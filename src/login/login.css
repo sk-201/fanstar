@@ -1,0 +1,42 @@
+.login-heading{
+margin-left:5%;
+font-family: 'Montserrat', sans-serif;
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+    
+}
+.input-no{
+     margin-top:1rem;
+     margin-left: 1.2rem;
+     padding:1rem;
+     width:75%;
+     border:none;
+     font-family: 'Poppins', sans-serif;
+     background: #F3F3F3;
+     border-radius: 8px;
+}
+
+.msg-no{
+    margin-left:2.2rem;
+    margin-top: 0.2rem;
+    color: #828282;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+}
+.btn-nxt{
+     width: 83%;
+     height:7vh;
+     margin-left: 1.2rem;
+     padding:1rem;
+     font-family: Montserrat;
+     font-style: normal;
+     font-weight: bold;
+     font-size: 18px;
+     background: #2D2D2D;
+     color:#ffffff;
+     border-radius: 8px;
+
+}
