@@ -1,10 +1,13 @@
 import React from 'react';
-import Header from '../header/header.component';
 import './login.css';
+import  Logo from '../assets/Ellipse 58.png';
  const Login=()=>{
 return(   
 <div className="login-main">
-    <Header/>
+ <div className='img-container'>
+     <img className='logo' src={Logo} alt='fanstar-logo'/>
+      <h4 className='logo-sub-head'>Fanstar logo</h4>
+     </div>   
 <h2 className='login-heading'>Login </h2>
 <div className="inputs">
 <input className="input-no" type="tel" placeholder="Enter your phone no"/>

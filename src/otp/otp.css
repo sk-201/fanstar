@@ -1,36 +1,68 @@
 .otp{
-    margin-top:7rem;
+    margin-top:3rem;
 }
 .otp-head{
     margin-left:5%;
     font-family: Montserrat;
     font-style: normal;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 20px;
 }
 
 .resend-txt{
     font-family: Montserrat;
    font-style: normal;
-   font-weight: 500;
+   font-weight: 600;
    font-size: 13px;
    color:#828282;
    margin-left:1.5rem;
    margin-top: 0.2rem;
 }
-.otp-num-inp{
+.timer{
+    margin-left: 4.5rem;
+    margin-right:4.5rem;
+}
+.otp-num{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 1rem;
+    margin-right:1rem;
+   
+}
+.otp-num-inp1{
      border:none;   
-     margin-top:1rem;
-     margin-left: 1.2rem;
-     padding:1rem;
-     width:75%;
     background-color: #F3F3F3;
     border-radius: 8px;
+    width:5rem;
+    height:3rem;
+}
+.otp-num-inp2{
+    border:none;   
+   background-color: #F3F3F3;
+   border-radius: 8px;
+   width:5rem;
+   height:3rem;
+}
+.otp-num-inp3{
+    border:none;   
+   background-color: #F3F3F3;
+   border-radius: 8px;
+   width:5rem;
+   height:3rem;
+}
+.otp-num-inp4{
+    border:none;   
+   background-color: #F3F3F3;
+   border-radius: 8px;
+   width:5rem;
+   height:3rem;
 }
 .btn{
-    width: 83%;
+    width: 90%;
     height:7vh;
-    margin-left: 1.2rem;
+    margin-left: 1.4rem;
+    margin-right:1.4rem;
     padding:1rem;
     border:none;
     background: #2D2D2D;

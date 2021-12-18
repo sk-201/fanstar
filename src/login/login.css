@@ -2,8 +2,9 @@
 margin-left:5%;
 font-family: 'Montserrat', sans-serif;
 font-style: normal;
-font-weight: 500;
+font-weight: bold;
 font-size: 20px;
+
     
 }
 .input-no{
@@ -23,7 +24,7 @@ font-size: 20px;
     color: #828282;
     font-family: Montserrat;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 13px;
 }
 .btn-nxt{
@@ -38,5 +39,22 @@ font-size: 20px;
      background: #2D2D2D;
      color:#ffffff;
      border-radius: 8px;
+     border:none;
 
+}
+.logo{
+     margin-left: 40%;
+     margin-right: 40%;
+     margin-top:10%;
+     
+}
+.logo-sub-head{
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+margin-left:30%;
+margin-right:30%;
+margin-top:.5rem;
+margin-bottom: 20%;
 }
