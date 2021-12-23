@@ -1,0 +1,61 @@
+.feedback{
+    margin-top:5rem;
+    margin-left:2rem;
+    margin-right:2rem;
+}
+.rate-head{
+font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 27px;
+}
+.rate-head-span{
+    font-family: Open Sans;
+font-style: normal;
+font-weight: 300;
+font-size: 14px;
+line-height: 19px;
+}
+
+.h4-head{
+    font-family: Open Sans;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 22px;
+}
+.stars-tab{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    
+}
+.star{
+    margin-right: 1rem;
+}
+textarea{
+    font-family: Open Sans;
+font-style: normal;
+font-weight: 300;
+font-size: 14px;
+line-height: 19px;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+border-radius: 16px;
+padding:1rem;
+}
+button{
+display: block;
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 24px;
+color: #FFFFFF;
+background: #2C2C2C;
+border-radius: 16px;
+padding: 16px 40px;
+width:100%;
+margin-top:6rem;
+}
