@@ -18,7 +18,7 @@ const artistSchema=new mongoose.Schema({
         type:String,
         default:"https://thumbs.dreamstime.com/b/white-background-paper-texture-stock-photo-hearts-abstract-template-website-book-cover-valentines-mothers-day-95345656.jpg"
     }
-},{timeseries:true})
+},{timestamps:true})
 
 artistSchema.pre("save",async function(next){
     if(this.isModified("password")){
