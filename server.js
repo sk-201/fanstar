@@ -18,6 +18,9 @@ const port=process.env.PORT || 8000;
 //User's routes
 app.use('/api/user/public',require('./routes/user/public'))
 
+//Artist's routes
+app.use('/api/artist/public',require('./routes/artist/public'));
+
 app.listen(port,()=>{
     console.log(`Server is running at http://localhost:${port}`);
 })

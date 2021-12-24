@@ -2,24 +2,32 @@ const mongoose=require('mongoose');
 const jwt=require('jsonwebtoken');
 const bcryptjs=require('bcryptjs');
 
-const userSchema=new mongoose.Schema({
+const artistSchema=new mongoose.Schema({
     phone:{
         type:String,
         minlength:10,
         maxlength:10,
         required:true,
         unique:true
+    },
+    profilePhoto:{
+        type:String,
+        default:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+    },
+    coverPhoto:{
+        type:String,
+        default:"https://thumbs.dreamstime.com/b/white-background-paper-texture-stock-photo-hearts-abstract-template-website-book-cover-valentines-mothers-day-95345656.jpg"
     }
 },{timeseries:true})
 
-userSchema.pre("save",async function(next){
+artistSchema.pre("save",async function(next){
     if(this.isModified("password")){
         this.password=await bcryptjs.hash(this.password,10);
     }
     next();
 })
 
-userSchema.methods.generateToken=async function(){
+artistSchema.methods.generateToken=async function(){
     try {
         const token=await jwt.sign({_id:this._id},process.env.SECRET_KEY,{expiresIn:process.env.EXPIRES});
         return token;
@@ -28,7 +36,7 @@ userSchema.methods.generateToken=async function(){
     }
 }
 
-userSchema.methods.comparePasswords=async function(password){
+artistSchema.methods.comparePasswords=async function(password){
     try {
         return await bcryptjs.compare(password,this.password);
     } catch (error) {
@@ -36,6 +44,6 @@ userSchema.methods.comparePasswords=async function(password){
     }
 }
 
-const User=new mongoose.model('user',userSchema);
+const Artist=new mongoose.model('artist',artistSchema);
 
-module.exports=User;
+module.exports=Artist;
