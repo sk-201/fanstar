@@ -1,6 +1,6 @@
 import React from 'react';
 import {ReactComponent as Star} from '../assets/Star.svg';
-import {ReactComponent as StarE} from '../assets/Star-e.svg';
+import {ReactComponent as StarE} from '../assets/Star 6.svg';
 import './feedback.css';
 const Feedback=()=>(
 <div className='feedback'>

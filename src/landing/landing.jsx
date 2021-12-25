@@ -18,18 +18,26 @@ const Landing=()=>(
     <img  className='img-2'src={Img2} alt='banner-pic'/>
     <h1 className='img-2-heading'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hendrerit ut massa metus.Lorem ip</h1>
     </div>
-   <Link to="/register"><button className='btn-chat'>Chat now @ Rs 2000/-</button></Link> 
+   <Link to="/register" style={{textDecoration:"none"}}><button className='btn-chat' >Chat now @ Rs 2000/-</button></Link> 
     </div>
     <div className='container-2'>
         <h1 className='container-2-head'>Lets connect</h1>
+        <div className='card'>
+            <div className='card-1'></div>
+            <div className='card-2'>I will promote your brand on my <br/>instagram</div>
+            <div className='card-3'></div>
+        </div>
 
     </div>
     <div className='icons-tab'>
+        <div className='nav'>
         <Home/>
       
-        <Chat/>
-        
-        <Lock/>
+      <Chat/>
+      
+      <Lock/>
+        </div>
+   
     </div>
 
 

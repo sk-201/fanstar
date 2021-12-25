@@ -16,4 +16,4 @@ const Otp=()=>(
     <button className="btn">Log In</button>
 </div>
 )
-export default Otp;
+export default Otp; 

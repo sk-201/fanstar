@@ -17,6 +17,7 @@
    color:#828282;
    margin-left:1.5rem;
    margin-top: 0.2rem;
+  
 }
 .timer{
     margin-left: 4.5rem;
@@ -34,33 +35,38 @@
      border:none;   
     background-color: #F3F3F3;
     border-radius: 8px;
-    width:5rem;
+    width:4rem;
     height:3rem;
+    margin-right:.5rem;
 }
 .otp-num-inp2{
     border:none;   
    background-color: #F3F3F3;
    border-radius: 8px;
-   width:5rem;
+   width:4rem;
    height:3rem;
+   margin-right:.5rem;
 }
 .otp-num-inp3{
     border:none;   
    background-color: #F3F3F3;
    border-radius: 8px;
-   width:5rem;
+   width:4rem;
    height:3rem;
+   margin-right:.5rem;
 }
 .otp-num-inp4{
     border:none;   
    background-color: #F3F3F3;
    border-radius: 8px;
-   width:5rem;
+   width:4rem;
    height:3rem;
+   margin-right:.5rem;
 }
 .btn{
     width: 90%;
     height:7vh;
+    margin-top:3rem;
     margin-left: 1.4rem;
     margin-right:1.4rem;
     padding:1rem;
