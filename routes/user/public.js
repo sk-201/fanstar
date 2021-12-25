@@ -3,16 +3,18 @@ const {generateOTP,verify}=require('../../controllers/user/public');
 
 //Generate OTP
 //Route : '/api/user/public/generateotp'
-//Request : POST
+//Method : POST
 //Body : {phone}
 //Params : N/A
+//Token : No
 router.post('/generateotp',generateOTP);
 
 //Verify OTP
 //Route : '/api/user/public/verify'
-//Request : POST
+//Method : POST
 //Body : {phone,code}
 //Params : N/A
+//Token : No
 router.post('/verify',verify);
 
 module.exports=router;

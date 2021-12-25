@@ -20,6 +20,7 @@ app.use('/api/user/public',require('./routes/user/public'))
 
 //Artist's routes
 app.use('/api/artist/public',require('./routes/artist/public'));
+app.use('/api/artist/private',require('./routes/artist/private'));
 
 app.listen(port,()=>{
     console.log(`Server is running at http://localhost:${port}`);

@@ -9,6 +9,10 @@ const userSchema=new mongoose.Schema({
         maxlength:10,
         required:true,
         unique:true
+    },
+    balance:{
+        type:String,
+        default:"0"
     }
 },{timestamps:true})
 
