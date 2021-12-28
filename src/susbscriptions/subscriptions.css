@@ -1,0 +1,78 @@
+.subscription-main{
+    position:relative;
+}
+.back-img{
+    object-fit: cover;
+    width: 100%;
+    
+    position: absolute; 
+}
+.img-container{
+border: 2px solid #FFFFFF;
+box-sizing: border-box;
+border-radius: 8px;
+padding: 0px;
+
+}
+.subscription-container{
+ position: absolute;
+ margin-top: 9rem;
+margin-left:1rem;
+margin-right:1rem; 
+background: rgba(38, 38, 38, 0.8);
+border: 2px solid #FFFFFF;
+box-sizing: border-box;
+backdrop-filter: blur(8px);
+border-radius: 24px;
+}
+.subscription-main-2{
+    padding:1rem;
+   
+}
+.sub-head{
+    
+margin-left:1rem;
+font-family: Kaushan Script;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+}
+
+#sub-main-con{
+    font-family: Montserrat;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 24px;
+color: #FFFFFF;
+
+
+
+}
+#choose-plan{
+    background: rgba(129, 129, 129, 0.6);
+border: 1px solid #FFFFFF;
+box-sizing: border-box;
+border-radius: 8px;
+padding:1rem;
+font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 24px;
+color: #D9D9D9;
+width:100%;
+}
+#ban-img{
+width:100%;
+object-fit: cover;
+}
+.btn-sub{
+    margin-top: 1rem;
+    background:#FFFFFF;
+    color:#2b2b2b;
+}

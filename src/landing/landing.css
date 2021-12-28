@@ -9,6 +9,7 @@ flex-direction: column;
 .img-1{
     width:100%;
     object-fit: cover; 
+    position: relative;
 }
 
 .img-1-heading{
