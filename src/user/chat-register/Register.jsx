@@ -1,5 +1,5 @@
 import React from 'react';
-import Ban from '../assets/register-banner.png';
+import Ban from '../.././assets/register-banner.png';
 import './Register.css';
 
 const Register=()=>(

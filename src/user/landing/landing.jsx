@@ -1,15 +1,19 @@
 import React from 'react';
-import Img1 from '../assets/Banner.png';
-import Img2 from '../assets/2-div-img.png';
+import Img1 from '../.././assets/Banner.png';
+import Img2 from '../.././assets/2-div-img.png';
 import {Link} from 'react-router-dom'
-import {ReactComponent as Home} from '../assets/home.svg';
-import {ReactComponent as Chat} from '../assets/chat.svg';
-import {ReactComponent as Lock} from '../assets/lock.svg';
+import {ReactComponent as Home} from '../.././assets/home.svg';
+import {ReactComponent as Chat} from '../.././assets/chat.svg';
+import {ReactComponent as Lock} from '../.././assets/lock.svg';
+import {ReactComponent as Wallet} from '../.././assets/wallet.svg';
+import {ReactComponent as Bell} from '../.././assets/bell.svg'; 
 import './landing.css';
 const Landing=()=>(
     <div className='landing'>
     <div className='img-header'>
         <img  className='img-1'src={Img1} alt='banner-pic'/>  
+        <Link to='/balance'><Wallet className='wallet-icon'/></Link>
+        <Link to='/sub'><Bell className='bell-icon'> </Bell></Link>
         <h1 className='img-1-heading'>Hi I'm Jenna</h1>
     </div>
     <div className='container-1'>

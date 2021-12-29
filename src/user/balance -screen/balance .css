@@ -35,8 +35,11 @@ box-sizing: border-box;
 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
 backdrop-filter: blur(4px);
 border-radius: 16px;
-padding:.4rem;
-margin-left:7rem;
+padding-left:1rem;
+padding-right:1rem;
+padding-top:.3rem;
+padding-bottom: .3rem;
+margin-left:4rem;
 }
 #bal-sc-bal{
     font-family: DM Sans;
@@ -59,7 +62,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 18px;
 line-height: 28px;
-text-decoration-line: underline;
+
 
 }
 .bal-re-subhead{
@@ -117,7 +120,7 @@ font-weight: normal;
 font-size: 14px;
 line-height: 17px;
 text-align: justify;
-text-decoration-line: underline;
+
 color: #00365B;
 }
 #price{
@@ -129,7 +132,7 @@ line-height: 20px;
 text-align: right;
 letter-spacing: 0.2px;
 color: #000000;
-margin-left:6rem;
+margin-left:4rem;
 }
 .btn-pay{
     font-family: Montserrat;

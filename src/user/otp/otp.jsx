@@ -1,8 +1,9 @@
-import React,{useState} from 'react';
-import { useParams } from 'react-router-dom';
+import React,{useState,useEffect} from 'react';
+import { useParams,Link } from 'react-router-dom';
 import axios from 'axios';
 import './otp.css'
 const Otp=()=>{
+    const [counter, setCounter] = useState(60);
     const {phone}=useParams();
     const [code1,setCode1]=useState("");
     const [code2,setCode2]=useState("");
@@ -18,7 +19,9 @@ const Otp=()=>{
                      "Content-Type":"application/json"
                    }
                  }
-                 await axios.post("/api/user/public/verify",{phone,code},config)
+                const {data}= await axios.post("/api/user/public/verify",{phone,code},config)
+                console.log(data);
+                localStorage.setItem("fanstarToken",data);
                   alert("Login Successfull");
                  
                }
@@ -29,17 +32,21 @@ const Otp=()=>{
             console.log(error);
         }
     }
+    useEffect(() => {
+        counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
+      }, [counter]);
+    
     return(
 <div className="otp">
 <h2 className='otp-head'>Enter OTP</h2>
 <form className="otp-num-form">
     <div className='otp-num'>
-    <input  className="otp-num-inp1" type="tel" value={code1} onChange={(e)=>setCode1(e.target.value)}></input>
-    <input  className="otp-num-inp2" type="tel" value={code2} onChange={(e)=>setCode2(e.target.value)}></input>
-    <input  className="otp-num-inp3" type="tel" value={code3} onChange={(e)=>setCode3(e.target.value)}></input>
-    <input  className="otp-num-inp4" type="tel" value={code4} onChange={(e)=>setCode4(e.target.value)}></input>   
+    <input  className="otp-num-inp1"  type="tel" value={code1} maxLength="1" onChange={(e)=>setCode1(e.target.value)}></input>
+    <input  className="otp-num-inp2" type="tel" value={code2} maxLength="1" onChange={(e)=>setCode2(e.target.value)}></input>
+    <input  className="otp-num-inp3" type="tel" value={code3} maxLength="1" onChange={(e)=>setCode3(e.target.value)}></input>
+    <input  className="otp-num-inp4" type="tel" value={code4} maxLength="1" onChange={(e)=>setCode4(e.target.value)}></input>   
     </div>
-    <h6 className='resend-txt'>Resend OTP <span className='timer'>0:50</span></h6>
+    <Link to='/resend' style={{textDecoration:"none"}}><h6 className='resend-txt'>Resend OTP <span className='timer'>{counter}</span></h6></Link>
 
     <button className="btn"  type="submit" onClick={postData}>Log In</button>
 </form>

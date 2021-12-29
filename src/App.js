@@ -1,13 +1,15 @@
 import React from 'react';
 import {Route , Routes } from 'react-router-dom';
-import Landing from './landing/landing';
-import Login from './login/login';
-import Otp from './otp/otp';
-import Resend from './resend/resend';
-import Register from './chat-register/Register'
-import Feedback from './feedback/feedback';
-import Balance from './balance -screen/balance';
-import Subscription from './susbscriptions/subscriptions';
+import Landing from './user/landing/landing';
+import Login from './user/login/login';
+import Otp from './user/otp/otp';
+import Resend from './user/resend/resend';
+import Register from './user/chat-register/Register'
+import Feedback from './user/feedback/feedback';
+import Balance from './user/balance -screen/balance';
+import Subscription from './user/susbscriptions/subscriptions';
+import Payment from './user/payment/payment'
+import Subscribe from './user/susbscriptions/subscribe';
 import './App.css';
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
     <Route path='/feedback' element={<Feedback/>}/>
     <Route path='/balance' element={<Balance/>}/>
     <Route path='/sub' element={<Subscription/>}/>
+    <Route path='/subscribe' element={<Subscribe/>}/>
+    <Route path='/pay' element={<Payment/>}/>
     </Routes>
     </div>
   );

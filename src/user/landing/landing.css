@@ -5,6 +5,23 @@
 .img-header{
 display: flex;
 flex-direction: column;
+position: relative;
+}
+.wallet-icon{
+position: absolute;
+left: 6.4%;
+right: 86.73%;
+top: 8%;
+bottom: 96.59%;
+
+}
+.bell-icon{
+position: absolute;
+width: 65px;
+height: 28px;
+left: 80%;
+top: 70%;
+
 }
 .img-1{
     width:100%;

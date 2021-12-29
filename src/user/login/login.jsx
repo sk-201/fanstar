@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import './login.css';
-import  Logo from '../assets/Ellipse 58.png';
+import  Logo from '../.././assets/Ellipse 58.png';
  const Login=()=>{
      const navigate=useNavigate();
      const [phone,setPhone]=useState("");

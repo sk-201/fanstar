@@ -3,8 +3,7 @@
 }
 .back-img{
     object-fit: cover;
-    width: 100%;
-    
+    width: 100%;   
     position: absolute; 
 }
 .img-container{
@@ -53,7 +52,7 @@ color: #FFFFFF;
 
 
 }
-#choose-plan{
+.choose-plan{
     background: rgba(129, 129, 129, 0.6);
 border: 1px solid #FFFFFF;
 box-sizing: border-box;
@@ -64,7 +63,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 14px;
 line-height: 24px;
-color: #D9D9D9;
+color: #D9D9D9 !important;
 width:100%;
 }
 #ban-img{
@@ -76,3 +75,20 @@ object-fit: cover;
     background:#FFFFFF;
     color:#2b2b2b;
 }
+.inp-sub{
+    background: rgba(129, 129, 129, 0.6);
+border: 1px solid #FFFFFF;
+
+box-sizing: border-box;
+border-radius: 8px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 24px;
+width:100%;
+}
+::placeholder { 
+    color: #D9D9D9;
+    opacity: 1; 
+  }

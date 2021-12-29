@@ -9,7 +9,7 @@ const Balance=()=>(
      <text id="bal-sc-bal">Rs2500.00</text>
     </div>
     <div className='bal-recharge'>
-        <Link to="#" id='bal-re'>Recharge your Wallet</Link>
+        <Link style={{textDecoration:"none"}} to="#" id='bal-re'>Recharge your Wallet</Link>
         <span className='bal-re-subhead'>Min recharge 100/-</span>
     </div>
     <div className='prod-details'>
@@ -24,7 +24,7 @@ const Balance=()=>(
         <span id='price'>Rs 299/-</span>
         <button className='btn-pay'>Pay with Wallet</button>
 
-    </div>
+    </div> 
 
 </div>
 )
