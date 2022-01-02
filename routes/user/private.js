@@ -1,5 +1,5 @@
 const router=require('express').Router();
-const {buyServices,rechargeWallet,order,capture}=require('../../controllers/user/private');
+const {buyServices,order,capture}=require('../../controllers/user/private');
 const {protectUser}=require('../../middlewares/protect');
 
 //Buy service
@@ -10,10 +10,20 @@ const {protectUser}=require('../../middlewares/protect');
 //Token : Yes
 router.put('/buyservice',protectUser,buyServices);
 
-router.put('/rechargewallet',protectUser,rechargeWallet);
+//Recharge wallet (order)
+//Route : '/api/user/private/order/:amount'
+//Method : GET
+//Body : N/A
+//Params : {amount}
+//Token : Yes
+router.get('/order/:amount',protectUser,order);
 
-router.get('/order',order);
-
-router.post('/capture/:paymentId',capture);
+//Recharge wallet (capture)
+//Route : '/api/user/private/capture/:paymentId'
+//Method : POST
+//Body : {amount}
+//Params : {paymentId}
+//Token : Yes
+router.post('/capture/:paymentId',protectUser,capture);
 
 module.exports=router;
