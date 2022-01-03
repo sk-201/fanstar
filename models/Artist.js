@@ -21,7 +21,10 @@ const artistSchema=new mongoose.Schema({
     balance:{
         type:String,
         default:"0.00"
-    }
+    },
+    uploadedFiles:[{
+        type:String
+    }]
 },{timestamps:true})
 
 artistSchema.pre("save",async function(next){

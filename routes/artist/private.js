@@ -1,6 +1,8 @@
 const router=require('express').Router();
+const multer=require('multer');
+const upload=multer({dest:'uploads/'});
 const {protectArtist}=require('../../middlewares/protect');
-const {createService,updateService,getOwnServices}=require('../../controllers/artist/private');
+const {createService,updateService,getOwnServices,uploadFile,deleteFile,readFile}=require('../../controllers/artist/private');
 
 //Create service
 //Route : '/api/artist/private/createservice'
@@ -25,5 +27,30 @@ router.put('/updateservice/:serviceId',protectArtist,updateService);
 //Params : N/A
 //Token : Yes
 router.get('/ownservices',protectArtist,getOwnServices);
+
+//Upload a file
+//Route : '/api/artist/private/uploadfile'
+//Method : PUT
+//Body : file
+//Params : N/A
+//Token : Yes
+router.put('/uploadfile',protectArtist,upload.single('artistFile'),uploadFile);
+
+//Read a file
+//Route : '/api/artist/private/readfile/:fileKey'
+//Method : GET
+//Body : N/A
+//Params : fileKey
+//Token : Yes
+router.get('/readfile/:fileKey',protectArtist,readFile);
+
+//Delete a file
+//Route : '/api/artist/private/deletefile/:fileKey'
+//Method : DELETE
+//Body : N/A
+//Params : fileKey
+//Token : Yes
+router.delete('/deletefile/:fileKey',protectArtist,deleteFile);;
+
 
 module.exports=router;
