@@ -108,8 +108,8 @@ exports.deleteFile=async(req,res)=>{
 exports.addEvent=async(req,res)=>{
     try {
         const {summary,startTime,endTime,location,description,colorId,attendees}=req.body;
-        const res=await addEventToGoogleCalender(summary,startTime,endTime,location,description,colorId,attendees);
-        console.log(res);
+        const resp=await addEventToGoogleCalender(summary,startTime,endTime,location,description,colorId,attendees);
+        console.log(resp);
         res.status(201).json({message:"Event created!"});
     } catch (error) {
         console.log(error);
