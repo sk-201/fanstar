@@ -4,6 +4,7 @@ const fs=require('fs');
 const util=require('util');
 const unlinkFile = util.promisify(fs.unlink);
 const {readImage,uploadImage,deleteImage}=require('./aws');
+const {addEventToGoogleCalender,deleteEventFromGoogleCalender}=require('./addevent');
 
 //Create service
 exports.createService=async(req,res)=>{
@@ -100,5 +101,30 @@ exports.deleteFile=async(req,res)=>{
     } catch (error) {
         console.log(error);
         res.status(500).json({error:"Something went wrong!"});
+    }
+}
+
+//Add event to google calendar
+exports.addEvent=async(req,res)=>{
+    try {
+        const {summary,startTime,endTime,location,description,colorId,attendees}=req.body;
+        const res=await addEventToGoogleCalender(summary,startTime,endTime,location,description,colorId,attendees);
+        console.log(res);
+        res.status(201).json({message:"Event created!"});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:"Someting went wrong!"});
+    }
+}
+
+//Delete event
+exports.deleteEvent=async(req,res)=>{
+    try {
+        const {eventId}=req.params;
+        await deleteEventFromGoogleCalender(eventId);
+        res.status(200).json({message:"Event deleted!"});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:"Someting went wrong!"});
     }
 }

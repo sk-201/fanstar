@@ -2,7 +2,7 @@ const router=require('express').Router();
 const multer=require('multer');
 const upload=multer({dest:'uploads/'});
 const {protectArtist}=require('../../middlewares/protect');
-const {createService,updateService,getOwnServices,uploadFile,deleteFile,readFile}=require('../../controllers/artist/private');
+const {createService,updateService,getOwnServices,uploadFile,deleteFile,readFile,addEvent,deleteEvent}=require('../../controllers/artist/private');
 
 //Create service
 //Route : '/api/artist/private/createservice'
@@ -50,7 +50,23 @@ router.get('/readfile/:fileKey',protectArtist,readFile);
 //Body : N/A
 //Params : fileKey
 //Token : Yes
-router.delete('/deletefile/:fileKey',protectArtist,deleteFile);;
+router.delete('/deletefile/:fileKey',protectArtist,deleteFile);
+
+//Add event
+//Route : '/api/artist/private/addevent'
+//Method : POST
+//Body : {summary,startTime,endTime,location,description,colorId,attendees}
+//Params : N/A
+//Token : Yes
+router.post('/addevent',protectArtist,addEvent);
+
+//Delete an event
+//Route : '/api/artist/private/deleteevent/:eventId'
+//Method : DELETE
+//Body : N/A
+//Params : eventId
+//Token : Yes
+router.delete('/deleteevent/:eventId',protectArtist,deleteEvent);
 
 
 module.exports=router;
