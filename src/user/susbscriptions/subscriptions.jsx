@@ -4,6 +4,7 @@ import Ban from '../.././assets/register-banner.png';
 import Back from '../.././assets/Rectangle 736.png';
 import './subscriptions.css';
 const Subscription=()=>{
+     
     return(
         <div className='subscription-main'>
             <img  className='back-img' src={Back} alt="background-img"/>

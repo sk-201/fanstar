@@ -1,9 +1,11 @@
 import React from 'react';
 import {ReactComponent as Star} from '../.././assets/Star.svg';
 import {ReactComponent as StarE} from '../.././assets/Star 6.svg';
+import {ReactComponent as BackArrow} from '../../assets/backArrow.svg';
 import './feedback.css';
 const Feedback=()=>(
 <div className='feedback'>
+<BackArrow id="back-arrow"/>
 <h1 className='rate-head'>Rate your Experience</h1>
 <span className='rate-head-span'>Are you satisfied with the service</span>
 <div className='stars-tab'>

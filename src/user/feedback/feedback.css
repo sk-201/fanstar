@@ -1,7 +1,10 @@
 .feedback{
-    margin-top:5rem;
+    margin-top:2rem;
     margin-left:2rem;
     margin-right:2rem;
+}
+#back-arrow{
+    margin-top:-3rem;
 }
 .rate-head{
 font-family: Open Sans;
