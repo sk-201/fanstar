@@ -6,6 +6,7 @@ const unlinkFile = util.promisify(fs.unlink);
 const { readImage, uploadImage, deleteImage } = require('./aws');
 const { addEventToGoogleCalender, deleteEventFromGoogleCalender } = require('./addevent');
 
+//Update profile
 exports.updateProfile=async(req,res)=>{
     try {
         const {username,profilePhoto,bio}=req.body;
@@ -29,6 +30,17 @@ exports.createService = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Something went wrong!" });
+    }
+}
+
+//Get a service
+exports.getService=async(req,res)=>{
+    try {
+        const {serviceId}=req.params;
+        const service=await Service.findOne({_id:serviceId}).populate("createdBy");
+        res.status(200).send(service);
+    } catch (error) {
+        console.log(error);
     }
 }
 
