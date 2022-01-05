@@ -22,7 +22,7 @@ class Register extends Component{
         console.log("response", response)
         
         const options = {
-           key: 'rzp_test_o8yNNQSs02l7YA',//<--Razorpay key id-->
+           key: '<--Razorpay key id-->',
           name: "avdojo",
           description: "avodojo",
           order_id: data.id,
