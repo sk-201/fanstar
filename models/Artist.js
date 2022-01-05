@@ -3,6 +3,9 @@ const jwt=require('jsonwebtoken');
 const bcryptjs=require('bcryptjs');
 
 const artistSchema=new mongoose.Schema({
+    username:{
+        Type:String
+    },
     phone:{
         type:String,
         minlength:10,
@@ -17,6 +20,9 @@ const artistSchema=new mongoose.Schema({
     coverPhoto:{
         type:String,
         default:"https://thumbs.dreamstime.com/b/white-background-paper-texture-stock-photo-hearts-abstract-template-website-book-cover-valentines-mothers-day-95345656.jpg"
+    },
+    bio:{
+        type:String
     },
     balance:{
         type:String,

@@ -2,7 +2,15 @@ const router=require('express').Router();
 const multer=require('multer');
 const upload=multer({dest:'uploads/'});
 const {protectArtist}=require('../../middlewares/protect');
-const {createService,updateService,getOwnServices,uploadFile,deleteFile,readFile,addEvent,deleteEvent}=require('../../controllers/artist/private');
+const {createService,updateService,getOwnServices,uploadFile,deleteFile,readFile,addEvent,deleteEvent,updateProfile}=require('../../controllers/artist/private');
+
+//Update profile
+//Route : '/api/artist/private/updateprofile'
+//Method : PUT
+//Body : {username,profilePhoto,bio}
+//Params : N/A
+//Token : Yes
+router.put('/updateprofile',protectArtist,updateProfile);
 
 //Create service
 //Route : '/api/artist/private/createservice'
