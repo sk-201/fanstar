@@ -2,7 +2,7 @@ const router=require('express').Router();
 const multer=require('multer');
 const upload=multer({dest:'uploads/'});
 const {protectArtist}=require('../../middlewares/protect');
-const {createService,updateService,getOwnServices,uploadFile,deleteFile,readFile,addEvent,deleteEvent,updateProfile,getService}=require('../../controllers/artist/private');
+const {createService,updateService,getOwnServices,uploadFile,deleteFile,readFile,addEvent,deleteEvent,updateProfile,getService,getAllOwnFiles}=require('../../controllers/artist/private');
 
 //Update profile
 //Route : '/api/artist/private/updateprofile'
@@ -46,11 +46,11 @@ router.get('/ownservices',protectArtist,getOwnServices);
 
 //Upload a file
 //Route : '/api/artist/private/uploadfile'
-//Method : PUT
+//Method : POST
 //Body : file
 //Params : N/A
 //Token : Yes
-router.put('/uploadfile',protectArtist,upload.single('artistFile'),uploadFile);
+router.post('/uploadfile',protectArtist,upload.single('artistFile'),uploadFile);
 
 //Read a file
 //Route : '/api/artist/private/readfile/:fileKey'
@@ -59,6 +59,14 @@ router.put('/uploadfile',protectArtist,upload.single('artistFile'),uploadFile);
 //Params : fileKey
 //Token : Yes
 router.get('/readfile/:fileKey',protectArtist,readFile);
+
+//Read a get
+//Route : '/api/artist/private/getownfiles'
+//Method : GET
+//Body : N/A
+//Params : N/A
+//Token : Yes
+router.get('/getownfiles',protectArtist,getAllOwnFiles);
 
 //Delete a file
 //Route : '/api/artist/private/deletefile/:fileKey'

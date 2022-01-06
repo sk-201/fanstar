@@ -1,5 +1,6 @@
 const Artist = require('../../models/Artist');
 const Service = require('../../models/Service');
+const Album=require('../../models/Album');
 const fs = require('fs');
 const util = require('util');
 const unlinkFile = util.promisify(fs.unlink);
@@ -83,12 +84,12 @@ exports.getOwnServices = async (req, res) => {
 exports.uploadFile = async (req, res) => {
     try {
         const file = req.file;
+        const {caption,price}=req.body;
         let data = await uploadImage(file);
-        await Artist.updateOne({ _id: req.artist._id }, {
-            $push: {
-                uploadedFiles: data
-            }
-        });
+        const album=new Album({
+            fileUrl:data,postedBy:req.artist._id,caption,price
+        })
+        await album.save(); 
         unlinkFile(file.path);
         res.status(201).json({ message: "File uploaded!" });
     } catch (error) {
@@ -112,16 +113,23 @@ exports.readFile = async (req, res) => {
     }
 }
 
+//Get all files of a user
+exports.getAllOwnFiles=async(req,res)=>{
+    try {
+        const albums=await Album.find({createdBy:req.artist._id}).populate("postedBy");
+        res.status(200).send(albums);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:"Something went wrong!"});
+    }
+}
+
 //Delete image
 exports.deleteFile = async (req, res) => {
     try {
         const { fileKey } = req.params;
         await deleteImage(fileKey);
-        await Artist.updateOne({ _id: req.artist._id }, {
-            $pull: {
-                uploadedFiles: fileKey
-            }
-        })
+        await Album.deleteOne({fileUrl:fileKey});
         res.status(200).json({ message: "File deleted!" });
     } catch (error) {
         console.log(error);
