@@ -1,6 +1,7 @@
 const User = require('../../models/User');
 const Artist = require('../../models/Artist');
 const Service = require('../../models/Service');
+const Album=require('../../models/Album');
 const Razorpay = require('razorpay');
 const request = require('request');
 const { nanoid } = require('nanoid');
@@ -106,6 +107,48 @@ exports.buyServices = async (req, res) => {
           }
         })
         res.status(200).json({ message: "Service added!" });
+      }
+      else res.status(400).json({ error: "User doesn't have enough balance!" });
+
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Something went wrong!" });
+  }
+}
+
+//Buy album
+exports.buyAlbum=async (req, res) => {
+  try {
+    const { albumId } = req.body;
+    const album = await Album.findOne({ _id: albumId });
+    if (!album) res.status(400).json({ error: "Album not found!" });
+    else {
+      let uBalance = parseFloat(req.user.balance);
+      let albumPrice = parseFloat(album.price);
+      if (uBalance >= albumPrice) {
+        await Album.updateOne({ _id: albumId }, {
+          $push: {
+            accessedBy: {userId:req.user._id}
+          }
+        })
+        const artist = await Artist.findOne({ _id: album.postedBy });
+        let aBalance = parseFloat(artist.balance);
+        aBalance = aBalance + (albumPrice * 70.00 / 100.00);
+        aBalance = aBalance.toString();
+        await Artist.updateOne({ _id: artist._id }, {
+          $set: {
+            balance: aBalance
+          }
+        })
+        uBalance = uBalance - albumPrice;
+        uBalance = uBalance.toString();
+        await User.updateOne({ _id: req.user._id }, {
+          $set: {
+            balance: uBalance
+          }
+        })
+        res.status(200).json({ message: "Album accessed!" });
       }
       else res.status(400).json({ error: "User doesn't have enough balance!" });
 

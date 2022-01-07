@@ -27,7 +27,7 @@ const albumSchema=new mongoose.Schema({
         },
         time:{
             type:String,
-            default:moment().format("hh:mm A")
+            default:moment().format()
         }
     }]
 },{timestamps:true})
