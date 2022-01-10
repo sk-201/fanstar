@@ -1,0 +1,50 @@
+.chat{
+    background-color: #e5e5e5;
+    
+}
+.chat-container{
+    margin-top:5%;
+    margin-left:5%;
+    margin-right:5%;
+    
+}
+#user-icon{
+    height:2rem;
+    width:2rem;
+    border-radius: 100%;
+    margin-bottom: -1.2rem;
+    padding:.1rem;
+   background: #eaeaea;
+}
+#chat-name{
+    font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 17px;
+line-height: 25px;
+color: #000000;
+margin-left:.7rem;
+}
+#chat-ch{
+    font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+color: #000000;
+display: block;
+margin-left:3rem;
+margin-bottom: 1rem;
+
+}
+#chat-time{
+    
+font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 10px;
+line-height: 15px;
+margin-left: 5rem;
+
+color: #000000;
+}

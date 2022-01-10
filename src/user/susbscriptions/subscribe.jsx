@@ -22,7 +22,7 @@ class Subscribe extends Component{
         console.log("response", response)
         
         const options = {
-           key: '//<--Razorpay key id-->',
+           key: '<--Razorpay key id-->',
           name: "avdojo",
           description: "avodojo",
           order_id: data.id,

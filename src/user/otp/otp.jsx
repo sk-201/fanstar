@@ -1,8 +1,12 @@
 import React,{useState,useEffect} from 'react';
-import { useParams,Link } from 'react-router-dom';
+import { useParams,Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './otp.css'
 const Otp=()=>{
+
+
+
+  const navigate=useNavigate();
     const [counter, setCounter] = useState(60);
     const {phone}=useParams();
     const [code1,setCode1]=useState("");
@@ -23,6 +27,7 @@ const Otp=()=>{
                 console.log(data);
                 localStorage.setItem("fanstarToken",data);
                   alert("Login Successfull");
+                  navigate("/");
                  
                }
            else{
@@ -35,14 +40,17 @@ const Otp=()=>{
     useEffect(() => {
         counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
       }, [counter]);
-    
+
+     
+  
+  
     return(
 <div className="otp">
 <h2 className='otp-head'>Enter OTP</h2>
 <form className="otp-num-form">
     <div className='otp-num'>
     <input  className="otp-num-inp1"  type="tel" value={code1} maxLength="1" onChange={(e)=>setCode1(e.target.value)}></input>
-    <input  className="otp-num-inp2" type="tel" value={code2} maxLength="1" onChange={(e)=>setCode2(e.target.value)}></input>
+    <input  className="otp-num-inp2"  type="tel" value={code2} maxLength="1" onChange={(e)=>setCode2(e.target.value)}></input>
     <input  className="otp-num-inp3" type="tel" value={code3} maxLength="1" onChange={(e)=>setCode3(e.target.value)}></input>
     <input  className="otp-num-inp4" type="tel" value={code4} maxLength="1" onChange={(e)=>setCode4(e.target.value)}></input>   
     </div>

@@ -6,13 +6,24 @@ import {ReactComponent as Home} from '../.././assets/home.svg';
 import {ReactComponent as Chat} from '../.././assets/chat.svg';
 import {ReactComponent as Lock} from '../.././assets/lock.svg';
 import {ReactComponent as Wallet} from '../.././assets/wallet.svg';
-import {ReactComponent as Bell} from '../.././assets/bell.svg'; 
+import {ReactComponent as Bell} from '../.././assets/bell.svg';
+import {ReactComponent as User} from '../.././assets/userlogin.svg'; 
+
 import './landing.css';
 const Landing=()=>(
     <div className='landing'>
     <div className='img-header'>
-        <img  className='img-1'src={Img1} alt='banner-pic'/>  
-        <Link to='/balance'><Wallet className='wallet-icon'/></Link>
+        <img  className='img-1'src={Img1} alt='banner-pic'/> 
+        
+        {localStorage.getItem("fanstarToken")
+        ?
+        <Link to='/balance'><Wallet className='wallet-icon'/>
+        
+        </Link>
+            
+        :<Link to='/login'><User className='wallet-icon'/>
+        <text id="login-text-land" >Login</text>
+        </Link>}
         <Link to='/sub'><Bell className='bell-icon'> </Bell></Link>
         <h1 className='img-1-heading'>Hi I'm Jenna</h1>
     </div>
@@ -24,11 +35,11 @@ const Landing=()=>(
     </div>
    <Link to="/register" style={{textDecoration:"none"}}><button className='btn-chat' >Chat now @ Rs 2000/-</button></Link> 
     </div>
-    <div className='container-2'>
+    <div className='container-2'> 
         <h1 className='container-2-head'>Lets connect</h1>
         <div className='card'>
             <div className='card-1'></div>
-            <div className='card-2'>I will promote your brand on my <br/>instagram</div>
+            <div className='card-2'>I will promote your brand on my instagram</div>
             <div className='card-3'></div>
         </div>
 

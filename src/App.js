@@ -13,12 +13,14 @@ import Payment from './user/payment/payment'
 import Subscribe from './user/susbscriptions/subscribe';
 import Income from './artist/income/income';
 import AddService from './artist/add-service/add-service';
+import EditService from './artist/edit-service/edit-service';
 import MyService from './artist/my-services/my-services';
 import AddImage from './artist/add-image/add-image';
 import ArtistLanding from './artist/artist-landing/artist-landing';
 import ArtistLogin from './artist/artist-login/artist-login';
 import ArtistOtp from './artist/artist-otp/artist-otp';
 import MyImage from './artist/my-images/myimages.';
+import ChatList from './artist/chat/chatscreen';
 import './App.css';
 
 function App() {
@@ -38,12 +40,14 @@ function App() {
     <Route path='/income' element={<Income/>}/>
     <Route path='/edit' element={<Edit/>}/>
     <Route path='/addservice' element={<AddService/>}/>
+    <Route path='/editservice/:id' element={<EditService/>}/>
     <Route path='/service' element={<MyService/>}/>
     <Route path='/add' element={<AddImage/>}/>
     <Route path='/artist/landing' element={<ArtistLanding/>}/>
     <Route path='/artist/login' element={<ArtistLogin/>}/>
-    <Route path='/artist/otp' element={<ArtistOtp/>}/>
+    <Route path='/artist/otp/:phone' element={<ArtistOtp/>}/>
     <Route path='/myimage' element={<MyImage/>}/>
+    <Route path='/chat' element={<ChatList/>}/>
     </Routes>
     </div>
   );
