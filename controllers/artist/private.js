@@ -7,6 +7,16 @@ const unlinkFile = util.promisify(fs.unlink);
 const { readImage, uploadImage, deleteImage } = require('./aws');
 const { addEventToGoogleCalender, deleteEventFromGoogleCalender } = require('./addevent');
 
+//Get own profile
+exports.getOwnProfile=async(req,res)=>{
+    try {
+        res.status(200).send(req.artist);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error:"Something went wrong!"});
+    }
+}
+
 //Update profile
 exports.updateProfile=async(req,res)=>{
     try {
