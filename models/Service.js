@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const moment=require('moment');
 
 const serviceSchema=new mongoose.Schema({
     serviceName:{
@@ -20,8 +21,14 @@ const serviceSchema=new mongoose.Schema({
         required:true
     },
     users:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'user'
+        userId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'user'
+        },
+        time:{
+            type:String,
+            default:moment().format()
+        }
     }]
 },{timestamps:true})
 

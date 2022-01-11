@@ -87,7 +87,7 @@ exports.buyServices = async (req, res) => {
       if (uBalance >= servicePrice) {
         await Service.updateOne({ _id: serviceId }, {
           $push: {
-            users: req.user._id
+            users: {userId:req.user._id}
           }
         })
         const artist = await Artist.findOne({ _id: service.createdBy });
