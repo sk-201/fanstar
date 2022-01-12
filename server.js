@@ -25,6 +25,9 @@ app.use(morgan("dev"));
 
 const port=process.env.PORT || 8000;
 
+//Login routes
+app.use('/api/login',require('./routes/login/login'));
+
 //User's routes
 app.use('/api/user/public',require('./routes/user/public'));
 app.use('/api/user/private',require('./routes/user/private'));
