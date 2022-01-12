@@ -11,6 +11,17 @@ const razorInstance = new Razorpay({
   key_secret: process.env.KEY_SECRET
 })
 
+//Get an artist
+exports.getArtist=async(req,res)=>{
+  try {
+    const artist=await Artist.findOne({_id:req.params.artistId});
+    res.status(200).send(artist);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Something went wrong!" });
+  }
+}
+
 //Order
 exports.order = async (req, res) => {
   try {
