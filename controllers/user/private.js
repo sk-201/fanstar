@@ -130,6 +130,17 @@ exports.buyServices = async (req, res) => {
   }
 }
 
+//Get a service
+exports.getAService=async(req,res)=>{
+  try {
+    const service=await Service.findOne({_id:req.params.serviceId});
+    res.status(200).send(service);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error:"Something went wrong!"});
+  }
+}
+
 //Buy album
 exports.buyAlbum=async (req, res) => {
   try {

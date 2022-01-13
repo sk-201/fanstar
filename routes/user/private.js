@@ -1,5 +1,5 @@
 const router=require('express').Router();
-const {buyServices,order,capture,buyAlbum,getArtist}=require('../../controllers/user/private');
+const {buyServices,order,capture,buyAlbum,getArtist,getAService}=require('../../controllers/user/private');
 const {protectUser}=require('../../middlewares/protect');
 
 //Get an artist
@@ -10,10 +10,18 @@ const {protectUser}=require('../../middlewares/protect');
 //Token : Yes
 router.get('/getartist/:artistId',protectUser,getArtist);
 
+//Get a service
+//Route : '/api/user/private/getaservice/:serviceId'
+//Method : PUT
+//Body : N/A
+//Params : {serviceId}
+//Token : Yes
+router.get('/getaservice/:serviceId',protectUser,getAService);
+
 //Buy service
 //Route : '/api/user/private/buyservice'
 //Method : PUT
-//Body : {serviceId}
+//Body : { serviceId,username,email,phone,insta }
 //Params : N/A
 //Token : Yes
 router.put('/buyservice',protectUser,buyServices);
