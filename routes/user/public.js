@@ -10,7 +10,7 @@ const {generateOTP,verify,getArtist,getServicesofAnArtist}=require('../../contro
 router.get('/getartist/:artistId',getArtist);
 
 //Get services of an artist
-//Route : '/api/user/private/getservices/:artistId'
+//Route : '/api/user/public/getservices/:artistId'
 //Method : GET
 //Body : {artistId}
 //Params : N/A

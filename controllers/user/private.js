@@ -89,7 +89,7 @@ exports.capture = async (req, res) => {
 //Buy service
 exports.buyServices = async (req, res) => {
   try {
-    const { serviceId } = req.body;
+    const { serviceId,username,email,phone,insta } = req.body;
     const service = await Service.findOne({ _id: serviceId });
     if (!service) res.status(400).json({ error: "Service not found!" });
     else {
@@ -98,7 +98,9 @@ exports.buyServices = async (req, res) => {
       if (uBalance >= servicePrice) {
         await Service.updateOne({ _id: serviceId }, {
           $push: {
-            users: {userId:req.user._id}
+            users: {
+              userId:req.user._id,
+            username,email,phone,insta}
           }
         })
         const artist = await Artist.findOne({ _id: service.createdBy });

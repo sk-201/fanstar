@@ -25,6 +25,24 @@ const serviceSchema=new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:'user'
         },
+        username:{
+            type:String,
+            required:true
+        },
+        email:{
+            type:String,
+            required:true
+        },
+        phone:{
+            type:String,
+            required:true,
+            minlength:10,
+            maxlength:10
+        },
+        insta:{
+            type:String,
+            required:true
+        },
         time:{
             type:String,
             default:moment().format()
