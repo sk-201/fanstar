@@ -2,6 +2,7 @@ const User = require('../../models/User');
 const Artist = require('../../models/Artist');
 const Service = require('../../models/Service');
 const Album=require('../../models/Album');
+const {readImage}=require('../../controllers/artist/aws');
 const Razorpay = require('razorpay');
 const request = require('request');
 const { nanoid } = require('nanoid');
@@ -138,6 +139,21 @@ exports.getAService=async(req,res)=>{
   } catch (error) {
     console.log(error);
     res.status(500).json({error:"Something went wrong!"});
+  }
+}
+
+//Read Image
+exports.readFile = async (req, res) => {
+  try {
+      const { fileKey } = req.params;
+      const data = await readImage(fileKey);
+      const receivedFile = Buffer.from(data).toString('base64');
+      // console.log(receivedFile);
+      res.status(200).send(receivedFile);
+
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Something went wrong!" });
   }
 }
 

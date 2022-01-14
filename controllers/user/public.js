@@ -1,6 +1,7 @@
 const User = require('../../models/User');
 const Artist = require('../../models/Artist');
 const Service = require('../../models/Service');
+const Album=require('../../models/Album');
 const twilio = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
 
 //Generate OTP
@@ -70,5 +71,16 @@ exports.getServicesofAnArtist = async (req, res) => {
   } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Something went wrong!" });
+  }
+}
+
+//Get all albums of an artist
+exports.getAllAlbums=async(req,res)=>{
+  try {
+    const albums=await Album.find({postedBy:req.params.artistId});
+    res.status(200).send(albums);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error:"Something went wrong!"});
   }
 }

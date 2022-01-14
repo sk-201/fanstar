@@ -1,5 +1,5 @@
 const router=require('express').Router();
-const {generateOTP,verify,getArtist,getServicesofAnArtist}=require('../../controllers/user/public');
+const {generateOTP,verify,getArtist,getServicesofAnArtist,getAllAlbums}=require('../../controllers/user/public');
 
 //Get an artist
 //Route : '/api/user/private/getartist/:artistId'
@@ -16,6 +16,14 @@ router.get('/getartist/:artistId',getArtist);
 //Params : N/A
 //Token : NO
 router.get('/getservices/:artistId',getServicesofAnArtist);
+
+//Get albums of an artist
+//Route : '/api/user/public/getalbums/:artistId'
+//Method : GET
+//Body : N/A
+//Params : {artistId}
+//Token : NO
+router.get('/getalbums/:artistId',getAllAlbums);
 
 //Generate OTP
 //Route : '/api/user/public/generateotp'

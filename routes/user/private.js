@@ -1,5 +1,5 @@
 const router=require('express').Router();
-const {buyServices,order,capture,buyAlbum,getArtist,getAService}=require('../../controllers/user/private');
+const {buyServices,order,capture,buyAlbum,getArtist,getAService,readFile}=require('../../controllers/user/private');
 const {protectUser}=require('../../middlewares/protect');
 
 //Get an artist
@@ -12,7 +12,7 @@ router.get('/getartist/:artistId',protectUser,getArtist);
 
 //Get a service
 //Route : '/api/user/private/getaservice/:serviceId'
-//Method : PUT
+//Method : GET
 //Body : N/A
 //Params : {serviceId}
 //Token : Yes
@@ -42,7 +42,15 @@ router.get('/order/:amount',protectUser,order);
 //Token : Yes
 router.post('/capture/:paymentId',protectUser,capture);
 
-//Recharge wallet (capture)
+//Read image of an artist
+//Route : '/api/user/private/readimage/:fileKey'
+//Method : GET
+//Body : N/A
+//Params : {fileKey}
+//Token : Yes
+router.get('/readimage/:fileKey',protectUser,readFile);
+
+//Buy an album
 //Route : '/api/user/private/buyalbum'
 //Method : POST
 //Body : {albumId}
