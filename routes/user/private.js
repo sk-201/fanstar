@@ -1,6 +1,14 @@
 const router=require('express').Router();
-const {buyServices,order,capture,buyAlbum,getArtist,getAService,readFile}=require('../../controllers/user/private');
+const {buyServices,order,capture,buyAlbum,getArtist,getAService,readFile,getOwnDetails}=require('../../controllers/user/private');
 const {protectUser}=require('../../middlewares/protect');
+
+//Get own details
+//Route : '/api/user/private/getowndetails'
+//Method : GET
+//Body : N/A
+//Params : N/A
+//Token : Yes
+router.get('/getowndetails',protectUser,getOwnDetails);
 
 //Get an artist
 //Route : '/api/user/private/getartist/:artistId'

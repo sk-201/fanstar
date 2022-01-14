@@ -12,6 +12,16 @@ const razorInstance = new Razorpay({
   key_secret: process.env.KEY_SECRET
 })
 
+//Get own details
+exports.getOwnDetails=async(req,res)=>{
+  try {
+    res.status(200).send(req.user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error:"Something went wrong!"});
+  }
+}
+
 //Get an artist
 exports.getArtist=async(req,res)=>{
   try {
