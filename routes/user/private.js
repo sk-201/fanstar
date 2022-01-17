@@ -1,5 +1,5 @@
 const router=require('express').Router();
-const {buyServices,order,capture,buyAlbum,getArtist,getAService,readFile,getOwnDetails}=require('../../controllers/user/private');
+const {buyServices,order,capture,buyAlbum,getArtist,getAService,readFile,getOwnDetails,getAlbum}=require('../../controllers/user/private');
 const {protectUser}=require('../../middlewares/protect');
 
 //Get own details
@@ -13,10 +13,18 @@ router.get('/getowndetails',protectUser,getOwnDetails);
 //Get an artist
 //Route : '/api/user/private/getartist/:artistId'
 //Method : GET
-//Body : {artistId}
-//Params : N/A
+//Body : N/A
+//Params : {artistId}
 //Token : Yes
 router.get('/getartist/:artistId',protectUser,getArtist);
+
+//Get an album
+//Route : '/api/user/private/getalbum/:albumId'
+//Method : GET
+//Body : N/A
+//Params : {albumId}
+//Token : Yes
+router.get('/getalbum/:albumId',protectUser,getAlbum);
 
 //Get a service
 //Route : '/api/user/private/getaservice/:serviceId'

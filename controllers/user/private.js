@@ -97,6 +97,17 @@ exports.capture = async (req, res) => {
   }
 }
 
+//Get an album
+exports.getAlbum=async(req,res)=>{
+  try {
+    const album=await Album.findOne({_id:req.params.albumId});
+    res.status(200).send(album);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error:"Somehing went wrong!"});
+  }
+}
+
 //Buy service
 exports.buyServices = async (req, res) => {
   try {
