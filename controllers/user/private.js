@@ -219,3 +219,23 @@ exports.buyAlbum=async (req, res) => {
     res.status(500).json({ error: "Something went wrong!" });
   }
 }
+
+//Give feedback
+exports.giveFeedback=async(req,res)=>{
+  try {
+    const {artistId,stars,message}=req.body;
+    await Artist.findOneAndUpdate({_id:artistId,'feedbacks.userId':{$ne:req.user._id}},{
+      $addToSet:{
+        feedbacks:{
+          userId:req.user._id,
+          stars,
+          message
+        }
+      }
+    })
+    res.status(200).json({message:"Thanks for your feedback!"});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error:"Something went wrong!"});
+  }
+}

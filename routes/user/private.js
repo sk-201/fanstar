@@ -1,5 +1,5 @@
 const router=require('express').Router();
-const {buyServices,order,capture,buyAlbum,getArtist,getAService,readFile,getOwnDetails,getAlbum}=require('../../controllers/user/private');
+const {buyServices,order,capture,buyAlbum,getArtist,getAService,readFile,getOwnDetails,getAlbum,giveFeedback}=require('../../controllers/user/private');
 const {protectUser}=require('../../middlewares/protect');
 
 //Get own details
@@ -73,5 +73,13 @@ router.get('/readimage/:fileKey',protectUser,readFile);
 //Params : N/A
 //Token : Yes
 router.post('/buyalbum',protectUser,buyAlbum);
+
+//Give feedback
+//Route : '/api/user/private/givefeedback'
+//Method : PUT
+//Body : {artistId,stars,message}
+//Params : N/A
+//Token : Yes
+router.post('/givefeedback',protectUser,giveFeedback);
 
 module.exports=router;

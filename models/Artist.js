@@ -27,7 +27,19 @@ const artistSchema=new mongoose.Schema({
     balance:{
         type:String,
         default:"0.00"
-    }
+    },
+    feedbacks:[{
+        userId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'user'
+        },
+        stars:{
+            type:Number
+        },
+        message:{
+            type:String
+        }
+    }]
 },{timestamps:true})
 
 artistSchema.pre("save",async function(next){
