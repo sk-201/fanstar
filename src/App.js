@@ -29,41 +29,50 @@ import ArtistPage from './user/landing/artistpage';
 import './App.css';
 
 function App() {
-  return (
-    <div className='App'>
-      <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/otp/:phone' element={<Otp />} />
-        <Route path='/resend' element={<Resend />} />
-        <Route
-          path='/artist/:artistId/user/service/:serviceId'
-          element={<Register />}
-        />
-        <Route path='/feedback' element={<Feedback />} />
-        <Route path='/balance' element={<Balance />} />
-        <Route path='/sub' element={<Subscription />} />
-        <Route path='/subscribe' element={<Subscribe />} />
-        <Route path='/pay' element={<Payment />} />
-        <Route path='/income' element={<Income />} />
-        <Route path='/edit' element={<Edit />} />
-        <Route path='/addservice' element={<AddService />} />
-        <Route path='/editservice/:id' element={<EditService />} />
-        <Route path='/service' element={<MyService />} />
-        <Route path='/add' element={<AddImage />} />
-        <Route path='/artist/landing' element={<ArtistLanding />} />
-        <Route path='/artist/login' element={<ArtistLogin />} />
-        <Route path='/artist/otp/:phone' element={<ArtistOtp />} />
-        <Route path='/myimage' element={<MyImage />} />
-        <Route path='/chat' element={<ChatList />} />
-        <Route path='/employee/login' element={<EmployeeLogin />} />
-        <Route path='/employee/otp/:phone' element={<EmployeeOtp />} />
-        <Route path='/employee/income' element={<EmployeeIncome />} />
-        <Route path='/employee/profile' element={<EmployeeProfile />} />
-        <Route path='/artist/:id' element={<ArtistPage />} />
-      </Routes>
-    </div>
-  );
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (isMobile) {
+    return (
+      <div className='App'>
+        <Routes>
+          <Route path='/' element={<Landing />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/otp/:phone' element={<Otp />} />
+          <Route path='/resend' element={<Resend />} />
+          <Route
+            path='/artist/:artistId/user/service/:serviceId'
+            element={<Register />}
+          />
+          <Route path='/feedback' element={<Feedback />} />
+          <Route path='/balance' element={<Balance />} />
+          <Route path='/sub' element={<Subscription />} />
+          <Route path='/subscribe' element={<Subscribe />} />
+          <Route path='/pay' element={<Payment />} />
+          <Route path='/income' element={<Income />} />
+          <Route path='/edit' element={<Edit />} />
+          <Route path='/addservice' element={<AddService />} />
+          <Route path='/editservice/:id' element={<EditService />} />
+          <Route path='/service' element={<MyService />} />
+          <Route path='/add' element={<AddImage />} />
+          <Route path='/artist/landing' element={<ArtistLanding />} />
+          <Route path='/artist/login' element={<ArtistLogin />} />
+          <Route path='/artist/otp/:phone' element={<ArtistOtp />} />
+          <Route path='/myimage' element={<MyImage />} />
+          <Route path='/chat' element={<ChatList />} />
+          <Route path='/employee/login' element={<EmployeeLogin />} />
+          <Route path='/employee/otp/:phone' element={<EmployeeOtp />} />
+          <Route path='/employee/income' element={<EmployeeIncome />} />
+          <Route path='/employee/profile' element={<EmployeeProfile />} />
+          <Route path='/artist/:id' element={<ArtistPage />} />
+        </Routes>
+      </div>
+    );
+  } else {
+    return (
+      <div className='desktop-WarningDiv'>
+        <h1>Please open this link in Mobile Or Tablet to View the website.</h1>
+      </div>
+    );
+  }
 }
 
 export default App;
