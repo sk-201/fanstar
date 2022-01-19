@@ -26,6 +26,9 @@ import EmployeeOtp from './employee/employee-otp/employee-otp';
 import EmployeeIncome from './employee/employee-income-scren/employee-income';
 import EmployeeProfile from './employee/employee profile/employee-profile';
 import ArtistPage from './user/landing/artistpage';
+import AlbumBuy from './user/balance -screen/albumbalance';
+import WalletBalance from './user/balance -screen/walletbalance';
+import Album from './user/album-gallery/album';
 import './App.css';
 
 function App() {
@@ -37,8 +40,11 @@ function App() {
     <Route path='/otp/:phone' element={<Otp/>}/>
     <Route path='/resend' element={<Resend/>}/>
     <Route path='/artist/:artistId/user/service/:serviceId' element={<Register/>}/>
-    <Route path='/feedback' element={<Feedback/>}/>
-    <Route path='/balance' element={<Balance/>}/>
+    <Route path='/artist/:artistId/user/feedback' element={<Feedback/>}/>
+    <Route path='/artist/:artistId/user/service/:serviceId/payment' element={<Balance/>}/>
+    <Route path='/artist/:artistId/user/album/:albumId' element={<AlbumBuy/>}/>
+    <Route path='/wallet' element={<WalletBalance/>}/>
+    <Route path='/artist/album/:id' element={<Album/>}/>
     <Route path='/sub' element={<Subscription/>}/>
     <Route path='/subscribe' element={<Subscribe/>}/>
     <Route path='/pay' element={<Payment/>}/>

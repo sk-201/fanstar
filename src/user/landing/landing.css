@@ -139,13 +139,18 @@ border: none;
     justify-content: space-between;
     
 }
-
+.time-cont{
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom: 2rem;
+}
 .card-1{
     background: #F3F3F3;
 border: 1px solid #2D2D2D;
 box-sizing: border-box;
 border-radius: 8px;
 padding:.5rem;
+cursor:pointer;
 
 }
 
@@ -163,7 +168,7 @@ border-radius: 8px;
     padding:3rem;
     margin-left:3%;
     margin-right:3%;
-    
+    cursor:pointer;
 }
 .card-3{
     background: #F3F3F3;
@@ -171,6 +176,60 @@ border: 1px solid #2D2D2D;
 box-sizing: border-box;
 border-radius: 8px;
 padding:.5rem;
+cursor:pointer;
+}
+.album-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left:10%;
+    margin-right:10%;
+    margin-bottom: 4rem;
+}
+.album-card-1{
+  border-radius:8px;
+  
+  
+  
+}
+.album-card-2{
+    border-radius:8px;
+    
+    
+}
+.album-card-3{
+    border-radius:8px;
+   
+}
+.album-card-img{
+    max-width: 100%;
+    height:auto;
+}
+#timer-clock{
+    
+font-family: Montserrat;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+margin-top:-1rem;
+margin-left:.5rem;
+
+color: #6A6A6A;
+
+}
+#clock-svg{
+    margin-bottom:-.5rem;
+}
+#see-all{
+    font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+margin-left:50%;
+
+color: #6A6A6A;
 }
 #service-txt-landing{
     font-family: Kaushan Script;

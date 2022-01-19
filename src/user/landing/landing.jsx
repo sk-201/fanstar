@@ -17,7 +17,7 @@ const Landing=()=>(
         
         {localStorage.getItem("fanstarToken")
         ?
-        <Link to='/balance'><Wallet className='wallet-icon'/>
+        <Link to='/wallet'><Wallet className='wallet-icon'/>
         
         </Link>
             

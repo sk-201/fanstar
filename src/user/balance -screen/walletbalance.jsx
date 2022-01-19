@@ -1,15 +1,10 @@
 import React,{useEffect,useState} from 'react';
-import { Link,useLocation,useNavigate,useParams } from 'react-router-dom';
 import axios from 'axios';
 import './balance .css';
-const Balance=()=>{
-const {state}=useLocation();
-const{artistId,serviceId}=useParams();
-const {username,email,phone,insta}=state;
-const [servicename,setServiceName]=useState("");
-  const [serviceprice,setServicePrice]=useState("");
+const WalletBalance=()=>{
+
   const [balance,setBalance]=useState("");
-  const navigate=useNavigate();
+
 useEffect(()=>{
     const config={
       headers:{
@@ -18,11 +13,6 @@ useEffect(()=>{
       }
   
     }
-   axios.get(`/api/user/private/getaservice/${serviceId}`,config).then(({data})=>{
-       setServiceName(data.serviceName);
-       setServicePrice(data.amount)
-    console.log(data);
-   })
    axios.get(`/api/user/private/getowndetails`,config).then(({data})=>{
     setBalance(data.balance);
 })
@@ -45,7 +35,7 @@ const razorPayPaymentHandler=async()=> {
         
         const options = {
            key: 'razorpay-key',
-          name: {username},
+          name: '',
           description: "Buy Service",
           order_id: data.id,
           handler: async (response) => {
@@ -73,29 +63,6 @@ const razorPayPaymentHandler=async()=> {
         rzp1.open();
       }
 
-
-const buyService=async()=>{
-    try{
-    
-        const config={
-          headers:{
-            "Content-Type":"application/json",
-            Authorization:`Bearer ${localStorage.getItem("fanstarToken")}`
-          }
-        }
-       
-       await axios.put('/api/user/private/buyservice',{serviceId,username,email,phone,insta},config);
-        alert("Thank you for buying my service!!")
-         navigate(`/artist/${artistId}`);
-      }
-    
-    catch(error){
-      alert("Not Enough Balance");
-      console.log(error);
-    }
-
-
-    }
 return(
 <div className='balance'>
     <div className='balance-screen'>
@@ -107,20 +74,7 @@ return(
         <p style={{textDecoration:"none",cursor:"pointer"}}  id='bal-re' onClick={razorPayPaymentHandler}>Recharge your Wallet</p>
         <span className='bal-re-subhead'>Min recharge 100/-</span>
     </div>
-    <div className='prod-details'>
-     <h1 id="prod-type">Product Type :</h1>
-     <span id="pers-ser">Personalised Service</span>
-     <span id="i-promote">{servicename}</span>
-    
-    </div>
-    <div className='amt-detail'>
-        <h1 id="tot-amt">Total Amount</h1>
-        <span id='incl'>(inclusive of all charges)</span>
-        <span id='price'>Rs {serviceprice}/-</span>
-        <button className='btn-pay' onClick={buyService}>Pay with Wallet</button>
-
-    </div> 
 
 </div>
 )}
-export default Balance;
+export default WalletBalance;
