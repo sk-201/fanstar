@@ -26,6 +26,9 @@ import EmployeeOtp from './employee/employee-otp/employee-otp';
 import EmployeeIncome from './employee/employee-income-scren/employee-income';
 import EmployeeProfile from './employee/employee profile/employee-profile';
 import ArtistPage from './user/landing/artistpage';
+import AlbumBuy from './user/balance -screen/albumbalance';
+import WalletBalance from './user/balance -screen/walletbalance';
+import Album from './user/album-gallery/album';
 import './App.css';
 
 function App() {

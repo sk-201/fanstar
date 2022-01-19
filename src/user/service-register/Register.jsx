@@ -30,31 +30,7 @@ const Register=()=> {
        })
        .catch((error)=>console.log(error))
       },[])
-      const buyService=async()=>{
-      try{
-        if(username.trim()==""||email.trim()==""||phone.trim()==""||insta.trim()==""){
-          alert("One or more Field is empty!!");
-        }
-        else{
-          const config={
-            headers:{
-              "Content-Type":"application/json",
-              Authorization:`Bearer ${localStorage.getItem("fanstarToken")}`
-            }
-          }
-         
-         await axios.put('/api/user/private/buyservice',{serviceId,username,email,phone,insta},config);
-          alert("Thank you for buying my service!!")
-           navigate(`/artist/${artistId}`);
-        }
-      }
-      catch(error){
-        alert("Not Enough Balance");
-        console.log(error);
-      }
-
-
-      }
+     
     // async razorPayPaymentHandler() {
     //     const API_URL = `/api/user/private/`
     //     const orderUrl = `${API_URL}order`;
@@ -111,7 +87,14 @@ const Register=()=> {
          <input type="text" placeholder='Enter phone number' value={phone} onChange={(e)=>setPhone(e.target.value)}/>
          <input type="text" placeholder='@Instagram Handle' value={insta}onChange={(e)=>setInsta(e.target.value)} />
          </div>
-         <button className='btn-pay' onClick={buyService}>Pay Rs {serviceprice}/-</button>
+         <button className='btn-pay' onClick={()=>{
+            if(username.trim()==""||email.trim()==""||phone.trim()==""||insta.trim()==""){
+              alert("One or more Field is empty!!");
+            }
+            else{
+           navigate(`/artist/${artistId}/user/service/${serviceId}/payment`,{state:{username,email,phone,insta}})
+            }
+        }}>Pay Rs {serviceprice}/-</button>
      
      <text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hendrerit ut massa metus.Lorem ipLorem ipsum <span>Read more </span></text>
     </div>

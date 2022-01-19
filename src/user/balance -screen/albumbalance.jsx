@@ -2,12 +2,10 @@ import React,{useEffect,useState} from 'react';
 import { Link,useLocation,useNavigate,useParams } from 'react-router-dom';
 import axios from 'axios';
 import './balance .css';
-const Balance=()=>{
-const {state}=useLocation();
-const{artistId,serviceId}=useParams();
-const {username,email,phone,insta}=state;
-const [servicename,setServiceName]=useState("");
-  const [serviceprice,setServicePrice]=useState("");
+const AlbumBuy=()=>{
+const{artistId,albumId}=useParams();
+  
+  const [albumprice,setAlbumPrice]=useState("");
   const [balance,setBalance]=useState("");
   const navigate=useNavigate();
 useEffect(()=>{
@@ -18,9 +16,8 @@ useEffect(()=>{
       }
   
     }
-   axios.get(`/api/user/private/getaservice/${serviceId}`,config).then(({data})=>{
-       setServiceName(data.serviceName);
-       setServicePrice(data.amount)
+   axios.get(`/api/user/private/getalbum/${albumId}`,config).then(({data})=>{
+       setAlbumPrice(data.price);
     console.log(data);
    })
    axios.get(`/api/user/private/getowndetails`,config).then(({data})=>{
@@ -45,7 +42,7 @@ const razorPayPaymentHandler=async()=> {
         
         const options = {
            key: 'razorpay-key',
-          name: {username},
+          name: '',
           description: "Buy Service",
           order_id: data.id,
           handler: async (response) => {
@@ -84,8 +81,8 @@ const buyService=async()=>{
           }
         }
        
-       await axios.put('/api/user/private/buyservice',{serviceId,username,email,phone,insta},config);
-        alert("Thank you for buying my service!!")
+       await axios.post('/api/user/private/buyalbum',{albumId},config);
+        alert("You can now view my album!!")
          navigate(`/artist/${artistId}`);
       }
     
@@ -107,20 +104,20 @@ return(
         <p style={{textDecoration:"none",cursor:"pointer"}}  id='bal-re' onClick={razorPayPaymentHandler}>Recharge your Wallet</p>
         <span className='bal-re-subhead'>Min recharge 100/-</span>
     </div>
-    <div className='prod-details'>
+    {/* <div className='prod-details'>
      <h1 id="prod-type">Product Type :</h1>
      <span id="pers-ser">Personalised Service</span>
      <span id="i-promote">{servicename}</span>
     
-    </div>
+    </div> */}
     <div className='amt-detail'>
         <h1 id="tot-amt">Total Amount</h1>
         <span id='incl'>(inclusive of all charges)</span>
-        <span id='price'>Rs {serviceprice}/-</span>
+        <span id='price'>Rs {albumprice}/-</span>
         <button className='btn-pay' onClick={buyService}>Pay with Wallet</button>
 
     </div> 
 
 </div>
 )}
-export default Balance;
+export default AlbumBuy;
