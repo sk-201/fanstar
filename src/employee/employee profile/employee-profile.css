@@ -1,0 +1,190 @@
+.employee-profile {
+  width: 100%;
+}
+
+.profile-main-container {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 15%;
+}
+
+.profileImage-section {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 15%;
+}
+
+.profileImg-div {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.profileImg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.editBtnDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 18%;
+}
+
+.editText {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 14px;
+  color: #223263;
+  /* margin-right: 15%; */
+}
+
+.editIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+}
+
+.profileInfo-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 5%;
+}
+
+.inputField-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 5%;
+  width: 100%;
+}
+
+.inputField-label {
+  color: #828282;
+  font-size: 13px;
+  font-family: Montserrat;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.inputField {
+  margin-top: 0;
+  padding: 14px;
+  width: 90%;
+  background: #f1f1f1;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  color: #b6b6b6;
+  font-size: 16px;
+}
+
+.editProfile-container {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 15%;
+}
+.editProfile-headerDiv {
+  width: 100%;
+  padding: 14px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editProfile-imageSection {
+  margin-top: 5%;
+}
+
+.editProfile-pageTitleDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.editProfile-backTick {
+  width: 16px;
+  margin-right: 12px;
+}
+
+.editProfile-pageTitle {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 18px;
+  color: #223263;
+  margin: 5px 0;
+}
+
+.editProfile-saveBtn {
+  background: none !important;
+  outline: none;
+  border: none;
+  color: black;
+  padding: 0;
+  margin: 0;
+  margin-right: 10px;
+  color: #00365b;
+}
+
+.editProfile-helloDiv {
+  margin: 12% 0 8% 0;
+}
+
+.editProfile-helloUser {
+  margin: 0;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 20px;
+  color: #223263;
+}
+
+.editProfile-imageDiv {
+  height: 90px;
+  width: 90px;
+  position: relative;
+  border-radius: 50%;
+}
+
+.editProfile-editIconDiv {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.editProfile-editIcon {
+  width: 100%;
+  object-fit: cover;
+}
+
+.giveMargin {
+  margin-left: 10px;
+}
+
+.select-inputField {
+  margin-top: 0;
+  padding: 16px 14px;
+  width: 98%;
+  background: #f1f1f1;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  color: #b6b6b6;
+  font-size: 16px;
+}
+
+option:focus {
+  width: 150px;
+  /* width: auto; */
+}

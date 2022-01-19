@@ -1,150 +1,156 @@
-.income{
-margin-left: 7%;
-margin-right:7%;
-margin-top: 7%;
+.income {
+  margin-left: 7%;
+  margin-right: 7%;
+  margin-top: 7%;
 }
-.img-cont-inc{
-    margin-left:20%;
+.img-cont-inc {
+  margin-left: 20%;
 }
-#logo-img{
-    margin-top: -2.5rem;
-    margin-left:25%;
-    height:3rem;
-    
+#logo-img {
+  margin-top: -2.5rem;
+  margin-left: 25%;
+  height: 3rem;
 }
-#fanstar{
-font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 24px;
-padding:1rem;
-margin-top:-1rem;
-margin-left:22%;
-color: #000000;
-
+#fanstar {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  padding: 1rem;
+  margin-top: -1rem;
+  margin-left: 22%;
+  color: #000000;
 }
-.main-container{
-    margin-top:10%;
+.main-container {
+  margin-top: 10%;
+  margin-bottom: 20%;
 }
-#tot-inc-text{
-    font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 24px;
-color: #2D2D2D;
+#tot-inc-text {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #2d2d2d;
 }
-.total-income{
-    padding:1.5rem;
-background: linear-gradient(75.72deg, #05478A 4.63%, #73BCF8 106.33%, #05478A 106.92%);
-box-shadow: 4px 4px 4px rgba(4, 97, 182, 0.15), -4px 4px 4px rgba(109, 92, 252, 0.15);
-border-radius: 16px;
-margin-top:1rem;
-margin-bottom:1rem;
+.total-income {
+  padding: 1.5rem;
+  background: linear-gradient(
+    75.72deg,
+    #05478a 4.63%,
+    #73bcf8 106.33%,
+    #05478a 106.92%
+  );
+  box-shadow: 4px 4px 4px rgba(4, 97, 182, 0.15),
+    -4px 4px 4px rgba(109, 92, 252, 0.15);
+  border-radius: 16px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
-#week-inc-text{
-font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 24px;
-color: #2D2D2D;
+#week-inc-text {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #2d2d2d;
 }
-#tot-inc-text-1{
-font-family: DM Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 24px;
-line-height: 20px;
-letter-spacing: 1px;
-color: #FFFFFF;
+#tot-inc-text-1 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  color: #ffffff;
 }
-#tot-inc-rs{
-    font-family: DM Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 32px;
-line-height: 20px;
-letter-spacing: 1px;
-color: #FFFFFF;
-
+#tot-inc-rs {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  color: #ffffff;
 }
-.weekly-income{
-    padding: 1.5rem;
-background: linear-gradient(75.72deg, #05478A 4.63%, #73BCF8 106.33%, #05478A 106.92%);
-box-shadow: 4px 4px 4px rgba(4, 97, 182, 0.15), -4px 4px 4px rgba(109, 92, 252, 0.15);
-border-radius: 16px;
-margin-top:1rem;
-margin-bottom:1rem;
+.weekly-income {
+  padding: 1.5rem;
+  background: linear-gradient(
+    75.72deg,
+    #05478a 4.63%,
+    #73bcf8 106.33%,
+    #05478a 106.92%
+  );
+  box-shadow: 4px 4px 4px rgba(4, 97, 182, 0.15),
+    -4px 4px 4px rgba(109, 92, 252, 0.15);
+  border-radius: 16px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
-#week-inc-text-1{
-    font-family: DM Sans;
-font-style: normal;
-font-weight: normal;
-font-size: 24px;
-line-height: 20px;
-letter-spacing: 1px;
-color: #FFFFFF;
+#week-inc-text-1 {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  color: #ffffff;
 }
-#week-inc-rs{
-    font-family: DM Sans;
-font-style: normal;
-font-weight: bold;
-font-size: 32px;
-line-height: 20px;
-letter-spacing: 1px;
-color: #FFFFFF;
+#week-inc-rs {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  color: #ffffff;
 }
-#tot-app{
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color: #223263;
-    
+#tot-app {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #223263;
 }
-#tot-app-no{
-    font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 24px;
-color: #223263;
-
+#tot-app-no {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #223263;
 }
-#tot-ord{
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;  
-    color: #223263;
-    
+#tot-ord {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #223263;
 }
-#tot-ord-no{
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px; 
-    color: #223263;
+#tot-ord-no {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #223263;
 }
-#pend-ord{
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;   
-    color: #223263;
+#pend-ord {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #223263;
 }
-#pend-ord-no{
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #FC7E00;
-    
+#pend-ord-no {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fc7e00;
 }
