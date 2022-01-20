@@ -9,10 +9,11 @@ import editIcon from '../../assets/editIcon.png';
 import './employee-profile.css';
 
 const initialData = {
-  name: 'Shikhar rastogi',
+  username: 'Shikhar rastogi',
   gender: 'Male',
   email: 'shikhar@gmail.com',
   phone: '7894561203',
+  profilePhoto: '',
 };
 
 const EmployeeProfile = () => {
@@ -41,7 +42,7 @@ const EmployeeProfile = () => {
                 <label className='inputField-label'>Your full name</label>
                 <input
                   type='text'
-                  value={profileInfo.name}
+                  value={profileInfo.username}
                   className='inputField'
                   disabled
                 />

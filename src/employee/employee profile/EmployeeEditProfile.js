@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import backTick from '../../assets/backTick.png';
 import demoProfile from '../../assets/demoProfile.png';
@@ -7,6 +8,36 @@ import './employee-profile.css';
 const EmployeeEditProfile = (props) => {
   const { profileInfo, setIsEdit } = props;
   const [profile, setProfile] = useState(profileInfo);
+
+  const handleChange = (e) => {
+    const { name } = e.target;
+    setProfile({ ...profile, [name]: e.target.value });
+  };
+
+  const saveChanges = async () => {
+    try {
+      await axios.put(
+        '/api/employee/private/updateprofile',
+        {
+          username: profile.username,
+          email: profile.email,
+          gender: profile.gender,
+          profilePhoto: profile.profilePhoto,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              'fanstarEmployeeToken'
+            )}`,
+          },
+        }
+      );
+      alert('Profile updated');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className='editProfile-container'>
       <div className='editProfile-headerDiv'>
@@ -20,12 +51,14 @@ const EmployeeEditProfile = (props) => {
           <h3 className='editProfile-pageTitle'>Edit Profile</h3>
         </div>
         <div className='editProfile-btn'>
-          <button className='editProfile-saveBtn'>Save</button>
+          <button className='editProfile-saveBtn' onClick={saveChanges}>
+            Save
+          </button>
         </div>
       </div>
       <div className='editProfile-imageSection'>
         <div className='editProfile-helloDiv'>
-          <h3 className='editProfile-helloUser'>{`Hello, ${profile.name}`}</h3>
+          <h3 className='editProfile-helloUser'>{`Hello, ${profile.username}`}</h3>
         </div>
         <div className='editProfile-imageDiv'>
           <img
@@ -44,14 +77,24 @@ const EmployeeEditProfile = (props) => {
       </div>
       <div className='profileInfo-section'>
         <div className='inputField-div'>
-          <input type='text' value={profile.name} className='inputField' />
+          <input
+            type='text'
+            value={profile.username}
+            className='inputField'
+            name='username'
+            onChange={handleChange}
+          />
           <label className='inputField-label giveMargin'>
             Enter your full name
           </label>
         </div>
         <div className='inputField-div'>
           {/**<input type='text' value={profile.gender} className='inputField' /> */}
-          <select className='select-inputField'>
+          <select
+            className='select-inputField'
+            name='gender'
+            onChange={handleChange}
+          >
             <option value='Male' selected={profile.gender === 'Male'}>
               Male
             </option>
@@ -67,17 +110,23 @@ const EmployeeEditProfile = (props) => {
           </label>
         </div>
         <div className='inputField-div'>
-          <input type='text' value={profile.email} className='inputField' />
+          <input
+            type='text'
+            value={profile.email}
+            className='inputField'
+            name='email'
+            onChange={handleChange}
+          />
           <label className='inputField-label giveMargin'>
             Enter your E-mail
           </label>
         </div>
-        <div className='inputField-div'>
-          <input type='text' value={profile.phone} className='inputField' />
+        {/**<div className='inputField-div'>
+          <input type='text' value={profile.phone} className='inputField' name='phoneNumber' onChange={handleChange}/>
           <label className='inputField-label giveMargin'>
             Enter your phone number
           </label>
-        </div>
+        </div> */}
       </div>
     </div>
   );
