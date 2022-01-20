@@ -33,7 +33,7 @@ import './App.css';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  if (isMobile) {
+  // if (isMobile) {
     return (
       <div className='App'>
         <Routes>
@@ -45,8 +45,11 @@ function App() {
             path='/artist/:artistId/user/service/:serviceId'
             element={<Register />}
           />
-          <Route path='/feedback' element={<Feedback />} />
-          <Route path='/balance' element={<Balance />} />
+           <Route path='/artist/:artistId/user/feedback' element={<Feedback/>}/>
+           <Route path='/artist/:artistId/user/service/:serviceId/payment' element={<Balance/>}/>
+           <Route path='/artist/:artistId/user/album/:albumId' element={<AlbumBuy/>}/>
+           <Route path='/wallet' element={<WalletBalance/>}/>
+       <Route path='/artist/:id/user/album' element={<Album/>}/>
           <Route path='/sub' element={<Subscription />} />
           <Route path='/subscribe' element={<Subscribe />} />
           <Route path='/pay' element={<Payment />} />
@@ -69,13 +72,13 @@ function App() {
         </Routes>
       </div>
     );
-  } else {
-    return (
-      <div className='desktop-WarningDiv'>
-        <h1>Please open this link in Mobile Or Tablet to View the website.</h1>
-      </div>
-    );
-  }
+  // } else {
+    // return (
+    //   <div className='desktop-WarningDiv'>
+    //     <h1>Please open this link in Mobile Or Tablet to View the website.</h1>
+    //   </div>
+    // );
+  // }   new Date().getTime() - new Date(Time_Variable).getTime()
 }
 
 export default App;

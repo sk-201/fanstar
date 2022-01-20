@@ -17,17 +17,21 @@ const Album=()=>{
         }
     axios.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
       setAlbum(data);
-      console.log(data);
       const arr=[];
       for(let i=0;i<data.length;i++){
         axios.get(`/api/user/private/readimage/${data[i].fileUrl}`,config).then((res)=>{
-        console.log(res.data);
+       console.log(res.data);
+       console.log("res");
         arr.push(res.data);
+        
         // setPhotos([...photos,res.data])
-          console.log("response");
+        
         })
-        setPhotos(arr);
+      
+
       }
+      console.log(arr);
+      setPhotos(arr);
 
         // setPhotos([...photos,res.data])
         
@@ -42,8 +46,8 @@ const Album=()=>{
         {album.length>0 && album.map((data,ind)=>{
           return(
             
-            <div>
-            <div className='album-card-1' key={ind}><img className="album-card-img" src={`data:image/png;base64, ${photos.length>0 && photos[ind]}`}  onClick={()=>{
+            <div key={ind}>
+            <div className='album-card-1' ><img className="album-card-img" src={photos.length>0?photos[ind]:""}  onClick={()=>{
                 navigate(`/artist/${id}/user/album/${data._id}`)
              }}/></div>
           </div>

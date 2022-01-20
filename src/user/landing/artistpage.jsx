@@ -46,7 +46,8 @@ const ArtistPage=()=>{
     })
     axios.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
       setAlbum(data);
-      console.log(data);
+      // console.log("data");
+      // console.log(data);
       const arr=[];
       for(let i=0;i<data.length;i++){
         axios.get(`/api/user/private/readimage/${data[i].fileUrl}`,config).then((res)=>{
@@ -55,9 +56,11 @@ const ArtistPage=()=>{
         // setPhotos([...photos,res.data])
           console.log("response");
         })
-        setPhotos(arr);
+        
       }
-
+      setPhotos(arr);
+      //  console.log("arr");
+      //  console.log(arr);
         // setPhotos([...photos,res.data])
         
     
@@ -115,7 +118,7 @@ const ArtistPage=()=>{
 }
    </div>
    <div className='container-2'> 
-        <h1 className='container-2-head'>My Images <span id="see-all" style={{cursor:"pointer"}} onClick={()=>{navigate(`/artist/album/${id}`)}}>See All</span></h1>
+        <h1 className='container-2-head'>My Images <span id="see-all" style={{cursor:"pointer"}} onClick={()=>{navigate(`/artist/${id}/user/album`)}}>See All</span></h1>
         <div className='time-cont'> 
         <Clock id="clock-svg"/> <span id='timer-clock'> {seconds} sec</span>
         
