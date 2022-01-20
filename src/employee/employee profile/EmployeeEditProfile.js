@@ -26,8 +26,9 @@ const EmployeeEditProfile = (props) => {
         },
         {
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: window.localStorage.fanstarEmployeeToken,
+            Authorization: `Bearer ${localStorage.getItem(
+              'fanstarEmployeeToken'
+            )}`,
           },
         }
       );

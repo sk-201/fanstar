@@ -13,7 +13,7 @@ const EmployeeLogin = () => {
             'Content-Type': 'application/json',
           },
         };
-        await axios.post('/api/user/public/generateotp', { phone }, config);
+        await axios.post('/api/employee/public/generateotp', { phone }, config);
         alert('OTP sent');
         navigate(`/employee/otp/${phone}`);
       } else {

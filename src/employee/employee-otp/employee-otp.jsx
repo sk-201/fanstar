@@ -29,11 +29,10 @@ const EmployeeOtp = () => {
           },
         };
         const { data } = await axios.post(
-          '/api/user/public/verify',
+          '/api/employee/public/verify',
           { phone, code },
           config
         );
-        console.log(data);
         localStorage.setItem('fanstarEmployeeToken', data);
         alert('Login Successfull');
         navigate('/employee/income');
