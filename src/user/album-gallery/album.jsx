@@ -47,7 +47,7 @@ const Album=()=>{
           return(
             
             <div key={ind}>
-            <div className='album-card-1' ><img className="album-card-img" src={photos.length>0?photos[ind]:""}  onClick={()=>{
+            <div className='album-card-1' ><img className="album-card-img" src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.fileUrl}`}  onClick={()=>{
                 navigate(`/artist/${id}/user/album/${data._id}`)
              }}/></div>
           </div>

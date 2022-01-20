@@ -25,6 +25,7 @@ const ArtistPage=()=>{
     const [services,setServices]=useState([]);
     const [album,setAlbum]=useState([]);
     const[photos,setPhotos]=useState([]);
+    const[checktime,setChecktime]=useState([]);
     
     useEffect(()=>{
         const config={
@@ -46,20 +47,24 @@ const ArtistPage=()=>{
     })
     axios.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
       setAlbum(data);
-      // console.log("data");
-      // console.log(data);
+      console.log("data");
+      console.log(data);
       const arr=[];
       for(let i=0;i<data.length;i++){
         axios.get(`/api/user/private/readimage/${data[i].fileUrl}`,config).then((res)=>{
-        console.log(res.data);
+        // console.log(res.data);
         arr.push(res.data);
+       
         // setPhotos([...photos,res.data])
-          console.log("response");
+          // console.log("response");
         })
         
       }
       setPhotos(arr);
-      //  console.log("arr");
+      for(let i=0;i<data.length;i++){
+      console.log("time");
+      console.log(data[i].accessedBy.time);
+       } //  console.log("arr");
       //  console.log(arr);
         // setPhotos([...photos,res.data])
         
@@ -130,7 +135,7 @@ const ArtistPage=()=>{
           return(
             
             <div>
-            <div className='album-card-1' key={ind}><img className="album-card-img" src={`data:image/png;base64, ${photos.length>0 && photos[ind]}`}  onClick={()=>{
+            <div className='album-card-1' key={ind}><img className="album-card-img" src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.fileUrl}`}  onClick={()=>{
                 navigate(`/artist/${id}/user/album/${data._id}`)
              }}/></div>
           </div>

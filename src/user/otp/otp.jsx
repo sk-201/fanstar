@@ -40,19 +40,28 @@ const Otp=()=>{
     useEffect(() => {
         counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
       }, [counter]);
-
      
+      const move = (e, prev, curr, next) => {
+        var length = document.getElementById(curr).value.length;
+        var maxlength = document.getElementById(curr).getAttribute('maxLength');
+        if (parseInt(length) === parseInt(maxlength) && next !== '') {
+          document.getElementById(next).focus();
+        }
+        if (e.key === 'Backspace' && prev !== '') {
+          document.getElementById(prev).focus();
+        }
+      };
   
-  
+   
     return(
 <div className="otp">
 <h2 className='otp-head'>Enter OTP</h2>
 <form className="otp-num-form">
     <div className='otp-num'>
-    <input  className="otp-num-inp1"  type="tel" value={code1} maxLength="1" onChange={(e)=>setCode1(e.target.value)}></input>
-    <input  className="otp-num-inp2"  type="tel" value={code2} maxLength="1" onChange={(e)=>setCode2(e.target.value)}></input>
-    <input  className="otp-num-inp3" type="tel" value={code3} maxLength="1" onChange={(e)=>setCode3(e.target.value)}></input>
-    <input  className="otp-num-inp4" type="tel" value={code4} maxLength="1" onChange={(e)=>setCode4(e.target.value)}></input>   
+    <input  className="otp-num-inp1"  id='code1'  type="tel" value={code1} maxLength="1"  onKeyUp={(e) => move(e, '', 'code1', 'code2')} onChange={(e)=>setCode1(e.target.value)}></input>
+    <input  className="otp-num-inp2"   id='code2' type="tel" value={code2} maxLength="1"  onKeyUp={(e) => move(e, 'code1', 'code2', 'code3')} onChange={(e)=>setCode2(e.target.value)}></input>
+    <input  className="otp-num-inp3"  id='code3'  type="tel" value={code3} maxLength="1" onKeyUp={(e) => move(e, 'code2', 'code3', 'code4')} onChange={(e)=>setCode3(e.target.value)}></input>
+    <input  className="otp-num-inp4"   id='code4' type="tel" value={code4} maxLength="1"  onKeyUp={(e) => move(e, 'code3', 'code4', '')} onChange={(e)=>setCode4(e.target.value)}></input>   
     </div>
     <Link to='/resend' style={{textDecoration:"none"}}><h6 className='resend-txt'>Resend OTP <span className='timer'>{counter}</span></h6></Link>
 
