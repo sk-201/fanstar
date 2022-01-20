@@ -1,17 +1,48 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import backTick from '../../assets/backTick.png';
 import demoProfile from '../../assets/demoProfile.png';
 import editImageIcon from '../../assets/editImageIcon.png';
 import './employee-profile.css';
 
 const EmployeeEditProfile = (props) => {
-  const { profileInfo, setIsEdit } = props;
+  const { profileInfo, setIsEdit, fetchProfileInfo } = props;
   const [profile, setProfile] = useState(profileInfo);
+  const [tempImg, setTempImg] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const imageInput = useRef(null);
 
   const handleChange = (e) => {
     const { name } = e.target;
     setProfile({ ...profile, [name]: e.target.value });
+  };
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const handleOpenSelector = () => {
+    imageInput.current.click();
+  };
+
+  const handleImageChange = async (event) => {
+    const fileUploaded = event.target.files[0];
+    const link = URL.createObjectURL(fileUploaded);
+    const base64 = await convertBase64(fileUploaded);
+    setProfile({ ...profile, profilePhoto: base64 });
+    setTempImg(link);
+    setImageFile(fileUploaded);
   };
 
   const saveChanges = async () => {
@@ -32,6 +63,7 @@ const EmployeeEditProfile = (props) => {
           },
         }
       );
+      fetchProfileInfo();
       alert('Profile updated');
     } catch (err) {
       console.log(err);
@@ -58,19 +90,26 @@ const EmployeeEditProfile = (props) => {
       </div>
       <div className='editProfile-imageSection'>
         <div className='editProfile-helloDiv'>
-          <h3 className='editProfile-helloUser'>{`Hello, ${profile.username}`}</h3>
+          <h3 className='editProfile-helloUser'>{`Hello, ${profileInfo.username}`}</h3>
         </div>
         <div className='editProfile-imageDiv'>
           <img
-            src={demoProfile}
+            src={tempImg ? tempImg : profile.profilePhoto}
             alt='profile-img'
             className='editProfile-image'
           />
-          <div className='editProfile-editIconDiv'>
+          <div className='editProfile-editIconDiv' onClick={handleOpenSelector}>
             <img
               src={editImageIcon}
               alt='edit'
               className='editProfile-editIcon'
+            />
+            <input
+              type='file'
+              accept='image/*'
+              ref={imageInput}
+              onChange={handleImageChange}
+              style={{ display: 'none' }}
             />
           </div>
         </div>
