@@ -220,6 +220,36 @@ exports.buyAlbum=async (req, res) => {
   }
 }
 
+//Remove album access
+exports.removeAlbumAccess=async(req,res)=>{
+  try {
+    await Album.findOneAndUpdate({_id:req.body.albumId},{
+      $pull:{
+        accessedBy:{userId:req.user._id}
+      }
+    })
+    res.status(200).json({message:"Access removed!"});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error:"Something went wrong!"});
+  }
+}
+
+//Get the timestamp, when the user accessed the album
+exports.getAlbumTimestamp=async(req,res)=>{
+  try {
+    const album=await Album.findOne({_id:req.params.albumId});
+    let ts=null;
+    album.accessedBy.forEach(e=>{
+      if(e.userId.toString().trim()==req.user._id.toString().trim()) ts=e.time;
+    })
+    res.status(200).send(ts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({error:"Something went wrong!"});
+  }
+}
+
 //Give feedback
 exports.giveFeedback=async(req,res)=>{
   try {

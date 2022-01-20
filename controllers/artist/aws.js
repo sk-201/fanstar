@@ -53,3 +53,38 @@ exports.readImage = async (key) => {
     throw new Error("Image not found!");
   }
 }
+
+//Bucket policy
+
+// {
+//   "Version": "2012-10-17",
+//   "Statement": [
+//       {
+//           "Sid": "AllowPublicReadAccess",
+//           "Effect": "Allow",
+//           "Principal": "*",
+//           "Action": "s3:GetObject",
+//           "Resource": "arn:aws:s3:::<bucket_name>/*"
+//       }
+//   ]
+// }
+
+//Bucket cors
+
+// [
+//   {
+//       "AllowedHeaders": [
+//           "*"
+//       ],
+//       "AllowedMethods": [
+//           "GET",
+//           "PUT",
+//           "POST",
+//           "DELETE"
+//       ],
+//       "AllowedOrigins": [
+//           "*"
+//       ],
+//       "ExposeHeaders": []
+//   }
+// ]

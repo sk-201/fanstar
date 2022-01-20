@@ -1,5 +1,5 @@
 const router=require('express').Router();
-const {buyServices,order,capture,buyAlbum,getArtist,getAService,readFile,getOwnDetails,getAlbum,giveFeedback}=require('../../controllers/user/private');
+const {buyServices,order,capture,buyAlbum,getArtist,getAService,readFile,getOwnDetails,getAlbum,giveFeedback,removeAlbumAccess,getAlbumTimestamp}=require('../../controllers/user/private');
 const {protectUser}=require('../../middlewares/protect');
 
 //Get own details
@@ -73,6 +73,22 @@ router.get('/readimage/:fileKey',protectUser,readFile);
 //Params : N/A
 //Token : Yes
 router.post('/buyalbum',protectUser,buyAlbum);
+
+//Get the timestamp, when the user accessed the album
+//Route : '/api/user/private/getalbumtimestamp'
+//Method : GET
+//Body : N/A
+//Params : {albumId}
+//Token : Yes
+router.get('/getalbumtimestamp/:albumId',protectUser,getAlbumTimestamp);
+
+//Remove album access
+//Route : '/api/user/private/removealbumaccess'
+//Method : PUT
+//Body : {albumId}
+//Params : N/A
+//Token : Yes
+router.put('/removealbumaccess',protectUser,removeAlbumAccess);
 
 //Give feedback
 //Route : '/api/user/private/givefeedback'
