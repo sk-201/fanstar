@@ -6,6 +6,7 @@ const {readImage}=require('../../controllers/artist/aws');
 const Razorpay = require('razorpay');
 const request = require('request');
 const { nanoid } = require('nanoid');
+const moment=require('moment');
 
 const razorInstance = new Razorpay({
   key_id: process.env.KEY_ID,
@@ -190,7 +191,7 @@ exports.buyAlbum=async (req, res) => {
       if (uBalance >= albumPrice) {
         await Album.updateOne({ _id: albumId }, {
           $push: {
-            accessedBy: {userId:req.user._id}
+            accessedBy: {userId:req.user._id,time:moment().format()}
           }
         })
         const artist = await Artist.findOne({ _id: album.postedBy });

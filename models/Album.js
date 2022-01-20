@@ -1,5 +1,4 @@
 const mongoose=require('mongoose');
-const moment=require('moment');
 
 const albumSchema=new mongoose.Schema({
     fileUrl:{
@@ -26,8 +25,7 @@ const albumSchema=new mongoose.Schema({
             ref:'user'
         },
         time:{
-            type:String,
-            default:moment().format()
+            type:String
         }
     }]
 },{timestamps:true})
