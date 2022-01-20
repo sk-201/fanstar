@@ -105,6 +105,13 @@
   margin-top: 5%;
 }
 
+.editProfile-image {
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .editProfile-pageTitleDiv {
   display: flex;
   flex-direction: row;

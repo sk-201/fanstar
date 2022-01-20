@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import axios from 'axios';
 import EmployeeEditProfile from './EmployeeEditProfile';
 import Logo from '../../assets/Ellipse 58.png';
 import { ReactComponent as Home } from '../.././assets/home.svg';
@@ -9,16 +10,41 @@ import editIcon from '../../assets/editIcon.png';
 import './employee-profile.css';
 
 const initialData = {
-  username: 'Shikhar rastogi',
-  gender: 'Male',
-  email: 'shikhar@gmail.com',
-  phone: '7894561203',
+  username: '',
+  gender: '',
+  email: '',
+  phone: '',
   profilePhoto: '',
 };
 
 const EmployeeProfile = () => {
   const [profileInfo, setProfileInfo] = useState(initialData);
   const [isEdit, setIsEdit] = useState(false);
+  const [boolVal, setBoolVal] = useState(false);
+
+  const fetchProfileInfo = async () => {
+    try {
+      const { data } = await axios.get('/api/employee/private/getownprofile', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem(
+            'fanstarEmployeeToken'
+          )}`,
+        },
+      });
+      // console.log(data);
+      setProfileInfo(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!boolVal) {
+      fetchProfileInfo();
+      setBoolVal(true);
+    }
+  }, []);
+
   return (
     <div className='employee-profile'>
       {!isEdit ? (
@@ -30,7 +56,15 @@ const EmployeeProfile = () => {
           <div className='profile-main-container'>
             <div className='profileImage-section'>
               <div className='profileImg-div'>
-                <img src={demoProfile} alt='profile' className='profileImg' />
+                <img
+                  src={
+                    profileInfo.profilePhoto
+                      ? profileInfo.profilePhoto
+                      : demoProfile
+                  }
+                  alt='profile'
+                  className='profileImg'
+                />
               </div>
               <div className='editBtnDiv' onClick={() => setIsEdit(true)}>
                 <span className='editText'>Edit</span>
@@ -78,7 +112,11 @@ const EmployeeProfile = () => {
           </div>
         </Fragment>
       ) : (
-        <EmployeeEditProfile profileInfo={profileInfo} setIsEdit={setIsEdit} />
+        <EmployeeEditProfile
+          profileInfo={profileInfo}
+          setIsEdit={setIsEdit}
+          fetchProfileInfo={fetchProfileInfo}
+        />
       )}
       <div className='icons-tab'>
         <div className='nav'>
