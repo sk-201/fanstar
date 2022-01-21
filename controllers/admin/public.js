@@ -6,10 +6,11 @@ exports.login=async(req,res)=>{
         const {email,password}=req.body;
         let admin=await Admin.findOne({email});
         if(!admin){
-            admin=new Admin({email,password});
-            await admin.save();
-            const token=await admin.generateToken();
-            res.status(201).send(token);
+            // admin=new Admin({email,password});
+            // await admin.save();
+            // const token=await admin.generateToken();
+            // res.status(201).send(token);
+            res.status(400).json({error:"Admin not found!"});
         }
         else{
             const matched=await admin.comparePasswords(password);
