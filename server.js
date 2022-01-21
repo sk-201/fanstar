@@ -40,6 +40,10 @@ app.use('/api/artist/private',require('./routes/artist/private'));
 app.use('/api/employee/public',require('./routes/employee/public'));
 app.use('/api/employee/private',require('./routes/employee/private'));
 
+//Admin's routes
+app.use('/api/admin/public',require('./routes/admin/public'));
+app.use('/api/admin/private',require('./routes/admin/private'));
+
 //Socket-io
 io.on('connection', (socket) => {
 	console.log("New websocket connected!", socket);

@@ -6,7 +6,7 @@ const {generateOTP,verify}=require('../../controllers/artist/public');
 //Method : POST
 //Body : {phone}
 //Params : N/A
-//Token : No
+//Token : N/A
 router.post('/generateotp',generateOTP);
 
 //Verify OTP
@@ -14,7 +14,7 @@ router.post('/generateotp',generateOTP);
 //Method : POST
 //Body : {phone,code}
 //Params : N/A
-//Token : No
+//Token : N/A
 router.post('/verify',verify);
 
 module.exports=router;
