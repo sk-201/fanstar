@@ -45,7 +45,7 @@ const ArtistLanding=()=>{
         <img  className='img-1'src={Img1} alt='banner-pic' />  
         <h1 className='img-1-heading' >Hi I'm Jenna
         <span id="serv-edit-txt" style={{marginLeft:'10%'}}>Edit</span>
-             <Edit id="edit-icon" style={{marginRight:"-6rem"}}/>
+             <Edit id="edit-icon" style={{marginRight:"-6rem"}} onClick={()=>{navigate("/edit")}}  />
 
         </h1>          
     </div>

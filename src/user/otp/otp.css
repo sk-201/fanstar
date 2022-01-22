@@ -5,14 +5,14 @@
   margin-left: 5%;
   font-family: Montserrat;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 20px;
 }
 
 .resend-txt {
   font-family: Montserrat;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 13px;
   color: #828282;
   margin-left: 1.5rem;
@@ -21,6 +21,7 @@
 .timer {
   margin-left: 4.5rem;
   margin-right: 4.5rem;
+  font-weight: 500;
 }
 .otp-num {
   display: flex;
@@ -70,8 +71,8 @@
   width: 90%;
   height: 7vh;
   margin-top: 3rem;
-  margin-left: 1.4rem;
-  margin-right: 1.4rem;
+  margin-left: 5%;
+  margin-right: 5%;
   padding: 1rem;
   border: none;
   background: #2d2d2d;

@@ -5,7 +5,7 @@ import Img2 from '../.././assets/2-div-img.png';
 import AlbumImg1 from '../.././assets/Group 33907.png';
 import AlbumImg2 from '../.././assets/Group 33906.png';
 import AlbumImg3 from '../.././assets/Group 33945.png';
-import {Link,useParams,useNavigate} from 'react-router-dom'
+import {Link,useParams,useNavigate,useLocation} from 'react-router-dom'
 import {ReactComponent as Home} from '../.././assets/home.svg';
 import {ReactComponent as Chat} from '../.././assets/chat.svg';
 import {ReactComponent as Lock} from '../.././assets/lock.svg';
@@ -25,8 +25,11 @@ const ArtistPage=()=>{
     const [services,setServices]=useState([]);
     const [album,setAlbum]=useState([]);
     const[photos,setPhotos]=useState([]);
-    const[checktime,setChecktime]=useState([]);
-    
+   
+    const [timestamp,setTimestamp]=useState("");
+    const [startClock,setStartClock]=useState(false);
+    const location=useLocation();
+    const [albumId,setAlbumId]=useState(location.state);
     useEffect(()=>{
         const config={
           headers:{
@@ -47,8 +50,8 @@ const ArtistPage=()=>{
     })
     axios.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
       setAlbum(data);
-      console.log("data");
-      console.log(data);
+      // console.log("access",data);
+      
       const arr=[];
       for(let i=0;i<data.length;i++){
         axios.get(`/api/user/private/readimage/${data[i].fileUrl}`,config).then((res)=>{
@@ -61,23 +64,55 @@ const ArtistPage=()=>{
         
       }
       setPhotos(arr);
-      for(let i=0;i<data.length;i++){
-      console.log("time");
-      console.log(data[i].accessedBy.time);
-       } //  console.log("arr");
+      //  console.log("arr");
       //  console.log(arr);
         // setPhotos([...photos,res.data])
         
     
     }
+    
+    
     ) 
-
+    if(albumId){
+      // console.log(albumId,"state");
+     axios.get(`/api/user/private/getalbumtimestamp/${albumId}`,config).then((res)=>{
+      setTimestamp(new Date().getTime());
+      setStartClock(true);
+      // console.log((new Date().getTime()-new Date(res.data).getTime())/1000);
+      // axios.put('/api/user/private/removealbumaccess',{albumId:state},config);
+    //   console.log(new Date());
+    //  console.log(new Date(res.data))
+     })
+    }
       },[])
       useEffect(() => {
-        seconds > 0 && setTimeout(() => setSeconds(seconds - 1), 1000);
+        if( seconds > 0 && startClock){
+          setTimeout(() => setSeconds(seconds - 1), 1000);
+        }else if(seconds<=0 && startClock){
+          removeAccess();
+          setStartClock(false);
+        }
     
-      }, [seconds]);
+      }, [seconds,startClock]);
+    const removeAccess=async()=>{
+      const config={
+        headers:{
+          "Content-Type":"application/json",
+          Authorization:`Bearer ${localStorage.getItem("fanstarToken")}`
+        }
     
+      }
+     try{
+       await  axios.put('/api/user/private/removealbumaccess',{albumId},config);
+         
+
+          navigate(`/artist/${id}`,{state:""});
+     }
+     catch(error){
+         console.log(error);
+     }
+    }
+// console.log(location);
     return(
     <div className='landing'>
     <div className='img-header'>
@@ -123,27 +158,75 @@ const ArtistPage=()=>{
 }
    </div>
    <div className='container-2'> 
-        <h1 className='container-2-head'>My Images <span id="see-all" style={{cursor:"pointer"}} onClick={()=>{navigate(`/artist/${id}/user/album`)}}>See All</span></h1>
+        <h1 className='container-2-head'>My Images <span id="see-all" style={{cursor:"pointer"}} onClick={()=>{navigate(`/artist/${id}/user/album`,{state:albumId})}}>See All</span></h1>
         <div className='time-cont'> 
-        <Clock id="clock-svg"/> <span id='timer-clock'> {seconds} sec</span>
+        {
         
-      
-      
+        (new Date().getTime()-timestamp)/1000 <=120 ? //condition
+      <div>  <Clock id="clock-svg"/> <span id='timer-clock'> {seconds} sec</span>
+       <div className='album-card'>
+        {album.length>0 && album.slice(0,3).map((data,ind)=>{
+         
+         return(
+            
+          <div>
+          <div className='album-card-1' key={ind}>
+           
+            <img className="album-card-img" src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.fileUrl}`} style={{webkitFilter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`, 
+filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
+}} />
+           
+           </div>
         </div>
-        <div className='album-card'>
-        {album.length>0 && album.map((data,ind)=>{
+         
+        )
+        }
+        )}
+        {/* <button onClick={removeAccess}>Remove</button> */}
+           </div>  
+      
+      
+      
+      
+      
+      </div>
+        :
+        <div>
+         <div className='album-card'>
+        {album.length>0 && album.slice(0,3).map((data,ind)=>{
+         
           return(
             
             <div>
-            <div className='album-card-1' key={ind}><img className="album-card-img" src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.fileUrl}`}  onClick={()=>{
-                navigate(`/artist/${id}/user/album/${data._id}`)
-             }}/></div>
+            <div className='album-card-1' key={ind}>
+             <div id="album-img-btn">
+             <button id="unlock-btn" onClick={()=>{
+               
+               navigate(`/artist/${id}/user/album/${data._id}`)
+                
+             }} > Unlock now</button>
+              <img className="album-card-img" src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.fileUrl}`} style={{webkitFilter: "blur(10px)", 
+  filter: "blur(10px)"
+}}  />
+              
+             </div>
+             </div>
           </div>
            
           )
         }
         )}
-           </div>  
+        
+           </div>
+
+        </div>
+        }
+        
+        
+        {/* <button onClick={removeAccess}>Remove</button> */}
+      
+        </div>
+       
             
           
             {/* <div className='album-card-2'><img className="album-card-img" src={AlbumImg2}/></div>

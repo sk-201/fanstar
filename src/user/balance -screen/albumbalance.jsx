@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { Link,useLocation,useNavigate,useParams } from 'react-router-dom';
 import axios from 'axios';
+import Razorpay_Key from '../../rzp';
 import './balance .css';
 const AlbumBuy=()=>{
 const{artistId,albumId}=useParams();
@@ -18,7 +19,7 @@ useEffect(()=>{
     }
    axios.get(`/api/user/private/getalbum/${albumId}`,config).then(({data})=>{
        setAlbumPrice(data.price);
-    console.log(data);
+    // console.log(data);
    })
    axios.get(`/api/user/private/getowndetails`,config).then(({data})=>{
     setBalance(data.balance);
@@ -41,7 +42,7 @@ const razorPayPaymentHandler=async()=> {
         console.log("response", response)
         
         const options = {
-           key: 'razorpay-key',
+           key: Razorpay_Key,
           name: '',
           description: "Buy Service",
           order_id: data.id,
@@ -83,7 +84,7 @@ const buyService=async()=>{
        
        await axios.post('/api/user/private/buyalbum',{albumId},config);
         alert("You can now view my album!!")
-         navigate(`/artist/${artistId}`);
+         navigate(`/artist/${artistId}`,{state:albumId});
       }
     
     catch(error){

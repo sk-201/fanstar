@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import { Link,useLocation,useNavigate,useParams } from 'react-router-dom';
+import Razorpay_Key from '../../rzp';
 import axios from 'axios';
 import './balance .css';
 const Balance=()=>{
@@ -44,7 +45,7 @@ const razorPayPaymentHandler=async()=> {
         console.log("response", response)
         
         const options = {
-           key: 'razorpay-key',
+           key: Razorpay_Key,
           name: {username},
           description: "Buy Service",
           order_id: data.id,

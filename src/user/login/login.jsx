@@ -20,6 +20,7 @@ import  Logo from '../.././assets/Ellipse 58.png';
                 }
             else{
                 alert("Mobile no is not correct!");
+                
             }
          } catch (error) {
              console.log(error);

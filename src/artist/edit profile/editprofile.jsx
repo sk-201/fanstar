@@ -55,10 +55,11 @@ const Edit=()=>{
       }
     return(
 <div className='edit-profile'>
-    <Cross id="cross-icon"/>  
-    <span id="edit-txt">Edit profile</span>
+    
   
     <div className='edit-container'>
+    <Cross id="cross-icon" onClick={()=>{navigate("/artist/landing")}}/>  
+    <span id="edit-txt">Edit profile</span>
     <img id="img-edit" src={baseImage}/>
  <label htmlFor="chng-pp" id="chng-pp-1">Change profile picture</label>
  <input id="chng-pp" type="file"   onChange={(e) => {

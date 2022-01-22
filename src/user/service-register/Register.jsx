@@ -72,7 +72,7 @@ const Register=()=> {
     return(
     <div className='Register'>
      <div className='img-banner'>
-      <img src={Ban} alt="banner-img"/>     
+      <img src={Ban} id="ban-img-id" alt="banner-img"/>     
      </div>
      <div>
          <h1>Product Type</h1>

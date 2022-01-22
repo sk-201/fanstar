@@ -12,6 +12,10 @@ font-weight: normal;
 font-size: 20px;
 line-height: 24px;
 color: #434343;
+
+}
+#ban-img-id{
+    width:100%;
 }
 .pers-text{
     font-family: Montserrat;
