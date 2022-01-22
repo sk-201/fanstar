@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../../api';
 import EmployeeEditProfile from './EmployeeEditProfile';
 import Logo from '../../assets/Ellipse 58.png';
 import { ReactComponent as Home } from '../.././assets/home.svg';
@@ -24,7 +24,7 @@ const EmployeeProfile = () => {
 
   const fetchProfileInfo = async () => {
     try {
-      const { data } = await axios.get('/api/employee/private/getownprofile', {
+      const { data } = await API.get('/api/employee/private/getownprofile', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem(
             'fanstarEmployeeToken'

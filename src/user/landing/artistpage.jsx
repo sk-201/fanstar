@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Img1 from '../.././assets/Banner.png';
 import Img2 from '../.././assets/2-div-img.png';
 import AlbumImg1 from '../.././assets/Group 33907.png';
 import AlbumImg2 from '../.././assets/Group 33906.png';
 import AlbumImg3 from '../.././assets/Group 33945.png';
+import API from '../../api';
 import {Link,useParams,useNavigate,useLocation} from 'react-router-dom'
 import {ReactComponent as Home} from '../.././assets/home.svg';
 import {ReactComponent as Chat} from '../.././assets/chat.svg';
@@ -38,23 +38,23 @@ const ArtistPage=()=>{
           }
       
         }
-       axios.get(`/api/user/private/getartist/${id}`,config).then(({data})=>{
+       API.get(`/api/user/private/getartist/${id}`,config).then(({data})=>{
            setName(data.username);
            setProfilePhoto(data.profilePhoto);
            setBio(data.bio);
         
        })
-       axios.get(`/api/user/public/getservices/${id}`,config).then(({data})=>{
+       API.get(`/api/user/public/getservices/${id}`,config).then(({data})=>{
         setServices(data);
      
     })
-    axios.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
+    API.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
       setAlbum(data);
       // console.log("access",data);
       
       const arr=[];
       for(let i=0;i<data.length;i++){
-        axios.get(`/api/user/private/readimage/${data[i].fileUrl}`,config).then((res)=>{
+        API.get(`/api/user/private/readimage/${data[i].fileUrl}`,config).then((res)=>{
         // console.log(res.data);
         arr.push(res.data);
        
@@ -75,11 +75,11 @@ const ArtistPage=()=>{
     ) 
     if(albumId){
       // console.log(albumId,"state");
-     axios.get(`/api/user/private/getalbumtimestamp/${albumId}`,config).then((res)=>{
+     API.get(`/api/user/private/getalbumtimestamp/${albumId}`,config).then((res)=>{
       setTimestamp(new Date().getTime());
       setStartClock(true);
       // console.log((new Date().getTime()-new Date(res.data).getTime())/1000);
-      // axios.put('/api/user/private/removealbumaccess',{albumId:state},config);
+      // API.put('/api/user/private/removealbumaccess',{albumId:state},config);
     //   console.log(new Date());
     //  console.log(new Date(res.data))
      })
@@ -103,7 +103,7 @@ const ArtistPage=()=>{
     
       }
      try{
-       await  axios.put('/api/user/private/removealbumaccess',{albumId},config);
+       await  API.put('/api/user/private/removealbumaccess',{albumId},config);
          
 
           navigate(`/artist/${id}`,{state:""});

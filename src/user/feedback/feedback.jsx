@@ -3,7 +3,7 @@ import { useParams,useNavigate } from 'react-router-dom';
 import {ReactComponent as Star} from '../.././assets/Star.svg';
 import {ReactComponent as StarE} from '../.././assets/Star 6.svg';
 import {ReactComponent as BackArrow} from '../../assets/backArrow.svg';
-import axios from 'axios';
+import API from '../../api';
 import './feedback.css';
 const Feedback=()=>{
     const {artistId} =useParams();
@@ -26,7 +26,7 @@ const Feedback=()=>{
               }
             }
            
-           await axios.post('/api/user/private/givefeedback',{artistId,stars,message},config);
+           await API.post('/api/user/private/givefeedback',{artistId,stars,message},config);
             alert("Thanks for the feedback")
              navigate(`/artist/${artistId}`);
           }

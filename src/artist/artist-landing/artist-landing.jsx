@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import axios from 'axios';
+import API from '../../api';
 import Img1 from '../.././assets/Banner.png';
 import Img2 from '../.././assets/2-div-img.png';
 import {Link,useNavigate} from 'react-router-dom';
@@ -21,7 +21,7 @@ const ArtistLanding=()=>{
             }
         
           }
-          axios.get("/api/artist/private/ownservices",config).then(
+          API.get("/api/artist/private/ownservices",config).then(
               ({ data})=>{
                   setServices(data);
                   console.log(data);

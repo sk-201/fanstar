@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { Link,useLocation,useNavigate,useParams } from 'react-router-dom';
 import Razorpay_Key from '../../rzp';
-import axios from 'axios';
+import API from '../../api';
 import './balance .css';
 const Balance=()=>{
 const {state}=useLocation();
@@ -19,12 +19,12 @@ useEffect(()=>{
       }
   
     }
-   axios.get(`/api/user/private/getaservice/${serviceId}`,config).then(({data})=>{
+   API.get(`/api/user/private/getaservice/${serviceId}`,config).then(({data})=>{
        setServiceName(data.serviceName);
        setServicePrice(data.amount)
     console.log(data);
    })
-   axios.get(`/api/user/private/getowndetails`,config).then(({data})=>{
+   API.get(`/api/user/private/getowndetails`,config).then(({data})=>{
     setBalance(data.balance);
 })
    .catch((error)=>console.log(error))
@@ -39,7 +39,7 @@ const razorPayPaymentHandler=async()=> {
       }
         const API_URL = `/api/user/private/`
         const orderUrl = `${API_URL}order/720`;
-        const response = await axios.get(orderUrl,config);
+        const response = await API.get(orderUrl,config);
         const { data } = response;
         console.log("App -> razorPayPaymentHandler -> data", data)
         console.log("response", response)
@@ -53,7 +53,7 @@ const razorPayPaymentHandler=async()=> {
             try {
              const paymentId = response.razorpay_payment_id;
              const url = `${API_URL}capture/${paymentId}`;
-             const captureResponse = await axios.post(url,{amount:'720'},config)
+             const captureResponse = await API.post(url,{amount:'720'},config)
              const successObj = JSON.parse(captureResponse.data)
              const captured = successObj.captured;
              console.log("App -> razorPayPaymentHandler -> captured", successObj)
@@ -85,7 +85,7 @@ const buyService=async()=>{
           }
         }
        
-       await axios.put('/api/user/private/buyservice',{serviceId,username,email,phone,insta},config);
+       await API.put('/api/user/private/buyservice',{serviceId,username,email,phone,insta},config);
         alert("Thank you for buying my service!!")
          navigate(`/artist/${artistId}`);
       }

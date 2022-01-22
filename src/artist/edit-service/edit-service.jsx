@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react';
 import {ReactComponent as BackArrow} from '../../assets/backArrow.svg';
-import axios from "axios";
+import API from '../../api';
 import { useParams,useNavigate } from 'react-router-dom';
 import '../add-service/add-service.css';
 const EditService=()=>{
@@ -17,7 +17,7 @@ const EditService=()=>{
       }
   
     }
-   axios.get(`/api/artist/private/getservice/${id}`,config).then(({data})=>{
+   API.get(`/api/artist/private/getservice/${id}`,config).then(({data})=>{
      setserviceName(data.serviceName);
      setAmount(data.amount);
      setDescription(data.description);
@@ -34,7 +34,7 @@ const EditService=()=>{
             }
         
           }
-          await axios.put(`/api/artist/private/updateservice/${id}`,{serviceName,amount,description},config);
+          await API.put(`/api/artist/private/updateservice/${id}`,{serviceName,amount,description},config);
           alert("Service Updated");
           navigate("/service");
           

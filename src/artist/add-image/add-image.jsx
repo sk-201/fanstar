@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import axios from 'axios';
+import API from '../../api';
 import {useNavigate} from 'react-router-dom';
 import {ReactComponent as BackArrow} from '../../assets/backArrow.svg';
 import './add-image.css'
@@ -46,7 +46,7 @@ const AddImage=()=>{
       data.append("caption",caption);
       data.append("price",price);
       data.append("artistFile",fileStore);
-     await axios.post("/api/artist/private/uploadfile",data,config);
+     await API.post("/api/artist/private/uploadfile",data,config);
      alert("Image Uploaded!");
      navigate("/artist/landing");
 

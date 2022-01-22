@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import axios from 'axios';
+import API from '../../api';
 import Razorpay_Key from '../../rzp';
 import './balance .css';
 const WalletBalance=()=>{
@@ -14,7 +14,7 @@ useEffect(()=>{
       }
   
     }
-   axios.get(`/api/user/private/getowndetails`,config).then(({data})=>{
+   API.get(`/api/user/private/getowndetails`,config).then(({data})=>{
     setBalance(data.balance);
 })
    .catch((error)=>console.log(error))
@@ -29,7 +29,7 @@ const razorPayPaymentHandler=async()=> {
       }
         const API_URL = `/api/user/private/`
         const orderUrl = `${API_URL}order/720`;
-        const response = await axios.get(orderUrl,config);
+        const response = await API.get(orderUrl,config);
         const { data } = response;
         console.log("App -> razorPayPaymentHandler -> data", data)
         console.log("response", response)
@@ -43,7 +43,7 @@ const razorPayPaymentHandler=async()=> {
             try {
              const paymentId = response.razorpay_payment_id;
              const url = `${API_URL}capture/${paymentId}`;
-             const captureResponse = await axios.post(url,{amount:'720'},config)
+             const captureResponse = await API.post(url,{amount:'720'},config)
              const successObj = JSON.parse(captureResponse.data)
              const captured = successObj.captured;
              console.log("App -> razorPayPaymentHandler -> captured", successObj)

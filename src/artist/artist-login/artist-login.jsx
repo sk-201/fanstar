@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 import  Logo from '../.././assets/Ellipse 58.png';
 const ArtistLogin=()=>{
     const navigate=useNavigate();
@@ -13,7 +13,7 @@ const ArtistLogin=()=>{
                      "Content-Type":"application/json"
                    }
                  }
-                 await axios.post("/api/artist/public/generateotp",{phone},config)
+                 await API.post("/api/artist/public/generateotp",{phone},config)
                   alert("OTP sent");
                   navigate(`/artist/otp/${phone}`);
                   

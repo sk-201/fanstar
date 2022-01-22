@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { useParams,Link,useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 import './otp.css'
 const Otp=()=>{
 
@@ -23,7 +23,7 @@ const Otp=()=>{
                      "Content-Type":"application/json"
                    }
                  }
-                const {data}= await axios.post("/api/user/public/verify",{phone,code},config)
+                const {data}= await API.post("/api/user/public/verify",{phone,code},config)
                 console.log(data);
                 localStorage.setItem("fanstarToken",data);
                   alert("Login Successfull");

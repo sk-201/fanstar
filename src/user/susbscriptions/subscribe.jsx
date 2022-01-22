@@ -1,5 +1,5 @@
 import React,{ Component } from 'react';
-import Axios from 'axios';
+import API from '../../api';
 import Ban from '../.././assets/register-banner.png';
 import Back from '../.././assets/Rectangle 736.png';
 import './subscriptions.css';
@@ -16,7 +16,7 @@ class Subscribe extends Component{
       async razorPayPaymentHandler() {
         const API_URL = `/api/user/private/`
         const orderUrl = `${API_URL}order`;
-        const response = await Axios.get(orderUrl);
+        const response = await API.get(orderUrl);
         const { data } = response;
         console.log("App -> razorPayPaymentHandler -> data", data)
         console.log("response", response)
@@ -30,7 +30,7 @@ class Subscribe extends Component{
             try {
              const paymentId = response.razorpay_payment_id;
              const url = `${API_URL}capture/${paymentId}`;
-             const captureResponse = await Axios.post(url, {})
+             const captureResponse = await API.post(url, {})
              const successObj = JSON.parse(captureResponse.data)
              const captured = successObj.captured;
              console.log("App -> razorPayPaymentHandler -> captured", successObj)

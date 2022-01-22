@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import API from '../../api';
 import { useNavigate } from 'react-router-dom';
 import {ReactComponent as BackArrow} from '../../assets/backArrow.svg';
 import {ReactComponent as Edit} from '../../assets/edit-icon.svg';
@@ -19,7 +19,7 @@ useEffect(()=>
         }
     
       }
-      axios.get("/api/artist/private/ownservices",config).then(
+      API.get("/api/artist/private/ownservices",config).then(
           ({ data})=>{
               setServices(data);
               console.log(data);

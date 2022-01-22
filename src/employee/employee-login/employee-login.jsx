@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 import Logo from '../.././assets/Ellipse 58.png';
 const EmployeeLogin = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const EmployeeLogin = () => {
             'Content-Type': 'application/json',
           },
         };
-        await axios.post('/api/employee/public/generateotp', { phone }, config);
+        await API.post('/api/employee/public/generateotp', { phone }, config);
         alert('OTP sent');
         navigate(`/employee/otp/${phone}`);
       } else {

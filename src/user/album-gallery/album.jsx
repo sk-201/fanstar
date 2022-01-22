@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import { useParams,useNavigate,useLocation } from "react-router-dom";
 import {ReactComponent as Clock} from '../.././assets/clock.svg'; 
-import axios from "axios";
+import API from "../../api";
 import '../landing/landing.css';
 const Album=()=>{
     const navigate=useNavigate();
@@ -24,11 +24,11 @@ const Album=()=>{
           }
       
         }
-    axios.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
+    API.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
       setAlbum(data);
       const arr=[];
       for(let i=0;i<data.length;i++){
-        axios.get(`/api/user/private/readimage/${data[i].fileUrl}`,config).then((res)=>{
+        API.get(`/api/user/private/readimage/${data[i].fileUrl}`,config).then((res)=>{
       //  console.log(res.data);
       //  console.log("res");
         arr.push(res.data);
@@ -49,11 +49,11 @@ const Album=()=>{
     ) 
     if(albumId){
       // console.log(albumId,"state");
-     axios.get(`/api/user/private/getalbumtimestamp/${albumId}`,config).then((res)=>{
+     API.get(`/api/user/private/getalbumtimestamp/${albumId}`,config).then((res)=>{
       setTimestamp(new Date().getTime());
       setStartClock(true);
       // console.log((new Date().getTime()-new Date(res.data).getTime())/1000);
-      // axios.put('/api/user/private/removealbumaccess',{albumId:state},config);
+      // API.put('/api/user/private/removealbumaccess',{albumId:state},config);
     //   console.log(new Date());
     //  console.log(new Date(res.data))
      })
@@ -84,7 +84,7 @@ const Album=()=>{
       
         }
        try{
-         await  axios.put('/api/user/private/removealbumaccess',{albumId},config);
+         await  API.put('/api/user/private/removealbumaccess',{albumId},config);
            
   
             navigate(`/artist/${id}`,{state:""});

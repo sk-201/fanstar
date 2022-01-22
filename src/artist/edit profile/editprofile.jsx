@@ -1,7 +1,7 @@
 import React ,{useState} from 'react';
 import Banner from '../../assets/register-banner.png';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 import {ReactComponent as Cross} from '../../assets/cross.svg';
 import {ReactComponent as Blue} from '../../assets/blue.svg';
 import {ReactComponent as Green} from '../../assets/green.svg';
@@ -43,7 +43,7 @@ const Edit=()=>{
                 }
             
               }
-              await axios.put("/api/artist/private/updateprofile",{username:Name,profilePhoto:baseImage,bio:Bio},config)
+              await API.put("/api/artist/private/updateprofile",{username:Name,profilePhoto:baseImage,bio:Bio},config)
               alert("Profile Updated");
               navigate("/artist/landing");
            }

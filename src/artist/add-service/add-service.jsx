@@ -1,6 +1,6 @@
 import React ,{useState} from 'react';
 import {ReactComponent as BackArrow} from '../../assets/backArrow.svg';
-import axios from "axios";
+import API from '../../api';
 import './add-service.css';
 const AddService=()=>{
   const [serviceName,setserviceName]=useState("");
@@ -16,7 +16,7 @@ const AddService=()=>{
             }
         
           }
-          await axios.post("/api/artist/private/createservice",{serviceName,amount,description},config)
+          await API.post("/api/artist/private/createservice",{serviceName,amount,description},config)
           alert("Service Created");
           
        }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Axios from 'axios';
+import API from '../../api';
 export class Payment extends Component {
   constructor(props) {
     super(props)
@@ -14,7 +14,7 @@ export class Payment extends Component {
   async razorPayPaymentHandler() {
     const API_URL = `/api/user/private/`
     const orderUrl = `${API_URL}order`;
-    const response = await Axios.get(orderUrl);
+    const response = await API.get(orderUrl);
     const { data } = response;
     console.log("App -> razorPayPaymentHandler -> data", data)
     console.log("response", response)
@@ -28,7 +28,7 @@ export class Payment extends Component {
         try {
          const paymentId = response.razorpay_payment_id;
          const url = `${API_URL}capture/${paymentId}`;
-         const captureResponse = await Axios.post(url, {})
+         const captureResponse = await API.post(url, {})
          const successObj = JSON.parse(captureResponse.data)
          const captured = successObj.captured;
          console.log("App -> razorPayPaymentHandler -> captured", successObj)

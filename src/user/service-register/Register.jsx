@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 import Ban from '../.././assets/register-banner.png';
 import './Register.css';
 
@@ -23,7 +23,7 @@ const Register=()=> {
           }
       
         }
-       axios.get(`/api/user/private/getaservice/${serviceId}`,config).then(({data})=>{
+       API.get(`/api/user/private/getaservice/${serviceId}`,config).then(({data})=>{
            setServiceName(data.serviceName);
            setServicePrice(data.amount)
         console.log(data);
@@ -34,7 +34,7 @@ const Register=()=> {
     // async razorPayPaymentHandler() {
     //     const API_URL = `/api/user/private/`
     //     const orderUrl = `${API_URL}order`;
-    //     const response = await Axios.get(orderUrl);
+    //     const response = await API.get(orderUrl);
     //     const { data } = response;
     //     console.log("App -> razorPayPaymentHandler -> data", data)
     //     console.log("response", response)
@@ -48,7 +48,7 @@ const Register=()=> {
     //         try {
     //          const paymentId = response.razorpay_payment_id;
     //          const url = `${API_URL}capture/${paymentId}`;
-    //          const captureResponse = await Axios.post(url, {})
+    //          const captureResponse = await API.post(url, {})
     //          const successObj = JSON.parse(captureResponse.data)
     //          const captured = successObj.captured;
     //          console.log("App -> razorPayPaymentHandler -> captured", successObj)

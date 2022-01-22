@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 const EmployeeOtp = () => {
   const navigate = useNavigate();
   const [counter, setCounter] = useState(60);
@@ -28,7 +28,7 @@ const EmployeeOtp = () => {
             'Content-Type': 'application/json',
           },
         };
-        const { data } = await axios.post(
+        const { data } = await API.post(
           '/api/employee/public/verify',
           { phone, code },
           config

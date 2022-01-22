@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 import './login.css';
 import  Logo from '../.././assets/Ellipse 58.png';
  const Login=()=>{
@@ -14,7 +14,7 @@ import  Logo from '../.././assets/Ellipse 58.png';
                       "Content-Type":"application/json"
                     }
                   }
-                  await axios.post("/api/user/public/generateotp",{phone},config)
+                  await API.post("/api/user/public/generateotp",{phone},config)
                    alert("OTP sent");
                    navigate(`/otp/${phone}`);
                 }

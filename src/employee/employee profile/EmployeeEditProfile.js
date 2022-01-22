@@ -1,4 +1,4 @@
-import axios from 'axios';
+import API from '../../api';
 import React, { useState, useRef } from 'react';
 import backTick from '../../assets/backTick.png';
 import demoProfile from '../../assets/demoProfile.png';
@@ -47,7 +47,7 @@ const EmployeeEditProfile = (props) => {
 
   const saveChanges = async () => {
     try {
-      await axios.put(
+      await API.put(
         '/api/employee/private/updateprofile',
         {
           username: profile.username,

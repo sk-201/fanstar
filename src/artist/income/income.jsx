@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import axios from 'axios';
+import API from '../../api';
 import {ReactComponent as Home} from '../.././assets/home.svg';
 import {ReactComponent as Chat} from '../.././assets/chat.svg';
 import {ReactComponent as Lock} from '../.././assets/lock.svg';
@@ -16,7 +16,7 @@ const Income=()=>{
             }
         
           }
-          axios.get("/api/artist/private/getownprofile",config).then(
+          API.get("/api/artist/private/getownprofile",config).then(
               ({ data})=>{
                   setBalance(data.balance);
                   

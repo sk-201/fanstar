@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import { useParams,Link } from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
+import API from '../../api';
 const ArtistOtp =()=>{
   const navigate=useNavigate();
     const [counter, setCounter] = useState(60);
@@ -20,7 +20,7 @@ const ArtistOtp =()=>{
                      "Content-Type":"application/json"
                    }
                  }
-                const {data}= await axios.post("/api/artist/public/verify",{phone,code},config)
+                const {data}= await API.post("/api/artist/public/verify",{phone,code},config)
                 console.log(data);
                 localStorage.setItem("fanstarToken",data);
                   alert("Login Successfull");
