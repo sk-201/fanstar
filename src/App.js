@@ -33,7 +33,7 @@ import './App.css';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  // if (isMobile) {
+  if (isMobile) {
     return (
       <div className='App'>
         <Routes>
@@ -72,13 +72,13 @@ function App() {
         </Routes>
       </div>
     );
-  // } else {
-    // return (
-    //   <div className='desktop-WarningDiv'>
-    //     <h1>Please open this link in Mobile Or Tablet to View the website.</h1>
-    //   </div>
-    // );
-  // }   new Date().getTime() - new Date(Time_Variable).getTime()
+  } else {
+    return (
+      <div className='desktop-WarningDiv'>
+        <h1>Please open this link in Mobile Or Tablet to View the website.</h1>
+      </div>
+    );
+  }   
 }
 
 export default App;
