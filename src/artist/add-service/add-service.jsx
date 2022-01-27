@@ -6,7 +6,8 @@ const AddService=()=>{
   const [serviceName,setserviceName]=useState("");
   const [amount,setAmount]=useState("");
   const [description,setDescription]=useState("");
-  const createService =async()=>{
+  const createService =async(event)=>{
+    event.preventDefault();
     try{
       if(serviceName.trim()!==""&& amount.trim()!==""&&description.trim()!==""){
         const config={

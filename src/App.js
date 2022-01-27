@@ -29,6 +29,7 @@ import ArtistPage from './user/landing/artistpage';
 import AlbumBuy from './user/balance -screen/albumbalance';
 import WalletBalance from './user/balance -screen/walletbalance';
 import Album from './user/album-gallery/album';
+import SubBalance from './user/balance -screen/subscribe-balance';
 import './App.css';
 
 function App() {
@@ -50,8 +51,9 @@ function App() {
            <Route path='/artist/:artistId/user/album/:albumId' element={<AlbumBuy/>}/>
            <Route path='/wallet' element={<WalletBalance/>}/>
        <Route path='/artist/:id/user/album' element={<Album/>}/>
-          <Route path='/sub' element={<Subscription />} />
-          <Route path='/subscribe' element={<Subscribe />} />
+          <Route path='/artist/:id/sub' element={<Subscription />} />
+          <Route path='/artist/:id/subscribe' element={<Subscribe />} />
+          <Route path='/artist/:id/subscribe/payment' element={<SubBalance />} />
           <Route path='/pay' element={<Payment />} />
           <Route path='/income' element={<Income />} />
           <Route path='/edit' element={<Edit />} />

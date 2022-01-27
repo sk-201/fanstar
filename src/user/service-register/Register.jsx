@@ -23,6 +23,7 @@ const Register=()=> {
           }
       
         }
+        
        API.get(`/api/user/private/getaservice/${serviceId}`,config).then(({data})=>{
            setServiceName(data.serviceName);
            setServicePrice(data.amount)

@@ -1,9 +1,18 @@
 import React,{useEffect,useState} from "react";
 import { useParams,useNavigate,useLocation } from "react-router-dom";
 import {ReactComponent as Clock} from '../.././assets/clock.svg'; 
+import {ReactComponent as Home} from '../.././assets/home-white.svg'; 
+import {ReactComponent as ChatB} from '../.././assets/chat-black.svg'; 
+import {ReactComponent as LockB} from '../.././assets/lock-black.svg'; 
+import {ReactComponent as HomeB} from '../.././assets/home.svg';
+import {ReactComponent as Chat} from '../.././assets/chat.svg';
+import {ReactComponent as Lock} from '../.././assets/lock.svg';
 import API from "../../api";
 import '../landing/landing.css';
 const Album=()=>{
+  const [home,setHome]=useState(0);
+  const [chat,setChat]=useState(0);
+  const [lock,setLock]=useState(1);
     const navigate=useNavigate();
     const {id}=useParams();
     const [seconds, setSeconds] = useState(120);
@@ -162,10 +171,64 @@ filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
       </div>
       }
       
-{/*       
-      <button onClick={removeAccess}>Remove</button> */}
+
     
       </div>
+      {(() => {
+        if (home==1 &&chat==0&&lock==0) {
+          return (
+            <div>
+              <div className='icons-tab'>
+        <div className='nav'>
+        <HomeB/>
+      
+      <Chat onClick={()=>{setChat(1);setHome(0);navigate("/chat")}}/>
+
+      <Lock onClick={()=>{setLock(1);setHome(0);navigate(`/artist/${id}/sub`)}} />
+          </div>
+          </div>
+             
+
+
+            </div>
+          )
+        } else if (chat==1&&home==0&&lock==0) {
+          return (
+            <div>
+              <div className='icons-tab'>
+        <div className='nav'>
+        <Home onClick={()=>{setHome(1);setChat(0)}}  />
+      
+      <ChatB/>
+      
+      <Lock onClick={()=>{setLock(1);setChat(0);navigate(`/artist/${id}/sub`)}}/>
+          </div>
+          </div>
+      
+
+
+            </div>
+          )
+        } else if(lock==1&&chat==0&&home==0) {
+          return (
+            <div>
+              <div className='icons-tab'>
+        <div className='nav'>
+        <Home onClick={()=>{setHome(1);setLock(0);navigate(`/artist/${id}`)}}/>
+      
+      <Chat onClick={()=>{setChat(1);setLock(0);}}/>
+      
+      <LockB/>
+          </div>
+          </div>
+       
+
+
+            </div>
+          )
+        }
+      })()}
+
      
           </div>
     )

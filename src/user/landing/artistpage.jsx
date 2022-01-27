@@ -6,13 +6,16 @@ import AlbumImg2 from '../.././assets/Group 33906.png';
 import AlbumImg3 from '../.././assets/Group 33945.png';
 import API from '../../api';
 import {Link,useParams,useNavigate,useLocation} from 'react-router-dom'
-import {ReactComponent as Home} from '../.././assets/home.svg';
+import {ReactComponent as HomeB} from '../.././assets/home.svg';
 import {ReactComponent as Chat} from '../.././assets/chat.svg';
 import {ReactComponent as Lock} from '../.././assets/lock.svg';
 import {ReactComponent as Wallet} from '../.././assets/wallet.svg';
 import {ReactComponent as Bell} from '../.././assets/bell.svg';
 import {ReactComponent as User} from '../.././assets/userlogin.svg'; 
 import {ReactComponent as Clock} from '../.././assets/clock.svg'; 
+import {ReactComponent as Home} from '../.././assets/home-white.svg'; 
+import {ReactComponent as ChatB} from '../.././assets/chat-black.svg'; 
+import {ReactComponent as LockB} from '../.././assets/lock-black.svg'; 
 
 import './landing.css';
 const ArtistPage=()=>{
@@ -24,12 +27,14 @@ const ArtistPage=()=>{
     const[profilePhoto,setProfilePhoto]=useState("");
     const [services,setServices]=useState([]);
     const [album,setAlbum]=useState([]);
-    const[photos,setPhotos]=useState([]);
-   
+    const[photos,setPhotos]=useState([]); 
     const [timestamp,setTimestamp]=useState("");
     const [startClock,setStartClock]=useState(false);
     const location=useLocation();
     const [albumId,setAlbumId]=useState(location.state);
+    const [home,setHome]=useState(1);
+    const [chat,setChat]=useState(0);
+    const [lock,setLock]=useState(0);
     useEffect(()=>{
         const config={
           headers:{
@@ -127,7 +132,7 @@ const ArtistPage=()=>{
         :<Link to='/login'><User className='wallet-icon'/>
         <text id="login-text-land" >Login</text>
         </Link>}
-        <Link to='/sub'><Bell className='bell-icon'> </Bell></Link>
+        <Link to={`/artist/${id}/sub`}><Bell className='bell-icon'> </Bell></Link>
         <h1 className='img-1-heading'>Hi I'm {name}</h1>
     </div>
     <div className='container-1'>
@@ -238,16 +243,65 @@ filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
     
 
    </div>
-    <div className='icons-tab'>
+    
+        {(() => {
+        if (home==1 &&chat==0&&lock==0) {
+          return (
+            <div>
+              <div className='icons-tab'>
         <div className='nav'>
-        <Home/>
+        <HomeB/>
       
-      <Chat/>
+      <Chat onClick={()=>{setChat(1);setHome(0);navigate("/chat")}}/>
+
+      <Lock onClick={()=>{setLock(1);setHome(0);navigate(`/artist/${id}/sub`)}} />
+          </div>
+          </div>
+             
+
+
+            </div>
+          )
+        } else if (chat==1&&home==0&&lock==0) {
+          return (
+            <div>
+              <div className='icons-tab'>
+        <div className='nav'>
+        <Home onClick={()=>{setHome(1);setChat(0)}}  />
       
-      <Lock/>
-        </div>
-   
-    </div>
+      <ChatB/>
+      
+      <Lock onClick={()=>{setLock(1);setChat(0);navigate(`/artist/${id}/sub`)}}/>
+          </div>
+          </div>
+      
+
+
+            </div>
+          )
+        } else if(lock==1&&chat==0&&home==0) {
+          return (
+            <div>
+              <div className='icons-tab'>
+        <div className='nav'>
+        <Home onClick={()=>{setHome(1);setLock(0);navigate(`/artist/${id}`)}}/>
+      
+      <Chat onClick={()=>{setChat(1);setLock(0);}}/>
+      
+      <LockB/>
+          </div>
+          </div>
+       
+
+
+            </div>
+          )
+        }
+      })()}
+        
+        
+        
+        
 
 
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import Img1 from '../.././assets/Banner.png';
 import Img2 from '../.././assets/2-div-img.png';
 import {Link} from 'react-router-dom'
-import {ReactComponent as Home} from '../.././assets/home.svg';
+import {ReactComponent as HomeB} from '../.././assets/home.svg';
 import {ReactComponent as Chat} from '../.././assets/chat.svg';
 import {ReactComponent as Lock} from '../.././assets/lock.svg';
 import {ReactComponent as Wallet} from '../.././assets/wallet.svg';
@@ -46,7 +46,7 @@ const Landing=()=>(
     </div>
     <div className='icons-tab'>
         <div className='nav'>
-        <Home/>
+        <HomeB/>
       
       <Chat/>
       

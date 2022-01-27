@@ -4,13 +4,19 @@ import Img1 from '../.././assets/Banner.png';
 import Img2 from '../.././assets/2-div-img.png';
 import {Link,useNavigate} from 'react-router-dom';
 import '../../user/landing/landing.css';
-import {ReactComponent as Home} from '../.././assets/home.svg';
+import {ReactComponent as Home} from '../.././assets/home-white.svg'; 
+import {ReactComponent as ChatB} from '../.././assets/chat-black.svg'; 
+import {ReactComponent as LockB} from '../.././assets/lock-black.svg'; 
+import {ReactComponent as HomeB} from '../.././assets/home.svg';
 import {ReactComponent as Chat} from '../.././assets/chat.svg';
 import {ReactComponent as Lock} from '../.././assets/lock.svg';
 import {ReactComponent as Edit} from '../../assets/edit-icon.svg';
 import {ReactComponent as Plus} from '../../assets/plusicon.svg';
 const ArtistLanding=()=>{
     const [services,setServices]=useState([]);    
+    const [home,setHome]=useState(1);
+    const [chat,setChat]=useState(0);
+    const [lock,setLock]=useState(0);
     const navigate=useNavigate();
     useEffect(()=>
     {
@@ -69,7 +75,7 @@ const ArtistLanding=()=>{
              <span id="serv-edit-txt">
          Add
         <Plus onClick={()=>{
-               navigate(`/editservice/${data._id}`)
+               navigate(`/addservice`)
              }} id="edit-icon"/>
         </span>
         </h1>   
@@ -89,16 +95,62 @@ const ArtistLanding=()=>{
   
 
     </div>
-    <div className='icons-tab'>
+    {(() => {
+        if (home==1 &&chat==0&&lock==0) {
+          return (
+            <div>
+              <div className='icons-tab'>
         <div className='nav'>
-        <Home/>
+        <HomeB/>
       
-      <Chat/>
+      <Chat onClick={()=>{setChat(1);setHome(0)}}/>
+
+      <Lock onClick={()=>{setLock(1);setHome(0)}} />
+          </div>
+          </div>
+             
+
+
+            </div>
+          )
+        } else if (chat==1&&home==0&&lock==0) {
+          return (
+            <div>
+              <div className='icons-tab'>
+        <div className='nav'>
+        <Home onClick={()=>{setHome(1);setChat(0)}}  />
       
-      <Lock/>
-        </div>
-   
-    </div>
+      <ChatB/>
+      
+      <Lock onClick={()=>{setLock(1);setChat(0)}}/>
+          </div>
+          </div>
+      
+
+
+            </div>
+          )
+        } else if(lock==1&&chat==0&&home==0) {
+          return (
+            <div>
+              <div className='icons-tab'>
+        <div className='nav'>
+        <Home onClick={()=>{setHome(1);setLock(0)}}/>
+      
+      <Chat onClick={()=>{setChat(1);setLock(0)}}/>
+      
+      <LockB/>
+          </div>
+          </div>
+       
+
+
+            </div>
+          )
+        }
+      })()}
+        
+  
 
     </>
    )}

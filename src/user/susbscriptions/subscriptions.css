@@ -1,4 +1,4 @@
-.subscription-main {
+.subscription-main{
   position: relative;
   height:100vh;
 }
@@ -7,6 +7,7 @@
   width: 100%;
   position: absolute;
   height:100%;
+
 }
 .img-container {
   border: 2px solid #ffffff;
@@ -16,7 +17,8 @@
 }
 .subscription-container {
   position: absolute;
-  margin-top: 9rem;
+  margin-top: 4rem;
+  
   margin-left: 1rem;
   margin-right: 1rem;
   background: rgba(38, 38, 38, 0.8);
