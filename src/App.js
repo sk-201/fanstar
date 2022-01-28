@@ -31,6 +31,8 @@ import WalletBalance from './user/balance -screen/walletbalance';
 import Album from './user/album-gallery/album';
 import SubBalance from './user/balance -screen/subscribe-balance';
 import './App.css';
+import EmployeeLinkedArtist from './employee/employee-linkedArtist/EmployeeLinkedArtist';
+import LinkedArtistDetials from './employee/employee-linkedArtist/LinkedArtistDetials';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -82,6 +84,14 @@ function App() {
           <Route path='/employee/login' element={<EmployeeLogin />} />
           <Route path='/employee/otp/:phone' element={<EmployeeOtp />} />
           <Route path='/employee/income' element={<EmployeeIncome />} />
+          <Route
+            path='/employee/myArtists'
+            element={<EmployeeLinkedArtist />}
+          />
+          <Route
+            path='/employee/myArtists/:artistId'
+            element={<LinkedArtistDetials />}
+          />
           <Route path='/employee/profile' element={<EmployeeProfile />} />
           <Route path='/artist/:id' element={<ArtistPage />} />
         </Routes>
