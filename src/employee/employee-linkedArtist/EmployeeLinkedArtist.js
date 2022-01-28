@@ -46,11 +46,19 @@ const EmployeeLinkedArtist = () => {
           onClick={() => navigate(`/employee/myArtists/${artist.artistId}`)}
         >
           <div className='linkedArtist-imgDiv'>
-            <img src={artistDemo} alt='artist' className='linked-artistImg' />
+            <img
+              src={artist.profilePhoto}
+              alt='artist'
+              className='linked-artistImg'
+            />
           </div>
           <div className='linkedArtist-detailDiv'>
             <p className='linkedArtist-name'>{artist.artistName}</p>
-            <p className='linkedArtist-orders'>
+            <p
+              className={`linkedArtist-orders ${
+                artist.pendingOrders > 0 ? 'highlight-orders' : ''
+              }`}
+            >
               Pending orders: {artist.pendingOrders}
             </p>
           </div>
