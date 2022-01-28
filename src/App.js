@@ -46,14 +46,26 @@ function App() {
             path='/artist/:artistId/user/service/:serviceId'
             element={<Register />}
           />
-           <Route path='/artist/:artistId/user/feedback' element={<Feedback/>}/>
-           <Route path='/artist/:artistId/user/service/:serviceId/payment' element={<Balance/>}/>
-           <Route path='/artist/:artistId/user/album/:albumId' element={<AlbumBuy/>}/>
-           <Route path='/wallet' element={<WalletBalance/>}/>
-       <Route path='/artist/:id/user/album' element={<Album/>}/>
+          <Route
+            path='/artist/:artistId/user/feedback'
+            element={<Feedback />}
+          />
+          <Route
+            path='/artist/:artistId/user/service/:serviceId/payment'
+            element={<Balance />}
+          />
+          <Route
+            path='/artist/:artistId/user/album/:albumId'
+            element={<AlbumBuy />}
+          />
+          <Route path='/wallet' element={<WalletBalance />} />
+          <Route path='/artist/:id/user/album' element={<Album />} />
           <Route path='/artist/:id/sub' element={<Subscription />} />
           <Route path='/artist/:id/subscribe' element={<Subscribe />} />
-          <Route path='/artist/:id/subscribe/payment' element={<SubBalance />} />
+          <Route
+            path='/artist/:id/subscribe/payment'
+            element={<SubBalance />}
+          />
           <Route path='/pay' element={<Payment />} />
           <Route path='/income' element={<Income />} />
           <Route path='/edit' element={<Edit />} />
@@ -62,6 +74,7 @@ function App() {
           <Route path='/service' element={<MyService />} />
           <Route path='/add' element={<AddImage />} />
           <Route path='/artist/landing' element={<ArtistLanding />} />
+          <Route path='/artist/landing/:token' element={<ArtistLanding />} />
           <Route path='/artist/login' element={<ArtistLogin />} />
           <Route path='/artist/otp/:phone' element={<ArtistOtp />} />
           <Route path='/myimage' element={<MyImage />} />
@@ -80,7 +93,7 @@ function App() {
         <h1>Please open this link in Mobile Or Tablet to View the website.</h1>
       </div>
     );
-  }   
+  }
 }
 
 export default App;
