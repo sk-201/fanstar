@@ -24,7 +24,7 @@ const ArtistOtp =()=>{
                 console.log(data);
                 localStorage.setItem("fanstarToken",data);
                   alert("Login Successfull");
-                  navigate(`/artist/landing`);
+                  navigate(`/income`);
                  
                }
            else{

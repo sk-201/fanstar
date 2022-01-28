@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import API from '../../api';
 import './login.css';
 import Logo from '../.././assets/Ellipse 58.png';
 const Login = () => {
   const navigate = useNavigate();
+  const location=useLocation();
   const [phone, setPhone] = useState('');
   const postData = async () => {
     try {
@@ -16,7 +17,7 @@ const Login = () => {
         };
         await API.post('/api/user/public/generateotp', { phone }, config);
         alert('OTP sent');
-        navigate(`/otp/${phone}`);
+        navigate(`/otp/${phone}`,{state:location.state});
       } else {
         alert('Mobile no is not correct!');
       }
@@ -24,7 +25,6 @@ const Login = () => {
       console.log(error);
     }
   };
-
   return (
     <div className='login-main'>
       <div className='img-container'>

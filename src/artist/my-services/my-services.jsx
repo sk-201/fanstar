@@ -22,7 +22,7 @@ useEffect(()=>
       API.get("/api/artist/private/ownservices",config).then(
           ({ data})=>{
               setServices(data);
-              console.log(data);
+           
           }
       ).catch(error=>console.log(error))
     
@@ -34,7 +34,7 @@ const navigate=useNavigate();
 
 return(
 <div className='my-service'>
-<BackArrow id="bck-arrw"/>
+<BackArrow id="bck-arrw" onClick={()=>navigate('/artist/landing')}/>
 <span id="my-service-text">My Services</span>
 
 

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { useParams,Link,useNavigate } from 'react-router-dom';
+import { useParams,Link,useNavigate,useLocation } from 'react-router-dom';
 import API from '../../api';
 import './otp.css'
 const Otp=()=>{
@@ -13,6 +13,7 @@ const Otp=()=>{
     const [code2,setCode2]=useState("");
     const [code3,setCode3]=useState("");
     const [code4,setCode4]=useState("");
+    const location=useLocation();
     const postData=async(e)=>{
         e.preventDefault();
         try {
@@ -27,7 +28,7 @@ const Otp=()=>{
                 console.log(data);
                 localStorage.setItem("fanstarToken",data);
                   alert("Login Successfull");
-                  navigate("/");
+                  navigate(`/artist/${location.state}`);
                  
                }
            else{

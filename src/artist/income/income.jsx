@@ -1,14 +1,16 @@
 import React,{useState,useEffect} from 'react';
 import API from '../../api';
+import { useNavigate } from 'react-router-dom';
 import {ReactComponent as Home} from '../.././assets/home-white.svg'; 
 import {ReactComponent as ChatB} from '../.././assets/chat-black.svg'; 
-import {ReactComponent as LockB} from '../.././assets/lock-black.svg'; 
+import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
 import {ReactComponent as HomeB} from '../.././assets/home.svg';
 import {ReactComponent as Chat} from '../.././assets/chat.svg';
-import {ReactComponent as Lock} from '../.././assets/lock.svg';
+import { ReactComponent as Lock } from '../.././assets/opep.svg';
 import  Logo from '../../assets/Ellipse 58.png';
 import './income.css'
 const Income=()=>{
+  const navigate=useNavigate();
     const [balance,setBalance]=useState();
     const [home,setHome]=useState(1);
     const [chat,setChat]=useState(0);
@@ -73,9 +75,9 @@ const Income=()=>{
         <div className='nav'>
         <HomeB/>
       
-      <Chat onClick={()=>{setChat(1);setHome(0)}}/>
+      <Chat onClick={()=>{setChat(1);setHome(0);}}/>
 
-      <Lock onClick={()=>{setLock(1);setHome(0)}} />
+      <Lock onClick={()=>{setLock(1);setHome(0);navigate(`/artist/landing`)}} />
           </div>
           </div>
              
@@ -88,11 +90,11 @@ const Income=()=>{
             <div>
               <div className='icons-tab' style={{marginLeft:"-1.8rem"}}>
         <div className='nav'>
-        <Home onClick={()=>{setHome(1);setChat(0)}}  />
+        <Home onClick={()=>{setHome(1);setChat(0); navigate('/income')} }  />
       
       <ChatB/>
       
-      <Lock onClick={()=>{setLock(1);setChat(0)}}/>
+      <Lock onClick={()=>{setLock(1);setChat(0);navigate(`/artist/landing`)}}/>
           </div>
           </div>
       
@@ -105,9 +107,9 @@ const Income=()=>{
             <div>
               <div className='icons-tab' style={{marginLeft:"-1.8rem"}}>
         <div className='nav'>
-        <Home onClick={()=>{setHome(1);setLock(0)}}/>
+        <Home onClick={()=>{setHome(1);setLock(0);navigate(`/income`)}}/>
       
-      <Chat onClick={()=>{setChat(1);setLock(0)}}/>
+      <Chat onClick={()=>{setChat(1);setLock(0);}}/>
       
       <LockB/>
           </div>

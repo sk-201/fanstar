@@ -4,27 +4,35 @@ import Img1 from '../.././assets/Banner.png';
 import Img2 from '../.././assets/2-div-img.png';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../user/landing/landing.css';
+import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+import SwiperCore, {
+  Pagination
+} from 'swiper';
 import { ReactComponent as Home } from '../.././assets/home-white.svg';
 import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
-import { ReactComponent as LockB } from '../.././assets/lock-black.svg';
+import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
 import { ReactComponent as HomeB } from '../.././assets/home.svg';
 import { ReactComponent as Chat } from '../.././assets/chat.svg';
-import { ReactComponent as Lock } from '../.././assets/lock.svg';
+import { ReactComponent as Lock } from '../.././assets/opep.svg';
 import { ReactComponent as Edit } from '../../assets/edit-icon.svg';
 import { ReactComponent as Plus } from '../../assets/plusicon.svg';
 const ArtistLanding = () => {
   const [services, setServices] = useState([]);
-  const [home, setHome] = useState(1);
+  const [home, setHome] = useState(0);
   const [chat, setChat] = useState(0);
-  const [lock, setLock] = useState(0);
+  const [lock, setLock] = useState(1);
   const navigate = useNavigate();
   useEffect(() => {
+    if(!localStorage.getItem('fanstarToken')){
+      navigate("/artist/login");
+    }
     const config = {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
       },
     };
+   
     API.get('/api/artist/private/ownservices', config)
       .then(({ data }) => {
         setServices(data);
@@ -32,7 +40,7 @@ const ArtistLanding = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-
+  SwiperCore.use([Pagination]);
   return (
     <>
       <div className='img-header'>
@@ -64,11 +72,7 @@ const ArtistLanding = () => {
         </Link>
       </div>
       <div className='container-2'>
-        {services.length > 0 &&
-          services.map((data) => {
-            return (
-              <div>
-                <h1 className='container-2-head'>
+      <h1 className='container-2-head'>
                   My Services
                   <span id='serv-edit-txt'>
                     Add
@@ -82,7 +86,17 @@ const ArtistLanding = () => {
                 </h1>
 
                 <div className='card'>
-                  <div className='card-1'></div>
+               
+                
+                <Swiper pagination={{
+            "dynamicBullets": true
+          }} className="mySwiper">
+             {services.length > 0 &&
+          services.map((data) => {
+            return (
+              <div>
+               
+                <SwiperSlide>
                   <div
                     className='card-2'
                     onClick={() => {
@@ -92,85 +106,67 @@ const ArtistLanding = () => {
                     {' '}
                     <text id='service-txt-landing'>{data.serviceName}</text>
                   </div>
-                  <div className='card-3'></div>
-                </div>
-              </div>
-            );
+                  </SwiperSlide>
+                  </div>
+                  );
           })}
+          </Swiper>
+              
+              </div>
+          
       </div>
       {(() => {
-        if (home == 1 && chat == 0 && lock == 0) {
+        if (home==1 &&chat==0&&lock==0) {
           return (
             <div>
               <div className='icons-tab'>
-                <div className='nav'>
-                  <HomeB />
+        <div className='nav'>
+        <HomeB/>
+      
+      <Chat onClick={()=>{setChat(1);setHome(0);}}/>
 
-                  <Chat
-                    onClick={() => {
-                      setChat(1);
-                      setHome(0);
-                    }}
-                  />
+      <Lock onClick={()=>{setLock(1);setHome(0);navigate(`/artist/landing`)}} />
+          </div>
+          </div>
+             
 
-                  <Lock
-                    onClick={() => {
-                      setLock(1);
-                      setHome(0);
-                    }}
-                  />
-                </div>
-              </div>
+
             </div>
-          );
-        } else if (chat == 1 && home == 0 && lock == 0) {
+          )
+        } else if (chat==1&&home==0&&lock==0) {
           return (
             <div>
               <div className='icons-tab'>
-                <div className='nav'>
-                  <Home
-                    onClick={() => {
-                      setHome(1);
-                      setChat(0);
-                    }}
-                  />
+        <div className='nav'>
+        <Home onClick={()=>{setHome(1);setChat(0); navigate('/income')} }  />
+      
+      <ChatB/>
+      
+      <Lock onClick={()=>{setLock(1);setChat(0);navigate(`/artist/landing`)}}/>
+          </div>
+          </div>
+      
 
-                  <ChatB />
 
-                  <Lock
-                    onClick={() => {
-                      setLock(1);
-                      setChat(0);
-                    }}
-                  />
-                </div>
-              </div>
             </div>
-          );
-        } else if (lock == 1 && chat == 0 && home == 0) {
+          )
+        } else if(lock==1&&chat==0&&home==0) {
           return (
             <div>
               <div className='icons-tab'>
-                <div className='nav'>
-                  <Home
-                    onClick={() => {
-                      setHome(1);
-                      setLock(0);
-                    }}
-                  />
+        <div className='nav'>
+        <Home onClick={()=>{setHome(1);setLock(0);navigate(`/income`)}}/>
+      
+      <Chat onClick={()=>{setChat(1);setLock(0);}}/>
+      
+      <LockB/>
+          </div>
+          </div>
+       
 
-                  <Chat
-                    onClick={() => {
-                      setChat(1);
-                      setLock(0);
-                    }}
-                  />
 
-                  <LockB />
-                </div>
-              </div>
             </div>
-          );
+          )
         }
       })()}
     </>

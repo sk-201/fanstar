@@ -118,6 +118,7 @@ border: none;
 }
 .icons-tab{
     position:fixed;    
+    z-index:10;
     bottom: 0px;
     background: #FFFFFF;
     border: 2px solid #D0D0D0;

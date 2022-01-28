@@ -4,6 +4,13 @@ import Img2 from '../.././assets/2-div-img.png';
 import AlbumImg1 from '../.././assets/Group 33907.png';
 import AlbumImg2 from '../.././assets/Group 33906.png';
 import AlbumImg3 from '../.././assets/Group 33945.png';
+
+import 'swiper/swiper.min.css'
+import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+import SwiperCore, {
+  Pagination
+} from 'swiper';
+
 import API from '../../api';
 import {Link,useParams,useNavigate,useLocation} from 'react-router-dom'
 import {ReactComponent as HomeB} from '../.././assets/home.svg';
@@ -18,6 +25,7 @@ import {ReactComponent as ChatB} from '../.././assets/chat-black.svg';
 import {ReactComponent as LockB} from '../.././assets/lock-black.svg'; 
 
 import './landing.css';
+SwiperCore.use([Pagination]);
 const ArtistPage=()=>{
   const navigate=useNavigate();
     const {id}=useParams();
@@ -117,7 +125,7 @@ const ArtistPage=()=>{
          console.log(error);
      }
     }
-// console.log(location);
+ 
     return(
     <div className='landing'>
     <div className='img-header'>
@@ -129,9 +137,10 @@ const ArtistPage=()=>{
         
         </Link>
             
-        :<Link to='/login'><User className='wallet-icon'/>
+        :<div  onClick={()=>navigate('/login',{state:id})}>
+          <User className='wallet-icon' />
         <text id="login-text-land" >Login</text>
-        </Link>}
+        </div> }
         <Link to={`/artist/${id}/sub`}><Bell className='bell-icon'> </Bell></Link>
         <h1 className='img-1-heading'>Hi I'm {name}</h1>
     </div>
@@ -145,22 +154,39 @@ const ArtistPage=()=>{
     </div>
     <div className='container-2'> 
         <h1 className='container-2-head'>Lets connect</h1>
-        {services.length>0&&
-    services.map((data)=>{
-        return(
+       
+         
             <div>  
             <div className='card'>
-            <div className='card-1'></div>
-            <div className='card-2'onClick={()=>{
+         
+            {/* <div className='card-1'></div> */}
+            <Swiper pagination={{
+            "dynamicBullets": true
+          }} className="mySwiper">
+  {services.length>0&&
+    services.map((data)=>{
+        return(
+  <SwiperSlide>
+
+  <div className='card-2'onClick={()=>{
                 navigate(`/artist/${id}/user/service/${data._id}`)
              }} > <text id="service-txt-landing">{data.serviceName}</text></div>
-            <div className='card-3'></div>
-        </div>
-        </div>
-        )
+           
+  </SwiperSlide>
+      )
     })
     
-}
+}      
+  </Swiper>
+ 
+
+            {/* <div className='card-3'></div> */}
+            
+           
+        </div>
+        </div>
+    
+ 
    </div>
    <div className='container-2'> 
         <h1 className='container-2-head'>My Images <span id="see-all" style={{cursor:"pointer"}} onClick={()=>{navigate(`/artist/${id}/user/album`,{state:albumId})}}>See All</span></h1>
@@ -252,7 +278,7 @@ filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
         <div className='nav'>
         <HomeB/>
       
-      <Chat onClick={()=>{setChat(1);setHome(0);navigate("/chat")}}/>
+      <Chat onClick={()=>{setChat(1);setHome(0);}}/>
 
       <Lock onClick={()=>{setLock(1);setHome(0);navigate(`/artist/${id}/sub`)}} />
           </div>
