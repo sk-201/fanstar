@@ -28,7 +28,7 @@ const Otp=()=>{
                 console.log(data);
                 localStorage.setItem("fanstarToken",data);
                   alert("Login Successfull");
-                  navigate(`/artist/${location.state}`);
+                  navigate(`/artist/${location.state.artistid}`);
                  
                }
            else{

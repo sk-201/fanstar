@@ -23,9 +23,9 @@ const ArtistLanding = () => {
   const [lock, setLock] = useState(1);
   const navigate = useNavigate();
   useEffect(() => {
-    if(!localStorage.getItem('fanstarToken')){
-      navigate("/artist/login");
-    }
+    // if(!localStorage.getItem('fanstarToken')){
+    //   navigate("/artist/login");
+    // }
     const config = {
       headers: {
         'Content-Type': 'application/json',

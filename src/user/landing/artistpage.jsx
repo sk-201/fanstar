@@ -63,7 +63,7 @@ const ArtistPage=()=>{
     })
     API.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
       setAlbum(data);
-      // console.log("access",data);
+      console.log("access",data);
       
       const arr=[];
       for(let i=0;i<data.length;i++){
@@ -87,7 +87,7 @@ const ArtistPage=()=>{
     
     ) 
     if(albumId){
-      // console.log(albumId,"state");
+       console.log(albumId,"state");
      API.get(`/api/user/private/getalbumtimestamp/${albumId}`,config).then((res)=>{
       setTimestamp(new Date().getTime());
       setStartClock(true);
@@ -126,6 +126,7 @@ const ArtistPage=()=>{
      }
     }
  
+    // console.log(location,"location");
     return(
     <div className='landing'>
     <div className='img-header'>
@@ -137,7 +138,7 @@ const ArtistPage=()=>{
         
         </Link>
             
-        :<div  onClick={()=>navigate('/login',{state:id})}>
+        :<div  onClick={()=>navigate('/login',{state:{artistid:id}})}>
           <User className='wallet-icon' />
         <text id="login-text-land" >Login</text>
         </div> }
@@ -213,7 +214,7 @@ filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
         )
         }
         )}
-        {/* <button onClick={removeAccess}>Remove</button> */}
+        <button onClick={removeAccess}>Remove</button>
            </div>  
       
       
@@ -254,7 +255,7 @@ filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
         }
         
         
-        {/* <button onClick={removeAccess}>Remove</button> */}
+        <button onClick={removeAccess}>Remove</button>
       
         </div>
        
