@@ -62,7 +62,7 @@ const Subscription = () => {
             <div>
               <div className='icons-tab'>
         <div className='nav'>
-        <Home onClick={()=>{setHome(1);setChat(0)}}  />
+        <Home onClick={()=>{setHome(1);setChat(0);navigate(`/artist/${id}`)}}  />
       
       <ChatB/>
       

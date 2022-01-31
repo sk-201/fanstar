@@ -1,0 +1,120 @@
+.chat-cont-div{
+  margin-top:5%;
+}
+#user-photo{
+  margin-bottom:-1rem;
+}
+#chat-user-name{
+  
+font-family: Poppins;
+font-style: normal;
+font-weight: 500;
+font-size: 17px;
+line-height: 25px;
+color: #000000;
+margin-left: 1rem;
+}
+.received-message{
+  color: #222222;
+  border-radius: 16px;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 120%;
+/* or 19px */
+
+text-align: right;
+
+/* white */
+
+
+padding-top:1rem;
+padding-bottom:1rem;
+padding-right:1rem;
+padding-left:0px !important;
+width:50%;
+margin-right:30%;
+margin-left:5%;
+margin-top: 5%;
+}
+.sent-message{
+  background: linear-gradient(90deg, #65A7D4 0%, #00365B 100%);
+border-radius: 16px;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 120%;
+/* or 19px */
+
+text-align: right;
+
+/* white */
+
+color: #FFFFFF;
+padding:1rem;
+width:50%;
+margin-left:30%;
+margin-top: 5%;
+}
+.messages{
+  margin-bottom:40%;
+  z-index: 10;
+}
+.message-inp{
+  font-family: SF Compact Display;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 120%;
+/* or 19px */
+position: fixed;
+left: 10%;
+right: 16.82%;
+top: 83%;
+bottom: 0%;
+height:5vh;
+
+
+
+/* gray */
+
+
+color: #999999;
+
+
+}
+#message-btn{
+  width:20%;
+  display: inline;
+  background: #0B4268;
+border-radius: 16px;
+
+  padding:.5rem;
+  height:5vh;
+ 
+  
+  position: fixed;
+left: 70%;
+right: 16.82%;
+top: 75%;
+bottom: 5%;
+height:5vh;
+}
+.received-message{
+  border: 1px solid #E8E8E8;
+box-sizing: border-box;
+border-radius: 16px;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 120%;
+/* or 19px */
+
+
+/* gray_dark */
+
+color: #222222;
+}

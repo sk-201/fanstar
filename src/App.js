@@ -30,9 +30,11 @@ import AlbumBuy from './user/balance -screen/albumbalance';
 import WalletBalance from './user/balance -screen/walletbalance';
 import Album from './user/album-gallery/album';
 import SubBalance from './user/balance -screen/subscribe-balance';
+import ChatScreen from './user/user-chat/user-chat';
 import './App.css';
 import EmployeeLinkedArtist from './employee/employee-linkedArtist/EmployeeLinkedArtist';
 import LinkedArtistDetials from './employee/employee-linkedArtist/LinkedArtistDetials';
+import ArtistChat from './artist/artist-chat/artist-chat';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -81,6 +83,8 @@ function App() {
           <Route path='/artist/otp/:phone' element={<ArtistOtp />} />
           <Route path='/myimage' element={<MyImage />} />
           <Route path='/chat' element={<ChatList />} />
+          <Route path='/user/chat' element={<ChatScreen />} />
+          <Route path='/artist/chat' element={<ArtistChat />} />
           <Route path='/employee/login' element={<EmployeeLogin />} />
           <Route path='/employee/otp/:phone' element={<EmployeeOtp />} />
           <Route path='/employee/income' element={<EmployeeIncome />} />

@@ -28,6 +28,7 @@ const AddService = () => {
           config
         );
         alert('Service Created');
+        navigate('/artist/landing')
       }
     } catch (error) {
       console.log(error);

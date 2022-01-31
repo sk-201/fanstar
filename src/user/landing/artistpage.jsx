@@ -63,7 +63,7 @@ const ArtistPage=()=>{
     })
     API.get(`/api/user/public/getalbums/${id}`,config ).then(({data})=>{
       setAlbum(data);
-      console.log("access",data);
+      // console.log("access",data);
       
       const arr=[];
       for(let i=0;i<data.length;i++){
@@ -97,6 +97,8 @@ const ArtistPage=()=>{
     //  console.log(new Date(res.data))
      })
     }
+
+
       },[])
       useEffect(() => {
         if( seconds > 0 && startClock){
@@ -107,6 +109,31 @@ const ArtistPage=()=>{
         }
     
       }, [seconds,startClock]);
+      
+      const chatHandler=async()=>{
+
+     try{
+      const config={
+        headers:{
+          "Content-Type":"application/json",
+          Authorization:`Bearer ${localStorage.getItem("fanstarToken")}`
+        }
+    
+      }
+    const {data}=await API.get('/api/user/private/getowndetails',config)
+
+      const res=await API.post('/api/chat/createchat',{user1:data._id,user2:id},{
+        headers:{
+           "Content-Type":"application/json"
+        }});
+navigate('/user/chat',{state:{userId:data._id,roomId:res.data,id:id}});
+}
+  
+catch(error){
+console.log(error);
+}
+       
+      } 
     const removeAccess=async()=>{
       const config={
         headers:{
@@ -214,7 +241,7 @@ filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
         )
         }
         )}
-        <button onClick={removeAccess}>Remove</button>
+        {/* <button onClick={removeAccess}>Remove</button> */}
            </div>  
       
       
@@ -255,7 +282,7 @@ filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
         }
         
         
-        <button onClick={removeAccess}>Remove</button>
+        {/* <button onClick={removeAccess}>Remove</button> */}
       
         </div>
        
@@ -279,7 +306,7 @@ filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
         <div className='nav'>
         <HomeB/>
       
-      <Chat onClick={()=>{setChat(1);setHome(0);}}/>
+      <Chat onClick={()=>{setChat(1);setHome(0);chatHandler()}}/>
 
       <Lock onClick={()=>{setLock(1);setHome(0);navigate(`/artist/${id}/sub`)}} />
           </div>
@@ -313,7 +340,7 @@ filter: `${data.accessedBy.length>0?"blur(0px)":"blur(10px)"}`
         <div className='nav'>
         <Home onClick={()=>{setHome(1);setLock(0);navigate(`/artist/${id}`)}}/>
       
-      <Chat onClick={()=>{setChat(1);setLock(0);}}/>
+      <Chat onClick={()=>{setChat(1);setLock(0);chatHandler()}}/>
       
       <LockB/>
           </div>

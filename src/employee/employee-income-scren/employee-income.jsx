@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../api';
-import { ReactComponent as Home } from '../.././assets/home.svg';
+import { useNavigate } from 'react-router-dom';
+import { ReactComponent as Home } from '../.././assets/home-white.svg';
+import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
+import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
+import { ReactComponent as HomeB } from '../.././assets/home.svg';
 import { ReactComponent as Chat } from '../.././assets/chat.svg';
-import { ReactComponent as Profile } from '../.././assets/employeeprofile.svg';
+import { ReactComponent as Lock } from '../.././assets/opep.svg';
 import Logo from '../../assets/Ellipse 58.png';
 const EmployeeIncome = () => {
   const [balance, setBalance] = useState(250);
+  const [home, setHome] = useState(1);
+  const [chat, setChat] = useState(0);
+  const [lock, setLock] = useState(0);
+  const navigate=useNavigate();
   // useEffect(()=>
   // {
   //     const config={
@@ -50,15 +58,87 @@ const EmployeeIncome = () => {
         <h3 id='pend-ord'>Pending Orders</h3>
         <h2 id='pend-ord-no'>10</h2>
       </div>
-      <div className='icons-tab' style={{ marginLeft: '-1.8rem' }}>
-        <div className='nav'>
-          <Home />
+      {(() => {
+        if (home == 1 && chat == 0 && lock == 0) {
+          return (
+            <div>
+              <div className='icons-tab' style={{marginLeft:"-1.8rem"}}>
+                <div className='nav'>
+                  <HomeB />
 
-          <Chat />
+                  <Chat
+                    onClick={() => {
+                      setChat(1);
+                      setHome(0);
+                      navigate('/employee/myArtists');
+                    }}
+                  />
 
-          <Profile />
-        </div>
-      </div>
+                  <Lock
+                    onClick={() => {
+                      setLock(1);
+                      setHome(0);
+                      navigate(`/employee/profile`);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        } else if (chat == 1 && home == 0 && lock == 0) {
+          return (
+            <div>
+              <div className='icons-tab' style={{marginLeft:"-1.8rem"}}>
+                <div className='nav'>
+                  <Home
+                    onClick={() => {
+                      setHome(1);
+                      setChat(0);
+                      navigate('/employee/income');
+                    }}
+                  />
+
+                  <ChatB />
+
+                  <Lock
+                    onClick={() => {
+                      setLock(1);
+                      setChat(0);
+                      navigate(`/employee/profile`);
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        } else if (lock == 1 && chat == 0 && home == 0) {
+          return (
+            <div>
+              <div className='icons-tab' style={{marginLeft:"-1.8rem"}}>
+                <div className='nav'>
+                  <Home
+                    onClick={() => {
+                      setHome(1);
+                      setLock(0);
+                      navigate(`/employee/income`);
+                    }}
+                  />
+
+                  <Chat
+                    onClick={() => {
+                      setChat(1);
+                      setLock(0);
+                      navigate('/employee/myArtists');
+                    }}
+                  />
+
+                  <LockB />
+                </div>
+              </div>
+            </div>
+          );
+        }
+      })()}
     </div>
   );
 };

@@ -66,6 +66,7 @@ const Income = () => {
                     onClick={() => {
                       setChat(1);
                       setHome(0);
+                      navigate('/chat');
                     }}
                   />
 
@@ -123,6 +124,7 @@ const Income = () => {
                     onClick={() => {
                       setChat(1);
                       setLock(0);
+                      navigate('/chat');
                     }}
                   />
 

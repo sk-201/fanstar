@@ -44,6 +44,10 @@ const ArtistLanding = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
+
+
+  
   SwiperCore.use([Pagination]);
   return (
     <>
@@ -129,6 +133,7 @@ const ArtistLanding = () => {
                     onClick={() => {
                       setChat(1);
                       setHome(0);
+                      navigate('/chat');
                     }}
                   />
 
@@ -186,6 +191,7 @@ const ArtistLanding = () => {
                     onClick={() => {
                       setChat(1);
                       setLock(0);
+                      navigate('/chat');
                     }}
                   />
 
