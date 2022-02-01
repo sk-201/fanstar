@@ -1,266 +1,247 @@
-.landing{
-    display: flex;
-    flex-direction:column;
+.landing {
+  display: flex;
+  flex-direction: column;
 }
-.img-header{
-display: flex;
-flex-direction: column;
-position: relative;
+.img-header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
-.wallet-icon{
-position: absolute;
-left: 6.4%;
-right: 86.73%;
-top: 8%;
-bottom: 96.59%;
-
+.wallet-icon {
+  position: absolute;
+  left: 6.4%;
+  right: 86.73%;
+  top: 8%;
+  bottom: 96.59%;
 }
-#login-text-land{
-    position: absolute;
-    width: 65px;
-height: 19px;
-left: 21px;
-top: 45px;
-font-family: Montserrat;
-font-style: normal;
-font-weight: normal;
-font-size: 12px;
-line-height: 24px;
-/* or 200% */
+#login-text-land {
+  position: absolute;
+  width: 65px;
+  height: 19px;
+  left: 21px;
+  top: 45px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 24px;
+  /* or 200% */
 
-display: flex;
-align-items: center;
-text-align: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
 
-color: #FFFFFF;
-
+  color: #ffffff;
 }
-.bell-icon{
-position: absolute;
-width: 65px;
-height: 28px;
-left: 80%;
-top: 70%;
-
+.bell-icon {
+  position: absolute;
+  width: 65px;
+  height: 28px;
+  left: 80%;
+  top: 65%;
 }
-.img-1{
-    width:100%;
-    object-fit: cover; 
-    position: relative;
+.img-1 {
+  width: 100%;
+  object-fit: cover;
+  position: relative;
 }
 
-.img-1-heading{
-   margin-top: 0px;
-   margin-bottom: 0px;
-   border:none;
-   padding:0px;
-    text-align: center;
-    font-family: 'Kaushan Script', cursive;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+.img-1-heading {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border: none;
+  padding: 10px 0;
+  text-align: center;
+  font-family: 'Kaushan Script', cursive;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
 }
-.container-1{
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-    border: none;
-   padding: 1rem;
-    
-    
+.container-1 {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  border: none;
+  padding: 1rem;
 }
-.container-1-1{
-    display:flex;
-    flex-direction: row;
-    margin-left: 5%;
-    margin-right: 5%; 
+.container-1-1 {
+  display: flex;
+  flex-direction: row;
+  margin-left: 5%;
+  margin-right: 5%;
 }
-.img-2{
-    margin-right: 5%;
-    border-radius: 8px;
-    width:50%;
-    height:20vh;
-    object-fit: cover;
+.img-2 {
+  margin-right: 5%;
+  border-radius: 8px;
+  width: 50%;
+  height: 20vh;
+  object-fit: cover;
 }
-.img-2-heading{
-    
-font-family: Kaushan Script;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 24px;
-margin-left: 1rem;
-
+.img-2-heading {
+  font-family: Kaushan Script;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  margin-left: 1rem;
 }
 
-.btn-chat{
-color: #FFFFFF;
-background: #2D2D2D;
-margin-left:5%;
-margin-right: 5%;
-margin-top: 2rem;
-width:90%;
-padding: 1rem;
-font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 13px;
-line-height: 19px;
-border-radius: 8px;
-border: none;
+.btn-chat {
+  color: #ffffff;
+  background: #2d2d2d;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2rem;
+  width: 90%;
+  padding: 1rem;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 19px;
+  border-radius: 8px;
+  border: none;
 }
-.container-2-head{
-    margin-left:5%;
-    font-family: Kaushan Script;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 24px;
+.container-2-head {
+  margin-left: 5%;
+  font-family: Kaushan Script;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
 }
-.icons-tab{
-    position:fixed;    
-    z-index:10;
-    bottom: 0px;
-    background: #FFFFFF;
-    border: 2px solid #D0D0D0;
-    box-sizing: border-box;
-    width:100%;
-    padding:.7rem;
+.icons-tab {
+  position: fixed;
+  z-index: 10;
+  bottom: 0px;
+  background: #ffffff;
+  border: 2px solid #d0d0d0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.7rem;
 }
-.nav{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-left:-1rem;
-    margin-right: -1rem;
-  
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: -1rem;
+  margin-right: -1rem;
 }
-.card{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.time-cont{
-    margin-left:5%;
-    margin-right:5%;
-    margin-bottom: 2rem;
+.time-cont {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
-.card-1{
-    background: #F3F3F3;
-border: 1px solid #2D2D2D;
-box-sizing: border-box;
-border-radius: 8px;
-padding:.5rem;
-cursor:pointer;
-
+.card-1 {
+  background: #f3f3f3;
+  border: 1px solid #2d2d2d;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
-.card-2{
-    background: #F3F3F3;
-border: 1px solid #2D2D2D;
-box-sizing: border-box;
-border-radius: 8px;
-    font-family: Kaushan Script;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 24px;
-    text-align: center;
-    padding:3rem;
-    margin-left:3%;
-    margin-right:3%;
-    cursor:pointer;
+.card-2 {
+  background: #f3f3f3;
+  border: 1px solid #2d2d2d;
+  box-sizing: border-box;
+  border-radius: 8px;
+  font-family: Kaushan Script;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  padding: 3rem;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-bottom: 18%;
+  cursor: pointer;
 }
-.card-3{
-    background: #F3F3F3;
-border: 1px solid #2D2D2D;
-box-sizing: border-box;
-border-radius: 8px;
-padding:.5rem;
-cursor:pointer;
+.card-3 {
+  background: #f3f3f3;
+  border: 1px solid #2d2d2d;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
 }
-.album-card{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin-left:10%;
-    margin-right:10%;
-    margin-bottom: 4rem;
+.album-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 4rem;
 }
-.album-card-1{
-  border-radius:8px;
-  
+.album-card-1 {
+  border-radius: 8px;
+}
+#album-img-btn {
+  position: relative;
+  z-index: 2;
+  height: 275px;
+}
+#unlock-btn {
+  z-index: 5;
+  position: absolute;
+  bottom: 50%;
 
-  
+  background: #2d2d2d;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 0.5rem;
 }
-#album-img-btn{
-position: relative;
-z-index:2;
-height:275px;
+.album-card-2 {
+  border-radius: 8px;
 }
-#unlock-btn{
-    z-index:5;
-    position: absolute;
-    bottom:50%;
-    
-    
-    background: #2D2D2D;
-border: 1px solid #FFFFFF;
-box-sizing: border-box;
-border-radius: 8px;
-padding:.5rem;
+.album-card-3 {
+  border-radius: 8px;
 }
-.album-card-2{
-    border-radius:8px;
-    
-    
+.album-card-img {
+  width: 100%;
+  height: 275px;
+  object-fit: cover;
 }
-.album-card-3{
-    border-radius:8px;
-   
-}
-.album-card-img{
-   
-    width: 100%;
-height: 275px;
-object-fit: cover;
-}
-#timer-clock{
-    
-font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 19px;
-margin-top:-1rem;
-margin-left:.5rem;
+#timer-clock {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  margin-top: -1rem;
+  margin-left: 0.5rem;
 
-color: #6A6A6A;
-
+  color: #6a6a6a;
 }
-#clock-svg{
-    margin-bottom:-.5rem;
+#clock-svg {
+  margin-bottom: -0.5rem;
 }
-#see-all{
-    font-family: Montserrat;
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 24px;
-margin-left:50%;
+#see-all {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 50%;
 
-color: #6A6A6A;
+  color: #6a6a6a;
 }
-#service-txt-landing{
-    font-family: Kaushan Script;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 24px;
-margin-left:1rem;
+#service-txt-landing {
+  font-family: Kaushan Script;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  margin-left: 1rem;
 
+  text-align: center;
 
-text-align: center;
-
-color: #2D2D2D;
+  color: #2d2d2d;
 }

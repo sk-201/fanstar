@@ -9,30 +9,75 @@ import { ReactComponent as Chat } from '../.././assets/chat.svg';
 import { ReactComponent as Lock } from '../.././assets/opep.svg';
 import Logo from '../../assets/Ellipse 58.png';
 const EmployeeIncome = () => {
-  const [balance, setBalance] = useState(250);
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [weeklyIncome, setWeeklyIncome] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [pendingOrders, setPendingOrders] = useState(0);
+  const [boolVal, setBoolVal] = useState(false);
   const [home, setHome] = useState(1);
   const [chat, setChat] = useState(0);
   const [lock, setLock] = useState(0);
-  const navigate=useNavigate();
-  // useEffect(()=>
-  // {
-  //     const config={
-  //         headers:{
-  //           "Content-Type":"application/json",
-  //           Authorization:`Bearer ${localStorage.getItem("fanstarToken")}`
-  //         }
+  const navigate = useNavigate();
 
-  //       }
-  //       API.get("/api/artist/private/getownprofile",config).then(
-  //           ({ data})=>{
-  //               setBalance(data.balance);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('fanstarEmployeeToken')}`,
+    },
+  };
 
-  //           }
-  //       ).catch(error=>console.log(error))
+  const fetchTotalAndWeeklyIncome = async () => {
+    try {
+      const { data } = await API.get(
+        '/api/employee/private/getpaymentsofownartists',
+        config
+      );
+      setTotalOrders(data.length);
+      let today = new Date();
+      let before = new Date(today);
+      before.setDate(today.getDate() - 6);
+      let total = 0,
+        pending = 0,
+        weekly = 0;
+      data.forEach((d) => {
+        if (d.status === 'pending') {
+          pending += 1;
+        }
+        if (
+          d.status === 'completed' &&
+          new Date(d.createdAt).getTime() >= before
+        ) {
+          weekly += parseInt(d.amount);
+        }
+        total += parseInt(d.amount);
+      });
+      setTotalIncome(total);
+      setWeeklyIncome(weekly);
+      setPendingOrders(pending);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // }
+  const fetchEmployeeProfile = async () => {
+    try {
+      const { data } = await API.get(
+        '/api/employee/private/getownprofile',
+        config
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // )
+  useEffect(() => {
+    if (!boolVal) {
+      fetchTotalAndWeeklyIncome();
+      fetchEmployeeProfile();
+      setBoolVal(true);
+    }
+  }, [boolVal]);
 
   return (
     <div className='income'>
@@ -44,25 +89,25 @@ const EmployeeIncome = () => {
         <span id='tot-inc-text'>Total Income</span>
         <div className='total-income'>
           <h2 id='tot-inc-text-1'>Total Income</h2>
-          <h1 id='tot-inc-rs'> Rs {balance}/-</h1>
+          <h1 id='tot-inc-rs'> Rs {totalIncome}/-</h1>
         </div>
         <span id='week-inc-text'>Weekly Income</span>
         <div className='weekly-income'>
           <h2 id='week-inc-text-1'>Weekly Income</h2>
-          <h1 id='week-inc-rs'>Rs {balance}/-</h1>
+          <h1 id='week-inc-rs'>Rs {weeklyIncome}/-</h1>
         </div>
-        <h3 id='tot-app'>Total no app visits</h3>
-        <h2 id='tot-app-no'>100,789</h2>
+        {/**<h3 id='tot-app'>Total no app visits</h3>
+        <h2 id='tot-app-no'>100,789</h2> */}
         <h3 id='tot-ord'>Total Orders</h3>
-        <h2 id='tot-ord-no'>100</h2>
+        <h2 id='tot-ord-no'>{totalOrders}</h2>
         <h3 id='pend-ord'>Pending Orders</h3>
-        <h2 id='pend-ord-no'>10</h2>
+        <h2 id='pend-ord-no'>{pendingOrders}</h2>
       </div>
       {(() => {
         if (home == 1 && chat == 0 && lock == 0) {
           return (
             <div>
-              <div className='icons-tab' style={{marginLeft:"-1.8rem"}}>
+              <div className='icons-tab' style={{ marginLeft: '-1.8rem' }}>
                 <div className='nav'>
                   <HomeB />
 
@@ -88,7 +133,7 @@ const EmployeeIncome = () => {
         } else if (chat == 1 && home == 0 && lock == 0) {
           return (
             <div>
-              <div className='icons-tab' style={{marginLeft:"-1.8rem"}}>
+              <div className='icons-tab' style={{ marginLeft: '-1.8rem' }}>
                 <div className='nav'>
                   <Home
                     onClick={() => {
@@ -114,7 +159,7 @@ const EmployeeIncome = () => {
         } else if (lock == 1 && chat == 0 && home == 0) {
           return (
             <div>
-              <div className='icons-tab' style={{marginLeft:"-1.8rem"}}>
+              <div className='icons-tab' style={{ marginLeft: '-1.8rem' }}>
                 <div className='nav'>
                   <Home
                     onClick={() => {
