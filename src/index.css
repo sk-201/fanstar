@@ -13,3 +13,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* :root {
+  --red-theme: #009ee0;
+  --secondary-color: #c4c4c4;
+} */

@@ -11,23 +11,57 @@ import Logo from '../../assets/Ellipse 58.png';
 import './income.css';
 const Income = () => {
   const navigate = useNavigate();
-  const [balance, setBalance] = useState();
+  const [balance, setBalance] = useState(0);
+  const [weeklyIncome, setWeeklyIncome] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [pendingOrders, setPendingOrders] = useState(0);
+  const [artistData, setArtistData] = useState({});
   const [home, setHome] = useState(1);
   const [chat, setChat] = useState(0);
   const [lock, setLock] = useState(0);
-  useEffect(() => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
-      },
-    };
+  const [boolVal, setBoolVal] = useState(false);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+    },
+  };
+
+  const fetchArtistProfile = () => {
     API.get('/api/artist/private/getownprofile', config)
       .then(({ data }) => {
         setBalance(data.balance);
+        setArtistData(data);
       })
       .catch((error) => console.log(error));
-  });
+  };
+
+  const fetchWeeklyPayments = async () => {
+    try {
+      const { data } = await API.get(
+        '/api/artist/private/getownpayments',
+        config
+      );
+      setTotalOrders(data.length);
+      let pending = 0;
+      data.forEach((d) => {
+        if (d.status === 'pending') {
+          pending += 1;
+        }
+      });
+      setPendingOrders(pending);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!boolVal) {
+      fetchArtistProfile();
+      fetchWeeklyPayments();
+      setBoolVal(true);
+    }
+  }, [boolVal]);
 
   return (
     <div className='income'>
@@ -47,11 +81,11 @@ const Income = () => {
           <h1 id='week-inc-rs'>Rs {balance}/-</h1>
         </div>
         <h3 id='tot-app'>Total no app visits</h3>
-        <h2 id='tot-app-no'>100,789</h2>
+        <h2 id='tot-app-no'>{artistData.appVisits}</h2>
         <h3 id='tot-ord'>Total Orders</h3>
-        <h2 id='tot-ord-no'>100</h2>
+        <h2 id='tot-ord-no'>{totalOrders}</h2>
         <h3 id='pend-ord'>Pending Orders</h3>
-        <h2 id='pend-ord-no'>10</h2>
+        <h2 id='pend-ord-no'>{pendingOrders}</h2>
       </div>
 
       {(() => {

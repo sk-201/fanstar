@@ -12,15 +12,17 @@ import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
 import { ReactComponent as HomeB } from '../.././assets/home.svg';
 import { ReactComponent as Chat } from '../.././assets/chat.svg';
 import { ReactComponent as Lock } from '../.././assets/opep.svg';
-import { ReactComponent as Edit } from '../../assets/edit-icon.svg';
-import { ReactComponent as Plus } from '../../assets/plusicon.svg';
+import editIcon from '../../assets/edit-icon.svg';
+import plusIcon from '../../assets/plusicon.svg';
 const ArtistLanding = () => {
   const { token = null } = useParams();
   const [services, setServices] = useState([]);
+  const [artistDetails, setArtistDetails] = useState({});
   const [home, setHome] = useState(0);
   const [chat, setChat] = useState(0);
   const [lock, setLock] = useState(1);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!localStorage.getItem('fanstarToken')) {
       if (token) {
@@ -40,25 +42,31 @@ const ArtistLanding = () => {
     API.get('/api/artist/private/ownservices', config)
       .then(({ data }) => {
         setServices(data);
-        console.log(data);
+      })
+      .catch((error) => console.log(error));
+
+    API.get('/api/artist/private/getownprofile', config)
+      .then(({ data }) => {
+        setArtistDetails(data);
       })
       .catch((error) => console.log(error));
   }, []);
 
-
-
-  
   SwiperCore.use([Pagination]);
   return (
     <>
       <div className='img-header'>
         <img className='img-1' src={Img1} alt='banner-pic' />
         <h1 className='img-1-heading'>
-          Hi I'm Jenna
+          {Object.keys(artistDetails).length > 0
+            ? `Hi I'm ${artistDetails.username}`
+            : ''}
           <span id='serv-edit-txt' style={{ marginLeft: '10%' }}>
             Edit
           </span>
-          <Edit
+          <img
+            src={editIcon}
+            alt='edit'
             id='edit-icon'
             style={{ marginRight: '-6rem' }}
             onClick={() => {
@@ -84,11 +92,12 @@ const ArtistLanding = () => {
           My Services
           <span id='serv-edit-txt'>
             Add
-            <Plus
+            <img
+              src={plusIcon}
               onClick={() => {
                 navigate(`/addservice`);
               }}
-              id='edit-icon'
+              id='add-icon'
             />
           </span>
         </h1>
