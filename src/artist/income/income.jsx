@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Home } from '../.././assets/home-white.svg';
-import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
-import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
-import { ReactComponent as HomeB } from '../.././assets/home.svg';
-import { ReactComponent as Chat } from '../.././assets/chat.svg';
-import { ReactComponent as Lock } from '../.././assets/opep.svg';
+import demo from '../../assets/demoProfile.png';
+import { ReactComponent as Home } from '../../assets/home-white.svg';
+import { ReactComponent as ChatB } from '../../assets/chat-black.svg';
+import { ReactComponent as LockB } from '../../assets/Ellipse 66.svg';
+import { ReactComponent as HomeB } from '../../assets/home.svg';
+import { ReactComponent as Chat } from '../../assets/chat.svg';
+import { ReactComponent as Lock } from '../../assets/opep.svg';
 import Logo from '../../assets/Ellipse 58.png';
 import './income.css';
+
 const Income = () => {
   const navigate = useNavigate();
   const [balance, setBalance] = useState(0);
@@ -42,13 +44,25 @@ const Income = () => {
         '/api/artist/private/getownpayments',
         config
       );
+      console.log(data);
       setTotalOrders(data.length);
-      let pending = 0;
+      let pending = 0,
+        weekly = 0;
+      let today = new Date();
+      let before = new Date(today);
+      before.setDate(today.getDate() - 6);
       data.forEach((d) => {
         if (d.status === 'pending') {
           pending += 1;
         }
+        if (
+          d.status === 'completed' &&
+          new Date(d.createdAt).getTime() >= before
+        ) {
+          weekly += parseInt(d.amount);
+        }
       });
+      setWeeklyIncome(weekly * 0.7);
       setPendingOrders(pending);
     } catch (error) {
       console.log(error);
@@ -73,12 +87,12 @@ const Income = () => {
         <span id='tot-inc-text'>Total Income</span>
         <div className='total-income'>
           <h2 id='tot-inc-text-1'>Total Income</h2>
-          <h1 id='tot-inc-rs'> Rs {balance}/-</h1>
+          <h1 id='tot-inc-rs'> Rs {parseInt(balance)}/-</h1>
         </div>
         <span id='week-inc-text'>Weekly Income</span>
         <div className='weekly-income'>
           <h2 id='week-inc-text-1'>Weekly Income</h2>
-          <h1 id='week-inc-rs'>Rs {balance}/-</h1>
+          <h1 id='week-inc-rs'>Rs {weeklyIncome}/-</h1>
         </div>
         <h3 id='tot-app'>Total no app visits</h3>
         <h2 id='tot-app-no'>{artistData.appVisits}</h2>
@@ -86,6 +100,20 @@ const Income = () => {
         <h2 id='tot-ord-no'>{totalOrders}</h2>
         <h3 id='pend-ord'>Pending Orders</h3>
         <h2 id='pend-ord-no'>{pendingOrders}</h2>
+        <div className='pending-orderList'>
+          <h2 className='pending-orderTitle'>My Pending Orders</h2>
+          {[1, 2, 3].map((row, i) => (
+            <div className='pending-container' key={i}>
+              <div className='pending-userImgDiv'>
+                <img src={demo} alt='user-pic' className='pending-userImage' />
+              </div>
+              <div className='pending-userDetails'>
+                <h3 className='pending-userName'>Anunya Sood</h3>
+                <p className='pending-orderName'>Video call</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {(() => {

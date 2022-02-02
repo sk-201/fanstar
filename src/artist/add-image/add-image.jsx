@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as BackArrow } from '../../assets/backArrow.svg';
+import backArrow from '../../assets/backArrow.svg';
 import './add-image.css';
 const AddImage = () => {
   const navigate = useNavigate();
@@ -58,48 +58,57 @@ const AddImage = () => {
   };
   return (
     <div className='add-image'>
-      <BackArrow id='bck-arrw' onClick={() => navigate('/artist/landing')} />
-      <span id='my-service-text'>Add Image</span>
-
-      <div className='add-img-cont'>
-        <form onSubmit={sendImage}>
-          <button id='post-img' type='submit'>
+      <div className='addImage-headerDiv'>
+        <div className='addImage-tileDiv'>
+          <button
+            className='bck-arrwBtn'
+            onClick={() => navigate('/artist/landing')}
+          >
+            <img src={backArrow} alt='back' className='addImage-backIcon' />
+          </button>
+          <h3 className='addImage-title'>Add Image</h3>
+        </div>
+        <div className='addImage-postBtnDiv'>
+          <button className='addImage-postBtn' onClick={sendImage}>
             Post
           </button>
-          <div>
-            {baseImage ? (
-              <img id='added-img' src={baseImage} />
-            ) : (
-              <div>
-                <input
-                  type='file'
-                  onChange={(e) => {
-                    uploadImage(e);
-                  }}
-                  className='inp-add-img'
-                />
-              </div>
-            )}
-          </div>
-          <label for='add-caption'> Add Caption</label>
-          <input
-            id='add-caption'
-            type='text'
-            className='inp-add-img'
-            placeholder='typing...'
-            value={caption}
-            onChange={(e) => setCaption(e.target.value)}
-          />
-          <label for='img-price'> Add Price</label>
-          <input
-            id='img-price'
-            type='text'
-            className='inp-add-img'
-            placeholder='Rs'
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </form>
+        </div>
+      </div>
+
+      <div className='add-img-cont'>
+        <div>
+          {baseImage ? (
+            <img id='added-img' src={baseImage} />
+          ) : (
+            <div>
+              <input
+                type='file'
+                onChange={(e) => {
+                  uploadImage(e);
+                }}
+                className='inp-add-img'
+              />
+            </div>
+          )}
+        </div>
+        <label for='add-caption'> Add Caption</label>
+        <input
+          id='add-caption'
+          type='text'
+          className='inp-add-img'
+          placeholder='typing...'
+          value={caption}
+          onChange={(e) => setCaption(e.target.value)}
+        />
+        <label for='img-price'> Add Price</label>
+        <input
+          id='img-price'
+          type='text'
+          className='inp-add-img'
+          placeholder='Rs'
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
       </div>
     </div>
   );

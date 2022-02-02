@@ -21,8 +21,9 @@ import { ReactComponent as Clock } from '../.././assets/clock.svg';
 import { ReactComponent as Home } from '../.././assets/home-white.svg';
 import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
 import { ReactComponent as LockB } from '../.././assets/lock-black.svg';
-
+import { setTheme } from '../../utils';
 import './landing.css';
+
 SwiperCore.use([Pagination]);
 const ArtistPage = () => {
   const navigate = useNavigate();
@@ -49,6 +50,8 @@ const ArtistPage = () => {
       },
     };
     API.get(`/api/user/private/getartist/${id}`, config).then(({ data }) => {
+      window.localStorage.setItem('color', data.theme);
+      setTheme(data.theme);
       setName(data.username);
       setProfilePhoto(data.profilePhoto);
       setBio(data.bio);
@@ -168,9 +171,7 @@ const ArtistPage = () => {
           <img className='img-2' src={profilePhoto} alt='banner-pic' />
           <h1 className='img-2-heading'>{bio}</h1>
         </div>
-        <Link to='#' style={{ textDecoration: 'none' }}>
-          <button className='btn-chat'>Chat now @ Rs 2000/-</button>
-        </Link>
+        <button className='btn-chat'>Chat now @ Rs 2000/-</button>
       </div>
       <div className='container-2'>
         <h1 className='container-2-head'>Lets connect</h1>

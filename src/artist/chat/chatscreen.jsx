@@ -35,10 +35,10 @@ const ChatList = () => {
 
   return (
     <div className='chat'>
-      <div className='img-cont-inc' style={{ paddingTop: '1rem' }}>
-        <span id='fanstar'>Fanstar logo</span>
+      <div className='chat-headerContainer'>
+        <img className='chat-headerLogo' src={Logo} />
+        <h3 className='chat-headTitle'>Fanstar logo</h3>
       </div>
-      <img id='logo-img' src={Logo} />
       <div className='chat-container'>
         {chats.length > 0 &&
           chats.map((data) => {

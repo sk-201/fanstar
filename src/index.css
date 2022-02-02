@@ -14,7 +14,13 @@ code {
     monospace;
 }
 
-/* :root {
-  --red-theme: #009ee0;
-  --secondary-color: #c4c4c4;
-} */
+:root {
+  --background-color: #2d2d2d;
+  --subs-container-color: rgba(38, 38, 38, 0.8);
+  --menu-container-color: rgba(129, 129, 129, 0.6);
+  --text-color: #fff;
+}
+
+.container {
+  margin-bottom: 20%;
+}

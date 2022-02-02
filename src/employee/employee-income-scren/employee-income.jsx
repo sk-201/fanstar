@@ -51,8 +51,8 @@ const EmployeeIncome = () => {
         }
         total += parseInt(d.amount);
       });
-      setTotalIncome(total);
-      setWeeklyIncome(weekly);
+      setTotalIncome(total * 0.7);
+      setWeeklyIncome(weekly * 0.7);
       setPendingOrders(pending);
     } catch (error) {
       console.log(error);
@@ -65,7 +65,6 @@ const EmployeeIncome = () => {
         '/api/employee/private/getownprofile',
         config
       );
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

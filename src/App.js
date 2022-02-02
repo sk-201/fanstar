@@ -31,10 +31,12 @@ import WalletBalance from './user/balance -screen/walletbalance';
 import Album from './user/album-gallery/album';
 import SubBalance from './user/balance -screen/subscribe-balance';
 import ChatScreen from './user/user-chat/user-chat';
-import './App.css';
 import EmployeeLinkedArtist from './employee/employee-linkedArtist/EmployeeLinkedArtist';
 import LinkedArtistDetials from './employee/employee-linkedArtist/LinkedArtistDetials';
 import ArtistChat from './artist/artist-chat/artist-chat';
+import Bookings from './user/booking-screen/Bookings';
+
+import './App.css';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -64,6 +66,7 @@ function App() {
           />
           <Route path='/wallet' element={<WalletBalance />} />
           <Route path='/artist/:id/user/album' element={<Album />} />
+          <Route path='/artist/:id/user/bookings' element={<Bookings />} />
           <Route path='/artist/:id/sub' element={<Subscription />} />
           <Route path='/artist/:id/subscribe' element={<Subscribe />} />
           <Route

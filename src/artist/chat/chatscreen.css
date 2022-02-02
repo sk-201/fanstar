@@ -1,50 +1,74 @@
-.chat{
-    background-color: #e5e5e5;
-    
+.chat {
+  background-color: #e5e5e5;
+  min-height: 100vh;
 }
-.chat-container{
-    margin-top:5%;
-    margin-left:5%;
-    margin-right:5%;
-    
-}
-#user-icon{
-    height:2rem;
-    width:2rem;
-    border-radius: 100%;
-    margin-bottom: -1.2rem;
-    padding:.1rem;
-   background: #eaeaea;
-}
-#chat-name{
-    font-family: Poppins;
-font-style: normal;
-font-weight: 600;
-font-size: 17px;
-line-height: 25px;
-color: #000000;
-margin-left:.7rem;
-}
-#chat-ch{
-    font-family: Poppins;
-font-style: normal;
-font-weight: 600;
-font-size: 12px;
-line-height: 18px;
-color: #000000;
-display: block;
-margin-left:3rem;
-margin-bottom: 1rem;
 
+.chat-container {
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
-#chat-time{
-    
-font-family: Poppins;
-font-style: normal;
-font-weight: 600;
-font-size: 10px;
-line-height: 15px;
-margin-left: 5rem;
 
-color: #000000;
+.chat-headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.chat-headerLogo {
+  height: 42px;
+  width: 42px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.chat-headTitle {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000000;
+  margin-left: 15px;
+}
+
+#user-icon {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+  margin-bottom: -1.2rem;
+  padding: 0.1rem;
+  background: #eaeaea;
+}
+#chat-name {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 25px;
+  color: #000000;
+  margin-left: 0.7rem;
+}
+#chat-ch {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: #000000;
+  display: block;
+  margin-left: 3rem;
+  margin-bottom: 1rem;
+}
+#chat-time {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 15px;
+  margin-left: 5rem;
+
+  color: #000000;
 }

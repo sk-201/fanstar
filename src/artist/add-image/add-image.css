@@ -1,34 +1,81 @@
-.add-image{
-    margin-top:5%;
+.add-image {
+  margin-top: 5%;
 }
-#post-img{
- font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 16px;
-line-height: 24px;
-color: #0397FC;
-margin-left:39%;
-margin-top:-19%;
-margin-bottom: 40%;
-padding:0;
-background: none;
-border: none;
+#post-img {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0397fc;
+  margin-left: 39%;
+  margin-top: -19%;
+  margin-bottom: 15%;
+  padding: 0;
+  background: none;
+  border: none;
+}
+#added-img {
+  width: 94%;
+  height: 30vh;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+.add-img-cont {
+  margin-top: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.inp-add-img {
+  display: block;
+  width: 90%;
+  margin-bottom: 2rem;
+}
 
+.bck-arrwBtn {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  outline: none;
+  border: none;
+  background-color: transparent;
 }
-#added-img{
-    width:94%;
-    height:30vh;
-    border-radius: 8px;
-    margin-bottom: 2rem;
+
+.addImage-headerDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: auto;
 }
-.add-img-cont{
-    margin-top:10%;
-    margin-left:10%;
-    margin-right:10%;
+
+.addImage-tileDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
-.inp-add-img{
-    display: block;
-    width:90%;
-    margin-bottom: 2rem;
+
+.addImage-title {
+  font-family: Kaushan Script;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  color: #2d2d2d;
+  margin: 10px 0;
+  margin-left: 2rem;
+}
+
+.addImage-postBtn {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 16px;
+  color: #0397fc;
 }

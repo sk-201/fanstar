@@ -1,37 +1,54 @@
-.my-image{
-    margin-top:5%;
+.my-image {
+  margin-top: 5%;
 }
-.my-img-cont{
-    margin-top:10%;
-    margin-left: 10%;
-    margin-right:10%;
+.my-img-cont {
+  width: 80%;
+  margin: auto;
+  margin-top: 10%;
 }
-#myimg{
-    width:95%;
+#myimg {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
 }
-#unlock-price-txt{
-    
-font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 24px;
-color: #2C2C2C;
+#unlock-price-txt {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #2c2c2c;
+}
+#unlock-price {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #636363;
+}
+#unlock-price-subtext {
+  font-family: Kaushan Script;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #848484;
+}
 
+.myImage-box {
+  margin: 15px 0;
 }
-#unlock-price{
-    font-family: Montserrat;
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 24px;
-color: #636363;
-}
-#unlock-price-subtext{
- font-family: Kaushan Script;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 24px;
-color: #848484;
+
+.myImage-loading {
+  width: 100%;
+  margin-top: 2rem;
+  text-align: center;
+  font-family: Kaushan Script;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #848484;
 }
