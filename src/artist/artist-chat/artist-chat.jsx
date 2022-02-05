@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BackArrow from '../../assets/backArrow.svg';
 import avatar from '../../assets/avatar.png';
+import generateLink from '../../assets/generateLink.svg';
+import completeStatus from '../../assets/completeStatus.svg';
+import sendIcon from '../../assets/sendIcon.svg';
 import { ReactComponent as Wallet } from '../.././assets/wallet.svg';
 import { ReactComponent as Bell } from '../.././assets/bell.svg';
 import { ReactComponent as User } from '../.././assets/userlogin.svg';
@@ -12,13 +15,13 @@ import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
 import { ReactComponent as HomeB } from '../.././assets/home.svg';
 import { ReactComponent as Chat } from '../.././assets/chat.svg';
 import { ReactComponent as Lock } from '../.././assets/opep.svg';
-import sendIcon from '../../assets/sendIcon.svg';
 import socket from '../../socket';
 import API from '../../api';
 import '../../user/user-chat/user-chat.css';
 
 const ArtistChat = () => {
   const [message, setMessage] = useState('');
+  const [boolVal, setBoolVal] = useState(false);
   const { state } = useLocation();
   const { userId, roomId } = state;
   const [messages, setMessages] = useState([]);
@@ -27,11 +30,16 @@ const ArtistChat = () => {
   const [lock, setLock] = useState(0);
   const navigate = useNavigate();
 
+  console.log(state);
+
   useEffect(() => {
     API.get(`/api/chat/getachat/${roomId}`).then(({ data }) => {
-      setMessages(data.allMessages);
+      if (!boolVal) {
+        setMessages(data.allMessages);
+        setBoolVal(true);
+      }
     });
-  }, []); ///api/chat/getallchats/:artistId
+  }, [boolVal]); ///api/chat/getallchats/:artistId
   useEffect(() => {
     socket.emit('joined', { userId, roomId });
   }, []);
@@ -51,14 +59,32 @@ const ArtistChat = () => {
   return (
     <div className='artistChat-mainContainerDiv'>
       <div className='artistChat-headerDiv'>
-        <div className='artistChat-back' onClick={() => navigate('/chat')}>
-          <img src={BackArrow} alt='back' className='artistChat-backIcon' />
+        <div className='artistChat-headerLeft'>
+          <div className='artistChat-back' onClick={() => navigate('/chat')}>
+            <img src={BackArrow} alt='back' className='artistChat-backIcon' />
+          </div>
+          <div className='artistChat-userDetails'>
+            <img src={avatar} alt='user' className='artistChat-userImage' />
+            <p className='artistChat-username'>
+              {state.username ? state.username : ''}
+            </p>
+          </div>
         </div>
-        <div className='artistChat-userDetails'>
-          <img src={avatar} alt='user' className='artistChat-userImage' />
-          <p className='artistChat-username'>
-            {state.username ? state.username : ''}
-          </p>
+        <div className='artistChat-headerRight'>
+          <button className='artistChat-generate'>
+            <img
+              src={generateLink}
+              alt='generate'
+              className='artistChat-icon'
+            />
+          </button>
+          <button className='artistChat-complete'>
+            <img
+              src={completeStatus}
+              alt='status'
+              className='artistChat-icon'
+            />
+          </button>
         </div>
       </div>
       <div className='artistChat-div'>

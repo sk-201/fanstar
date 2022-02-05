@@ -37,10 +37,16 @@ import ArtistChat from './artist/artist-chat/artist-chat';
 import Bookings from './user/booking-screen/Bookings';
 
 import './App.css';
+import { setTheme } from './utils';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  var themeColor = localStorage.getItem('color')
+    ? localStorage.getItem('color')
+    : 'black';
+
   if (isMobile) {
+    setTheme(themeColor);
     return (
       <div className='App'>
         <Routes>

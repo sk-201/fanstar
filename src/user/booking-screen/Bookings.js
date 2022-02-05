@@ -45,6 +45,12 @@ const Bookings = () => {
                 </p>
               </div>
               <p className='booking-handle'>
+                Service name:{' '}
+                <span className='booking-handleDetail'>
+                  {order?.serviceId?.serviceName}
+                </span>
+              </p>
+              <p className='booking-handle'>
                 Social handle:{' '}
                 <span className='booking-handleDetail'>
                   {order?.userId?.insta}

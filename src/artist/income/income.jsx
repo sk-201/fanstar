@@ -115,9 +115,10 @@ const Income = () => {
       );
       navigate(`/artist/chat`, {
         state: {
-          artistId: data._id,
+          // artistId: data._id,
           roomId: res.data,
-          userId: orderData?.userId?._id,
+          // userId: orderData?.userId?._id,
+          userId: data._id,
           serviceId: orderData?.serviceId?._id,
           paymentId: orderData._id,
           username: orderData?.userId?.username,

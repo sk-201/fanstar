@@ -24,7 +24,7 @@ const BottomNav = (props) => {
         },
       };
       const { data } = await API.get('/api/user/private/getowndetails', config);
-
+      // console.log(data);
       const res = await API.post(
         '/api/chat/createchat',
         { user1: data._id, user2: id },
@@ -35,7 +35,7 @@ const BottomNav = (props) => {
         }
       );
       navigate(`/artist/${id}/user/chat`, {
-        state: { userId: data._id, roomId: res.data, id: id },
+        state: { userId: data._id, roomId: res.data, artistId: id },
       });
     } catch (error) {
       console.log(error);

@@ -102,7 +102,7 @@ const ArtistLanding = () => {
         </div>
         <div className='container-2'>
           <div className='heading-btnDiv'>
-            <h1 className='myImage-head'>My Images </h1>
+            <h1 className='myImage-head'>My Services </h1>
             <button
               className='add-myImage'
               onClick={() => {

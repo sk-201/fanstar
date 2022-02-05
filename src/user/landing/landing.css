@@ -144,6 +144,10 @@
   border: none;
 }
 
+.album-mainContainer {
+  margin-bottom: 20%;
+}
+
 .container-2-head {
   margin-top: 2rem;
   margin-left: 5%;
