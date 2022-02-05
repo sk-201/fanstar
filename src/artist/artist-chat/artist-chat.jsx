@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ReactComponent as BackArrow } from '../../assets/backArrow.svg';
-import { ReactComponent as UserPhoto } from '../../assets/Ellipse 7.svg';
+import BackArrow from '../../assets/backArrow.svg';
+import avatar from '../../assets/avatar.png';
 import { ReactComponent as Wallet } from '../.././assets/wallet.svg';
 import { ReactComponent as Bell } from '../.././assets/bell.svg';
 import { ReactComponent as User } from '../.././assets/userlogin.svg';
@@ -12,7 +12,7 @@ import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
 import { ReactComponent as HomeB } from '../.././assets/home.svg';
 import { ReactComponent as Chat } from '../.././assets/chat.svg';
 import { ReactComponent as Lock } from '../.././assets/opep.svg';
-import { ReactComponent as Send } from '../.././assets/send.svg';
+import sendIcon from '../../assets/sendIcon.svg';
 import socket from '../../socket';
 import API from '../../api';
 import '../../user/user-chat/user-chat.css';
@@ -26,6 +26,7 @@ const ArtistChat = () => {
   const [chat, setChat] = useState(1);
   const [lock, setLock] = useState(0);
   const navigate = useNavigate();
+
   useEffect(() => {
     API.get(`/api/chat/getachat/${roomId}`).then(({ data }) => {
       setMessages(data.allMessages);
@@ -46,41 +47,46 @@ const ArtistChat = () => {
     socket.emit('sendmessage', { userId, roomId, message });
     setMessage('');
   };
+
   return (
-    <div className='chat-cont-div'>
-      <BackArrow id='bck-arrw' onClick={() => navigate(`/chat`)} />
-      <UserPhoto id='user-photo' />
-      <span id='chat-user-name'>Jenna</span>
-      <div className='chat-div'>
-        <div className='messages'>
-          {messages.length > 0
-            ? messages.map((mes, ind) => {
-                return (
-                  <div
-                    className={
-                      mes.senderId === userId
-                        ? 'sent-message'
-                        : 'received-message'
-                    }
-                    key={ind}
-                  >
-                    {' '}
-                    {mes.message}
-                  </div>
-                );
-              })
-            : null}
+    <div className='artistChat-mainContainerDiv'>
+      <div className='artistChat-headerDiv'>
+        <div className='artistChat-back' onClick={() => navigate('/chat')}>
+          <img src={BackArrow} alt='back' className='artistChat-backIcon' />
         </div>
-        <form className='chat-input-div'>
+        <div className='artistChat-userDetails'>
+          <img src={avatar} alt='user' className='artistChat-userImage' />
+          <p className='artistChat-username'>
+            {state.username ? state.username : ''}
+          </p>
+        </div>
+      </div>
+      <div className='artistChat-div'>
+        {messages.map((mes, ind) => {
+          return (
+            <div
+              className={
+                mes.senderId === userId ? 'sent-message' : 'received-message'
+              }
+              key={ind}
+            >
+              {' '}
+              {mes.message}
+            </div>
+          );
+        })}
+      </div>
+      <div className='artistChat-inputDiv'>
+        <form className='artistChat-inputForm'>
           <input
             type='text'
-            className='message-inp'
+            className='artistChat-inputField'
             placeholder='Type a message...'
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <button type='submit' id='message-btn' onClick={send}>
-            <Send />
+          <button type='submit' className='artistChat-sendMsg' onClick={send}>
+            <img src={sendIcon} alt='send' className='msgSend-icon' />
           </button>
         </form>
       </div>

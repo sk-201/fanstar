@@ -29,6 +29,7 @@ const ChatList = () => {
       setartistId(data._id);
       API.get(`/api/chat/getallchats/${data._id}`, config).then((res) => {
         setChats(res.data);
+        console.log(res.data);
       });
     });
   }, []);

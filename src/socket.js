@@ -1,7 +1,7 @@
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client';
 
-const socket =io('/',{
-  reconnection:false
+const socket = io('/', {
+  reconnection: false,
 });
 
 export default socket;

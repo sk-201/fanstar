@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
-import demo from '../../assets/demoProfile.png';
+// import demo from '../../assets/demoProfile.png';
+import avatar from '../../assets/avatar.png';
 import { ReactComponent as Home } from '../../assets/home-white.svg';
 import { ReactComponent as ChatB } from '../../assets/chat-black.svg';
 import { ReactComponent as LockB } from '../../assets/Ellipse 66.svg';
@@ -17,6 +18,7 @@ const Income = () => {
   const [weeklyIncome, setWeeklyIncome] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [pendingOrders, setPendingOrders] = useState(0);
+  const [pendingData, setPendingData] = useState([]);
   const [artistData, setArtistData] = useState({});
   const [home, setHome] = useState(1);
   const [chat, setChat] = useState(0);
@@ -44,7 +46,6 @@ const Income = () => {
         '/api/artist/private/getownpayments',
         config
       );
-      console.log(data);
       setTotalOrders(data.length);
       let pending = 0,
         weekly = 0;
@@ -69,13 +70,63 @@ const Income = () => {
     }
   };
 
+  const fetchPendingOrders = async () => {
+    try {
+      const { data } = await API.get(
+        '/api/artist/private/getownpendingorders',
+        config
+      );
+      setPendingData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (!boolVal) {
       fetchArtistProfile();
       fetchWeeklyPayments();
+      fetchPendingOrders();
       setBoolVal(true);
     }
   }, [boolVal]);
+
+  const chatHandler = async (orderData) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        },
+      };
+      const { data } = await API.get(
+        '/api/artist/private/getownprofile',
+        config
+      );
+
+      const res = await API.post(
+        '/api/chat/createchat',
+        { user1: data._id, user2: orderData?.userId?._id },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      navigate(`/artist/chat`, {
+        state: {
+          artistId: data._id,
+          roomId: res.data,
+          userId: orderData?.userId?._id,
+          serviceId: orderData?.serviceId?._id,
+          paymentId: orderData._id,
+          username: orderData?.userId?.username,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className='income'>
@@ -102,14 +153,24 @@ const Income = () => {
         <h2 id='pend-ord-no'>{pendingOrders}</h2>
         <div className='pending-orderList'>
           <h2 className='pending-orderTitle'>My Pending Orders</h2>
-          {[1, 2, 3].map((row, i) => (
-            <div className='pending-container' key={i}>
+          {pendingData.map((data) => (
+            <div
+              className='pending-container'
+              key={data._id}
+              onClick={() => chatHandler(data)}
+            >
               <div className='pending-userImgDiv'>
-                <img src={demo} alt='user-pic' className='pending-userImage' />
+                <img
+                  src={avatar}
+                  alt='user-pic'
+                  className='pending-userImage'
+                />
               </div>
               <div className='pending-userDetails'>
-                <h3 className='pending-userName'>Anunya Sood</h3>
-                <p className='pending-orderName'>Video call</p>
+                <h3 className='pending-userName'>{data?.userId?.username}</h3>
+                <p className='pending-orderName'>
+                  {data?.serviceId?.serviceName}
+                </p>
               </div>
             </div>
           ))}

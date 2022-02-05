@@ -86,7 +86,7 @@ function App() {
           <Route path='/artist/otp/:phone' element={<ArtistOtp />} />
           <Route path='/myimage' element={<MyImage />} />
           <Route path='/chat' element={<ChatList />} />
-          <Route path='/user/chat' element={<ChatScreen />} />
+          <Route path='/artist/:id/user/chat' element={<ChatScreen />} />
           <Route path='/artist/chat' element={<ArtistChat />} />
           <Route path='/employee/login' element={<EmployeeLogin />} />
           <Route path='/employee/otp/:phone' element={<EmployeeOtp />} />

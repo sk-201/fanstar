@@ -1,0 +1,84 @@
+.booking-mainContainer {
+  /* background-color: #f6f6f6; */
+  /* min-height: 100vh; */
+  margin-bottom: 25%;
+}
+
+.booking-header {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.booking-heading {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 18px;
+  color: #110229;
+  background-color: transparent;
+  margin: 15px 0;
+  margin-bottom: 20px;
+}
+
+.booking-orderDiv {
+  background-color: #f6f6f6;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.booking-orderHead {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 16px;
+  color: #223263;
+  margin: 5px 0;
+  margin-bottom: 15px;
+}
+
+.booking-serviceHeading {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 16px;
+  color: #434343;
+  margin: 10px 0;
+  margin-bottom: 5px;
+}
+
+.booking-serviceDetails {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 14px;
+  color: #848484;
+  margin: 0;
+}
+
+.booking-handle {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 16px;
+  color: #353535;
+  margin: 15px 0;
+}
+
+.booking-handleDetail {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 14px;
+  color: #848484;
+  margin: 0;
+}
+
+.booking-status {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 16px;
+  color: #223263;
+  margin: 15px 0;
+}
+
+.booking-statusDetail {
+  color: #fc3c00;
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 14px;
+  margin: 0;
+}
