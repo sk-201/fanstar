@@ -25,24 +25,28 @@ const ChatScreen = () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
       },
-    }).then(({ data }) => {
-      setArtistDetails(data);
-      console.log(data);
-    });
-  }, []);
+    })
+      .then(({ data }) => {
+        setArtistDetails(data);
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+  }, [artistId]);
 
   useEffect(() => {
     if (!boolVal) {
-      API.get(`/api/chat/getachat/${roomId}`).then(({ data }) => {
-        setMessages(data.allMessages);
-      });
+      API.get(`/api/chat/getachat/${roomId}`)
+        .then(({ data }) => {
+          setMessages(data.allMessages);
+        })
+        .catch((error) => console.log(error));
       setBoolVal(true);
     }
-  }, [boolVal]); ///api/chat/getallchats/:artistId
+  }, [boolVal, roomId]); ///api/chat/getallchats/:artistId
 
   useEffect(() => {
     socket.emit('joined', { userId, roomId });
-  }, []);
+  }, [userId, roomId]);
 
   useEffect(() => {
     socket.on('sendallmessages', ({ allMessages }) => {
@@ -55,6 +59,7 @@ const ChatScreen = () => {
     socket.emit('sendmessage', { userId, roomId, message });
     setMessage('');
   };
+
   return (
     <Fragment>
       <div className='artistChat-mainContainerDiv'>

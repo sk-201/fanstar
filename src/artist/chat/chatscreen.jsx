@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import Logo from '../../assets/Ellipse 58.png';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 import { ReactComponent as User } from '../../assets/chatuser.svg';
+import userIcon from '../../assets/chatuser.svg';
+import Logo from '../../assets/Ellipse 58.png';
 import { ReactComponent as Home } from '../.././assets/home-white.svg';
 import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
 import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
@@ -18,6 +20,8 @@ const ChatList = () => {
   const [home, setHome] = useState(0);
   const [chat, setChat] = useState(1);
   const [lock, setLock] = useState(0);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const config = {
       headers: {
@@ -25,13 +29,24 @@ const ChatList = () => {
         Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
       },
     };
-    API.get(`/api/artist/private/getownprofile`, config).then(({ data }) => {
-      setartistId(data._id);
-      API.get(`/api/chat/getallchats/${data._id}`, config).then((res) => {
-        setChats(res.data);
-        console.log(res.data);
+    API.get(`/api/artist/private/getownprofile`, config)
+      .then(({ data }) => {
+        setartistId(data._id);
+        API.get(`/api/chat/getallchats/${data._id}`, config)
+          .then((res) => {
+            setChats(res.data);
+            // console.log(res.data);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+            setLoading(false);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
       });
-    });
   }, []);
 
   return (
@@ -41,27 +56,77 @@ const ChatList = () => {
         <h3 className='chat-headTitle'>Fanstar logo</h3>
       </div>
       <div className='chat-container'>
-        {chats.length > 0 &&
-          chats.map((data) => {
-            return (
+        {chats.length <= 0 ? (
+          <h3 className='artistChatlist-loading'>Loading...</h3>
+        ) : (
+          <Fragment>
+            {chats.map((data) => (
               <div
+                className='artistChat-chatBox'
                 onClick={() =>
                   navigate('/artist/chat', {
                     state: { userId: artistId, roomId: data.roomId },
                   })
                 }
+                key={data.roomId}
               >
-                <span className='chat-span'>
-                  <User id='user-icon' />
-                  <text id='chat-name'>{data.userPhone}</text>
-                  <text id='chat-ch'>
-                    {data.lastMessage.message}{' '}
-                    <text id='chat-time'>{data.lastMessage.time}</text>
-                  </text>
-                </span>
+                <div className='artistChatlist-imgDiv'>
+                  <img
+                    src={userIcon}
+                    alt='user-pic'
+                    className='artistChatlist-img'
+                  />
+                </div>
+                <div className='artistChatlist-contentDiv'>
+                  <div className='artistChatlist-userInfo'>
+                    <h4 className='artistChatlist-username'>
+                      {data.userPhone}
+                    </h4>
+                    <p className='artistChatlist-lastmsg'>
+                      {data.lastMessage.message.length > 25
+                        ? `${data.lastMessage.message.substr(0, 25)}...`
+                        : data.lastMessage.message}
+                    </p>
+                  </div>
+                  <div className='artistChatlist-chatTime'>
+                    <p className='artistChatlist-time'>
+                      {moment(data.lastMessage.time).fromNow()}
+                    </p>
+                  </div>
+                </div>
               </div>
-            );
-          })}
+            ))}
+          </Fragment>
+        )}
+        {/**[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((row, i) => (
+          <div className='artistChat-chatBox' key={i}>
+            <div className='artistChatlist-imgDiv'>
+              <img
+                src={userIcon}
+                alt='user-pic'
+                className='artistChatlist-img'
+              />
+            </div>
+            <div className='artistChatlist-contentDiv'>
+              <div className='artistChatlist-userInfo'>
+                <h4 className='artistChatlist-username'>{`data.userPhone`}</h4>
+                <p className='artistChatlist-lastmsg'>
+                  {`data.lastMessage.message, hi my name is shikhar`.length > 25
+                    ? `${'data.lastMessage.message, hi my name is shikhar'.substr(
+                        0,
+                        25
+                      )}...`
+                    : 'data.lastMessage.message'}
+                </p>
+              </div>
+              <div className='artistChatlist-chatTime'>
+                <p className='artistChatlist-time'>
+                  {moment(new Date()).fromNow()}
+                </p>
+              </div>
+            </div>
+          </div>
+        )) */}
       </div>
       {(() => {
         if (home == 1 && chat == 0 && lock == 0) {
