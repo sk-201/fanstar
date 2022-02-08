@@ -36,7 +36,6 @@ const Income = () => {
   const fetchArtistProfile = () => {
     API.get('/api/artist/private/getownprofile', config)
       .then(({ data }) => {
-        console.log(data);
         setBalance(data.balance);
         setAmountPaid(data.paid);
         setArtistData(data);

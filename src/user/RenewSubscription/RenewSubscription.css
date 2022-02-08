@@ -1,0 +1,97 @@
+.renewSubs-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0deg, #636262, #636262);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.renewSubs-cardDiv {
+  position: relative;
+  top: 0%;
+  left: 0%;
+  background-color: var(--background-color);
+  border-radius: 24px;
+  width: 85%;
+  padding: 12px 10px;
+  border: 2px solid #fff;
+  /* box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%); */
+}
+
+.renewSubs-headerDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.renewSubs-heading {
+  margin: 5px 0;
+  font-family: Kaushan Script;
+  font-weight: normal;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.renewSubs-close {
+  margin: 5px 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  left: 45%;
+  top: -18%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.renewSubs-imgDiv {
+  width: 98%;
+  height: 158px;
+  border: 2px solid #fff;
+  margin: 1rem auto;
+  border-radius: 24px;
+}
+
+.renewSubs-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.renewSubs-content {
+  font-family: Montserrat;
+  font-weight: normal;
+  font-size: 14px;
+  text-align: center;
+  color: #ffffff;
+  width: 100%;
+}
+
+.renewSubs-btn {
+  padding: 8px 0;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  width: 90%;
+  margin: 1rem auto;
+  margin-top: 2rem;
+  background-color: #fff;
+  color: var(--background-color);
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 13px;
+}

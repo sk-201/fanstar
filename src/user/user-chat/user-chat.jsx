@@ -19,6 +19,8 @@ const ChatScreen = () => {
   const [boolVal, setBoolVal] = useState(false);
   const navigate = useNavigate();
 
+  // console.log(state);
+
   useEffect(() => {
     API.get(`/api/user/private/getartist/${artistId}`, {
       headers: {
@@ -28,7 +30,6 @@ const ChatScreen = () => {
     })
       .then(({ data }) => {
         setArtistDetails(data);
-        console.log(data);
       })
       .catch((error) => console.log(error));
   }, [artistId]);

@@ -40,6 +40,7 @@ import './App.css';
 import { setTheme } from './utils';
 import AllTransactions from './artist/transactions/AllTransactions';
 import RequestWithdrawal from './artist/request-withdraw/RequestWithdrawal';
+import RenewSubscription from './user/RenewSubscription/RenewSubscription';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -77,6 +78,7 @@ function App() {
           <Route path='/artist/:id/user/bookings' element={<Bookings />} />
           <Route path='/artist/:id/sub' element={<Subscription />} />
           <Route path='/artist/:id/subscribe' element={<Subscribe />} />
+          <Route path='/artist/:id/renew' element={<RenewSubscription />} />
           <Route
             path='/artist/:id/subscribe/payment'
             element={<SubBalance />}

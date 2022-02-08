@@ -5,10 +5,6 @@ import avatar from '../../assets/avatar.png';
 import generateLink from '../../assets/generateLink.svg';
 import completeStatus from '../../assets/completeStatus.svg';
 import sendIcon from '../../assets/sendIcon.svg';
-import { ReactComponent as Wallet } from '../.././assets/wallet.svg';
-import { ReactComponent as Bell } from '../.././assets/bell.svg';
-import { ReactComponent as User } from '../.././assets/userlogin.svg';
-import { ReactComponent as Clock } from '../.././assets/clock.svg';
 import { ReactComponent as Home } from '../.././assets/home-white.svg';
 import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
 import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
@@ -22,6 +18,7 @@ import ConfirmationScreen from './ConfirmationScreen';
 
 const ArtistChat = () => {
   const [message, setMessage] = useState('');
+  const [meetLink, setMeetLink] = useState('');
   const [boolVal, setBoolVal] = useState(false);
   const [confirmScreen, setConfirmScreen] = useState(false);
   const [confirmType, setConfirmType] = useState(false);
@@ -81,6 +78,8 @@ const ArtistChat = () => {
         }
       );
       alert('Service Completed!');
+      setConfirmScreen(false);
+      setConfirmType('');
       // console.log(data);
     } catch (error) {
       console.log(error);
@@ -113,7 +112,10 @@ const ArtistChat = () => {
           Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
         },
       });
-      console.log(data);
+      setMeetLink(data);
+      window.open(data, '_blank');
+      setConfirmScreen(false);
+      setConfirmType('');
     } catch (error) {
       console.log(error);
     }
