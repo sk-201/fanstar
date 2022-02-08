@@ -18,27 +18,36 @@ import { ReactComponent as Lock } from '../.././assets/opep.svg';
 import socket from '../../socket';
 import API from '../../api';
 import '../../user/user-chat/user-chat.css';
+import ConfirmationScreen from './ConfirmationScreen';
 
 const ArtistChat = () => {
   const [message, setMessage] = useState('');
   const [boolVal, setBoolVal] = useState(false);
+  const [confirmScreen, setConfirmScreen] = useState(false);
+  const [confirmType, setConfirmType] = useState(false);
   const { state } = useLocation();
-  const { userId, roomId } = state;
+  const { userId, roomId, paymentId } = state;
   const [messages, setMessages] = useState([]);
   const [home, setHome] = useState(0);
   const [chat, setChat] = useState(1);
   const [lock, setLock] = useState(0);
   const navigate = useNavigate();
 
-  console.log(state);
+  // console.log(state);
 
   useEffect(() => {
-    API.get(`/api/chat/getachat/${roomId}`).then(({ data }) => {
-      if (!boolVal) {
-        setMessages(data.allMessages);
-        setBoolVal(true);
-      }
-    });
+    if (!boolVal) {
+      API.get(`/api/chat/getachat/${roomId}`)
+        .then(({ data }) => {
+          // console.log(data);
+          setMessages(data.allMessages);
+          setBoolVal(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          setBoolVal(true);
+        });
+    }
   }, [boolVal]); ///api/chat/getallchats/:artistId
   useEffect(() => {
     socket.emit('joined', { userId, roomId });
@@ -56,6 +65,65 @@ const ArtistChat = () => {
     setMessage('');
   };
 
+  const completeStatusClick = async () => {
+    try {
+      const { data } = await API.put(
+        '/api/artist/private/completepayment',
+        {
+          paymentId: paymentId,
+          roomId: roomId,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          },
+        }
+      );
+      alert('Service Completed!');
+      // console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const generateMeetLink = async () => {
+    try {
+      const eventStartTime = new Date();
+      eventStartTime.setDate(eventStartTime.getDay() + 2);
+      // Create a new event end date instance for temp uses in our calendar.
+      const eventEndTime = new Date();
+      eventEndTime.setDate(eventEndTime.getDay() + 4);
+      eventEndTime.setMinutes(eventEndTime.getMinutes() + 45);
+      const body = {
+        summary: 'Random summary another NEW',
+        location: '3595 California St, San Francisco, CA 94118',
+        description: 'Chat with someone',
+        colorId: 1,
+        startTime: eventStartTime,
+        endTime: eventEndTime,
+        attendees: [
+          { email: 'shikharrastogi.0208@gmail.com' },
+          { email: 'naman9071@gmail.com' },
+        ],
+      };
+      const { data } = await API.post('/api/artist/private/addevent', body, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        },
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleConfirm = (type) => {
+    setConfirmType(type);
+    setConfirmScreen(true);
+  };
+
   return (
     <div className='artistChat-mainContainerDiv'>
       <div className='artistChat-headerDiv'>
@@ -71,14 +139,20 @@ const ArtistChat = () => {
           </div>
         </div>
         <div className='artistChat-headerRight'>
-          <button className='artistChat-generate'>
+          <button
+            className='artistChat-generate'
+            onClick={() => handleConfirm('meet')}
+          >
             <img
               src={generateLink}
               alt='generate'
               className='artistChat-icon'
             />
           </button>
-          <button className='artistChat-complete'>
+          <button
+            className='artistChat-complete'
+            onClick={() => handleConfirm('status')}
+          >
             <img
               src={completeStatus}
               alt='status'
@@ -116,6 +190,14 @@ const ArtistChat = () => {
           </button>
         </form>
       </div>
+      {confirmScreen && (
+        <ConfirmationScreen
+          type={confirmType}
+          close={() => setConfirmScreen(false)}
+          handleStatusFunc={completeStatusClick}
+          handleMeetFunc={generateMeetLink}
+        />
+      )}
       {(() => {
         if (home == 1 && chat == 0 && lock == 0) {
           return (

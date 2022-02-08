@@ -38,6 +38,8 @@ import Bookings from './user/booking-screen/Bookings';
 
 import './App.css';
 import { setTheme } from './utils';
+import AllTransactions from './artist/transactions/AllTransactions';
+import RequestWithdrawal from './artist/request-withdraw/RequestWithdrawal';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -81,6 +83,11 @@ function App() {
           />
           <Route path='/pay' element={<Payment />} />
           <Route path='/income' element={<Income />} />
+          <Route path='/income/transaction' element={<AllTransactions />} />
+          <Route
+            path='/income/request-withdraw'
+            element={<RequestWithdrawal />}
+          />
           <Route path='/edit' element={<Edit />} />
           <Route path='/addservice' element={<AddService />} />
           <Route path='/editservice/:id' element={<EditService />} />

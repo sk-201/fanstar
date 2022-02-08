@@ -1,0 +1,99 @@
+.request-container {
+  background-color: #f6f6f6;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.request-headerDiv {
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+}
+
+.request-backBtn {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  margin-right: 20px;
+}
+
+.request-heading {
+  margin: 0px;
+  margin-bottom: 10px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #121212;
+}
+
+.request-contentDiv {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 80vh;
+}
+
+.request-contentHeading {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 20px;
+  color: #223263;
+}
+
+.request-contentAmount {
+  font-family: DM Sans;
+  font-weight: bold;
+  font-size: 32px;
+  letter-spacing: 1px;
+  color: #223263;
+}
+
+.request-amountForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.request-amount {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #2d2d2d;
+}
+
+.request-amountInput {
+  background: #ffffff;
+  border-radius: 8px;
+  margin-top: 5px;
+  padding: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.request-amountInput::placeholder {
+  color: #b6b6b6;
+}
+
+.request-amountBtn {
+  margin: 1rem 0;
+  margin-top: 25px;
+  padding: 15px 0;
+  outline: none;
+  border: none;
+  width: 100%;
+  background-color: var(--background-color);
+}

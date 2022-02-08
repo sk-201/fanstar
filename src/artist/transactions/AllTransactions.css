@@ -1,0 +1,90 @@
+.artistTrans-container {
+  width: 100%;
+  padding-top: 10px;
+}
+
+.artistTrans-header {
+  width: 90%;
+  margin: 15px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.artistTrans-backBtn {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  width: auto;
+  border: none;
+  outline: none;
+  margin-right: 20px;
+}
+
+.artistTrans-heading {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 18px;
+  color: #121212;
+  margin: 5px 0;
+  margin-bottom: 10px;
+}
+
+.artistTrans-listDiv {
+  width: 100%;
+}
+
+.artistTrans-singleTrans {
+  font-family: Montserrat;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 15px;
+  border-bottom: 2px solid #e1e4e6;
+}
+
+.artistTrans-orderId {
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  color: #000000;
+  margin: 5px 0;
+}
+
+.artistTrans-status {
+  font-weight: normal;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  color: #5a5a5a;
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+
+.artistTrans-date {
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: #a7a7a7;
+  margin: 8px 0;
+}
+
+.artistTrans-amount {
+  font-weight: 600;
+  font-size: 14px;
+  text-align: right;
+  letter-spacing: 0.03em;
+  color: #2ecc71;
+  margin: 5px;
+}
+
+.artistTrans-loading {
+  font-family: Kaushan Script;
+  font-weight: normal;
+  font-size: 20px;
+  color: #2d2d2d;
+  width: 100%;
+  text-align: center;
+  margin-top: 3rem;
+}

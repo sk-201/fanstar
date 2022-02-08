@@ -36,12 +36,7 @@
 }
 .total-income {
   padding: 1.5rem;
-  background: linear-gradient(
-    75.72deg,
-    #05478a 4.63%,
-    #73bcf8 106.33%,
-    #05478a 106.92%
-  );
+  background: #f3f3f3;
   box-shadow: 4px 4px 4px rgba(4, 97, 182, 0.15),
     -4px 4px 4px rgba(109, 92, 252, 0.15);
   border-radius: 16px;
@@ -63,7 +58,7 @@
   font-size: 24px;
   line-height: 20px;
   letter-spacing: 1px;
-  color: #ffffff;
+  color: #494949;
 }
 #tot-inc-rs {
   font-family: DM Sans;
@@ -72,16 +67,11 @@
   font-size: 20px;
   line-height: 20px;
   letter-spacing: 1px;
-  color: #ffffff;
+  color: #494949;
 }
 .weekly-income {
   padding: 1.5rem;
-  background: linear-gradient(
-    75.72deg,
-    #05478a 4.63%,
-    #73bcf8 106.33%,
-    #05478a 106.92%
-  );
+  background: #f3f3f3;
   box-shadow: 4px 4px 4px rgba(4, 97, 182, 0.15),
     -4px 4px 4px rgba(109, 92, 252, 0.15);
   border-radius: 16px;
@@ -95,7 +85,7 @@
   font-size: 24px;
   line-height: 20px;
   letter-spacing: 1px;
-  color: #ffffff;
+  color: #494949;
 }
 #week-inc-rs {
   font-family: DM Sans;
@@ -104,8 +94,55 @@
   font-size: 20px;
   line-height: 20px;
   letter-spacing: 1px;
-  color: #ffffff;
+  color: #494949;
 }
+
+.gradient {
+  background: linear-gradient(
+    75.72deg,
+    #05478a 4.63%,
+    #73bcf8 106.33%,
+    #05478a 106.92%
+  ) !important;
+  box-shadow: 4px 4px 4px rgba(4, 97, 182, 0.15),
+    -4px 4px 4px rgba(109, 92, 252, 0.15) !important;
+}
+
+#tot-inc-text-1-changeColor {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+#tot-inc-rs-changeColor {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  color: #fff !important;
+}
+
+.request-btn {
+  margin: 0;
+  margin-top: 25px;
+  padding: 5px 10px;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 13px;
+  color: #fff;
+  border: 2px solid #fff;
+  width: 40%;
+  margin-right: auto;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
 #tot-app {
   font-family: Montserrat;
   font-style: normal;
