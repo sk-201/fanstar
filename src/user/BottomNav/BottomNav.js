@@ -54,7 +54,10 @@ const BottomNav = (props) => {
           />
         )}
       </div>
-      <div className='bottomNav-home' onClick={chatHandler}>
+      <div
+        className='bottomNav-home'
+        onClick={() => navigate(`/artist/${id}/user/chatlist`)}
+      >
         <img src={chat} alt='chat' className='bottomNav-icon' />
         {active === 'chat' && (
           <img

@@ -43,10 +43,7 @@ const EmployeeIncome = () => {
         if (d.status === 'pending') {
           pending += 1;
         }
-        if (
-          d.status === 'completed' &&
-          new Date(d.createdAt).getTime() >= before
-        ) {
+        if (new Date(d.createdAt).getTime() >= before) {
           weekly += parseInt(d.amount);
         }
         total += parseInt(d.amount);

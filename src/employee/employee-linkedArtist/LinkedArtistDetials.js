@@ -73,16 +73,13 @@ const LinkedArtistDetials = () => {
       let total = 0,
         weekly = 0;
       data.forEach((d) => {
-        if (
-          d.status === 'completed' &&
-          new Date(d.createdAt).getTime() >= before
-        ) {
+        if (new Date(d.createdAt).getTime() >= before) {
           weekly += parseInt(d.amount);
         }
         total += parseInt(d.amount);
       });
-      setTotalIncome(total);
-      setWeeklyIncome(weekly);
+      setTotalIncome(total * 0.7);
+      setWeeklyIncome(weekly * 0.7);
     } catch (error) {
       console.log(error);
     }
@@ -138,18 +135,14 @@ const LinkedArtistDetials = () => {
           <h3 className='linkedArtist-incomeHead'>Total Income</h3>
           <div className='linkedArtist-incomeCard'>
             <h3 className='incomeCard-heading'>Total Income</h3>
-            <p className='incomeCard-amount'>{`Rs ${totalIncome.toFixed(
-              2
-            )}/-`}</p>
+            <p className='incomeCard-amount'>{`Rs ${totalIncome}/-`}</p>
           </div>
         </div>
         <div className='linkedArtist-incomeDiv'>
           <h3 className='linkedArtist-incomeHead'>Weekly Income</h3>
           <div className='linkedArtist-incomeCard'>
             <h3 className='incomeCard-heading'>Weekly Income</h3>
-            <p className='incomeCard-amount'>{`Rs ${weeklyIncome.toFixed(
-              2
-            )}/-`}</p>
+            <p className='incomeCard-amount'>{`Rs ${weeklyIncome}/-`}</p>
           </div>
         </div>
       </div>

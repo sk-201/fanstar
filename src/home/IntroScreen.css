@@ -1,0 +1,273 @@
+.intro-mainContainer {
+  margin: 0;
+  padding: 0;
+  font-family: Poppins;
+}
+
+.intro-headerSection {
+  background: url('../assets/abstractIntro.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 55vh;
+  color: #fff;
+  padding: 5%;
+}
+
+.intro-loginDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+}
+
+.intro-loginBtn {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  width: auto;
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.intro-aboutDiv {
+  margin-top: 1rem;
+}
+
+.intro-aboutHead {
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+}
+
+.intro-brandName {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+  color: #fff;
+}
+
+.intro-aboutContent {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffffff;
+  width: 90%;
+  margin: 10px 0;
+  margin-right: auto;
+}
+
+.home-secondSection {
+  width: 100%;
+  background: linear-gradient(180deg, #fffafa 0%, #dceef5 100%);
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.home-secondContent {
+  width: 90%;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.home-secondHead {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  color: #565656;
+}
+
+.home-secondPara {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  color: #818181;
+}
+
+.home-imageDiv {
+  width: 100%;
+  height: 228.75px;
+  text-align: center;
+  margin: 2rem 0;
+  margin-bottom: 0;
+}
+
+.home-image {
+  width: 307px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-thirdSection {
+  width: 100%;
+  background: linear-gradient(180deg, #5a5a5a 0%, #525252 100%);
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.home-thirdContent {
+  width: 90%;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.home-thirdHead {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  color: #ffffff;
+}
+
+.home-thirdPara {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.71);
+}
+
+.home-footerDiv {
+  width: 100%;
+  box-sizing: border-box;
+  background: #565656;
+  padding: 1rem 1.5rem 2rem 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-footer {
+  width: 45%;
+}
+
+.home-footerHead {
+  width: 100%;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+  color: #fff;
+  margin: 15px 0;
+}
+
+.home-socialLink {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 34%;
+}
+.home-socialPara {
+  margin: 8px 0;
+  color: #ffffff;
+}
+
+.home-socialIconDiv {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/***************** Login option page *********************/
+
+.loginOption-container {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.loginOption-closeDiv {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.loginOption-closeIcon {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.loginOption-title {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 48px;
+  color: #3f3f3f;
+}
+
+.loginOption-contentDiv {
+  margin-top: 30%;
+}
+
+.loginOption-contentHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.loginOption-icon {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.loginOption-heading {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  color: #223263;
+}
+
+.loginOption-para {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #223263;
+  margin-top: 0;
+}
+
+.loginOption-artistBtn {
+  margin: 0 auto;
+  width: 95%;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+.loginOption-btnSection {
+  margin-top: 4rem;
+}
+
+.loginOption-dividerDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 10px;
+}
+
+.divider {
+  width: 42%;
+  height: 1px;
+  background-color: #333333;
+}
+
+.divider-content {
+  font-family: Montserrat;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 24px;
+  color: #333333;
+}

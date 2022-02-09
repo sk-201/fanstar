@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import BackArrow from '../../assets/backArrow.svg';
 import avatar from '../../assets/avatar.png';
 import completeStatus from '../../assets/completeStatus.svg';
@@ -7,6 +7,7 @@ import sendIcon from '../../assets/sendIcon.svg';
 import socket from '../../socket';
 import API from '../../api';
 import BottomNav from '../BottomNav/BottomNav';
+import ConfirmationScreen from './ConfirmationScreen';
 
 import './user-chat.css';
 
@@ -17,9 +18,13 @@ const ChatScreen = () => {
   const { userId, roomId, artistId } = state;
   const [messages, setMessages] = useState([]);
   const [boolVal, setBoolVal] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  // console.log(state);
+  if (!state) {
+    navigate(`/artist/${id}/user/chatlist`);
+  }
 
   useEffect(() => {
     API.get(`/api/user/private/getartist/${artistId}`, {
@@ -61,6 +66,30 @@ const ChatScreen = () => {
     setMessage('');
   };
 
+  const completeStatusClick = async () => {
+    try {
+      const { data } = await API.put(
+        '/api/user/private/completepayment',
+        {
+          paymentId: state.paymentId,
+          roomId: state.roomId,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          },
+        }
+      );
+      alert('Service Completed!');
+      setOpenConfirm(false);
+      navigate(`/artist/${id}/user/feedback`);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Fragment>
       <div className='artistChat-mainContainerDiv'>
@@ -68,7 +97,7 @@ const ChatScreen = () => {
           <div className='artistChat-headerLeft'>
             <div
               className='artistChat-back'
-              onClick={() => navigate(`/artist/${artistId}`)}
+              onClick={() => navigate(`/artist/${artistId}/user/chatlist`)}
             >
               <img src={BackArrow} alt='back' className='artistChat-backIcon' />
             </div>
@@ -88,7 +117,10 @@ const ChatScreen = () => {
             </div>
           </div>
           <div className='artistChat-headerRight'>
-            <button className='artistChat-complete'>
+            <button
+              className='artistChat-complete'
+              onClick={() => setOpenConfirm(true)}
+            >
               <img
                 src={completeStatus}
                 alt='status'
@@ -126,6 +158,12 @@ const ChatScreen = () => {
             </button>
           </form>
         </div>
+        {openConfirm && (
+          <ConfirmationScreen
+            close={() => setOpenConfirm(false)}
+            handleStatusFunc={completeStatusClick}
+          />
+        )}
         <BottomNav active='chat' />
       </div>
     </Fragment>

@@ -57,7 +57,7 @@ const ChatList = () => {
         <h3 className='chat-headTitle'>Fanstar logo</h3>
       </div>
       <div className='chat-container'>
-        {chats.length <= 0 ? (
+        {loading ? (
           <h3 className='artistChatlist-loading'>Loading...</h3>
         ) : (
           <Fragment>

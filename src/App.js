@@ -41,6 +41,8 @@ import { setTheme } from './utils';
 import AllTransactions from './artist/transactions/AllTransactions';
 import RequestWithdrawal from './artist/request-withdraw/RequestWithdrawal';
 import RenewSubscription from './user/RenewSubscription/RenewSubscription';
+import UserChatList from './user/user-chat/UserChatList';
+import IntroScreen from './home/IntroScreen';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -53,7 +55,7 @@ function App() {
     return (
       <div className='App'>
         <Routes>
-          <Route path='/' element={<Landing />} />
+          <Route path='/' element={<IntroScreen />} />
           <Route path='/login' element={<Login />} />
           <Route path='/otp/:phone' element={<Otp />} />
           <Route path='/resend' element={<Resend />} />
@@ -102,6 +104,7 @@ function App() {
           <Route path='/myimage' element={<MyImage />} />
           <Route path='/chat' element={<ChatList />} />
           <Route path='/artist/:id/user/chat' element={<ChatScreen />} />
+          <Route path='/artist/:id/user/chatlist' element={<UserChatList />} />
           <Route path='/artist/chat' element={<ArtistChat />} />
           <Route path='/employee/login' element={<EmployeeLogin />} />
           <Route path='/employee/otp/:phone' element={<EmployeeOtp />} />
