@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import API from '../../api';
 import Img1 from '../.././assets/Banner.png';
 import Img2 from '../.././assets/2-div-img.png';
@@ -15,6 +15,7 @@ import { ReactComponent as Lock } from '../.././assets/opep.svg';
 import editIcon from '../../assets/edit-icon.svg';
 import plusIcon from '../../assets/plusicon.svg';
 import { setTheme } from '../../utils';
+import BottomNav from '../BottomNav/BottomNav';
 
 const ArtistLanding = () => {
   const { token = null } = useParams();
@@ -66,7 +67,7 @@ const ArtistLanding = () => {
 
   SwiperCore.use([Pagination]);
   return (
-    <>
+    <Fragment>
       <div className='container'>
         <div className='img-header'>
           <img className='img-1' src={Img1} alt='banner-pic' />
@@ -176,88 +177,8 @@ const ArtistLanding = () => {
           </div>
         </div>
       </div>
-      {(() => {
-        if (home == 1 && chat == 0 && lock == 0) {
-          return (
-            <div>
-              <div className='icons-tab'>
-                <div className='nav'>
-                  <HomeB />
-
-                  <Chat
-                    onClick={() => {
-                      setChat(1);
-                      setHome(0);
-                      navigate('/chat');
-                    }}
-                  />
-
-                  <Lock
-                    onClick={() => {
-                      setLock(1);
-                      setHome(0);
-                      navigate(`/artist/landing`);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          );
-        } else if (chat == 1 && home == 0 && lock == 0) {
-          return (
-            <div>
-              <div className='icons-tab'>
-                <div className='nav'>
-                  <Home
-                    onClick={() => {
-                      setHome(1);
-                      setChat(0);
-                      navigate('/income');
-                    }}
-                  />
-
-                  <ChatB />
-
-                  <Lock
-                    onClick={() => {
-                      setLock(1);
-                      setChat(0);
-                      navigate(`/artist/landing`);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          );
-        } else if (lock == 1 && chat == 0 && home == 0) {
-          return (
-            <div>
-              <div className='icons-tab'>
-                <div className='nav'>
-                  <Home
-                    onClick={() => {
-                      setHome(1);
-                      setLock(0);
-                      navigate(`/income`);
-                    }}
-                  />
-
-                  <Chat
-                    onClick={() => {
-                      setChat(1);
-                      setLock(0);
-                      navigate('/chat');
-                    }}
-                  />
-
-                  <LockB />
-                </div>
-              </div>
-            </div>
-          );
-        }
-      })()}
-    </>
+      <BottomNav active='profile' />
+    </Fragment>
   );
 };
 export default ArtistLanding;

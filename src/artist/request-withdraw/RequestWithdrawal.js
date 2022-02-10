@@ -7,7 +7,7 @@ import './RequestWithdrawal.css';
 const RequestWithdrawal = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [withdrawAmount, setWithdrawAmount] = useState(0);
+  const [withdrawAmount, setWithdrawAmount] = useState('');
   const [withdrawRequests, setWithdrawRequests] = useState([]);
   const [boolVal, setBoolVal] = useState(false);
 
@@ -57,6 +57,7 @@ const RequestWithdrawal = () => {
           },
         }
       );
+      setWithdrawAmount('');
       alert('Request sent!');
       // console.log(data);
     } catch (error) {

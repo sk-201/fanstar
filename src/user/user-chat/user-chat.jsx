@@ -22,6 +22,8 @@ const ChatScreen = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  console.log(state);
+
   if (!state) {
     navigate(`/artist/${id}/user/chatlist`);
   }

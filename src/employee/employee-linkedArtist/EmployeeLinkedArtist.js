@@ -10,6 +10,7 @@ import { ReactComponent as Chat } from '../.././assets/chat.svg';
 import { ReactComponent as Lock } from '../.././assets/opep.svg';
 
 import './EmployeeLinkedArtist.css';
+import BottomNav from '../BottomNav/BottomNav';
 
 const EmployeeLinkedArtist = () => {
   const navigate = useNavigate();
@@ -71,87 +72,7 @@ const EmployeeLinkedArtist = () => {
           </div>
         </div>
       ))}
-     {(() => {
-        if (home == 1 && chat == 0 && lock == 0) {
-          return (
-            <div>
-              <div className='icons-tab'>
-                <div className='nav'>
-                  <HomeB />
-
-                  <Chat
-                    onClick={() => {
-                      setChat(1);
-                      setHome(0);
-                      navigate('/employee/myArtists');
-                    }}
-                  />
-
-                  <Lock
-                    onClick={() => {
-                      setLock(1);
-                      setHome(0);
-                      navigate(`/employee/profile`);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          );
-        } else if (chat == 1 && home == 0 && lock == 0) {
-          return (
-            <div>
-              <div className='icons-tab'>
-                <div className='nav'>
-                  <Home
-                    onClick={() => {
-                      setHome(1);
-                      setChat(0);
-                      navigate('/employee/income');
-                    }}
-                  />
-
-                  <ChatB />
-
-                  <Lock
-                    onClick={() => {
-                      setLock(1);
-                      setChat(0);
-                      navigate(`/employee/profile`);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          );
-        } else if (lock == 1 && chat == 0 && home == 0) {
-          return (
-            <div>
-              <div className='icons-tab'>
-                <div className='nav'>
-                  <Home
-                    onClick={() => {
-                      setHome(1);
-                      setLock(0);
-                      navigate(`/employee/income`);
-                    }}
-                  />
-
-                  <Chat
-                    onClick={() => {
-                      setChat(1);
-                      setLock(0);
-                      navigate('/employee/myArtists');
-                    }}
-                  />
-
-                  <LockB />
-                </div>
-              </div>
-            </div>
-          );
-        }
-      })()}
+      <BottomNav active='artists' />
     </div>
   );
 };
