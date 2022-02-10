@@ -166,14 +166,18 @@ const ArtistLanding = () => {
                 />
               </div>
             ))}
-            <div className='seeMore-btnDiv'>
-              <button
-                className='seeMore-btn'
-                onClick={() => navigate('/myimage')}
-              >
-                See more
-              </button>
-            </div>
+            {imageList.length > 0 ? (
+              <div className='seeMore-btnDiv'>
+                <button
+                  className='seeMore-btn'
+                  onClick={() => navigate('/myimage')}
+                >
+                  See more
+                </button>
+              </div>
+            ) : (
+              <h3 className='artistChatlist-loading'>No image</h3>
+            )}
           </div>
         </div>
       </div>

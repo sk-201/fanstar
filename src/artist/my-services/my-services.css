@@ -44,10 +44,11 @@
   /* padding: 0.1rem; */
 }
 .my-service-container {
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 90%;
+  margin: auto;
   margin-top: 10%;
 }
+
 #serv-name {
   font-family: Montserrat;
   font-style: normal;
@@ -110,4 +111,41 @@
   line-height: 24px;
   color: #848484;
   margin-right: 3rem;
+}
+
+.service-editBtnDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.service-editBtn {
+  margin: 0 10px;
+  padding: 0;
+  width: auto;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.service-editSpan {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #3d3d3d;
+  margin-right: 5px;
+}
+
+.service-iconSpan {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--background-color);
 }

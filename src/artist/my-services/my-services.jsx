@@ -1,29 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as BackArrow } from '../../assets/backArrow.svg';
-import { ReactComponent as Edit } from '../../assets/edit-icon.svg';
+import editIcon from '../../assets/editIcon.svg';
+import ConfirmationScreen from './ConfirmationScreen';
 import './my-services.css';
-import { useState, useEffect } from 'react';
+
 const MyService = () => {
   const [services, setServices] = useState([]);
-  const [Name, setName] = useState('');
-  const [Amount, setAmount] = useState('');
-  const [Description, setDescription] = useState('');
+  const [openScreen, setOpenScreen] = useState(false);
+  const [boolVal, setBoolVal] = useState(false);
+  const [serviceId, setServiceId] = useState('');
+
   useEffect(() => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
-      },
-    };
-    API.get('/api/artist/private/ownservices', config)
-      .then(({ data }) => {
-        setServices(data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+    if (!boolVal) {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        },
+      };
+      API.get('/api/artist/private/ownservices', config)
+        .then(({ data }) => {
+          setServices(data);
+          setBoolVal(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          setBoolVal(true);
+        });
+    }
+  }, [boolVal]);
+
   const navigate = useNavigate();
+
+  const handleDelete = (id) => {
+    setServiceId(id);
+    setOpenScreen(true);
+  };
 
   return (
     <div className='my-service'>
@@ -35,13 +49,36 @@ const MyService = () => {
           services.map((data) => {
             return (
               <div key={data._id}>
-                <span id='serv-edit-txt'>Edit</span>
-                <Edit
-                  onClick={() => {
-                    navigate(`/editservice/${data._id}`);
-                  }}
-                  id='edit-icon'
-                />
+                <div className='service-editBtnDiv'>
+                  <button
+                    className='service-editBtn'
+                    onClick={() => {
+                      navigate(`/editservice/${data._id}`);
+                    }}
+                  >
+                    <span className='service-editSpan'>Edit</span>
+                    <span className='service-iconSpan'>
+                      <img
+                        src={editIcon}
+                        alt='edit'
+                        className='service-editIcon'
+                      />
+                    </span>
+                  </button>
+                  <button
+                    className='service-editBtn'
+                    onClick={() => handleDelete(data._id)}
+                  >
+                    <span className='service-editSpan'>Delete</span>
+                    <span className='service-iconSpan'>
+                      <img
+                        src={editIcon}
+                        alt='edit'
+                        className='service-editIcon'
+                      />
+                    </span>
+                  </button>
+                </div>
                 <h2 id='serv-name'>Service Name</h2>
                 <h3 id='per-serv'>Personalised Services</h3>
                 <p id='serv-name-details'>{data.serviceName}</p>
@@ -53,6 +90,13 @@ const MyService = () => {
             );
           })}
       </div>
+      {openScreen && (
+        <ConfirmationScreen
+          close={() => setOpenScreen(false)}
+          id={serviceId}
+          refresh={() => setBoolVal(false)}
+        />
+      )}
     </div>
   );
 };

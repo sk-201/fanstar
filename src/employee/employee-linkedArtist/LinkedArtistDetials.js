@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import API from '../../api';
-import ConfirmationScreen from './ConfirmationScreen';
+// import ConfirmationScreen from './ConfirmationScreen';
+import avatar from '../../assets/avatar.png';
 import backArrow from '../../assets/backArrow.svg';
-import artistDemo from '../../assets/artistDemo.png';
-import deleteIcon from '../../assets/deleteIcon.svg';
+// import deleteIcon from '../../assets/deleteIcon.svg';
 import BottomNav from '../BottomNav/BottomNav';
 import './EmployeeLinkedArtist.css';
 
@@ -15,22 +15,22 @@ const LinkedArtistDetials = () => {
   const [weeklyIncome, setWeeklyIncome] = useState(0);
   const [artistData, setArtistData] = useState({});
   const [boolVal, setBoolVal] = useState(false);
-  const [openConfirm, setOpenConfirm] = useState(false);
+  // const [openConfirm, setOpenConfirm] = useState(false);
 
-  const deleteArtist = async () => {
-    try {
-      await API.delete(`/api/employee/private/deleteartist/${artistId}`, {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem(
-            'fanstarEmployeeToken'
-          )}`,
-        },
-      });
-      navigate('/employee/myArtists');
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const deleteArtist = async () => {
+  //   try {
+  //     await API.delete(`/api/employee/private/deleteartist/${artistId}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${window.localStorage.getItem(
+  //           'fanstarEmployeeToken'
+  //         )}`,
+  //       },
+  //     });
+  //     navigate('/employee/myArtists');
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const fetchArtistDetails = async (id) => {
     try {
@@ -103,7 +103,11 @@ const LinkedArtistDetials = () => {
               onClick={() => navigate('/employee/myArtists')}
             />
             <img
-              src={artistData?.artistDet?.profilePhoto}
+              src={
+                artistData?.artistDet?.profilePhoto
+                  ? artistData?.artistDet?.profilePhoto
+                  : avatar
+              }
               alt='artist'
               className='linkedArtist-artistImg'
             />
@@ -116,7 +120,7 @@ const LinkedArtistDetials = () => {
               </p>
             </div>
           </div>
-          <div className='linkedArtist-headerRight'>
+          {/**<div className='linkedArtist-headerRight'>
             <button
               className='linkedArtist-delete'
               onClick={() => setOpenConfirm(true)}
@@ -127,7 +131,7 @@ const LinkedArtistDetials = () => {
                 className='linkedArtist-deleteIcon'
               />
             </button>
-          </div>
+          </div> */}
         </div>
         <div className='linkedArtist-incomeContainer'>
           <div className='linkedArtist-incomeDiv'>
@@ -169,12 +173,12 @@ const LinkedArtistDetials = () => {
             </p>
           </div>
         </div>
-        {openConfirm && (
+        {/**openConfirm && (
           <ConfirmationScreen
             close={() => setOpenConfirm(false)}
             deleteArtist={deleteArtist}
           />
-        )}
+        ) */}
       </div>
       <BottomNav active='artists' />
     </Fragment>

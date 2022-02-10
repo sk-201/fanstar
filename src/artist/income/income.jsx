@@ -13,7 +13,7 @@ const Income = () => {
   const [weeklyIncome, setWeeklyIncome] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [pendingOrders, setPendingOrders] = useState(0);
-  const [amountPending, setAmountPending] = useState(0);
+  // const [amountPending, setAmountPending] = useState(0);
   const [amountPaid, setAmountPaid] = useState(0);
   const [pendingData, setPendingData] = useState([]);
   const [artistData, setArtistData] = useState({});
@@ -43,7 +43,6 @@ const Income = () => {
       );
       setTotalOrders(data.length);
       let pending = 0,
-        pendingAmount = 0,
         weekly = 0;
       let today = new Date();
       let before = new Date(today);
@@ -51,13 +50,11 @@ const Income = () => {
       data.forEach((d) => {
         if (d.status === 'pending') {
           pending += 1;
-          pendingAmount += parseInt(d.amount);
         }
         if (new Date(d.createdAt).getTime() >= before) {
           weekly += parseInt(d.amount);
         }
       });
-      setAmountPending(pendingAmount * 0.7);
       setWeeklyIncome(weekly * 0.7);
       setPendingOrders(pending);
     } catch (error) {
@@ -147,14 +144,11 @@ const Income = () => {
             <h2 id='week-inc-text-1'>Weekly Income</h2>
             <h1 id='week-inc-rs'>Rs {weeklyIncome}/-</h1>
           </div>
-          <span id='tot-inc-text'>Request Payment</span>
+          <span id='tot-inc-text'>Balance Withdrawn</span>
           <div className='total-income gradient'>
-            <h2 id='tot-inc-text-1-changeColor'>Withdrawable Balance</h2>
-            <h1 id='tot-inc-rs-changeColor'>
-              {' '}
-              Rs {parseInt(balance) - amountPending - parseInt(amountPaid)}/-
-            </h1>
-            <button
+            <h2 id='tot-inc-text-1-changeColor'>Balance Withdrawn</h2>
+            <h1 id='tot-inc-rs-changeColor'> Rs {parseInt(amountPaid)}/-</h1>
+            {/**<button
               className='request-btn'
               onClick={() =>
                 navigate('/income/request-withdraw', {
@@ -164,7 +158,7 @@ const Income = () => {
               }
             >
               Request
-            </button>
+            </button> */}
           </div>
           <h3 id='tot-app'>Total no app visits</h3>
           <h2 id='tot-app-no'>{artistData.appVisits}</h2>
