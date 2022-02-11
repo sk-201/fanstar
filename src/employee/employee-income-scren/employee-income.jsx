@@ -49,8 +49,8 @@ const EmployeeIncome = () => {
         }
         total += parseInt(d.amount);
       });
-      setTotalIncome(total * 0.7);
-      setWeeklyIncome(weekly * 0.7);
+      setTotalIncome(total);
+      setWeeklyIncome(weekly);
       setPendingOrders(pending);
     } catch (error) {
       console.log(error);

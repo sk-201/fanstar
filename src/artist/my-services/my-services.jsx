@@ -3,6 +3,7 @@ import API from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as BackArrow } from '../../assets/backArrow.svg';
 import editIcon from '../../assets/editIcon.svg';
+import deleteIcon from '../../assets/dustbin.svg';
 import ConfirmationScreen from './ConfirmationScreen';
 import './my-services.css';
 
@@ -72,7 +73,7 @@ const MyService = () => {
                     <span className='service-editSpan'>Delete</span>
                     <span className='service-iconSpan'>
                       <img
-                        src={editIcon}
+                        src={deleteIcon}
                         alt='edit'
                         className='service-editIcon'
                       />

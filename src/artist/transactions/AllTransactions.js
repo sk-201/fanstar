@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import moment from 'moment';
 import API from '../../api';
 import backArrow from '../../assets/backArrow.svg';
@@ -7,10 +7,15 @@ import './AllTransactions.css';
 
 const AllTransactions = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [paymentDetails, setPaymentDetails] = useState([]);
   const [boolVal, setBoolVal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const state = location.state;
+
+  if (!state) {
+    navigate('/income');
+  }
 
   const fetchPaymentHistory = async () => {
     try {
@@ -67,7 +72,7 @@ const AllTransactions = () => {
                 </div>
                 <div className='artistTrans-amountDiv'>
                   <p className='artistTrans-amount'>{`Rs ${
-                    parseInt(payment.amount) * 0.7
+                    parseInt(payment.amount) * state
                   }/-`}</p>
                 </div>
               </div>

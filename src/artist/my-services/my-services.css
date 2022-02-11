@@ -143,6 +143,11 @@
   margin-right: 5px;
 }
 
+.service-editIcon {
+  width: 14px;
+  height: 14px;
+}
+
 .service-iconSpan {
   width: 22px;
   height: 22px;

@@ -45,6 +45,7 @@ const LinkedArtistDetials = () => {
         }
       );
       setArtistData(data);
+      fetchTotalAndWeeklyIncome(parseInt(data.artistDet.commission) / 100);
       // console.log(data);
     } catch (error) {
       console.log(error);
@@ -52,7 +53,7 @@ const LinkedArtistDetials = () => {
     }
   };
 
-  const fetchTotalAndWeeklyIncome = async (artistId) => {
+  const fetchTotalAndWeeklyIncome = async (comm) => {
     try {
       const { data } = await API.get(
         `/api/employee/private/getpayments/${artistId}`,
@@ -76,8 +77,8 @@ const LinkedArtistDetials = () => {
         }
         total += parseInt(d.amount);
       });
-      setTotalIncome(total * 0.7);
-      setWeeklyIncome(weekly * 0.7);
+      setTotalIncome(total * comm);
+      setWeeklyIncome(weekly * comm);
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +87,6 @@ const LinkedArtistDetials = () => {
   useEffect(() => {
     if (!boolVal) {
       fetchArtistDetails(artistId);
-      fetchTotalAndWeeklyIncome(artistId);
       setBoolVal(true);
     }
   }, [boolVal, artistId]);

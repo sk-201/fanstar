@@ -6,14 +6,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import '../../user/landing/landing.css';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import SwiperCore, { Pagination } from 'swiper';
-import { ReactComponent as Home } from '../.././assets/home-white.svg';
-import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
-import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
-import { ReactComponent as HomeB } from '../.././assets/home.svg';
-import { ReactComponent as Chat } from '../.././assets/chat.svg';
-import { ReactComponent as Lock } from '../.././assets/opep.svg';
 import editIcon from '../../assets/edit-icon.svg';
-import plusIcon from '../../assets/plusicon.svg';
+import demoCover from '../../assets/demoCover.png';
 import { setTheme } from '../../utils';
 import BottomNav from '../BottomNav/BottomNav';
 
@@ -115,33 +109,37 @@ const ArtistLanding = () => {
           </div>
 
           <div className='card'>
-            <Swiper
-              pagination={{
-                dynamicBullets: true,
-              }}
-              className='mySwiper'
-            >
-              {services.length > 0 &&
-                services.map((data) => {
-                  return (
-                    <div>
-                      <SwiperSlide>
-                        <div
-                          className='card-2'
-                          onClick={() => {
-                            navigate(`/service`);
-                          }}
-                        >
-                          {' '}
-                          <text id='service-txt-landing'>
-                            {data.serviceName}
-                          </text>
-                        </div>
-                      </SwiperSlide>
-                    </div>
-                  );
-                })}
-            </Swiper>
+            {services.length > 0 ? (
+              <Swiper
+                pagination={{
+                  dynamicBullets: true,
+                }}
+                className='mySwiper'
+              >
+                {services.length > 0 &&
+                  services.map((data) => {
+                    return (
+                      <div>
+                        <SwiperSlide>
+                          <div
+                            className='card-2'
+                            onClick={() => {
+                              navigate(`/service`);
+                            }}
+                          >
+                            {' '}
+                            <text id='service-txt-landing'>
+                              {data.serviceName}
+                            </text>
+                          </div>
+                        </SwiperSlide>
+                      </div>
+                    );
+                  })}
+              </Swiper>
+            ) : (
+              <h3 className='artistChatlist-loading'>No service</h3>
+            )}
           </div>
         </div>
         <div className='container-2'>
@@ -178,6 +176,55 @@ const ArtistLanding = () => {
             ) : (
               <h3 className='artistChatlist-loading'>No image</h3>
             )}
+          </div>
+        </div>
+        <div className='container-2'>
+          <div className='heading-btnDiv'>
+            <h1 className='myImage-head'>My Albums </h1>
+            <button
+              className='add-myImage'
+              onClick={() => {
+                navigate(`/artist/addalbum`);
+              }}
+            >
+              Add <span className='addImage-icon'>+</span>
+            </button>
+          </div>
+          <div className='image-containerDiv'>
+            {/**{imageList.slice(0, 3).map((image) => (
+              <div className='myImageDiv'>
+                <img
+                  src={`https://fanstar.s3.us-east-2.amazonaws.com/${image.fileUrl}`}
+                  alt='myImage'
+                  className='myImage'
+                />
+              </div>
+            ))}
+            {imageList.length > 0 ? (
+              <div className='seeMore-btnDiv'>
+                <button
+                  className='seeMore-btn'
+                  onClick={() => navigate('/myimage')}
+                >
+                  See more
+                </button>
+              </div>
+            ) : (
+              <h3 className='artistChatlist-loading'>No ablum</h3>
+            )} */}
+            {[1, 2, 3, 4, 5].map((row, i) => (
+              <div className='artistLanding-ablumDiv' key={i}>
+                <h3 className='artistLanding-ablumName'>Album name</h3>
+                <div className='artistLanding-ablumCover'>
+                  <img
+                    src={demoCover}
+                    alt='cover'
+                    className='artistLanding-cover'
+                  />
+                </div>
+                <h3 className='artistLanding-numPhoto'>20 photos</h3>
+              </div>
+            ))}
           </div>
         </div>
       </div>

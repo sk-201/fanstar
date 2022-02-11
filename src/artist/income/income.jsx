@@ -13,6 +13,7 @@ const Income = () => {
   const [weeklyIncome, setWeeklyIncome] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [pendingOrders, setPendingOrders] = useState(0);
+  const [artistCommission, setArtistCommission] = useState(0);
   // const [amountPending, setAmountPending] = useState(0);
   const [amountPaid, setAmountPaid] = useState(0);
   const [pendingData, setPendingData] = useState([]);
@@ -31,11 +32,13 @@ const Income = () => {
         setBalance(data.balance);
         setAmountPaid(data.paid);
         setArtistData(data);
+        setArtistCommission(parseInt(data.commission) / 100);
+        fetchWeeklyPayments(parseInt(data.commission) / 100);
       })
       .catch((error) => console.log(error));
   };
 
-  const fetchWeeklyPayments = async () => {
+  const fetchWeeklyPayments = async (comm) => {
     try {
       const { data } = await API.get(
         '/api/artist/private/getownpayments',
@@ -55,7 +58,7 @@ const Income = () => {
           weekly += parseInt(d.amount);
         }
       });
-      setWeeklyIncome(weekly * 0.7);
+      setWeeklyIncome(weekly * comm);
       setPendingOrders(pending);
     } catch (error) {
       console.log(error);
@@ -77,7 +80,6 @@ const Income = () => {
   useEffect(() => {
     if (!boolVal) {
       fetchArtistProfile();
-      fetchWeeklyPayments();
       fetchPendingOrders();
       setBoolVal(true);
     }
@@ -134,7 +136,11 @@ const Income = () => {
           <span id='tot-inc-text'>Total Income</span>
           <div
             className='total-income'
-            onClick={() => navigate('/income/transaction')}
+            onClick={() =>
+              navigate('/income/transaction', {
+                state: artistCommission,
+              })
+            }
           >
             <h2 id='tot-inc-text-1'>Total Income</h2>
             <h1 id='tot-inc-rs'> Rs {parseInt(balance)}/-</h1>
