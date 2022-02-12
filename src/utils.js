@@ -59,3 +59,5 @@ export const setTheme = (theme) => {
       break;
   }
 };
+
+export const imageUrl = 'https://fanstar.s3.us-east-2.amazonaws.com';

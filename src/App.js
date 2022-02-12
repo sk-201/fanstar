@@ -44,6 +44,8 @@ import RenewSubscription from './user/RenewSubscription/RenewSubscription';
 import UserChatList from './user/user-chat/UserChatList';
 import IntroScreen from './home/IntroScreen';
 import AddAlbum from './artist/add-album/AddAlbum';
+import ViewAlbum from './artist/view-album/ViewAlbum';
+import EditAlbum from './artist/edit-album/EditAlbum';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -102,6 +104,8 @@ function App() {
           <Route path='/artist/landing/:token' element={<ArtistLanding />} />
           <Route path='/artist/login' element={<ArtistLogin />} />
           <Route path='/artist/addalbum' element={<AddAlbum />} />
+          <Route path='/artist/viewalbum/:id' element={<ViewAlbum />} />
+          <Route path='/artist/editalbum/:id' element={<EditAlbum />} />
           <Route path='/artist/otp/:phone' element={<ArtistOtp />} />
           <Route path='/myimage' element={<MyImage />} />
           <Route path='/chat' element={<ChatList />} />

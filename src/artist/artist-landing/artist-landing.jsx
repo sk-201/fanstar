@@ -8,13 +8,14 @@ import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import SwiperCore, { Pagination } from 'swiper';
 import editIcon from '../../assets/edit-icon.svg';
 import demoCover from '../../assets/demoCover.png';
-import { setTheme } from '../../utils';
+import { setTheme, imageUrl } from '../../utils';
 import BottomNav from '../BottomNav/BottomNav';
 
 const ArtistLanding = () => {
   const { token = null } = useParams();
   const [services, setServices] = useState([]);
   const [imageList, setImageList] = useState([]);
+  const [albumList, setAlbumList] = useState([]);
   const [artistDetails, setArtistDetails] = useState({});
   const [home, setHome] = useState(0);
   const [chat, setChat] = useState(0);
@@ -43,9 +44,17 @@ const ArtistLanding = () => {
       })
       .catch((error) => console.log(error));
 
-    API.get('/api/artist/private/getownfiles', config)
+    API.get('/api/artist/private/getallownimages', config)
       .then(({ data }) => {
         setImageList(data);
+        // console.log(data);
+      })
+      .catch((error) => console.log(error));
+
+    API.get('/api/artist/private/getallownalbums', config)
+      .then(({ data }) => {
+        setAlbumList(data);
+        // console.log(data);
       })
       .catch((error) => console.log(error));
 
@@ -53,13 +62,14 @@ const ArtistLanding = () => {
       .then(({ data }) => {
         window.localStorage.setItem('color', data.theme);
         setTheme(data.theme);
-        console.log(data);
+        // console.log(data);
         setArtistDetails(data);
       })
       .catch((error) => console.log(error));
   }, []);
 
   SwiperCore.use([Pagination]);
+
   return (
     <Fragment>
       <div className='container'>
@@ -158,7 +168,7 @@ const ArtistLanding = () => {
             {imageList.slice(0, 3).map((image) => (
               <div className='myImageDiv'>
                 <img
-                  src={`https://fanstar.s3.us-east-2.amazonaws.com/${image.fileUrl}`}
+                  src={`${imageUrl}/${image.url}`}
                   alt='myImage'
                   className='myImage'
                 />
@@ -212,19 +222,40 @@ const ArtistLanding = () => {
             ) : (
               <h3 className='artistChatlist-loading'>No ablum</h3>
             )} */}
-            {[1, 2, 3, 4, 5].map((row, i) => (
-              <div className='artistLanding-ablumDiv' key={i}>
-                <h3 className='artistLanding-ablumName'>Album name</h3>
+            {albumList.slice(0, 3).map((album) => (
+              <div
+                className='artistLanding-ablumDiv'
+                key={album._id}
+                onClick={() => navigate(`/artist/viewalbum/${album._id}`)}
+              >
+                <h3 className='artistLanding-ablumName'>{album.albumName}</h3>
                 <div className='artistLanding-ablumCover'>
                   <img
-                    src={demoCover}
+                    src={`${imageUrl}/${album?.images?.[0]}`}
                     alt='cover'
                     className='artistLanding-cover'
                   />
                 </div>
-                <h3 className='artistLanding-numPhoto'>20 photos</h3>
+                <h3 className='artistLanding-numPhoto'>
+                  {album.images.length === 1
+                    ? `${album.images.length} photo`
+                    : `${album.images.length} photos`}
+                </h3>
               </div>
             ))}
+
+            {albumList.length > 0 ? (
+              <div className='seeMore-btnDiv'>
+                <button
+                  className='seeMore-btn'
+                  // onClick={() => navigate('/myimage')}
+                >
+                  See more
+                </button>
+              </div>
+            ) : (
+              <h3 className='artistChatlist-loading'>No ablum</h3>
+            )}
           </div>
         </div>
       </div>

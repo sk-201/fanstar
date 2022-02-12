@@ -1,25 +1,35 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API from '../../api';
+import ConfirmationScreen from './ConfirmationScreen';
 import { ReactComponent as BackArrow } from '../../assets/backArrow.svg';
 import Image from '../../assets/myimg.png';
+import closeWhite from '../../assets/closeWhite.svg';
+import { imageUrl } from '../../utils';
+import API from '../../api';
 import './my-images.css';
+
 const MyImage = () => {
   const [imageList, setImageList] = useState([]);
+  const [url, setUrl] = useState('');
+  const [loading, setLoading] = useState(false);
   const [boolVal, setBoolVal] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
   const navigate = useNavigate();
 
   const fetchImages = async () => {
+    setLoading(true);
     try {
-      const { data } = await API.get('/api/artist/private/getownfiles', {
+      const { data } = await API.get('/api/artist/private/getallownimages', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
         },
       });
-      console.log(data);
+      setLoading(false);
       setImageList(data);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -27,6 +37,7 @@ const MyImage = () => {
   useEffect(() => {
     if (!boolVal) {
       fetchImages();
+      setBoolVal(true);
     }
   }, [boolVal]);
 
@@ -35,24 +46,47 @@ const MyImage = () => {
       <BackArrow id='bck-arrw' onClick={() => navigate('/artist/landing')} />
       <span id='my-service-text'>My Images</span>
       <div className='my-img-cont'>
-        {imageList.length === 0 ? (
-          <h1 className='myImage-loading'>Loading...</h1>
+        {loading ? (
+          <h3 className='myImage-loading'>Loading...</h3>
         ) : (
           <Fragment>
-            {imageList.map((image) => (
-              <div className='myImage-box'>
-                <img
-                  src={`https://fanstar.s3.us-east-2.amazonaws.com/${image.fileUrl}`}
-                  id='myimg'
-                />
-                <h2 id='unlock-price-txt'>Unlocking price</h2>
-                <h3 id='unlock-price'>{`Rs ${image.price}/-`}</h3>
-                <p id='unlock-price-subtext'>{image.caption}</p>
-              </div>
-            ))}
+            {imageList.length === 0 ? (
+              <h3 className='myImage-loading'>No image</h3>
+            ) : (
+              <Fragment>
+                {imageList.map((image) => (
+                  <div className='myImage-box'>
+                    <img src={`${imageUrl}/${image.url}`} id='myimg' />
+                    <h2 id='unlock-price-txt'>Unlocking price</h2>
+                    <h3 id='unlock-price'>{`Rs ${image.price}/-`}</h3>
+                    <p id='unlock-price-subtext'>{image.caption}</p>
+                    <button
+                      className='myImage-btn myImage-delete'
+                      onClick={() => {
+                        setUrl(image.url);
+                        setShowConfirm(true);
+                      }}
+                    >
+                      <img
+                        src={closeWhite}
+                        alt='delete'
+                        className='myImage-deleteIcon'
+                      />
+                    </button>
+                  </div>
+                ))}
+              </Fragment>
+            )}
           </Fragment>
         )}
       </div>
+      {showConfirm && (
+        <ConfirmationScreen
+          close={() => setShowConfirm(false)}
+          refresh={() => setBoolVal(false)}
+          url={url}
+        />
+      )}
     </div>
   );
 };

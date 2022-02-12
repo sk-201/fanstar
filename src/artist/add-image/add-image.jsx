@@ -48,7 +48,7 @@ const AddImage = () => {
       data.append('caption', caption);
       data.append('price', price);
       data.append('artistFile', fileStore);
-      await API.post('/api/artist/private/uploadfile', data, config);
+      await API.post('/api/artist/private/uploadimage', data, config);
       alert('Image Uploaded!');
       navigate('/artist/landing');
     } catch (error) {

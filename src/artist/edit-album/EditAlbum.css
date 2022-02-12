@@ -1,0 +1,89 @@
+.editAlbum-container {
+  width: 90%;
+  margin: auto;
+}
+
+.editAlbum-headerDiv {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.editAlbum-btn {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+.editAlbum-backBtn {
+  margin-right: 20px;
+}
+
+.editAlbum-backIcon {
+  height: 20px;
+  width: 20px;
+}
+
+.editAlbum-title {
+  font-family: Kaushan Script;
+  /* font-style: normal; */
+  font-weight: normal;
+  font-size: 20px;
+  color: #2d2d2d;
+  margin: 8px 0;
+  margin-bottom: 14px;
+}
+
+.editAlbum-formSection {
+  margin-top: 3rem;
+}
+
+.editAlbum-inputDiv {
+  margin: 12px 0;
+}
+
+.editAlbum-label {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 20px;
+  color: #2d2d2d;
+  margin: 8px 5px;
+}
+
+.editAlbum-inputField {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 10px auto;
+  padding: 12px 15px;
+  outline: none;
+  border: none;
+}
+
+.editAlbum-btnDiv {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.editAlbum-submitBtn {
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+  padding: 13px;
+  font-family: Montserrat;
+  font-weight: bold;
+  font-size: 16px;
+  color: #f3f3f3;
+  background-color: var(--background-color);
+}
