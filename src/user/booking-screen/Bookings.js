@@ -14,7 +14,7 @@ const Bookings = () => {
       const { data } = await API.get('/api/user/private/getpaymentsofauser', {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
         },
       });
       setBookingData(data);

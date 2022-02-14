@@ -38,7 +38,7 @@ const ArtistPage = () => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
     };
     API.get(`/api/user/private/getartist/${id}`, config).then(({ data }) => {
@@ -84,7 +84,7 @@ const ArtistPage = () => {
   //     const config = {
   //       headers: {
   //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+  //         Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
   //       },
   //     };
   //     const { data } = await API.get('/api/user/private/getowndetails', config);
@@ -110,7 +110,7 @@ const ArtistPage = () => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
     };
     try {
@@ -129,7 +129,7 @@ const ArtistPage = () => {
         <div className='img-header'>
           <img className='img-1' src={Img1} alt='banner-pic' />
 
-          {localStorage.getItem('fanstarToken') ? (
+          {localStorage.getItem('fanstarUserToken') ? (
             <Link to={`/artist/${id}/wallet`}>
               <Wallet className='wallet-icon' />
             </Link>

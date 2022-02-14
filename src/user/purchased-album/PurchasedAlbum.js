@@ -19,7 +19,7 @@ const PurchasedAlbum = () => {
       const { data } = await API.get(`/api/user/private/getalbum/${albumId}`, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
         },
       });
       // console.log(data);

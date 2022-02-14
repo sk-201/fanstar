@@ -24,7 +24,7 @@ const SubBalance = () => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
     };
     API.get(`/api/user/private/getowndetails`, config)
@@ -38,7 +38,7 @@ const SubBalance = () => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
     };
     const API_URL = `/api/user/private/`;
@@ -86,7 +86,7 @@ const SubBalance = () => {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
         },
       };
 

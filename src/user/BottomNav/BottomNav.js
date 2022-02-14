@@ -20,7 +20,7 @@ const BottomNav = (props) => {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
         },
       };
       const { data } = await API.get('/api/user/private/getowndetails', config);

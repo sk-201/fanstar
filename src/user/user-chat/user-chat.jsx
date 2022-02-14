@@ -32,7 +32,7 @@ const ChatScreen = () => {
     API.get(`/api/user/private/getartist/${artistId}`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
     })
       .then(({ data }) => {
@@ -79,7 +79,7 @@ const ChatScreen = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+            Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
           },
         }
       );

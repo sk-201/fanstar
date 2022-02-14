@@ -28,7 +28,7 @@ const Album = () => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
     };
     API.get(`/api/user/private/getallimages/${id}`, config).then(({ data }) => {
@@ -62,7 +62,7 @@ const Album = () => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
     };
     try {

@@ -18,7 +18,7 @@ const AlbumList = () => {
       const { data } = await API.get(`/api/user/private/getallalbums/${id}`, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
         },
       });
       // console.log(data);
@@ -33,7 +33,9 @@ const AlbumList = () => {
             {
               headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+                Authorization: `Bearer ${localStorage.getItem(
+                  'fanstarUserToken'
+                )}`,
               },
             }
           );
@@ -73,7 +75,7 @@ const AlbumList = () => {
   //       {
   //         headers: {
   //           'Content-Type': 'application/json',
-  //           Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+  //           Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
   //         },
   //       }
   //     );
