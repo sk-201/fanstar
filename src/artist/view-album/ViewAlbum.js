@@ -16,6 +16,7 @@ const ViewAlbum = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [albumImages, setAlbumImages] = useState([]);
+  const [albumName, setAlbumName] = useState('');
   const [boolVal, setBoolVal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -34,6 +35,7 @@ const ViewAlbum = () => {
         }
       );
       // console.log(data);
+      setAlbumName(data.albumName);
       setAlbumImages(data.images);
       setLoading(false);
     } catch (error) {
@@ -101,7 +103,7 @@ const ViewAlbum = () => {
           >
             <img src={backIcon} alt='back' className='viewAlbum-backIcon' />
           </button>
-          <h3 className='viewAlbum-pageTitle'>Album name</h3>
+          <h3 className='viewAlbum-pageTitle'>{albumName}</h3>
         </div>
         <div className='viewAlbum-headerRight'>
           <button

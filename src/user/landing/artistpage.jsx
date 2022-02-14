@@ -28,8 +28,7 @@ const ArtistPage = () => {
   const [bio, setBio] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
   const [services, setServices] = useState([]);
-  const [album, setAlbum] = useState([]);
-  const [photos, setPhotos] = useState([]);
+  const [allImages, setAllImages] = useState([]);
   const [timestamp, setTimestamp] = useState('');
   const [startClock, setStartClock] = useState(false);
   const location = useLocation();
@@ -52,30 +51,13 @@ const ArtistPage = () => {
     API.get(`/api/user/public/getservices/${id}`, config).then(({ data }) => {
       setServices(data);
     });
-    API.get(`/api/user/public/getalbums/${id}`, config).then(({ data }) => {
-      setAlbum(data);
-      // console.log("access",data);
-
-      const arr = [];
-      for (let i = 0; i < data.length; i++) {
-        API.get(`/api/user/private/readimage/${data[i].fileUrl}`, config).then(
-          (res) => {
-            // console.log(res.data);
-            arr.push(res.data);
-
-            // setPhotos([...photos,res.data])
-            // console.log("response");
-          }
-        );
-      }
-      setPhotos(arr);
-      //  console.log("arr");
-      //  console.log(arr);
-      // setPhotos([...photos,res.data])
+    API.get(`/api/user/private/getallimages/${id}`, config).then(({ data }) => {
+      setAllImages(data);
+      // console.log(data);
     });
     if (albumId) {
-      console.log(albumId, 'state');
-      API.get(`/api/user/private/getalbumtimestamp/${albumId}`, config).then(
+      // console.log(albumId, 'state');
+      API.get(`/api/user/private/getimagetimestamp/${albumId}`, config).then(
         (res) => {
           setTimestamp(new Date().getTime());
           setStartClock(true);
@@ -87,6 +69,7 @@ const ArtistPage = () => {
       );
     }
   }, []);
+
   useEffect(() => {
     if (seconds > 0 && startClock) {
       setTimeout(() => setSeconds(seconds - 1), 1000);
@@ -96,32 +79,33 @@ const ArtistPage = () => {
     }
   }, [seconds, startClock]);
 
-  const chatHandler = async () => {
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
-        },
-      };
-      const { data } = await API.get('/api/user/private/getowndetails', config);
+  // const chatHandler = async () => {
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+  //       },
+  //     };
+  //     const { data } = await API.get('/api/user/private/getowndetails', config);
 
-      const res = await API.post(
-        '/api/chat/createchat',
-        { user1: data._id, user2: id },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      navigate('/user/chat', {
-        state: { userId: data._id, roomId: res.data, id: id },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     const res = await API.post(
+  //       '/api/chat/createchat',
+  //       { user1: data._id, user2: id },
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       }
+  //     );
+  //     navigate('/user/chat', {
+  //       state: { userId: data._id, roomId: res.data, id: id },
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const removeAccess = async () => {
     const config = {
       headers: {
@@ -146,7 +130,7 @@ const ArtistPage = () => {
           <img className='img-1' src={Img1} alt='banner-pic' />
 
           {localStorage.getItem('fanstarToken') ? (
-            <Link to='/wallet'>
+            <Link to={`/artist/${id}/wallet`}>
               <Wallet className='wallet-icon' />
             </Link>
           ) : (
@@ -212,7 +196,7 @@ const ArtistPage = () => {
               id='see-all'
               style={{ cursor: 'pointer' }}
               onClick={() => {
-                navigate(`/artist/${id}/user/album`, { state: albumId });
+                navigate(`/artist/${id}/user/imagelist`, { state: albumId });
               }}
             >
               See All
@@ -225,14 +209,14 @@ const ArtistPage = () => {
                 <Clock id='clock-svg' />{' '}
                 <span id='timer-clock'> {seconds} sec</span>
                 <div className='album-card'>
-                  {album.length > 0 &&
-                    album.slice(0, 3).map((data, ind) => {
+                  {allImages.length > 0 &&
+                    allImages.slice(0, 3).map((data, ind) => {
                       return (
                         <div>
                           <div className='album-card-1' key={ind}>
                             <img
                               className='album-card-img'
-                              src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.fileUrl}`}
+                              src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.url}`}
                               style={{
                                 webkitFilter: `${
                                   data.accessedBy.length > 0
@@ -256,8 +240,8 @@ const ArtistPage = () => {
             ) : (
               <div>
                 <div className='album-card'>
-                  {album.length > 0 &&
-                    album.slice(0, 3).map((data, ind) => {
+                  {allImages.length > 0 &&
+                    allImages.slice(0, 3).map((data, ind) => {
                       return (
                         <div>
                           <div className='album-card-1' key={ind}>
@@ -266,7 +250,7 @@ const ArtistPage = () => {
                                 id='unlock-btn'
                                 onClick={() => {
                                   navigate(
-                                    `/artist/${id}/user/album/${data._id}`
+                                    `/artist/${id}/user/image/${data._id}`
                                   );
                                 }}
                               >
@@ -275,7 +259,7 @@ const ArtistPage = () => {
                               </button>
                               <img
                                 className='album-card-img'
-                                src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.fileUrl}`}
+                                src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.url}`}
                                 style={{
                                   webkitFilter: 'blur(10px)',
                                   filter: 'blur(10px)',

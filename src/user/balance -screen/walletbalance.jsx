@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import API from '../../api';
 import Razorpay_Key from '../../rzp';
-import './balance .css';
+import backIcon from '../../assets/backArrow.svg';
+import { useNavigate, useParams } from 'react-router-dom';
+import './balance.css';
+
 const WalletBalance = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [balance, setBalance] = useState('');
+  const [openRecharge, setOpenRecharge] = useState(false);
+  const [rechargeAmount, setRechargeAmount] = useState('');
 
   useEffect(() => {
     const config = {
@@ -18,6 +25,7 @@ const WalletBalance = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
   const razorPayPaymentHandler = async () => {
     const config = {
       headers: {
@@ -26,7 +34,7 @@ const WalletBalance = () => {
       },
     };
     const API_URL = `/api/user/private/`;
-    const orderUrl = `${API_URL}order/100000`;
+    const orderUrl = `${API_URL}order/${rechargeAmount}`;
     const response = await API.get(orderUrl, config);
     const { data } = response;
     console.log('App -> razorPayPaymentHandler -> data', data);
@@ -43,7 +51,7 @@ const WalletBalance = () => {
           const url = `${API_URL}capture/${paymentId}`;
           const captureResponse = await API.post(
             url,
-            { amount: '100000' },
+            { amount: rechargeAmount },
             config
           );
           const successObj = JSON.parse(captureResponse.data);
@@ -65,8 +73,24 @@ const WalletBalance = () => {
     rzp1.open();
   };
 
+  const handleProceed = () => {
+    if (parseInt(rechargeAmount) >= 100) {
+      razorPayPaymentHandler();
+    } else {
+      alert('Minimum allowed recharge amount is Rs.100/-');
+    }
+  };
+
   return (
     <div className='balance'>
+      <div className='balance-backBtnDiv'>
+        <button
+          className='balance-backBtn'
+          onClick={() => navigate(`/artist/${id}`)}
+        >
+          <img className='balance-backIcon' src={backIcon} alt='back' />
+        </button>
+      </div>
       <div className='balance-screen'>
         <h1 id='bal-sc-head'>
           My Balance <span id='curr'>INR</span>
@@ -75,14 +99,34 @@ const WalletBalance = () => {
         <text id='bal-sc-bal'>Rs {balance}.00</text>
       </div>
       <div className='bal-recharge'>
-        <p
-          style={{ textDecoration: 'none', cursor: 'pointer' }}
-          id='bal-re'
-          onClick={razorPayPaymentHandler}
-        >
-          Recharge your Wallet
-        </p>
-        <span className='bal-re-subhead'>Min recharge 100/-</span>
+        {openRecharge ? (
+          <div className='balance-rechargeDiv'>
+            <label className='balance-rechargeLabel'>Recharge amount</label>
+            <input
+              type='number'
+              className='balance-rechargeInp'
+              placeholder='Ex. 500'
+              min='1'
+              value={rechargeAmount}
+              onChange={(e) => setRechargeAmount(e.target.value)}
+            />
+            <span className='bal-re-subhead'>Min recharge 100/-</span>
+            <button className='balance-rechargeBtn' onClick={handleProceed}>
+              Proceed
+            </button>
+          </div>
+        ) : (
+          <p
+            style={{ textDecoration: 'underline', cursor: 'pointer' }}
+            id='bal-re'
+            onClick={() => setOpenRecharge(true)}
+          >
+            Recharge your Wallet
+          </p>
+        )}
+        {!openRecharge && (
+          <span className='bal-re-subhead'>Min recharge 100/-</span>
+        )}
       </div>
     </div>
   );

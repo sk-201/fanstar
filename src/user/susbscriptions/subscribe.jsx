@@ -11,8 +11,8 @@ const Subscribe = () => {
   const [lock, setLock] = useState(1);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const { id } = useParams();
+  const [insta, setInsta] = useState('');
+  const { id, albumId } = useParams();
   const navigate = useNavigate();
   return (
     <Fragment>
@@ -29,6 +29,11 @@ const Subscribe = () => {
             <h1 id='sub-main-con'>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hendre
             </h1>
+            <select name='plans' className='choose-plan'>
+              <option value='1month'>1 month membership @ 599/-</option>
+              <option value='plan2'>Plan 2</option>
+              <option value='plan3'>Plan 3</option>
+            </select>
             <input
               className='inp-sub'
               type='text'
@@ -39,16 +44,16 @@ const Subscribe = () => {
             <input
               className='inp-sub'
               type='email'
-              placeholder='E-mail ID'
+              placeholder='Email address'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               className='inp-sub'
               type='tel'
-              placeholder='Phone-no'
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              placeholder='Instagram id'
+              value={insta}
+              onChange={(e) => setInsta(e.target.value)}
             />
             <button
               className='btn-sub'
@@ -56,12 +61,12 @@ const Subscribe = () => {
                 if (
                   name.trim() == '' ||
                   email.trim() == '' ||
-                  phone.trim() == ''
+                  insta.trim() == ''
                 ) {
                   alert('One or more Field is empty!!');
                 } else {
                   navigate(`/artist/${id}/subscribe/payment`, {
-                    state: { name, email, phone },
+                    state: { name, email, insta, albumId: albumId },
                   });
                 }
               }}

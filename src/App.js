@@ -7,7 +7,7 @@ import Resend from './user/resend/resend';
 import Register from './user/service-register/Register';
 import Feedback from './user/feedback/feedback';
 import Balance from './user/balance -screen/balance';
-import Subscription from './user/susbscriptions/subscriptions';
+// import Subscription from './user/susbscriptions/subscriptions';
 import Edit from './artist/edit profile/editprofile';
 import Payment from './user/payment/payment';
 import Subscribe from './user/susbscriptions/subscribe';
@@ -46,6 +46,8 @@ import IntroScreen from './home/IntroScreen';
 import AddAlbum from './artist/add-album/AddAlbum';
 import ViewAlbum from './artist/view-album/ViewAlbum';
 import EditAlbum from './artist/edit-album/EditAlbum';
+import AlbumList from './user/album-list/AlbumList';
+import PurchasedAlbum from './user/purchased-album/PurchasedAlbum';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -75,14 +77,23 @@ function App() {
             element={<Balance />}
           />
           <Route
-            path='/artist/:artistId/user/album/:albumId'
+            path='/artist/:artistId/user/image/:albumId'
             element={<AlbumBuy />}
           />
-          <Route path='/wallet' element={<WalletBalance />} />
-          <Route path='/artist/:id/user/album' element={<Album />} />
+          <Route path='/artist/:id/wallet' element={<WalletBalance />} />
+          <Route path='/artist/:id/user/imagelist' element={<Album />} />
           <Route path='/artist/:id/user/bookings' element={<Bookings />} />
-          <Route path='/artist/:id/sub' element={<Subscription />} />
-          <Route path='/artist/:id/subscribe' element={<Subscribe />} />
+          <Route path='/artist/:id/albumlist' element={<AlbumList />} />
+          <Route
+            path='/artist/:id/viewalbum/:albumId'
+            element={<PurchasedAlbum />}
+          />
+
+          {/** <Route path='/artist/:id/sub' element={<Subscription />} /> */}
+          <Route
+            path='/artist/:id/subscribe/:albumId'
+            element={<Subscribe />}
+          />
           <Route path='/artist/:id/renew' element={<RenewSubscription />} />
           <Route
             path='/artist/:id/subscribe/payment'

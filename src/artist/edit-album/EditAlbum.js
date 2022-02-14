@@ -51,28 +51,29 @@ const EditAlbum = () => {
     setInputData({ ...inputData, [name]: e.target.value });
   };
 
-  // const handleEditAlbum = async () => {
-  //   let formData = new FormData();
-  //   formData.append('price', inputData.price);
-  //   formData.append('description', inputData.description);
-  //   formData.append('albumName', inputData.albumName);
-  //   try {
-  //     const { data } = await API.put(
-  //       `/api/artist/private/updatealbum/${id}`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           'Content-Type': 'multipart/form-data',
-  //           Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
-  //         },
-  //       }
-  //     );
-  //     // console.log(data);
-  //     alert('Album details updated!');
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleEditAlbum = async () => {
+    try {
+      const { data } = await API.put(
+        `/api/artist/private/updatealbumdetails`,
+        {
+          albumId: id,
+          description: inputData.description,
+          albumName: inputData.albumName,
+          price: inputData.price,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          },
+        }
+      );
+      // console.log(data);
+      alert('Album details updated!');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className='editAlbum-container'>
@@ -121,7 +122,9 @@ const EditAlbum = () => {
         </div>
       </div>
       <div className='editAlbum-btnDiv'>
-        <button className='editAlbum-submitBtn'>Edit Album</button>
+        <button className='editAlbum-submitBtn' onClick={handleEditAlbum}>
+          Edit Album
+        </button>
       </div>
     </div>
   );

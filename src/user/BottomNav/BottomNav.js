@@ -82,7 +82,7 @@ const BottomNav = (props) => {
       </div>
       <div
         className='bottomNav-home'
-        onClick={() => navigate(`/artist/${id}/sub`)}
+        onClick={() => navigate(`/artist/${id}/albumlist`)}
       >
         <img src={subscribe} alt='subscribe' className='bottomNav-icon' />
         {active === 'subscribe' && (

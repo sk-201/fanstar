@@ -14,6 +14,8 @@
   box-sizing: border-box;
   border-radius: 8px;
   padding: 0px;
+  width: 100%;
+  height: 159px;
 }
 .subscription-container {
   position: absolute;
@@ -46,6 +48,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 24px;
+  text-align: center;
   color: #ffffff;
 }
 .choose-plan {
@@ -53,7 +56,7 @@
   border: 1px solid #ffffff;
   box-sizing: border-box;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 11px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
@@ -65,6 +68,7 @@
 }
 #ban-img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 .btn-sub {
@@ -73,10 +77,12 @@
   color: var(--background-color);
   border: none;
   outline: none;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .inp-sub {
-  background: rgba(129, 129, 129, 0.6);
+  background-color: var(--menu-container-color);
   border: 1px solid #ffffff;
   color: #fff !important;
   box-sizing: border-box;

@@ -1,0 +1,199 @@
+.balance {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1rem;
+}
+.balance-screen {
+  background: linear-gradient(
+    75.72deg,
+    #05478a 4.63%,
+    #73bcf8 106.33%,
+    #05478a 106.92%
+  );
+  box-shadow: 4px 4px 4px rgba(4, 97, 182, 0.15),
+    -4px 4px 4px rgba(109, 92, 252, 0.15);
+  border-radius: 16px;
+  height: 20vh;
+  padding: 1rem;
+}
+#bal-sc-head {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  color: #ffffff;
+
+  letter-spacing: 0.2px;
+}
+#curr {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  background: #000000;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  margin-left: 4rem;
+}
+#bal-sc-bal {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  color: #ffffff;
+  margin-top: 1rem;
+}
+.bal-recharge {
+  margin-top: 2rem;
+}
+#bal-re {
+  color: #2d2d2d;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+}
+.bal-re-subhead {
+  display: block;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 28px;
+  color: #afafaf;
+}
+.prod-details {
+  margin-top: 4.5rem;
+}
+#prod-type {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #2d2d2d;
+}
+#pers-ser {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #434343;
+  display: block;
+}
+#i-promote {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #434343;
+  display: block;
+}
+#tot-amt {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: #2d2d2d;
+}
+#incl {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: justify;
+
+  color: #00365b;
+}
+#price {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: right;
+  letter-spacing: 0.2px;
+  color: #000000;
+  margin-left: 4rem;
+}
+.btn-pay {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.balance-rechargeDiv {
+  width: 100;
+}
+
+.balance-rechargeLabel {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 18px;
+  color: #2d2d2d;
+  margin-bottom: 8px;
+}
+
+.balance-rechargeInp {
+  outline: none;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+}
+
+.balance-rechargeBtn {
+  margin: 1rem 0;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.balance-backBtnDiv {
+  width: 100%;
+  margin: 15px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.balance-backBtn {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  width: auto;
+}
+
+.balance-backIcon {
+  height: 20px;
+  width: 20px;
+}

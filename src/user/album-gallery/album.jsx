@@ -31,24 +31,9 @@ const Album = () => {
         Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
       },
     };
-    API.get(`/api/user/public/getalbums/${id}`, config).then(({ data }) => {
+    API.get(`/api/user/private/getallimages/${id}`, config).then(({ data }) => {
       setAlbum(data);
-      const arr = [];
-      for (let i = 0; i < data.length; i++) {
-        API.get(`/api/user/private/readimage/${data[i].fileUrl}`, config).then(
-          (res) => {
-            //  console.log(res.data);
-            //  console.log("res");
-            arr.push(res.data);
-
-            // setPhotos([...photos,res.data])
-          }
-        );
-      }
-      // console.log(arr);
-      setPhotos(arr);
-
-      // setPhotos([...photos,res.data])
+      console.log(data);
     });
     if (albumId) {
       // console.log(albumId,"state");
@@ -98,10 +83,10 @@ const Album = () => {
             id='see-all'
             style={{ cursor: 'pointer' }}
             onClick={() => {
-              navigate(`/artist/${id}/user/album`);
+              navigate(`/artist/${id}`);
             }}
           >
-            See All
+            Back
           </span>
         </h1>
         <div className='time-cont'>
@@ -152,7 +137,7 @@ const Album = () => {
                               id='unlock-btn'
                               onClick={() => {
                                 navigate(
-                                  `/artist/${id}/user/album/${data._id}`
+                                  `/artist/${id}/user/image/${data._id}`
                                 );
                               }}
                             >
@@ -161,7 +146,7 @@ const Album = () => {
                             </button>
                             <img
                               className='album-card-img'
-                              src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.fileUrl}`}
+                              src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.url}`}
                               style={{
                                 webkitFilter: 'blur(10px)',
                                 filter: 'blur(10px)',

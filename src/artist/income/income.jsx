@@ -172,30 +172,34 @@ const Income = () => {
           <h2 id='tot-ord-no'>{totalOrders}</h2>
           <h3 id='pend-ord'>Pending Orders</h3>
           <h2 id='pend-ord-no'>{pendingOrders}</h2>
-          <div className='pending-orderList'>
-            <h2 className='pending-orderTitle'>My Pending Orders</h2>
-            {pendingData.map((data) => (
-              <div
-                className='pending-container'
-                key={data._id}
-                onClick={() => chatHandler(data)}
-              >
-                <div className='pending-userImgDiv'>
-                  <img
-                    src={avatar}
-                    alt='user-pic'
-                    className='pending-userImage'
-                  />
+          {pendingData.length > 0 && (
+            <div className='pending-orderList'>
+              <h2 className='pending-orderTitle'>My Pending Orders</h2>
+              {pendingData.map((data) => (
+                <div
+                  className='pending-container'
+                  key={data._id}
+                  onClick={() => chatHandler(data)}
+                >
+                  <div className='pending-userImgDiv'>
+                    <img
+                      src={avatar}
+                      alt='user-pic'
+                      className='pending-userImage'
+                    />
+                  </div>
+                  <div className='pending-userDetails'>
+                    <h3 className='pending-userName'>
+                      {data?.userId?.username}
+                    </h3>
+                    <p className='pending-orderName'>
+                      {data?.serviceId?.serviceName}
+                    </p>
+                  </div>
                 </div>
-                <div className='pending-userDetails'>
-                  <h3 className='pending-userName'>{data?.userId?.username}</h3>
-                  <p className='pending-orderName'>
-                    {data?.serviceId?.serviceName}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <BottomNav active='home' />
