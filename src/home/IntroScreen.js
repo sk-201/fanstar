@@ -1,6 +1,9 @@
 import React, { Fragment, useState } from 'react';
 import fansImage from '../assets/fansImage.png';
 import appIcon from '../assets/appIcon.png';
+import introImage1 from '../assets/introImage1.png';
+import introImage2 from '../assets/introImage2.png';
+import introImage3 from '../assets/introImage3.png';
 import privacyIcon from '../assets/privacyIcon.png';
 import facebook from '../assets/facebook.svg';
 import instagram from '../assets/instagram.svg';
@@ -45,7 +48,7 @@ const IntroScreen = () => {
               </p>
             </div>
             <div className='home-imageDiv'>
-              <img src={fansImage} alt='fans' className='home-image' />
+              <img src={introImage1} alt='fans' className='home-image' />
             </div>
           </div>
           <div className='home-thirdSection'>
@@ -58,7 +61,7 @@ const IntroScreen = () => {
               </p>
             </div>
             <div className='home-imageDiv'>
-              <img src={appIcon} alt='app' className='home-image' />
+              <img src={introImage2} alt='app' className='home-image' />
             </div>
           </div>
           <div className='home-secondSection'>
@@ -71,7 +74,7 @@ const IntroScreen = () => {
               </p>
             </div>
             <div className='home-imageDiv'>
-              <img src={privacyIcon} alt='privacy' className='home-image' />
+              <img src={introImage3} alt='privacy' className='home-image' />
             </div>
           </div>
           <div className='home-footerDiv'>
