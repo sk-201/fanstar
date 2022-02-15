@@ -99,7 +99,7 @@ const ViewAlbum = () => {
         <div className='viewAlbum-headerLeft'>
           <button
             className='viewAlbum-btn viewAlbum-backBtn'
-            onClick={() => navigate('/artist/landing')}
+            onClick={() => navigate('/artist/myalbums')}
           >
             <img src={backIcon} alt='back' className='viewAlbum-backIcon' />
           </button>

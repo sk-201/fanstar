@@ -88,6 +88,7 @@
   font-size: 17px;
   color: #000000;
   text-transform: capitalize;
+  margin: 5px 0;
 }
 
 .artistChat-back {
@@ -117,7 +118,7 @@
   font-family: Montserrat;
   font-weight: normal;
   font-size: 16px;
-  text-align: right;
+  text-align: justify;
   color: #ffffff;
   padding: 10px 15px;
   width: fit-content;
@@ -126,6 +127,7 @@
   margin-left: auto;
   margin-right: 5%;
   margin-top: 5%;
+  word-wrap: break-word;
 }
 .received-message {
   color: #222222;
@@ -137,13 +139,14 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 120%;
-  text-align: left;
+  text-align: justify;
   width: fit-content;
   max-width: 50%;
   padding: 10px 15px;
   margin-right: auto;
   margin-left: 5%;
   margin-top: 5%;
+  word-wrap: break-word;
 }
 
 .messages {
@@ -180,7 +183,6 @@
   right: 16.82%;
   top: 75%;
   bottom: 5%;
-  height: 5vh;
 }
 
 /* .received-message {
@@ -220,7 +222,8 @@
   width: 100%;
   margin: auto;
   position: fixed;
-  bottom: 75px;
+  bottom: 65px;
+  background: #ffffff;
 }
 
 .artistChat-inputForm {
@@ -228,13 +231,132 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 95%;
   margin: auto;
+  background: #fff;
 }
 
 .artistChat-inputField {
   margin: 0;
-  width: 70%;
+  width: 80%;
+  min-height: 25px;
+  height: fit-content;
   padding: 10px;
   outline: none;
+  border-radius: 31px;
+  box-sizing: border-box;
+}
+
+.artistChat-inputFieldDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 82%;
+  background: #f0f0f0;
+  border-radius: 31px;
+  border: 1px solid #f0f0f0;
+}
+
+.artistChat-emojiBtn {
+  width: 15%;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.artist-emojisListDiv {
+  width: 95%;
+  margin: auto;
+  margin-top: 8px;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.artist-emojisListDiv::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+
+.artist-emojiDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 85px;
+  height: 32px;
+  border-radius: 31px;
+  padding: 2px;
+  margin: 0 10px;
+  background: #0e0d0d;
+}
+
+.emojiIconDiv {
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
+  margin-right: 5px;
+}
+
+.emojiIcon {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.emojiPrice {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+  color: #fff;
+}
+
+.changeHeight {
+  height: 68vh !important;
+}
+
+.changeBottom {
+  bottom: 52px !important;
+}
+
+.artistChatlist-usernameAndService {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.artistChatlist-serviceName {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 12px;
+  color: #3d3c3c;
+  margin: 0;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  border-left: 1px solid #555;
+}
+
+.artistChat-serviceName {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 12px;
+  color: #3d3c3c;
+  margin: 0;
+  /* margin-bottom: 5px; */
+}
+
+.artistChat-usernameAndService {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }

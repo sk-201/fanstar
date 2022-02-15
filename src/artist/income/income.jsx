@@ -19,6 +19,7 @@ const Income = () => {
   const [pendingData, setPendingData] = useState([]);
   const [artistData, setArtistData] = useState({});
   const [boolVal, setBoolVal] = useState(false);
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -71,6 +72,7 @@ const Income = () => {
         '/api/artist/private/getownpendingorders',
         config
       );
+      // console.log(data);
       setPendingData(data);
     } catch (error) {
       console.log(error);
@@ -100,7 +102,11 @@ const Income = () => {
 
       const res = await API.post(
         '/api/chat/createchat',
-        { user1: data._id, user2: orderData?.userId?._id },
+        {
+          user1: data._id,
+          user2: orderData?.userId?._id,
+          paymentId: orderData._id,
+        },
         {
           headers: {
             'Content-Type': 'application/json',

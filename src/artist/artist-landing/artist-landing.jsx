@@ -248,7 +248,7 @@ const ArtistLanding = () => {
               <div className='seeMore-btnDiv'>
                 <button
                   className='seeMore-btn'
-                  // onClick={() => navigate('/myimage')}
+                  onClick={() => navigate('/artist/myalbums')}
                 >
                   See more
                 </button>

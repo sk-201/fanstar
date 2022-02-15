@@ -7,6 +7,7 @@ import completeStatus from '../../assets/completeStatus.svg';
 import sendIcon from '../../assets/sendIcon.svg';
 import socket from '../../socket';
 import API from '../../api';
+import { imageUrl } from '../../utils';
 import '../../user/user-chat/user-chat.css';
 import ConfirmationScreen from './ConfirmationScreen';
 import BottomNav from '../BottomNav/BottomNav';
@@ -20,6 +21,7 @@ const ArtistChat = () => {
   const { state } = useLocation();
   const { userId, roomId, paymentId } = state;
   const [messages, setMessages] = useState([]);
+  const [serviceName, setServiceName] = useState('');
   const navigate = useNavigate();
 
   // console.log(state);
@@ -28,7 +30,8 @@ const ArtistChat = () => {
     if (!boolVal) {
       API.get(`/api/chat/getachat/${roomId}`)
         .then(({ data }) => {
-          // console.log(data);
+          console.log(data);
+          setServiceName(data.paymentId.serviceName);
           setMessages(data.allMessages);
           setBoolVal(true);
         })
@@ -72,6 +75,7 @@ const ArtistChat = () => {
       alert('Service Completed!');
       setConfirmScreen(false);
       setConfirmType('');
+      navigate('/chat');
       // console.log(data);
     } catch (error) {
       console.log(error);
@@ -128,9 +132,12 @@ const ArtistChat = () => {
             </div>
             <div className='artistChat-userDetails'>
               <img src={avatar} alt='user' className='artistChat-userImage' />
-              <p className='artistChat-username'>
-                {state.username ? state.username : ''}
-              </p>
+              <div className='artistChat-usernameAndService'>
+                <p className='artistChat-username'>
+                  {state.username ? state.username : ''}
+                </p>
+                <span className='artistChat-serviceName'>{serviceName}</span>
+              </div>
             </div>
           </div>
           <div className='artistChat-headerRight'>
@@ -166,7 +173,17 @@ const ArtistChat = () => {
                 key={ind}
               >
                 {' '}
-                {mes.message}
+                {mes.isImage ? (
+                  <img
+                    src={`${imageUrl}/${mes.message}`}
+                    alt='emoji'
+                    width='24px'
+                    height='24px'
+                    style={{ borderRadius: '8px' }}
+                  />
+                ) : (
+                  mes.message
+                )}
               </div>
             );
           })}

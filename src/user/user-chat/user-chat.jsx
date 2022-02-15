@@ -4,8 +4,10 @@ import BackArrow from '../../assets/backArrow.svg';
 import avatar from '../../assets/avatar.png';
 import completeStatus from '../../assets/completeStatus.svg';
 import sendIcon from '../../assets/sendIcon.svg';
+import emoji from '../../assets/emoji.svg';
 import socket from '../../socket';
 import API from '../../api';
+import { imageUrl } from '../../utils';
 import BottomNav from '../BottomNav/BottomNav';
 import ConfirmationScreen from './ConfirmationScreen';
 
@@ -17,12 +19,15 @@ const ChatScreen = () => {
   const { state } = useLocation();
   const { userId, roomId, artistId } = state;
   const [messages, setMessages] = useState([]);
+  const [serviceName, setServiceName] = useState('');
+  const [emojis, setEmojis] = useState([]);
+  const [emojiDisplay, setEmojiDisplay] = useState(false);
   const [boolVal, setBoolVal] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
 
-  console.log(state);
+  //  console.log(state);
 
   if (!state) {
     navigate(`/artist/${id}/user/chatlist`);
@@ -45,7 +50,21 @@ const ChatScreen = () => {
     if (!boolVal) {
       API.get(`/api/chat/getachat/${roomId}`)
         .then(({ data }) => {
+          console.log(data);
+          setServiceName(data.paymentId.serviceName);
           setMessages(data.allMessages);
+        })
+        .catch((error) => console.log(error));
+      API.get('/api/user/private/getemojies', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+        },
+      })
+        .then(({ data }) => {
+          // console.log(data);
+          // console.log(`${imageUrl}/${data[0].emoji}`);
+          setEmojis(data);
         })
         .catch((error) => console.log(error));
       setBoolVal(true);
@@ -62,10 +81,64 @@ const ChatScreen = () => {
     });
   }, []);
 
-  const send = (e) => {
+  const send = async (e) => {
     e.preventDefault();
-    socket.emit('sendmessage', { userId, roomId, message });
-    setMessage('');
+    if (message.length > 0) {
+      try {
+        const { data } = await API.put(
+          '/api/user/private/deductbalance',
+          {
+            roomId: roomId,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem(
+                'fanstarUserToken'
+              )}`,
+            },
+          }
+        );
+        // console.log(data);
+        socket.emit('sendmessage', { userId, roomId, message, isImage: false });
+        setMessage('');
+      } catch (error) {
+        alert('Check your wallet balance!');
+        navigate(`/artist/${id}/wallet`);
+        setMessage('');
+      }
+    }
+  };
+
+  const sendEmoji = async (emId, url) => {
+    try {
+      const { data } = await API.post(
+        '/api/user/private/giveemoji',
+        {
+          artistId: id,
+          emojiId: emId,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+          },
+        }
+      );
+      console.log(url);
+      socket.emit('sendmessage', {
+        userId,
+        roomId,
+        message: url,
+        isImage: true,
+      });
+      setMessage('');
+      setEmojiDisplay(false);
+    } catch (error) {
+      alert('Check your wallet balance!');
+      navigate(`/artist/${id}/wallet`);
+      setMessage('');
+    }
   };
 
   const completeStatusClick = async () => {
@@ -113,9 +186,12 @@ const ChatScreen = () => {
                 alt='user'
                 className='userChat-userImage'
               />
-              <p className='artistChat-username'>
-                {artistDetails.username ? artistDetails.username : ''}
-              </p>
+              <div className='artistChat-usernameAndService'>
+                <p className='artistChat-username'>
+                  {artistDetails.username ? artistDetails.username : ''}
+                </p>
+                <span className='artistChat-serviceName'>{serviceName}</span>
+              </div>
             </div>
           </div>
           <div className='artistChat-headerRight'>
@@ -131,7 +207,7 @@ const ChatScreen = () => {
             </button>
           </div>
         </div>
-        <div className='artistChat-div'>
+        <div className={`artistChat-div ${emojiDisplay ? 'changeHeight' : ''}`}>
           {messages.map((mes, ind) => {
             return (
               <div
@@ -141,24 +217,77 @@ const ChatScreen = () => {
                 key={ind}
               >
                 {' '}
-                {mes.message}
+                {mes.isImage ? (
+                  <img
+                    src={`${imageUrl}/${mes.message}`}
+                    alt='emoji'
+                    width='24px'
+                    height='24px'
+                    style={{ borderRadius: '8px' }}
+                  />
+                ) : (
+                  mes.message
+                )}
               </div>
             );
           })}
         </div>
-        <div className='userChat-inputDiv'>
+        <div
+          className={`userChat-inputDiv ${emojiDisplay ? 'changeBottom' : ''}`}
+        >
           <form className='artistChat-inputForm'>
-            <input
-              type='text'
-              className='artistChat-inputField'
-              placeholder='Type a message...'
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-            />
+            <div className='artistChat-inputFieldDiv'>
+              <input
+                type='text'
+                className='artistChat-inputField'
+                placeholder='Type a message...'
+                value={message}
+                onChange={(e) => {
+                  if (emojiDisplay) {
+                    setEmojiDisplay(false);
+                  }
+                  setMessage(e.target.value);
+                }}
+              />
+              <button
+                className='artistChat-emojiBtn'
+                type='button'
+                onClick={() => setEmojiDisplay(!emojiDisplay)}
+              >
+                <img
+                  className='artistChat-emojiBtnIcon'
+                  src={emoji}
+                  alt='emoji'
+                />
+              </button>
+            </div>
             <button type='submit' className='artistChat-sendMsg' onClick={send}>
               <img src={sendIcon} alt='send' className='msgSend-icon' />
             </button>
           </form>
+          {emojiDisplay && (
+            <div className='artist-emojisListDiv'>
+              {emojis.map((em) => {
+                // console.log(`${imageUrl}/${em.emoji}`);
+                return (
+                  <div
+                    className='artist-emojiDiv'
+                    key={em._id}
+                    onClick={() => sendEmoji(em._id, em.emoji)}
+                  >
+                    <div className='emojiIconDiv'>
+                      <img
+                        src={`${imageUrl}/${em.emoji}`}
+                        className='emojiIcon'
+                        alt='emoji'
+                      />
+                    </div>
+                    <span className='emojiPrice'>{em.price}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
         {openConfirm && (
           <ConfirmationScreen

@@ -4,7 +4,6 @@ import Img2 from '../.././assets/2-div-img.png';
 import AlbumImg1 from '../.././assets/Group 33907.png';
 import AlbumImg2 from '../.././assets/Group 33906.png';
 import AlbumImg3 from '../.././assets/Group 33945.png';
-
 import 'swiper/swiper.min.css';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import SwiperCore, { Pagination } from 'swiper';
@@ -78,33 +77,6 @@ const ArtistPage = () => {
       setStartClock(false);
     }
   }, [seconds, startClock]);
-
-  // const chatHandler = async () => {
-  //   try {
-  //     const config = {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
-  //       },
-  //     };
-  //     const { data } = await API.get('/api/user/private/getowndetails', config);
-
-  //     const res = await API.post(
-  //       '/api/chat/createchat',
-  //       { user1: data._id, user2: id },
-  //       {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       }
-  //     );
-  //     navigate('/user/chat', {
-  //       state: { userId: data._id, roomId: res.data, id: id },
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const removeAccess = async () => {
     const config = {

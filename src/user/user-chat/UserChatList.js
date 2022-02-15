@@ -5,6 +5,7 @@ import userIcon from '../../assets/chatuser.svg';
 import Logo from '../../assets/Ellipse 58.png';
 import '../../artist/chat/chatscreen.css';
 import API from '../../api';
+import { imageUrl } from '../../utils';
 import BottomNav from '../BottomNav/BottomNav';
 
 const UserChatList = () => {
@@ -16,10 +17,11 @@ const UserChatList = () => {
   const [loading, setLoading] = useState(true);
 
   const chatHandler = async (paymentId) => {
+    console.log(paymentId);
     try {
       const res = await API.post(
         '/api/chat/createchat',
-        { user1: userId, user2: id },
+        { user1: userId, user2: id, paymentId: paymentId },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -51,7 +53,7 @@ const UserChatList = () => {
         setArtistDetails(data);
         API.get(`/api/chat/getallchatsofuser`, config)
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setChats(res.data.chats);
             setUserId(res.data.ownId);
             setLoading(false);
@@ -89,7 +91,7 @@ const UserChatList = () => {
                     <div
                       className='artistChat-chatBox'
                       key={data._id}
-                      onClick={() => chatHandler(data.paymentId)}
+                      onClick={() => chatHandler(data.paymentId._id)}
                     >
                       <div className='artistChatlist-imgDiv'>
                         <img
@@ -104,29 +106,56 @@ const UserChatList = () => {
                       </div>
                       <div className='artistChatlist-contentDiv'>
                         <div className='artistChatlist-userInfo'>
-                          <h4 className='artistChatlist-username'>
-                            {artistDetials.username
-                              ? artistDetials.username
-                              : ''}
-                          </h4>
-                          <p className='artistChatlist-lastmsg'>
-                            {data?.allMessages[data?.allMessages?.length - 1]
-                              ?.message?.length > 25
-                              ? `${data?.allMessages[
+                          <div className='artistChatlist-usernameAndService'>
+                            <h4 className='artistChatlist-username'>
+                              {artistDetials.username
+                                ? `${artistDetials.username} `
+                                : ''}
+                            </h4>
+                            <span className='artistChatlist-serviceName'>
+                              {data?.paymentId?.serviceName
+                                ? data?.paymentId?.serviceName
+                                : ''}
+                            </span>
+                          </div>
+                          {data.allMessages.length > 0 && (
+                            <p className='artistChatlist-lastmsg'>
+                              {data?.allMessages[data?.allMessages?.length - 1]
+                                .isImage ? (
+                                <img
+                                  src={`${imageUrl}/${
+                                    data?.allMessages[
+                                      data?.allMessages?.length - 1
+                                    ].message
+                                  }`}
+                                  alt='emoji'
+                                  width='24px'
+                                  height='24px'
+                                  style={{ borderRadius: '8px' }}
+                                />
+                              ) : data?.allMessages[
+                                  data?.allMessages?.length - 1
+                                ]?.message?.length > 25 ? (
+                                `${data?.allMessages[
                                   data?.allMessages?.length - 1
                                 ]?.message?.substr(0, 25)}...`
-                              : data?.allMessages[data?.allMessages?.length - 1]
-                                  ?.message}
-                          </p>
+                              ) : (
+                                data?.allMessages[data?.allMessages?.length - 1]
+                                  ?.message
+                              )}
+                            </p>
+                          )}
                         </div>
-                        <div className='artistChatlist-chatTime'>
-                          <p className='artistChatlist-time'>
-                            {moment(
-                              data?.allMessages[data?.allMessages?.length - 1]
-                                ?.time
-                            ).fromNow()}
-                          </p>
-                        </div>
+                        {data.allMessages.length > 0 && (
+                          <div className='artistChatlist-chatTime'>
+                            <p className='artistChatlist-time'>
+                              {moment(
+                                data?.allMessages[data?.allMessages?.length - 1]
+                                  ?.time
+                              ).fromNow()}
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
