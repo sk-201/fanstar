@@ -202,12 +202,12 @@ const ArtistPage = () => {
                                 webkitFilter: `${
                                   data.accessedBy.length > 0
                                     ? 'blur(0px)'
-                                    : 'blur(10px)'
+                                    : 'blur(20px)'
                                 }`,
                                 filter: `${
                                   data.accessedBy.length > 0
                                     ? 'blur(0px)'
-                                    : 'blur(10px)'
+                                    : 'blur(20px)'
                                 }`,
                               }}
                             />
@@ -242,8 +242,8 @@ const ArtistPage = () => {
                                 className='album-card-img'
                                 src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.url}`}
                                 style={{
-                                  webkitFilter: 'blur(10px)',
-                                  filter: 'blur(10px)',
+                                  webkitFilter: 'blur(20px)',
+                                  filter: 'blur(20px)',
                                 }}
                               />
                             </div>
