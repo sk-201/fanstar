@@ -31,7 +31,7 @@ const ChatList = () => {
         setArtistEmail(data.email);
         API.get(`/api/chat/getallchats/${data._id}`, config)
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setChats(res.data);
             setLoading(false);
           })
@@ -104,9 +104,15 @@ const ChatList = () => {
                       </div>
                       <div className='artistChatlist-contentDiv'>
                         <div className='artistChatlist-userInfo'>
-                          <h4 className='artistChatlist-username'>
-                            {data?.username}
-                          </h4>
+                          <div className='artistChatlist-usernameAndService'>
+                            <h4 className='artistChatlist-username'>
+                              {data.username ? `${data.username} ` : ''}
+                            </h4>
+                            <span className='artistChatlist-serviceName'>
+                              {data?.serviceName ? data?.serviceName : ''}
+                            </span>
+                          </div>
+
                           <p className='artistChatlist-lastmsg'>
                             {data?.lastMessage?.isImage ? (
                               <img

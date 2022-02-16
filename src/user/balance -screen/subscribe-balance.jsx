@@ -6,7 +6,7 @@ import backIcon from '../../assets/backArrow.svg';
 import './balance.css';
 
 const SubBalance = () => {
-  const { id } = useParams();
+  const { id, artistName } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const { name, email, insta, albumId } = location.state;
@@ -15,7 +15,7 @@ const SubBalance = () => {
   const [rechargeAmount, setRechargeAmount] = useState('');
 
   if (!location.state) {
-    navigate(`/artist/${id}/albumlist`);
+    navigate(`/artist/${artistName}/${id}/albumlist`);
   }
 
   console.log(location.state);
@@ -96,7 +96,7 @@ const SubBalance = () => {
         config
       );
       alert('Thank you for buying my album!!');
-      navigate(`/artist/${id}/viewalbum/${albumId}`);
+      navigate(`/artist/${artistName}/${id}/viewalbum/${albumId}`);
     } catch (error) {
       alert('Something went wrong');
       console.log(error);
@@ -116,7 +116,7 @@ const SubBalance = () => {
       <div className='balance-backBtnDiv'>
         <button
           className='balance-backBtn'
-          onClick={() => navigate(`/artist/${id}`)}
+          onClick={() => navigate(`/artist/${artistName}/${id}`)}
         >
           <img className='balance-backIcon' src={backIcon} alt='back' />
         </button>

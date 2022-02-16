@@ -7,7 +7,7 @@ import demoCover from '../../assets/demoCover.png';
 import './AlbumList.css';
 
 const AlbumList = () => {
-  const { id } = useParams();
+  const { id, artistName } = useParams();
   const navigate = useNavigate();
   const [albumList, setAlbumList] = useState([]);
   const [boolVal, setBoolVal] = useState(false);
@@ -91,7 +91,7 @@ const AlbumList = () => {
       <div className='albumList-headerDiv'>
         <button
           className='albumList-backBtn'
-          onClick={() => navigate(`/artist/${id}`)}
+          onClick={() => navigate(`/artist/${artistName}/${id}`)}
         >
           <img src={backIcon} alt='back' className='albumList-backIcon' />
         </button>
@@ -128,9 +128,13 @@ const AlbumList = () => {
                         className='albumList-subsBtn'
                         onClick={() => {
                           if (!album.subscribed) {
-                            navigate(`/artist/${id}/subscribe/${album._id}`);
+                            navigate(
+                              `/artist/${artistName}/${id}/subscribe/${album._id}`
+                            );
                           } else {
-                            navigate(`/artist/${id}/viewalbum/${album._id}`);
+                            navigate(
+                              `/artist/${artistName}/${id}/viewalbum/${album._id}`
+                            );
                           }
                         }}
                       >

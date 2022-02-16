@@ -8,7 +8,7 @@ import './PurchasedAlbum.css';
 
 const PurchasedAlbum = () => {
   const navigate = useNavigate();
-  const { id, albumId } = useParams();
+  const { id, albumId, artistName } = useParams();
   const [albumImages, setAlbumImages] = useState([]);
   const [albumName, setAlbumName] = useState('');
   const [boolVal, setBoolVal] = useState(false);
@@ -45,7 +45,7 @@ const PurchasedAlbum = () => {
         <div className='purchased-headerLeft'>
           <button
             className='purchased-btn purchased-backBtn'
-            onClick={() => navigate(`/artist/${id}/albumlist`)}
+            onClick={() => navigate(`/artist/${artistName}/${id}/albumlist`)}
           >
             <img src={backIcon} alt='back' className='purchased-backIcon' />
           </button>

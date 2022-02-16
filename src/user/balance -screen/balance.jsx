@@ -8,7 +8,7 @@ import './balance.css';
 
 const Balance = () => {
   const { state } = useLocation();
-  const { artistId, serviceId } = useParams();
+  const { artistId, serviceId, artistName } = useParams();
   const { username, email, phone, insta } = state;
   const [servicename, setServiceName] = useState('');
   const [serviceprice, setServicePrice] = useState('');
@@ -100,7 +100,7 @@ const Balance = () => {
         config
       );
       alert('Thank you for buying my service!!');
-      navigate(`/artist/${artistId}`);
+      navigate(`/artist/${artistName}/${artistId}`);
     } catch (error) {
       alert('Not Enough Balance');
       console.log(error);
@@ -120,7 +120,7 @@ const Balance = () => {
       <div className='balance-backBtnDiv'>
         <button
           className='balance-backBtn'
-          onClick={() => navigate(`/artist/${artistId}`)}
+          onClick={() => navigate(`/artist/${artistName}/${artistId}`)}
         >
           <img className='balance-backIcon' src={backIcon} alt='back' />
         </button>

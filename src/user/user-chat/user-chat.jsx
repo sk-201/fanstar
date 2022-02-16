@@ -25,12 +25,12 @@ const ChatScreen = () => {
   const [boolVal, setBoolVal] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, artistName } = useParams();
 
   //  console.log(state);
 
   if (!state) {
-    navigate(`/artist/${id}/user/chatlist`);
+    navigate(`/artist/${artistName}/${id}/user/chatlist`);
   }
 
   useEffect(() => {
@@ -104,7 +104,7 @@ const ChatScreen = () => {
         setMessage('');
       } catch (error) {
         alert('Check your wallet balance!');
-        navigate(`/artist/${id}/wallet`);
+        navigate(`/artist/${artistName}/${id}/wallet`);
         setMessage('');
       }
     }
@@ -136,7 +136,7 @@ const ChatScreen = () => {
       setEmojiDisplay(false);
     } catch (error) {
       alert('Check your wallet balance!');
-      navigate(`/artist/${id}/wallet`);
+      navigate(`/artist/${artistName}/${id}/wallet`);
       setMessage('');
     }
   };
@@ -158,7 +158,7 @@ const ChatScreen = () => {
       );
       alert('Service Completed!');
       setOpenConfirm(false);
-      navigate(`/artist/${id}/user/feedback`);
+      navigate(`/artist/${artistName}/${id}/user/feedback`);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -172,7 +172,9 @@ const ChatScreen = () => {
           <div className='artistChat-headerLeft'>
             <div
               className='artistChat-back'
-              onClick={() => navigate(`/artist/${artistId}/user/chatlist`)}
+              onClick={() =>
+                navigate(`/artist/${artistName}/${artistId}/user/chatlist`)
+              }
             >
               <img src={BackArrow} alt='back' className='artistChat-backIcon' />
             </div>

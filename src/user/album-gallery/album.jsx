@@ -15,7 +15,7 @@ const Album = () => {
   const [chat, setChat] = useState(0);
   const [lock, setLock] = useState(1);
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, artistName } = useParams();
   const [seconds, setSeconds] = useState(120);
   const [album, setAlbum] = useState([]);
   const [photos, setPhotos] = useState([]);
@@ -33,7 +33,7 @@ const Album = () => {
     };
     API.get(`/api/user/private/getallimages/${id}`, config).then(({ data }) => {
       setAlbum(data);
-      console.log(data);
+      // console.log(data);
     });
     if (albumId) {
       // console.log(albumId,"state");
@@ -68,7 +68,7 @@ const Album = () => {
     try {
       await API.put('/api/user/private/removealbumaccess', { albumId }, config);
 
-      navigate(`/artist/${id}`, { state: '' });
+      navigate(`/artist/${artistName}/${id}`, { state: '' });
     } catch (error) {
       console.log(error);
     }
@@ -83,7 +83,7 @@ const Album = () => {
             id='see-all'
             style={{ cursor: 'pointer' }}
             onClick={() => {
-              navigate(`/artist/${id}`);
+              navigate(`/artist/${artistName}/${id}`);
             }}
           >
             Back
@@ -137,7 +137,7 @@ const Album = () => {
                               id='unlock-btn'
                               onClick={() => {
                                 navigate(
-                                  `/artist/${id}/user/image/${data._id}`
+                                  `/artist/${artistName}/${id}/user/image/${data._id}`
                                 );
                               }}
                             >

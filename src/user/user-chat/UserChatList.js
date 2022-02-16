@@ -10,14 +10,14 @@ import BottomNav from '../BottomNav/BottomNav';
 
 const UserChatList = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, artistName } = useParams();
   const [userId, setUserId] = useState('');
   const [chats, setChats] = useState([]);
   const [artistDetials, setArtistDetails] = useState({});
   const [loading, setLoading] = useState(true);
 
   const chatHandler = async (paymentId) => {
-    console.log(paymentId);
+    // console.log(paymentId);
     try {
       const res = await API.post(
         '/api/chat/createchat',
@@ -28,7 +28,7 @@ const UserChatList = () => {
           },
         }
       );
-      navigate(`/artist/${id}/user/chat`, {
+      navigate(`/artist/${artistName}/${id}/user/chat`, {
         state: {
           userId: userId,
           roomId: res.data,

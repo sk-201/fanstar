@@ -12,7 +12,7 @@ import './BottomNav.css';
 const BottomNav = (props) => {
   const { active } = props;
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, artistName } = useParams();
   // console.log(location.pathname.includes(`/artist/${id}`));
 
   const chatHandler = async () => {
@@ -34,7 +34,7 @@ const BottomNav = (props) => {
           },
         }
       );
-      navigate(`/artist/${id}/user/chat`, {
+      navigate(`/artist/${artistName}/${id}/user/chat`, {
         state: { userId: data._id, roomId: res.data, artistId: id },
       });
     } catch (error) {
@@ -44,7 +44,10 @@ const BottomNav = (props) => {
 
   return (
     <div className='bottomNav-container'>
-      <div className='bottomNav-home' onClick={() => navigate(`/artist/${id}`)}>
+      <div
+        className='bottomNav-home'
+        onClick={() => navigate(`/artist/${artistName}/${id}`)}
+      >
         <img src={home} alt='home' className='bottomNav-icon' />
         {active === 'home' && (
           <img
@@ -56,7 +59,7 @@ const BottomNav = (props) => {
       </div>
       <div
         className='bottomNav-home'
-        onClick={() => navigate(`/artist/${id}/user/chatlist`)}
+        onClick={() => navigate(`/artist/${artistName}/${id}/user/chatlist`)}
       >
         <img src={chat} alt='chat' className='bottomNav-icon' />
         {active === 'chat' && (
@@ -69,7 +72,7 @@ const BottomNav = (props) => {
       </div>
       <div
         className='bottomNav-home'
-        onClick={() => navigate(`/artist/${id}/user/bookings`)}
+        onClick={() => navigate(`/artist/${artistName}/${id}/user/bookings`)}
       >
         <img src={booking} alt='booking' className='bottomNav-icon' />
         {active === 'booking' && (
@@ -82,7 +85,7 @@ const BottomNav = (props) => {
       </div>
       <div
         className='bottomNav-home'
-        onClick={() => navigate(`/artist/${id}/albumlist`)}
+        onClick={() => navigate(`/artist/${artistName}/${id}/albumlist`)}
       >
         <img src={subscribe} alt='subscribe' className='bottomNav-icon' />
         {active === 'subscribe' && (

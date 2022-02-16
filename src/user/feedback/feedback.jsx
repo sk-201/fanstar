@@ -6,7 +6,7 @@ import { ReactComponent as BackArrow } from '../../assets/backArrow.svg';
 import API from '../../api';
 import './feedback.css';
 const Feedback = () => {
-  const { artistId } = useParams();
+  const { artistId, artistName } = useParams();
   const [stars, setStars] = useState(1);
   const [star1, setStar1] = useState('');
   const [star2, setStar2] = useState('');
@@ -30,7 +30,7 @@ const Feedback = () => {
         config
       );
       alert('Thanks for the feedback');
-      navigate(`/artist/${artistId}`);
+      navigate(`/artist/${artistName}/${artistId}`);
     } catch (error) {
       alert('Something went wrong');
       console.log(error);
@@ -40,7 +40,7 @@ const Feedback = () => {
     <div className='feedback'>
       <BackArrow
         id='back-arrow'
-        onClick={() => navigate(`/artist/${artistId}`)}
+        onClick={() => navigate(`/artist/${artistName}/${artistId}`)}
       />
       <h1 className='rate-head'>Rate your Experience</h1>
       <span className='rate-head-span'>Are you satisfied with the service</span>

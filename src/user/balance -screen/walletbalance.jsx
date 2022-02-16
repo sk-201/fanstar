@@ -7,7 +7,7 @@ import './balance.css';
 
 const WalletBalance = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, artistName } = useParams();
   const [balance, setBalance] = useState('');
   const [openRecharge, setOpenRecharge] = useState(false);
   const [rechargeAmount, setRechargeAmount] = useState('');
@@ -86,7 +86,7 @@ const WalletBalance = () => {
       <div className='balance-backBtnDiv'>
         <button
           className='balance-backBtn'
-          onClick={() => navigate(`/artist/${id}`)}
+          onClick={() => navigate(`/artist/${artistName}/${id}`)}
         >
           <img className='balance-backIcon' src={backIcon} alt='back' />
         </button>

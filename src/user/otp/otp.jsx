@@ -35,10 +35,12 @@ const Otp = () => {
           { phone, code },
           config
         );
-        console.log(data);
+        // console.log(data);
         localStorage.setItem('fanstarUserToken', data);
         alert('Login Successfull');
-        navigate(`/artist/${location.state.artistid}`);
+        navigate(
+          `/artist/${location.state.artistName}/${location.state.artistid}`
+        );
       } else {
         alert('Something went wrong Please try again later!');
       }
@@ -46,6 +48,24 @@ const Otp = () => {
       console.log(error);
     }
   };
+
+  const resendOtp = async () => {
+    try {
+      await API.post(
+        '/api/user/public/generateotp',
+        { phone },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      alert('OTP sent');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
   }, [counter]);
@@ -103,11 +123,9 @@ const Otp = () => {
             onChange={(e) => setCode4(e.target.value)}
           ></input>
         </div>
-        <Link to='/resend' style={{ textDecoration: 'none' }}>
-          <h6 className='resend-txt'>
-            Resend OTP <span className='timer'>{counter}</span>
-          </h6>
-        </Link>
+        <h6 className='resend-txt' onClick={resendOtp}>
+          Resend OTP <span className='timer'>{counter}</span>
+        </h6>
 
         <button className='btn' type='submit' onClick={postData}>
           Log In

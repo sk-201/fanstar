@@ -12,7 +12,7 @@ const Subscribe = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [insta, setInsta] = useState('');
-  const { id, albumId } = useParams();
+  const { id, albumId, artistName } = useParams();
   const navigate = useNavigate();
   return (
     <Fragment>
@@ -65,7 +65,7 @@ const Subscribe = () => {
                 ) {
                   alert('One or more Field is empty!!');
                 } else {
-                  navigate(`/artist/${id}/subscribe/payment`, {
+                  navigate(`/artist/${artistName}/${id}/subscribe/payment`, {
                     state: { name, email, insta, albumId: albumId },
                   });
                 }

@@ -7,7 +7,7 @@ import './balance.css';
 
 const AlbumBuy = () => {
   // const location = useLocation();
-  const { artistId, albumId } = useParams();
+  const { artistId, albumId, artistName } = useParams();
   const [albumprice, setAlbumPrice] = useState('');
   const [balance, setBalance] = useState('');
   const [openRecharge, setOpenRecharge] = useState(false);
@@ -96,7 +96,7 @@ const AlbumBuy = () => {
         config
       );
       alert('You can now view my album!!');
-      navigate(`/artist/${artistId}`, { state: albumId });
+      navigate(`/artist/${artistName}/${artistId}`, { state: albumId });
     } catch (error) {
       alert('Not Enough Balance');
       console.log(error);
@@ -116,7 +116,9 @@ const AlbumBuy = () => {
       <div className='balance-backBtnDiv'>
         <button
           className='balance-backBtn'
-          onClick={() => navigate(`/artist/${artistId}/user/imagelist`)}
+          onClick={() =>
+            navigate(`/artist/${artistName}/${artistId}/user/imagelist`)
+          }
         >
           <img className='balance-backIcon' src={backIcon} alt='back' />
         </button>

@@ -66,39 +66,62 @@ function App() {
           <Route path='/otp/:phone' element={<Otp />} />
           <Route path='/resend' element={<Resend />} />
           <Route
-            path='/artist/:artistId/user/service/:serviceId'
+            path='/artist/:artistName/:artistId/user/service/:serviceId'
             element={<Register />}
           />
           <Route
-            path='/artist/:artistId/user/feedback'
+            path='/artist/:artistName/:artistId/user/feedback'
             element={<Feedback />}
           />
           <Route
-            path='/artist/:artistId/user/service/:serviceId/payment'
+            path='/artist/:artistName/:artistId/user/service/:serviceId/payment'
             element={<Balance />}
           />
           <Route
-            path='/artist/:artistId/user/image/:albumId'
+            path='/artist/:artistName/:artistId/user/image/:albumId'
             element={<AlbumBuy />}
           />
-          <Route path='/artist/:id/wallet' element={<WalletBalance />} />
-          <Route path='/artist/:id/user/imagelist' element={<Album />} />
-          <Route path='/artist/:id/user/bookings' element={<Bookings />} />
-          <Route path='/artist/:id/albumlist' element={<AlbumList />} />
           <Route
-            path='/artist/:id/viewalbum/:albumId'
+            path='/artist/:artistName/:id/wallet'
+            element={<WalletBalance />}
+          />
+          <Route
+            path='/artist/:artistName/:id/user/imagelist'
+            element={<Album />}
+          />
+          <Route
+            path='/artist/:artistName/:id/user/bookings'
+            element={<Bookings />}
+          />
+          <Route
+            path='/artist/:artistName/:id/albumlist'
+            element={<AlbumList />}
+          />
+          <Route
+            path='/artist/:artistName/:id/viewalbum/:albumId'
             element={<PurchasedAlbum />}
           />
 
           {/** <Route path='/artist/:id/sub' element={<Subscription />} /> */}
           <Route
-            path='/artist/:id/subscribe/:albumId'
+            path='/artist/:artistName/:id/subscribe/:albumId'
             element={<Subscribe />}
           />
-          <Route path='/artist/:id/renew' element={<RenewSubscription />} />
           <Route
-            path='/artist/:id/subscribe/payment'
+            path='/artist/:artistName/:id/renew'
+            element={<RenewSubscription />}
+          />
+          <Route
+            path='/artist/:artistName/:id/subscribe/payment'
             element={<SubBalance />}
+          />
+          <Route
+            path='/artist/:artistName/:id/user/chat'
+            element={<ChatScreen />}
+          />
+          <Route
+            path='/artist/:artistName/:id/user/chatlist'
+            element={<UserChatList />}
           />
           <Route path='/pay' element={<Payment />} />
           <Route path='/income' element={<Income />} />
@@ -122,8 +145,6 @@ function App() {
           <Route path='/artist/otp/:phone' element={<ArtistOtp />} />
           <Route path='/myimage' element={<MyImage />} />
           <Route path='/chat' element={<ChatList />} />
-          <Route path='/artist/:id/user/chat' element={<ChatScreen />} />
-          <Route path='/artist/:id/user/chatlist' element={<UserChatList />} />
           <Route path='/artist/chat' element={<ArtistChat />} />
           <Route path='/employee/login' element={<EmployeeLogin />} />
           <Route path='/employee/otp/:phone' element={<EmployeeOtp />} />
@@ -137,7 +158,7 @@ function App() {
             element={<LinkedArtistDetials />}
           />
           <Route path='/employee/profile' element={<EmployeeProfile />} />
-          <Route path='/artist/:id' element={<ArtistPage />} />
+          <Route path='/artist/:artistName/:id' element={<ArtistPage />} />
         </Routes>
       </div>
     );

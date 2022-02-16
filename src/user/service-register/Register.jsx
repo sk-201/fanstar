@@ -11,7 +11,7 @@ const Register = () => {
   const [insta, setInsta] = useState('');
   const [servicename, setServiceName] = useState('');
   const [serviceprice, setServicePrice] = useState('');
-  const { serviceId, artistId } = useParams();
+  const { serviceId, artistId, artistName } = useParams();
   const navigate = useNavigate();
   // this.razorPayHandler = this.razorPayHandler(this);
 
@@ -119,9 +119,12 @@ const Register = () => {
           ) {
             alert('One or more Field is empty!!');
           } else {
-            navigate(`/artist/${artistId}/user/service/${serviceId}/payment`, {
-              state: { username, email, phone, insta },
-            });
+            navigate(
+              `/artist/${artistName}/${artistId}/user/service/${serviceId}/payment`,
+              {
+                state: { username, email, phone, insta },
+              }
+            );
           }
         }}
       >

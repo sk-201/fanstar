@@ -14,7 +14,7 @@ const Subscription = () => {
   const [home, setHome] = useState(0);
   const [chat, setChat] = useState(0);
   const [lock, setLock] = useState(1);
-  const { id } = useParams();
+  const { id, artistName } = useParams();
   const navigate = useNavigate();
   return (
     <Fragment>
@@ -37,7 +37,7 @@ const Subscription = () => {
               <option value='plan3'>Plan 3</option>
             </select>
             <Link
-              to={`/artist/${id}/subscribe`}
+              to={`/artist/${artistName}/${id}/subscribe`}
               style={{ textDecoration: 'none' }}
             >
               <button className='btn-sub'>Subscribe now</button>

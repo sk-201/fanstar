@@ -21,7 +21,7 @@ import BottomNav from '../BottomNav/BottomNav';
 SwiperCore.use([Pagination]);
 const ArtistPage = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, artistName } = useParams();
   const [seconds, setSeconds] = useState(120);
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
@@ -41,6 +41,7 @@ const ArtistPage = () => {
       },
     };
     API.get(`/api/user/private/getartist/${id}`, config).then(({ data }) => {
+      // console.log(.split(' ').join('-'));
       window.localStorage.setItem('color', data.theme);
       setTheme(data.theme);
       setName(data.username);
@@ -88,7 +89,7 @@ const ArtistPage = () => {
     try {
       await API.put('/api/user/private/removealbumaccess', { albumId }, config);
 
-      navigate(`/artist/${id}`, { state: '' });
+      navigate(`/artist/${artistName}/${id}`, { state: '' });
     } catch (error) {
       console.log(error);
     }
@@ -102,18 +103,22 @@ const ArtistPage = () => {
           <img className='img-1' src={Img1} alt='banner-pic' />
 
           {localStorage.getItem('fanstarUserToken') ? (
-            <Link to={`/artist/${id}/wallet`}>
+            <Link to={`/artist/${artistName}/${id}/wallet`}>
               <Wallet className='wallet-icon' />
             </Link>
           ) : (
             <div
-              onClick={() => navigate('/login', { state: { artistid: id } })}
+              onClick={() =>
+                navigate('/login', {
+                  state: { artistid: id, artistName: artistName },
+                })
+              }
             >
               <User className='wallet-icon' />
               <text id='login-text-land'>Login</text>
             </div>
           )}
-          <Link to={`/artist/${id}/sub`}>
+          <Link to={`/artist/${artistName}/${id}/albumlist`}>
             <Bell className='bell-icon'> </Bell>
           </Link>
           <h1 className='img-1-heading'>Hi I'm {name}</h1>
@@ -144,7 +149,9 @@ const ArtistPage = () => {
                         <div
                           className='card-2'
                           onClick={() => {
-                            navigate(`/artist/${id}/user/service/${data._id}`);
+                            navigate(
+                              `/artist/${artistName}/${id}/user/service/${data._id}`
+                            );
                           }}
                         >
                           {' '}
@@ -168,7 +175,9 @@ const ArtistPage = () => {
               id='see-all'
               style={{ cursor: 'pointer' }}
               onClick={() => {
-                navigate(`/artist/${id}/user/imagelist`, { state: albumId });
+                navigate(`/artist/${artistName}/${id}/user/imagelist`, {
+                  state: albumId,
+                });
               }}
             >
               See All
@@ -222,7 +231,7 @@ const ArtistPage = () => {
                                 id='unlock-btn'
                                 onClick={() => {
                                   navigate(
-                                    `/artist/${id}/user/image/${data._id}`
+                                    `/artist/${artistName}/${id}/user/image/${data._id}`
                                   );
                                 }}
                               >
