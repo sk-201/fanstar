@@ -101,9 +101,9 @@ const ArtistLanding = () => {
               ut massa metus.Lorem ip
             </h1>
           </div>
-          <Link to='/register' style={{ textDecoration: 'none' }}>
+          {/**<Link to='/register' style={{ textDecoration: 'none' }}>
             <button className='btn-chat'>Chat now @ Rs 2000/-</button>
-          </Link>
+          </Link> */}
         </div>
         <div className='container-2'>
           <div className='heading-btnDiv'>

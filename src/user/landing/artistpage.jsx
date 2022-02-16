@@ -128,7 +128,7 @@ const ArtistPage = () => {
             <img className='img-2' src={profilePhoto} alt='banner-pic' />
             <h1 className='img-2-heading'>{bio}</h1>
           </div>
-          <button className='btn-chat'>Chat now @ Rs 2000/-</button>
+          {/**<button className='btn-chat'>Chat now @ Rs 2000/-</button> */}
         </div>
         <div className='container-2'>
           <h1 className='container-2-head'>Lets connect</h1>
