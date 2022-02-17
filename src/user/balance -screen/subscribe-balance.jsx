@@ -161,12 +161,12 @@ const SubBalance = () => {
       <div className='prod-details'>
         <h1 id='prod-type'>Product Type :</h1>
         <span id='pers-ser'>Personalised Service</span>
-        <span id='i-promote'>SUb plan</span>
+        <span id='i-promote'>Subscription plan</span>
       </div>
       <div className='amt-detail'>
         <h1 id='tot-amt'>Total Amount</h1>
         <span id='incl'>(inclusive of all charges)</span>
-        <span id='price'>Rs 500 </span>
+        <span id='price'>{`Rs. ${price}/-`}</span>
         <button className='btn-pay' onClick={buyService}>
           Pay with Wallet
         </button>

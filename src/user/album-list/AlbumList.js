@@ -42,7 +42,7 @@ const AlbumList = () => {
           dataArray.push({ ...d, subscribed: response.data.isSubscriber });
           // console.log(dataArray.length, 'len', data.length);
           if (dataArray.length === data.length) {
-            console.log(dataArray);
+            // console.log(dataArray);
             setAlbumList(dataArray);
             setLoading(false);
           }

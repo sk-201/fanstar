@@ -53,7 +53,7 @@ const ArtistPage = () => {
     });
     API.get(`/api/user/private/getallimages/${id}`, config).then(({ data }) => {
       setAllImages(data);
-      console.log(data);
+      // console.log(data);
     });
     if (albumId) {
       // console.log(albumId, 'state');

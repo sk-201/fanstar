@@ -50,7 +50,7 @@ const ChatScreen = () => {
     if (!boolVal) {
       API.get(`/api/chat/getachat/${roomId}`)
         .then(({ data }) => {
-          console.log(data);
+          // console.log(data);
           setServiceName(data.paymentId.serviceName);
           setMessages(data.allMessages);
         })
