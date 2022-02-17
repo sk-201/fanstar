@@ -6,9 +6,6 @@ import Back from '../.././assets/Rectangle 736.png';
 import BottomNav from '../BottomNav/BottomNav';
 import './subscriptions.css';
 const Subscribe = () => {
-  const [home, setHome] = useState(0);
-  const [chat, setChat] = useState(0);
-  const [lock, setLock] = useState(1);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [insta, setInsta] = useState('');
@@ -50,8 +47,8 @@ const Subscribe = () => {
             />
             <input
               className='inp-sub'
-              type='tel'
-              placeholder='Instagram id'
+              type='text'
+              placeholder='Instagram handle'
               value={insta}
               onChange={(e) => setInsta(e.target.value)}
             />
@@ -66,12 +63,12 @@ const Subscribe = () => {
                   alert('One or more Field is empty!!');
                 } else {
                   navigate(`/artist/${artistName}/${id}/subscribe/payment`, {
-                    state: { name, email, insta, albumId: albumId },
+                    state: { name, email, insta, albumId: albumId, price: 599 },
                   });
                 }
               }}
             >
-              Pay Rs 500/-
+              Pay
             </button>
           </div>
         </div>

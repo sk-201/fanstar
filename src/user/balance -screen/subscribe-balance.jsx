@@ -9,7 +9,7 @@ const SubBalance = () => {
   const { id, artistName } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const { name, email, insta, albumId } = location.state;
+  const { name, email, insta, albumId, price } = location.state;
   const [balance, setBalance] = useState('');
   const [openRecharge, setOpenRecharge] = useState(false);
   const [rechargeAmount, setRechargeAmount] = useState('');
@@ -18,7 +18,7 @@ const SubBalance = () => {
     navigate(`/artist/${artistName}/${id}/albumlist`);
   }
 
-  console.log(location.state);
+  // console.log(location.state);
 
   useEffect(() => {
     const config = {
@@ -98,7 +98,7 @@ const SubBalance = () => {
       alert('Thank you for buying my album!!');
       navigate(`/artist/${artistName}/${id}/viewalbum/${albumId}`);
     } catch (error) {
-      alert('Something went wrong');
+      alert('Something went wrong, check your wallet balance.');
       console.log(error);
     }
   };
