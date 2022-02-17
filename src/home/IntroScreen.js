@@ -32,9 +32,8 @@ const IntroScreen = () => {
               <h3 className='intro-aboutHead'>ABOUT US</h3>
               <h1 className='intro-brandName'>Fanstar</h1>
               <p className='intro-aboutContent'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                vitae aliquam platea orci. Et, praesent et lectus justo rutrum
-                non.{' '}
+                Our motive is to provide content creators with endless
+                opportunities to grow, earn and build their own empire.
               </p>
             </div>
           </div>
@@ -42,9 +41,9 @@ const IntroScreen = () => {
             <div className='home-secondContent'>
               <h3 className='home-secondHead'>Connect with your fans</h3>
               <p className='home-secondPara'>
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat sunt nostrud amet.
+                We made it possible for fans and brands to connect with their
+                favourite artist directly. Fanstar covers the barrier between a
+                fan or brand and an artist.
               </p>
             </div>
             <div className='home-imageDiv'>
@@ -55,9 +54,8 @@ const IntroScreen = () => {
             <div className='home-thirdContent'>
               <h3 className='home-thirdHead'>Create your own app</h3>
               <p className='home-thirdPara'>
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat sunt nostrud amet.
+                Fanstar made it possible to create application for artists in
+                just 5 minutes. It also helps artists to monetize their content.
               </p>
             </div>
             <div className='home-imageDiv'>
@@ -68,9 +66,9 @@ const IntroScreen = () => {
             <div className='home-secondContent'>
               <h3 className='home-secondHead'>Your privacy is our priority</h3>
               <p className='home-secondPara'>
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat sunt nostrud amet.
+                Fanstar have the will to protect the privacy of each and every
+                artist. It gives every artist full assurity that their privacy
+                is warranted.
               </p>
             </div>
             <div className='home-imageDiv'>

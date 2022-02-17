@@ -53,7 +53,7 @@ const ArtistPage = () => {
     });
     API.get(`/api/user/private/getallimages/${id}`, config).then(({ data }) => {
       setAllImages(data);
-      // console.log(data);
+      console.log(data);
     });
     if (albumId) {
       // console.log(albumId, 'state');
@@ -87,9 +87,15 @@ const ArtistPage = () => {
       },
     };
     try {
-      await API.put('/api/user/private/removealbumaccess', { albumId }, config);
+      await API.put(
+        '/api/user/private/removeimageaccess',
+        { imageId: albumId },
+        config
+      );
 
       navigate(`/artist/${artistName}/${id}`, { state: '' });
+      // setStartClock(false);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -212,6 +218,11 @@ const ArtistPage = () => {
                               }}
                             />
                           </div>
+                          {
+                            <p className='imageCaption-paraBottom'>
+                              {data.caption}
+                            </p>
+                          }
                         </div>
                       );
                     })}
@@ -246,7 +257,17 @@ const ArtistPage = () => {
                                   filter: 'blur(20px)',
                                 }}
                               />
+                              {/**data.accessedBy.length > 0 && (
+                                <p className='imageCaption-para'>
+                                  {data.caption}
+                                </p>
+                              ) */}
                             </div>
+                            {
+                              <p className='imageCaption-paraBottom'>
+                                {data.caption}
+                              </p>
+                            }
                           </div>
                         </div>
                       );
