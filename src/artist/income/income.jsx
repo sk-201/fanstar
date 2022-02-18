@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // import demo from '../../assets/demoProfile.png';
 import avatar from '../../assets/avatar.png';
 import Logo from '../../assets/Ellipse 58.png';
+import fanstar_logo from '../../assets/fanstar_logo.svg';
 import './income.css';
 import BottomNav from '../BottomNav/BottomNav';
 
@@ -135,9 +136,9 @@ const Income = () => {
     <Fragment>
       <div className='income'>
         <div className='img-cont-inc'>
-          <span id='fanstar'>Fanstar logo</span>
+          <span id='fanstar'>Fanstar</span>
         </div>
-        <img id='logo-img' src={Logo} />
+        <img id='logo-img' src={fanstar_logo} />
         <div className='main-container'>
           <span id='tot-inc-text'>Total Income</span>
           <div

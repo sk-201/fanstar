@@ -21,6 +21,10 @@ const AlbumList = () => {
           Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
         },
       });
+      if (data.length === 0) {
+        setLoading(false);
+        return;
+      }
       // console.log(data);
       let dataArray = [];
       data.forEach(async (d) => {

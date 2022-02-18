@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import API from '../../api';
+import fanstar_logo from '../.././assets/fanstar_logo.svg';
 import './login.css';
-import Logo from '../.././assets/Ellipse 58.png';
+
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,8 +34,12 @@ const Login = () => {
   return (
     <div className='login-main'>
       <div className='img-container'>
-        <img className='logo' src={Logo} alt='fanstar-logo' />
-        <h4 className='logo-sub-head'>Fanstar logo</h4>
+        <img
+          className='logo logoSizing'
+          src={fanstar_logo}
+          alt='fanstar-logo'
+        />
+        <h4 className='logo-sub-head'>Fanstar</h4>
       </div>
       <h2 className='login-heading'>Login </h2>
       <div className='inputs'>

@@ -1,23 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Home } from '../.././assets/home-white.svg';
-import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
-import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
-import { ReactComponent as HomeB } from '../.././assets/home.svg';
-import { ReactComponent as Chat } from '../.././assets/chat.svg';
-import { ReactComponent as Lock } from '../.././assets/opep.svg';
-import Logo from '../../assets/Ellipse 58.png';
+import fanstar_logo from '../../assets/fanstar_logo.svg';
 import BottomNav from '../BottomNav/BottomNav';
+
 const EmployeeIncome = () => {
   const [totalIncome, setTotalIncome] = useState(0);
   const [weeklyIncome, setWeeklyIncome] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [pendingOrders, setPendingOrders] = useState(0);
   const [boolVal, setBoolVal] = useState(false);
-  const [home, setHome] = useState(1);
-  const [chat, setChat] = useState(0);
-  const [lock, setLock] = useState(0);
   const navigate = useNavigate();
 
   const config = {
@@ -80,9 +72,9 @@ const EmployeeIncome = () => {
     <Fragment>
       <div className='income'>
         <div className='img-cont-inc'>
-          <span id='fanstar'>Fanstar logo</span>
+          <span id='fanstar'>Fanstar</span>
         </div>
-        <img id='logo-img' src={Logo} />
+        <img id='logo-img' src={fanstar_logo} />
         <div className='main-container'>
           <span id='tot-inc-text'>Total Income</span>
           <div className='total-income'>

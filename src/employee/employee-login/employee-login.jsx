@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
-import Logo from '../.././assets/Ellipse 58.png';
+import fanstar_logo from '../../assets/fanstar_logo.svg';
+import '../../user/login/login.css';
+
 const EmployeeLogin = () => {
   const navigate = useNavigate();
   const [phone, setPhone] = useState('');
@@ -27,8 +29,12 @@ const EmployeeLogin = () => {
   return (
     <div className='login-main'>
       <div className='img-container'>
-        <img className='logo' src={Logo} alt='fanstar-logo' />
-        <h4 className='logo-sub-head'>Fanstar logo</h4>
+        <img
+          className='logo logoSizing'
+          src={fanstar_logo}
+          alt='fanstar-logo'
+        />
+        <h4 className='logo-sub-head'>Fanstar</h4>
       </div>
       <h2 className='login-heading'>Login </h2>
       <div className='inputs'>

@@ -4,6 +4,7 @@ import moment from 'moment';
 import userIcon from '../../assets/chatuser.svg';
 import Logo from '../../assets/Ellipse 58.png';
 import chatPriceIcon from '../../assets/chatPriceIcon.svg';
+import fanstar_logo from '../../assets/fanstar_logo.svg';
 import './chatscreen.css';
 import API from '../../api';
 import { imageUrl } from '../../utils';
@@ -51,8 +52,8 @@ const ChatList = () => {
       <div className='chat'>
         <div className='chat-headerContainer'>
           <div className='chat-header-brand'>
-            <img className='chat-headerLogo' src={Logo} />
-            <h3 className='chat-headTitle'>Fanstar logo</h3>
+            <img className='chat-headerLogo' src={fanstar_logo} />
+            <h3 className='chat-headTitle'>Fanstar</h3>
           </div>
           <div className='chat-headerCharge'>
             {!loading && (

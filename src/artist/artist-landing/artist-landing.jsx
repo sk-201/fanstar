@@ -2,12 +2,13 @@ import React, { useEffect, useState, Fragment } from 'react';
 import API from '../../api';
 import Img1 from '../.././assets/Banner.png';
 import Img2 from '../.././assets/2-div-img.png';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../../user/landing/landing.css';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import SwiperCore, { Pagination } from 'swiper';
 import editIcon from '../../assets/edit-icon.svg';
-import demoCover from '../../assets/demoCover.png';
+// import fanstarAppLogo from '../../assets/fanstarAppLogo.jpeg'
+// import demoCover from '../../assets/demoCover.png';
 import { setTheme, imageUrl } from '../../utils';
 import BottomNav from '../BottomNav/BottomNav';
 

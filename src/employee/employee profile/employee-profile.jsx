@@ -2,21 +2,15 @@ import React, { Fragment, useState, useEffect } from 'react';
 import API from '../../api';
 import EmployeeEditProfile from './EmployeeEditProfile';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../../assets/Ellipse 58.png';
-import { ReactComponent as Home } from '../.././assets/home-white.svg';
-import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
-import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
-import { ReactComponent as HomeB } from '../.././assets/home.svg';
-import { ReactComponent as Chat } from '../.././assets/chat.svg';
-import { ReactComponent as Lock } from '../.././assets/opep.svg';
-import demoProfile from '../../assets/demoProfile.png';
+import fanstar_logo from '../../assets/fanstar_logo.svg';
+import avatar from '../../assets/avatar.png';
 import editIcon from '../../assets/editIcon.png';
 import './employee-profile.css';
 import BottomNav from '../BottomNav/BottomNav';
 
 const initialData = {
   username: '',
-  gender: '',
+  gender: 'Male',
   email: '',
   phone: '',
   profilePhoto: '',
@@ -26,9 +20,6 @@ const EmployeeProfile = () => {
   const [profileInfo, setProfileInfo] = useState(initialData);
   const [isEdit, setIsEdit] = useState(false);
   const [boolVal, setBoolVal] = useState(false);
-  const [home, setHome] = useState(0);
-  const [chat, setChat] = useState(0);
-  const [lock, setLock] = useState(1);
   const navigate = useNavigate();
 
   const fetchProfileInfo = async () => {
@@ -59,17 +50,15 @@ const EmployeeProfile = () => {
       {!isEdit ? (
         <Fragment>
           <div className='img-cont-inc' style={{ paddingTop: '1rem' }}>
-            <span id='fanstar'>Fanstar logo</span>
+            <span id='fanstar'>Fanstar</span>
           </div>
-          <img id='logo-img' src={Logo} />
+          <img id='logo-img' src={fanstar_logo} />
           <div className='profile-main-container'>
             <div className='profileImage-section'>
               <div className='profileImg-div'>
                 <img
                   src={
-                    profileInfo.profilePhoto
-                      ? profileInfo.profilePhoto
-                      : demoProfile
+                    profileInfo.profilePhoto ? profileInfo.profilePhoto : avatar
                   }
                   alt='profile'
                   className='profileImg'

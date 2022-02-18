@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import userIcon from '../../assets/chatuser.svg';
-import Logo from '../../assets/Ellipse 58.png';
+import fanstar_logo from '../../assets/fanstar_logo.svg';
 import '../../artist/chat/chatscreen.css';
 import API from '../../api';
 import { imageUrl } from '../../utils';
@@ -73,8 +73,8 @@ const UserChatList = () => {
     <Fragment>
       <div className='chat paddingToList'>
         <div className='chat-headerContainer'>
-          <img className='chat-headerLogo' src={Logo} alt='logo' />
-          <h3 className='chat-headTitle'>Fanstar logo</h3>
+          <img className='chat-headerLogo' src={fanstar_logo} alt='logo' />
+          <h3 className='chat-headTitle'>Fanstar</h3>
         </div>
         <div className='chat-container'>
           {loading ? (

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-
+// import ArtistPrivateRoute from './Routes/ArtistPrivateRoute';
 import Login from './user/login/login';
 import Otp from './user/otp/otp';
 import Resend from './user/resend/resend';
@@ -63,104 +62,133 @@ function App() {
     return (
       <div className='App'>
         <Routes>
-          <Route path='/' element={<IntroScreen />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/otp/:phone' element={<Otp />} />
-          <Route path='/resend' element={<Resend />} />
+          <Route path='/' exact element={<IntroScreen />} />
+          <Route path='/login' exact element={<Login />} />
+          <Route path='/otp/:phone' exact element={<Otp />} />
+          <Route path='/resend' exact element={<Resend />} />
           <Route
             path='/artist/:artistName/:artistId/user/service/:serviceId'
+            exact
             element={<Register />}
           />
           <Route
             path='/artist/:artistName/:artistId/user/feedback'
+            exact
             element={<Feedback />}
           />
           <Route
             path='/artist/:artistName/:artistId/user/service/:serviceId/payment'
+            exact
             element={<Balance />}
           />
           <Route
             path='/artist/:artistName/:artistId/user/image/:albumId'
+            exact
             element={<AlbumBuy />}
           />
           <Route
             path='/artist/:artistName/:id/wallet'
+            exact
             element={<WalletBalance />}
           />
           <Route
             path='/artist/:artistName/:id/user/imagelist'
+            exact
             element={<Album />}
           />
           <Route
             path='/artist/:artistName/:id/user/bookings'
+            exact
             element={<Bookings />}
           />
           <Route
             path='/artist/:artistName/:id/albumlist'
+            exact
             element={<AlbumList />}
           />
           <Route
             path='/artist/:artistName/:id/viewalbum/:albumId'
+            exact
             element={<PurchasedAlbum />}
           />
 
           {/** <Route path='/artist/:id/sub' element={<Subscription />} /> */}
           <Route
             path='/artist/:artistName/:id/subscribe/:albumId'
+            exact
             element={<Subscribe />}
           />
           <Route
             path='/artist/:artistName/:id/renew'
+            exact
             element={<RenewSubscription />}
           />
           <Route
             path='/artist/:artistName/:id/subscribe/payment'
+            exact
             element={<SubBalance />}
           />
           <Route
             path='/artist/:artistName/:id/user/chat'
+            exact
             element={<ChatScreen />}
           />
           <Route
             path='/artist/:artistName/:id/user/chatlist'
+            exact
             element={<UserChatList />}
           />
-          <Route path='/pay' element={<Payment />} />
-          <Route path='/income' element={<Income />} />
-          <Route path='/income/transaction' element={<AllTransactions />} />
+          <Route path='/pay' exact element={<Payment />} />
+          <Route path='/income' exact element={<Income />} />
+          <Route
+            path='/income/transaction'
+            exact
+            element={<AllTransactions />}
+          />
           <Route
             path='/income/request-withdraw'
+            exact
             element={<RequestWithdrawal />}
           />
-          <Route path='/edit' element={<Edit />} />
-          <Route path='/addservice' element={<AddService />} />
-          <Route path='/editservice/:id' element={<EditService />} />
-          <Route path='/service' element={<MyService />} />
-          <Route path='/add' element={<AddImage />} />
-          <Route path='/artist/landing' element={<ArtistLanding />} />
-          <Route path='/artist/landing/:token' element={<ArtistLanding />} />
-          <Route path='/artist/login' element={<ArtistLogin />} />
-          <Route path='/artist/addalbum' element={<AddAlbum />} />
-          <Route path='/artist/myalbums' element={<MyAlbums />} />
-          <Route path='/artist/viewalbum/:id' element={<ViewAlbum />} />
-          <Route path='/artist/editalbum/:id' element={<EditAlbum />} />
-          <Route path='/artist/otp/:phone' element={<ArtistOtp />} />
-          <Route path='/myimage' element={<MyImage />} />
-          <Route path='/chat' element={<ChatList />} />
-          <Route path='/artist/chat' element={<ArtistChat />} />
-          <Route path='/employee/login' element={<EmployeeLogin />} />
-          <Route path='/employee/otp/:phone' element={<EmployeeOtp />} />
-          <Route path='/employee/income' element={<EmployeeIncome />} />
+          <Route path='/edit' exact element={<Edit />} />
+          <Route path='/addservice' exact element={<AddService />} />
+          <Route path='/editservice/:id' exact element={<EditService />} />
+          <Route path='/service' exact element={<MyService />} />
+          <Route path='/add' exact element={<AddImage />} />
+          <Route path='/artist/landing' exact element={<ArtistLanding />} />
+          <Route
+            path='/artist/landing/:token'
+            exact
+            element={<ArtistLanding />}
+          />
+          <Route path='/artist/login' exact element={<ArtistLogin />} />
+          <Route path='/artist/addalbum' exact element={<AddAlbum />} />
+          <Route path='/artist/myalbums' exact element={<MyAlbums />} />
+          <Route path='/artist/viewalbum/:id' exact element={<ViewAlbum />} />
+          <Route path='/artist/editalbum/:id' exact element={<EditAlbum />} />
+          <Route path='/artist/otp/:phone' exact element={<ArtistOtp />} />
+          <Route path='/myimage' exact element={<MyImage />} />
+          <Route path='/chat' exact element={<ChatList />} />
+          <Route path='/artist/chat' exact element={<ArtistChat />} />
+          <Route path='/employee/login' exact element={<EmployeeLogin />} />
+          <Route path='/employee/otp/:phone' exact element={<EmployeeOtp />} />
+          <Route path='/employee/income' exact element={<EmployeeIncome />} />
           <Route
             path='/employee/myArtists'
+            exact
             element={<EmployeeLinkedArtist />}
           />
           <Route
             path='/employee/myArtists/:artistId'
+            exact
             element={<LinkedArtistDetials />}
           />
-          <Route path='/employee/profile' element={<EmployeeProfile />} />
-          <Route path='/artist/:artistName/:id' element={<ArtistPage />} />
+          <Route path='/employee/profile' exact element={<EmployeeProfile />} />
+          <Route
+            path='/artist/:artistName/:id'
+            exact
+            element={<ArtistPage />}
+          />
         </Routes>
       </div>
     );

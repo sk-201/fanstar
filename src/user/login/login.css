@@ -1,67 +1,71 @@
-.login-heading{
-margin-left:5%;
-font-family: 'Montserrat', sans-serif;
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
+.login-heading {
+  margin-left: 5%;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+}
+.input-no {
+  margin-top: 0;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 1rem;
+  width: 80%;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  background: #f3f3f3;
+  border-radius: 8px;
+}
+::placeholder {
+  color: #b6b6b6 !important;
+  opacity: 1;
+}
 
-    
+.msg-no {
+  margin-left: 2.2rem;
+  margin-top: 0.2rem;
+  color: #828282;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
 }
-.input-no{
-     margin-top:1rem;
-     margin-left: 5%;
-     margin-right:5%;
-     padding:1rem;
-     width:80%;
-     border:none;
-     font-family: 'Poppins', sans-serif;
-     background: #F3F3F3;
-     border-radius: 8px;
+.btn-nxt {
+  width: 90%;
+  height: 7vh;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 3rem;
+  padding: 1rem;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  background: #2d2d2d;
+  color: #ffffff;
+  border-radius: 8px;
+  border: none;
 }
-::placeholder { 
-     color: #B6b6b6!important;
-     opacity: 1; 
-   }
+.logo {
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-top: 10%;
+}
 
-.msg-no{
-    margin-left:2.2rem;
-    margin-top: 0.2rem;
-    color: #828282;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 13px;
+.logoSizing {
+  height: 71px;
+  width: 71px;
+  object-fit: contain;
 }
-.btn-nxt{
-     width: 90%;
-     height:7vh;
-     margin-left: 5%;
-     margin-right:5%;
-     margin-top:3rem;
-     padding:1rem;
-     font-family: Montserrat;
-     font-style: normal;
-     font-weight: bold;
-     font-size: 18px;
-     background: #2D2D2D;
-     color:#ffffff;
-     border-radius: 8px;
-     border:none; 
 
-}
-.logo{
-     margin-left: 40%;
-     margin-right: 40%;
-     margin-top:10%;
-     
-}
-.logo-sub-head{
-font-family: Montserrat;
-font-style: normal;
-font-weight: 500;
-font-size: 24px;
-margin-left:27%;
-margin-right:27%;
-margin-top:.5rem;
-margin-bottom: 20%;
+.logo-sub-head {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  margin-left: 27%;
+  margin-right: 27%;
+  margin-top: 0.5rem;
+  margin-bottom: 20%;
+  text-align: center;
 }

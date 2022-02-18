@@ -1,9 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Img1 from '../.././assets/Banner.png';
-import Img2 from '../.././assets/2-div-img.png';
-import AlbumImg1 from '../.././assets/Group 33907.png';
-import AlbumImg2 from '../.././assets/Group 33906.png';
-import AlbumImg3 from '../.././assets/Group 33945.png';
 import 'swiper/swiper.min.css';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import SwiperCore, { Pagination } from 'swiper';
@@ -14,7 +10,7 @@ import { ReactComponent as Wallet } from '../.././assets/wallet.svg';
 import { ReactComponent as Bell } from '../.././assets/bell.svg';
 import { ReactComponent as User } from '../.././assets/userlogin.svg';
 import { ReactComponent as Clock } from '../.././assets/clock.svg';
-import { setTheme, imageUrl } from '../../utils';
+import { setTheme, imageUrl, addToHome } from '../../utils';
 import './landing.css';
 import BottomNav from '../BottomNav/BottomNav';
 
@@ -101,7 +97,38 @@ const ArtistPage = () => {
     }
   };
 
-  // console.log(location,"location");
+  const addToHome = () => {
+    let deferredPrompt;
+    const addBtn = document.querySelector('.addToHome-btn');
+    addBtn.style.display = 'none';
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+      // Update UI to notify the user they can add to home screen
+      addBtn.style.display = 'block';
+
+      addBtn.addEventListener('click', () => {
+        // hide our user interface that shows our A2HS button
+        console.log('clicked in');
+        addBtn.style.display = 'none';
+        // Show the prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+          deferredPrompt = null;
+        });
+      });
+    });
+  };
+
   return (
     <Fragment>
       <div className='user-landing'>
@@ -124,6 +151,9 @@ const ArtistPage = () => {
               <text id='login-text-land'>Login</text>
             </div>
           )}
+          <button className='addToHome-btn' onClick={addToHome}>
+            Add to home
+          </button>
           <Link to={`/artist/${artistName}/${id}/albumlist`}>
             <Bell className='bell-icon'> </Bell>
           </Link>
