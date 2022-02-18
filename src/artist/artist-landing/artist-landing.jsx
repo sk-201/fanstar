@@ -71,11 +71,50 @@ const ArtistLanding = () => {
 
   SwiperCore.use([Pagination]);
 
+  const addToHome = () => {
+    let deferredPrompt;
+    const addBtn = document.querySelector('.addToHome-btn');
+    addBtn.style.display = 'none';
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+      // Update UI to notify the user they can add to home screen
+      addBtn.style.display = 'block';
+
+      addBtn.addEventListener('click', () => {
+        // hide our user interface that shows our A2HS button
+        console.log('clicked in');
+        addBtn.style.display = 'none';
+        // Show the prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice
+          .then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the A2HS prompt');
+            } else {
+              console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    });
+  };
+
   return (
     <Fragment>
       <div className='container'>
         <div className='img-header'>
           <img className='img-1' src={Img1} alt='banner-pic' />
+          <button className='addToHome-btn' onClick={addToHome}>
+            Add to home
+          </button>
           <h1 className='img-1-heading'>
             {Object.keys(artistDetails).length > 0
               ? `Hi I'm ${artistDetails.username}`
