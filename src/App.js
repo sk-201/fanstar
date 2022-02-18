@@ -61,7 +61,6 @@ function App() {
 
     return (
       <div className='App'>
-        <Add
         <Routes>
           <Route path='/' exact element={<IntroScreen />} />
           <Route path='/login' exact element={<Login />} />
