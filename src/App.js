@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import AddToHomescreen from 'react-add-to-homescreen';
 // import ArtistPrivateRoute from './Routes/ArtistPrivateRoute';
 import Login from './user/login/login';
 import Otp from './user/otp/otp';
@@ -59,8 +60,13 @@ function App() {
   if (isMobile) {
     setTheme(themeColor);
 
+    const handleClick = () => {
+      alert('clicked');
+    };
+
     return (
       <div className='App'>
+        <AddToHomescreen onAddToHomescreenClick={handleClick} />
         <Routes>
           <Route path='/' exact element={<IntroScreen />} />
           <Route path='/login' exact element={<Login />} />
