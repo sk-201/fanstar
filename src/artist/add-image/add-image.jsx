@@ -6,15 +6,22 @@ import './add-image.css';
 const AddImage = () => {
   const navigate = useNavigate();
   const [baseImage, setBaseImage] = useState('');
+  const [isImage, setIsImage] = useState(false);
   const [caption, setCaption] = useState('');
   const [price, setPrice] = useState('');
   const [fileStore, setFileStore] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const uploadImage = async (e) => {
-    const file = e.target.files[0];
+    // const file = e.target.files[0];
+    // console.log(file);
+    // const base64 = await convertBase64(file);
+    // setBaseImage(base64);
+    // if (e.target.files[0].type.include('video')) {
+    //   setIsImage(false);
+    // }
     setFileStore(e.target.files[0]);
-    const base64 = await convertBase64(file);
-    setBaseImage(base64);
+    setBaseImage(URL.createObjectURL(e.target.files[0]));
   };
 
   const convertBase64 = (file) => {
@@ -31,6 +38,7 @@ const AddImage = () => {
       };
     });
   };
+
   const sendImage = async (e) => {
     e.preventDefault();
 
@@ -44,11 +52,14 @@ const AddImage = () => {
       if (caption.trim().length == 0 && price.trim().length() == 0) {
         alert('Caption or Price is empty');
       }
+      // console.log(fileStore);
       const data = new FormData();
       data.append('caption', caption);
       data.append('price', price);
       data.append('artistFile', fileStore);
+      setLoading(true);
       await API.post('/api/artist/private/uploadimage', data, config);
+      setLoading(false);
       alert('Image Uploaded!');
       navigate('/artist/landing');
     } catch (error) {
@@ -66,50 +77,56 @@ const AddImage = () => {
           >
             <img src={backArrow} alt='back' className='addImage-backIcon' />
           </button>
-          <h3 className='addImage-title'>Add Image</h3>
+          <h3 className='addImage-title'>Add Image Or Video</h3>
         </div>
         <div className='addImage-postBtnDiv'>
-          <button className='addImage-postBtn' onClick={sendImage}>
+          <button
+            className='addImage-postBtn'
+            onClick={sendImage}
+            disabled={loading}
+          >
             Post
           </button>
         </div>
       </div>
-
-      <div className='add-img-cont'>
-        <div>
-          {baseImage ? (
-            <img id='added-img' src={baseImage} />
-          ) : (
-            <div>
-              <input
-                type='file'
-                onChange={(e) => {
-                  uploadImage(e);
-                }}
-                className='inp-add-img'
-              />
-            </div>
-          )}
+      {loading ? (
+        <h3 className='artistChatlist-loading'>Posting...</h3>
+      ) : (
+        <div className='add-img-cont'>
+          <div>
+            {baseImage && isImage ? (
+              <img id='added-img' src={baseImage} />
+            ) : (
+              <div>
+                <input
+                  type='file'
+                  accept='image/*, video/*'
+                  onChange={uploadImage}
+                  className='inp-add-img'
+                />
+              </div>
+            )}
+          </div>
+          <label for='add-caption'> Add Caption</label>
+          <input
+            id='add-caption'
+            type='text'
+            className='inp-add-img'
+            placeholder='typing...'
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
+          />
+          <label for='img-price'> Add Price</label>
+          <input
+            id='img-price'
+            type='text'
+            className='inp-add-img'
+            placeholder='Rs'
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
         </div>
-        <label for='add-caption'> Add Caption</label>
-        <input
-          id='add-caption'
-          type='text'
-          className='inp-add-img'
-          placeholder='typing...'
-          value={caption}
-          onChange={(e) => setCaption(e.target.value)}
-        />
-        <label for='img-price'> Add Price</label>
-        <input
-          id='img-price'
-          type='text'
-          className='inp-add-img'
-          placeholder='Rs'
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-      </div>
+      )}
     </div>
   );
 };

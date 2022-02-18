@@ -14,7 +14,7 @@ import { ReactComponent as Wallet } from '../.././assets/wallet.svg';
 import { ReactComponent as Bell } from '../.././assets/bell.svg';
 import { ReactComponent as User } from '../.././assets/userlogin.svg';
 import { ReactComponent as Clock } from '../.././assets/clock.svg';
-import { setTheme } from '../../utils';
+import { setTheme, imageUrl } from '../../utils';
 import './landing.css';
 import BottomNav from '../BottomNav/BottomNav';
 
@@ -193,30 +193,60 @@ const ArtistPage = () => {
             {(new Date().getTime() - timestamp) / 1000 <= 120 ? ( //condition
               <div>
                 {' '}
-                <Clock id='clock-svg' />{' '}
-                <span id='timer-clock'> {seconds} sec</span>
                 <div className='album-card'>
                   {allImages.length > 0 &&
-                    allImages.slice(0, 3).map((data, ind) => {
+                    allImages.map((data, ind) => {
                       return (
                         <div>
+                          {data.accessedBy.length > 0 && (
+                            <Fragment>
+                              <Clock id='clock-svg' />{' '}
+                              <span id='timer-clock'> {seconds} sec</span>
+                            </Fragment>
+                          )}
                           <div className='album-card-1' key={ind}>
-                            <img
-                              className='album-card-img'
-                              src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.url}`}
-                              style={{
-                                webkitFilter: `${
-                                  data.accessedBy.length > 0
-                                    ? 'blur(0px)'
-                                    : 'blur(20px)'
-                                }`,
-                                filter: `${
-                                  data.accessedBy.length > 0
-                                    ? 'blur(0px)'
-                                    : 'blur(20px)'
-                                }`,
-                              }}
-                            />
+                            {data.url.split('.').pop() === 'jpg' ||
+                            data.url.split('.').pop() === 'jpeg' ||
+                            data.url.split('.').pop() === 'png' ? (
+                              <img
+                                className='album-card-img'
+                                src={`${imageUrl}/${data.url}`}
+                                style={{
+                                  webkitFilter: `${
+                                    data.accessedBy.length > 0
+                                      ? 'blur(0px)'
+                                      : 'blur(20px)'
+                                  }`,
+                                  filter: `${
+                                    data.accessedBy.length > 0
+                                      ? 'blur(0px)'
+                                      : 'blur(20px)'
+                                  }`,
+                                }}
+                              />
+                            ) : (
+                              <video
+                                className='album-card-img'
+                                controls
+                                style={{
+                                  webkitFilter: `${
+                                    data.accessedBy.length > 0
+                                      ? 'blur(0px)'
+                                      : 'blur(20px)'
+                                  }`,
+                                  filter: `${
+                                    data.accessedBy.length > 0
+                                      ? 'blur(0px)'
+                                      : 'blur(20px)'
+                                  }`,
+                                }}
+                              >
+                                <source
+                                  src={`${imageUrl}/${data.url}`}
+                                  type='video/mp4'
+                                />
+                              </video>
+                            )}
                           </div>
                           {
                             <p className='imageCaption-paraBottom'>
@@ -249,14 +279,32 @@ const ArtistPage = () => {
                                 {' '}
                                 Unlock now
                               </button>
-                              <img
-                                className='album-card-img'
-                                src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.url}`}
-                                style={{
-                                  webkitFilter: 'blur(20px)',
-                                  filter: 'blur(20px)',
-                                }}
-                              />
+                              {data.url.split('.').pop() === 'jpg' ||
+                              data.url.split('.').pop() === 'jpeg' ||
+                              data.url.split('.').pop() === 'png' ? (
+                                <img
+                                  className='album-card-img'
+                                  src={`${imageUrl}/${data.url}`}
+                                  style={{
+                                    webkitFilter: 'blur(20px)',
+                                    filter: 'blur(20px)',
+                                  }}
+                                />
+                              ) : (
+                                <video
+                                  className='album-card-img'
+                                  controls='false'
+                                  style={{
+                                    webkitFilter: 'blur(20px)',
+                                    filter: 'blur(20px)',
+                                  }}
+                                >
+                                  <source
+                                    src={`${imageUrl}/${data.url}`}
+                                    type='video/mp4'
+                                  />
+                                </video>
+                              )}
                               {/**data.accessedBy.length > 0 && (
                                 <p className='imageCaption-para'>
                                   {data.caption}

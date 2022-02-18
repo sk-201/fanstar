@@ -8,6 +8,7 @@ import { ReactComponent as HomeB } from '../.././assets/home.svg';
 import { ReactComponent as Chat } from '../.././assets/chat.svg';
 import { ReactComponent as Lock } from '../.././assets/lock.svg';
 import API from '../../api';
+import { imageUrl } from '../../utils';
 import '../landing/landing.css';
 import BottomNav from '../BottomNav/BottomNav';
 const Album = () => {
@@ -37,7 +38,7 @@ const Album = () => {
     });
     if (albumId) {
       // console.log(albumId,"state");
-      API.get(`/api/user/private/getalbumtimestamp/${albumId}`, config).then(
+      API.get(`/api/user/private/getimagetimestamp/${albumId}`, config).then(
         (res) => {
           setTimestamp(new Date().getTime());
           setStartClock(true);
@@ -66,7 +67,11 @@ const Album = () => {
       },
     };
     try {
-      await API.put('/api/user/private/removealbumaccess', { albumId }, config);
+      await API.put(
+        '/api/user/private/removeimageaccess',
+        { imageId: albumId },
+        config
+      );
 
       navigate(`/artist/${artistName}/${id}`, { state: '' });
     } catch (error) {
@@ -101,23 +106,52 @@ const Album = () => {
                     return (
                       <div>
                         <div className='album-card-1' key={ind}>
-                          <img
-                            className='album-card-img'
-                            src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.fileUrl}`}
-                            style={{
-                              webkitFilter: `${
-                                data.accessedBy.length > 0
-                                  ? 'blur(0px)'
-                                  : 'blur(10px)'
-                              }`,
-                              filter: `${
-                                data.accessedBy.length > 0
-                                  ? 'blur(0px)'
-                                  : 'blur(10px)'
-                              }`,
-                            }}
-                          />
+                          {data.url.split('.').pop() === 'jpg' ||
+                          data.url.split('.').pop() === 'jpeg' ||
+                          data.url.split('.').pop() === 'png' ? (
+                            <img
+                              className='album-card-img'
+                              src={`${imageUrl}/${data.url}`}
+                              style={{
+                                webkitFilter: `${
+                                  data.accessedBy.length > 0
+                                    ? 'blur(0px)'
+                                    : 'blur(20px)'
+                                }`,
+                                filter: `${
+                                  data.accessedBy.length > 0
+                                    ? 'blur(0px)'
+                                    : 'blur(20px)'
+                                }`,
+                              }}
+                            />
+                          ) : (
+                            <video
+                              className='album-card-img'
+                              controls
+                              style={{
+                                webkitFilter: `${
+                                  data.accessedBy.length > 0
+                                    ? 'blur(0px)'
+                                    : 'blur(20px)'
+                                }`,
+                                filter: `${
+                                  data.accessedBy.length > 0
+                                    ? 'blur(0px)'
+                                    : 'blur(20px)'
+                                }`,
+                              }}
+                            >
+                              <source
+                                src={`${imageUrl}/${data.url}`}
+                                type='video/mp4'
+                              />
+                            </video>
+                          )}
                         </div>
+                        <p className='imageCaption-paraBottom'>
+                          {data.caption}
+                        </p>
                       </div>
                     );
                   })}
@@ -144,15 +178,36 @@ const Album = () => {
                               {' '}
                               Unlock now
                             </button>
-                            <img
-                              className='album-card-img'
-                              src={`https://fanstar.s3.us-east-2.amazonaws.com/${data.url}`}
-                              style={{
-                                webkitFilter: 'blur(10px)',
-                                filter: 'blur(10px)',
-                              }}
-                            />
+                            {data.url.split('.').pop() === 'jpg' ||
+                            data.url.split('.').pop() === 'jpeg' ||
+                            data.url.split('.').pop() === 'png' ? (
+                              <img
+                                className='album-card-img'
+                                src={`${imageUrl}/${data.url}`}
+                                style={{
+                                  webkitFilter: 'blur(20px)',
+                                  filter: 'blur(20px)',
+                                }}
+                              />
+                            ) : (
+                              <video
+                                className='album-card-img'
+                                controls='false'
+                                style={{
+                                  webkitFilter: 'blur(20px)',
+                                  filter: 'blur(20px)',
+                                }}
+                              >
+                                <source
+                                  src={`${imageUrl}/${data.url}`}
+                                  type='video/mp4'
+                                />
+                              </video>
+                            )}
                           </div>
+                          <p className='imageCaption-paraBottom'>
+                            {data.caption}
+                          </p>
                         </div>
                       </div>
                     );
