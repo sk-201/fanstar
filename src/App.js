@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Landing from './user/landing/landing';
+import jwt_decode from 'jwt-decode';
+
 import Login from './user/login/login';
 import Otp from './user/otp/otp';
 import Resend from './user/resend/resend';
@@ -58,6 +59,7 @@ function App() {
 
   if (isMobile) {
     setTheme(themeColor);
+
     return (
       <div className='App'>
         <Routes>
