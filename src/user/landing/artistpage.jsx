@@ -127,7 +127,7 @@ const ArtistPage = () => {
   let deferredPrompt;
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
-    var addBtn = document.getElementById('addToScreen');
+    var addBtn = document.getElementById('addToScreen-user');
     console.log(addBtn);
     deferredPrompt = e;
     if (accepted == 0) {
