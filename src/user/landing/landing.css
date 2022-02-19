@@ -52,6 +52,9 @@
   object-fit: cover;
   position: relative;
 }
+#addToScreen {
+  z-index: 15;
+}
 
 .img-1-heading {
   margin-top: 0px;
