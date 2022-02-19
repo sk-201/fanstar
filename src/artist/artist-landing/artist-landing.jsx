@@ -79,7 +79,7 @@ const ArtistLanding = () => {
 
     const btnInstallApp = document.getElementById('addToScreen');
 
-    if (btnInstallApp) {
+    if (btnInstallApp && deferredPrompt) {
       btnInstallApp.addEventListener('click', (e) => {
         deferredPrompt.prompt();
         console.log(deferredPrompt);

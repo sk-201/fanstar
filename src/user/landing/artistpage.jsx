@@ -107,7 +107,7 @@ const ArtistPage = () => {
 
     const btnInstallApp = document.getElementById('addToScreen-user');
 
-    if (btnInstallApp) {
+    if (btnInstallApp && deferredPrompt) {
       btnInstallApp.addEventListener('click', (e) => {
         deferredPrompt.prompt();
         console.log(deferredPrompt);
