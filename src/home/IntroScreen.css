@@ -19,12 +19,13 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 2.5rem;
 }
 
 .intro-logoImg {
   height: 70px;
   width: 70px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .intro-loginDiv {

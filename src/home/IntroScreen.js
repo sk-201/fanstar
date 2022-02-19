@@ -30,11 +30,11 @@ const IntroScreen = () => {
               </button>
             </div>
             <div className='intro-aboutDiv'>
-              <h3 className='intro-aboutHead'>ABOUT US</h3>
               <div className='intro-pageTitleDiv'>
                 <img src={fanstar_logo} alt='logo' className='intro-logoImg' />
                 <h1 className='intro-brandName'>Fanstar</h1>
               </div>
+              <h3 className='intro-aboutHead'>ABOUT US</h3>
               <p className='intro-aboutContent'>
                 Our motive is to provide content creators with endless
                 opportunities to grow, earn and build their own empire.
