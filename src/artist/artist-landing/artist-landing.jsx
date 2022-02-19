@@ -95,13 +95,16 @@ const ArtistLanding = () => {
   // };
 
   let deferredPrompt;
+  var addBtn = document.getElementById('addToScreen');
+  addBtn.style.display = 'none';
+
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
-    var addBtn = document.getElementById('addToScreen');
+
     console.log(addBtn);
     deferredPrompt = e;
     if (accepted == 0) {
-      addBtn.show();
+      addBtn.style.display = 'block';
     }
   });
 
