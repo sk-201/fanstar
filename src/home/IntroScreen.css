@@ -14,6 +14,19 @@
   padding: 5%;
 }
 
+.intro-pageTitleDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.intro-logoImg {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+}
+
 .intro-loginDiv {
   display: flex;
   flex-direction: row;
@@ -51,6 +64,7 @@
   font-size: 32px;
   line-height: 48px;
   color: #fff;
+  margin-left: 1rem;
 }
 
 .intro-aboutContent {

@@ -22,7 +22,12 @@ const EmployeeLogin = () => {
         alert('Mobile no is not correct!');
       }
     } catch (error) {
-      console.log(error);
+      alert(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
+      console.log(error.response.data?.error);
     }
   };
 

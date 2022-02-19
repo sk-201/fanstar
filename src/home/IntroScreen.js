@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import fanstar_logo from '../assets/fanstar_logo.svg';
 import fansImage from '../assets/fansImage.png';
 import appIcon from '../assets/appIcon.png';
 import introImage1 from '../assets/introImage1.png';
@@ -30,7 +31,10 @@ const IntroScreen = () => {
             </div>
             <div className='intro-aboutDiv'>
               <h3 className='intro-aboutHead'>ABOUT US</h3>
-              <h1 className='intro-brandName'>Fanstar</h1>
+              <div className='intro-pageTitleDiv'>
+                <img src={fanstar_logo} alt='logo' className='intro-logoImg' />
+                <h1 className='intro-brandName'>Fanstar</h1>
+              </div>
               <p className='intro-aboutContent'>
                 Our motive is to provide content creators with endless
                 opportunities to grow, earn and build their own empire.
