@@ -37,10 +37,11 @@ const Otp = () => {
         );
         // console.log(data);
         localStorage.setItem('fanstarUserToken', data);
-        alert('Login Successfull');
-        navigate(
-          `/artist/${location.state.artistName}/${location.state.artistid}`
-        );
+        // alert('Login Successfull');
+        // navigate(
+        //   `/artist/${location.state.artistName}/${location.state.artistid}`
+        // );
+        window.location.href = `/artist/${location.state.artistName}/${location.state.artistid}`;
       } else {
         alert('Something went wrong Please try again later!');
       }

@@ -125,11 +125,9 @@ const ArtistPage = () => {
   // };
 
   let deferredPrompt;
-  var addBtn = document.getElementById('addToScreen-user');
-  addBtn.style.display = 'none';
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
-
+    var addBtn = document.getElementById('addToScreen-user');
     // console.log(addBtn);
     deferredPrompt = e;
     if (accepted == 0) {

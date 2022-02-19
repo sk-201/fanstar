@@ -55,8 +55,9 @@ const ArtistOtp = () => {
         );
         console.log(data);
         localStorage.setItem('fanstarToken', data);
-        alert('Login Successfull');
-        navigate(`/artist/landing`);
+        // alert('Login Successfull');
+        // navigate(`/artist/landing`);
+        window.location.href = `/artist/landing`;
       } else {
         alert('Something went wrong Please try again later!');
       }
