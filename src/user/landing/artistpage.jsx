@@ -28,6 +28,7 @@ const ArtistPage = () => {
   const [startClock, setStartClock] = useState(false);
   const location = useLocation();
   const [albumId, setAlbumId] = useState(location.state);
+  var deferredPrompt;
 
   useEffect(() => {
     const config = {
@@ -98,35 +99,28 @@ const ArtistPage = () => {
   };
 
   const addToHome = () => {
-    let deferredPrompt;
-    const addBtn = document.querySelector('.addToHome-btn');
-    addBtn.style.display = 'none';
-
     window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
-      // Stash the event so it can be triggered later.
       deferredPrompt = e;
-      // Update UI to notify the user they can add to home screen
-      addBtn.style.display = 'block';
+      console.log(e);
+    });
 
-      addBtn.addEventListener('click', () => {
-        // hide our user interface that shows our A2HS button
-        console.log('clicked in');
-        addBtn.style.display = 'none';
-        // Show the prompt
+    const btnInstallApp = document.getElementById('addToScreen-user');
+
+    if (btnInstallApp) {
+      btnInstallApp.addEventListener('click', (e) => {
         deferredPrompt.prompt();
-        // Wait for the user to respond to the prompt
+        console.log(deferredPrompt);
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
+            console.log('user accepted A2HS prompt');
           } else {
-            console.log('User dismissed the A2HS prompt');
+            console.log('user dismissed A2HS prompt');
           }
           deferredPrompt = null;
         });
       });
-    });
+    }
   };
 
   return (
@@ -151,8 +145,12 @@ const ArtistPage = () => {
               <text id='login-text-land'>Login</text>
             </div>
           )}
-          <button className='addToHome-btn' onClick={addToHome}>
-            Add to home
+          <button
+            className='addToHome-btn'
+            id='addToScreen-user'
+            onClick={addToHome}
+          >
+            Install
           </button>
           <Link to={`/artist/${artistName}/${id}/albumlist`}>
             <Bell className='bell-icon'> </Bell>

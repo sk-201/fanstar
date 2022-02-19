@@ -18,9 +18,6 @@ const ArtistLanding = () => {
   const [imageList, setImageList] = useState([]);
   const [albumList, setAlbumList] = useState([]);
   const [artistDetails, setArtistDetails] = useState({});
-  const [home, setHome] = useState(0);
-  const [chat, setChat] = useState(0);
-  const [lock, setLock] = useState(1);
   const navigate = useNavigate();
   var deferredPrompt;
   var addBtn = document.querySelector('.addToHome-btn');
@@ -73,12 +70,6 @@ const ArtistLanding = () => {
 
   SwiperCore.use([Pagination]);
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    console.log(deferredPrompt);
-  });
-
   const addToHome = () => {
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
@@ -91,6 +82,7 @@ const ArtistLanding = () => {
     if (btnInstallApp) {
       btnInstallApp.addEventListener('click', (e) => {
         deferredPrompt.prompt();
+        console.log(deferredPrompt);
         deferredPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
             console.log('user accepted A2HS prompt');
