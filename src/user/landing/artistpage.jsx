@@ -28,7 +28,8 @@ const ArtistPage = () => {
   const [startClock, setStartClock] = useState(false);
   const location = useLocation();
   const [albumId, setAlbumId] = useState(location.state);
-  var deferredPrompt;
+  var addBtn = document.getElementById('addToScreen-user');
+  // var deferredPrompt;
 
   useEffect(() => {
     const config = {
@@ -98,30 +99,57 @@ const ArtistPage = () => {
     }
   };
 
-  const addToHome = () => {
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      console.log(e);
-    });
+  // const addToHome = () => {
+  //   window.addEventListener('beforeinstallprompt', (e) => {
+  //     e.preventDefault();
+  //     deferredPrompt = e;
+  //     console.log(e);
+  //   });
 
-    const btnInstallApp = document.getElementById('addToScreen-user');
+  //   const btnInstallApp = document.getElementById('addToScreen-user');
 
-    if (btnInstallApp && deferredPrompt) {
-      btnInstallApp.addEventListener('click', (e) => {
-        deferredPrompt.prompt();
-        console.log(deferredPrompt);
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('user accepted A2HS prompt');
-          } else {
-            console.log('user dismissed A2HS prompt');
-          }
-          deferredPrompt = null;
-        });
-      });
+  //   if (btnInstallApp && deferredPrompt) {
+  //     btnInstallApp.addEventListener('click', (e) => {
+  //       deferredPrompt.prompt();
+  //       console.log(deferredPrompt);
+  //       deferredPrompt.userChoice.then((choiceResult) => {
+  //         if (choiceResult.outcome === 'accepted') {
+  //           console.log('user accepted A2HS prompt');
+  //         } else {
+  //           console.log('user dismissed A2HS prompt');
+  //         }
+  //         deferredPrompt = null;
+  //       });
+  //     });
+  //   }
+  // };
+
+  let deferredPrompt;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (accepted == 0) {
+      addBtn.show();
     }
-  };
+  });
+
+  var accepted = 0;
+  function addToHome() {
+    // AppInstallClick("shilindhraaa");
+    accepted = 1;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        // AppInstalled("shilindhraaa");
+        console.log('added');
+      } else {
+      }
+    });
+  }
+
+  window.addEventListener('appinstalled', (evt) => {
+    console.log('a2hs installed');
+  });
 
   return (
     <Fragment>
