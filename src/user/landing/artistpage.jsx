@@ -28,7 +28,7 @@ const ArtistPage = () => {
   const [startClock, setStartClock] = useState(false);
   const location = useLocation();
   const [albumId, setAlbumId] = useState(location.state);
-  var addBtn = document.getElementById('addToScreen-user');
+  // var addBtn = document.getElementById('addToScreen-user');
   // var deferredPrompt;
 
   useEffect(() => {
@@ -127,6 +127,8 @@ const ArtistPage = () => {
   let deferredPrompt;
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
+    var addBtn = document.getElementById('addToScreen');
+    console.log(addBtn);
     deferredPrompt = e;
     if (accepted == 0) {
       addBtn.show();
