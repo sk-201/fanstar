@@ -81,6 +81,7 @@ const IntroScreen = () => {
           </div>
           <div className='home-footerDiv'>
             <div className='home-footer'>
+              <img src={fanstar_logo} alt='logo' className='footer-logo' />
               <h3 className='home-footerHead'>Fanstar</h3>
             </div>
             <div className='home-socialLink'>
