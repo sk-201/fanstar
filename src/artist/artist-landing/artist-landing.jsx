@@ -97,27 +97,39 @@ const ArtistLanding = () => {
   let deferredPrompt;
   // addBtn.style.display = 'none';
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    var addBtn = document.getElementById('addToScreen');
+  // useEffect(() => {
 
-    // console.log(addBtn);
-    deferredPrompt = e;
-    if (accepted == 0) {
-      addBtn.style.display = 'block';
-    }
-  });
+  // }, []);
 
   var accepted = 0;
+
+  const shortcut = () => {
+    console.log('clicked');
+    if (accepted) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          // AppInstalled("shilindhraaa");
+          console.log('added');
+        } else {
+        }
+      });
+    }
+  };
+
   function addToHome() {
     // AppInstallClick("shilindhraaa");
-    accepted = 1;
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        // AppInstalled("shilindhraaa");
-        console.log('added');
-      } else {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      var addBtn = document.getElementById('addToScreen');
+
+      // console.log(addBtn);
+      deferredPrompt = e;
+      console.log(e);
+      if (accepted == 0) {
+        addBtn.style.display = 'block';
+        accepted = 1;
+        shortcut();
       }
     });
   }
@@ -158,11 +170,12 @@ const ArtistLanding = () => {
         </div>
         <div className='container-1'>
           <div className='container-1-1'>
-            <img className='img-2' src={Img2} alt='banner-pic' />
-            <h1 className='img-2-heading'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hendrerit
-              ut massa metus.Lorem ip
-            </h1>
+            <img
+              className='img-2'
+              src={artistDetails.profilePhoto}
+              alt='banner-pic'
+            />
+            <h1 className='img-2-heading'>{artistDetails.bio}</h1>
           </div>
           {/**<Link to='/register' style={{ textDecoration: 'none' }}>
             <button className='btn-chat'>Chat now @ Rs 2000/-</button>

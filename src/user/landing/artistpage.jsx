@@ -125,26 +125,33 @@ const ArtistPage = () => {
   // };
 
   let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    var addBtn = document.getElementById('addToScreen-user');
-    // console.log(addBtn);
-    deferredPrompt = e;
-    if (accepted == 0) {
-      addBtn.style.display = 'block';
-    }
-  });
 
   var accepted = 0;
+
+  const shortcut = () => {
+    if (accepted === 1) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          // AppInstalled("shilindhraaa");
+          console.log('added');
+        } else {
+        }
+      });
+    }
+  };
+
   function addToHome() {
     // AppInstallClick("shilindhraaa");
-    accepted = 1;
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        // AppInstalled("shilindhraaa");
-        console.log('added');
-      } else {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      var addBtn = document.getElementById('addToScreen-user');
+      // console.log(addBtn);
+      deferredPrompt = e;
+      if (accepted == 0) {
+        addBtn.style.display = 'block';
+        accepted = 1;
+        shortcut();
       }
     });
   }
