@@ -4,6 +4,7 @@ import API from '../../api';
 import backIcon from '../../assets/backArrow.svg';
 import albumCover from '../../assets/demoAlbumCover.png';
 import deleteImage from '../../assets/deleteImage.svg';
+import LoadingPage from '../../Loader/LoadingPage';
 
 import './AddAlbum.css';
 
@@ -17,6 +18,8 @@ const AddAlbum = () => {
   const [imageFiles, setImageFiles] = useState([]);
   const [inputData, setInputData] = useState(initialData);
   const imageInput = useRef(null);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleOpenSelector = () => {
@@ -54,16 +57,19 @@ const AddAlbum = () => {
       formData.append('albumName', inputData.albumName);
 
       try {
+        setLoading(true);
         await API.post('/api/artist/private/createalbum', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
           },
         });
+        setLoading(false);
         alert('Album added!');
         navigate('/artist/landing');
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     }
   };
@@ -161,10 +167,15 @@ const AddAlbum = () => {
         </div>
       </div>
       <div className='addAlbum-btnDiv'>
-        <button className='addAlbum-btn' onClick={handleAddAlbum}>
+        <button
+          className='addAlbum-btn'
+          onClick={handleAddAlbum}
+          disabled={loading}
+        >
           Add Album
         </button>
       </div>
+      {loading && <LoadingPage />}
     </div>
   );
 };
