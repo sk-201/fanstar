@@ -226,9 +226,17 @@ const ArtistPage = () => {
                           }}
                         >
                           {' '}
-                          <text id='service-txt-landing'>
-                            {data.serviceName}
-                          </text>
+                          <div className='serviceText-div'>
+                            <text id='service-txt-landing'>
+                              {data.serviceName}
+                            </text>
+                            <text
+                              id='service-txt-landing'
+                              className='service-amount'
+                            >
+                              {`Rs ${data.amount}/-`}
+                            </text>
+                          </div>
                         </div>
                       </SwiperSlide>
                     );

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
+import LoadingPage from '../../Loader/LoadingPage';
 import API from '../../api';
 import './otp.css';
+
 const Otp = () => {
   const navigate = useNavigate();
   const [counter, setCounter] = useState(60);
@@ -10,7 +12,9 @@ const Otp = () => {
   const [code2, setCode2] = useState('');
   const [code3, setCode3] = useState('');
   const [code4, setCode4] = useState('');
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
+
   const postData = async (e) => {
     e.preventDefault();
     try {
@@ -24,6 +28,7 @@ const Otp = () => {
         code4.trim() &&
         code4.trim().length == 1
       ) {
+        setLoading(true);
         const code = code1 + code2 + code3 + code4;
         const config = {
           headers: {
@@ -35,23 +40,30 @@ const Otp = () => {
           { phone, code },
           config
         );
-        // console.log(data);
+        setLoading(false);
         localStorage.setItem('fanstarUserToken', data);
-        // alert('Login Successfull');
-        // navigate(
-        //   `/artist/${location.state.artistName}/${location.state.artistid}`
-        // );
         window.location.href = `/artist/${location.state.artistName}/${location.state.artistid}`;
       } else {
+        setLoading(false);
         alert('Something went wrong Please try again later!');
       }
     } catch (error) {
-      console.log(error);
+      alert(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
+      console.log(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
     }
   };
 
   const resendOtp = async () => {
     try {
+      setLoading(true);
       await API.post(
         '/api/user/public/generateotp',
         { phone },
@@ -61,9 +73,20 @@ const Otp = () => {
           },
         }
       );
+      setLoading(false);
       alert('OTP sent');
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      alert(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
+      console.log(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
     }
   };
 
@@ -132,6 +155,7 @@ const Otp = () => {
           Log In
         </button>
       </form>
+      {loading && <LoadingPage />}
     </div>
   );
 };

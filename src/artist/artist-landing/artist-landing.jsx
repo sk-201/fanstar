@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import API from '../../api';
-import Img1 from '../.././assets/Banner.png';
+import Img1 from '../../assets/demoCoverPhoto.jpg';
 import Img2 from '../.././assets/2-div-img.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../user/landing/landing.css';
@@ -142,7 +142,11 @@ const ArtistLanding = () => {
     <Fragment>
       <div className='container'>
         <div className='img-header'>
-          <img className='img-1' src={Img1} alt='banner-pic' />
+          <img
+            className='img-1'
+            src={artistDetails.coverPhoto ? artistDetails.coverPhoto : Img1}
+            alt='banner-pic'
+          />
           <button
             className='addToHome-btn'
             id='addToScreen'
@@ -214,9 +218,17 @@ const ArtistLanding = () => {
                             }}
                           >
                             {' '}
-                            <text id='service-txt-landing'>
-                              {data.serviceName}
-                            </text>
+                            <div className='serviceText-div'>
+                              <text id='service-txt-landing'>
+                                {data.serviceName}
+                              </text>
+                              <text
+                                id='service-txt-landing'
+                                className='service-amount'
+                              >
+                                {`Rs ${data.amount}/-`}
+                              </text>
+                            </div>
                           </div>
                         </SwiperSlide>
                       </div>

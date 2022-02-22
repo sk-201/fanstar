@@ -1,3 +1,6 @@
+.login-main {
+  min-height: 100vh;
+}
 .login-heading {
   margin-left: 5%;
   font-family: 'Montserrat', sans-serif;

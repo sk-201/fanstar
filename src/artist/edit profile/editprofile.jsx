@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Banner from '../../assets/register-banner.png';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
@@ -13,11 +13,13 @@ import './edit.css';
 const Edit = () => {
   const navigate = useNavigate();
   const [baseImage, setBaseImage] = useState(Banner);
+  const [baseCoverImage, setBaseCoverImage] = useState(Banner);
   const [Name, setName] = useState('');
   const [Bio, setBio] = useState('');
   const [artistData, setArtistData] = useState({});
   const [boolVal, setBoolVal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [switchToCover, setSwitchToCover] = useState(false);
 
   const fetchArtistDetail = async () => {
     setLoading(true);
@@ -33,6 +35,7 @@ const Edit = () => {
       setName(data.username);
       setBio(data.bio ? data.bio : '');
       setBaseImage(data.profilePhoto);
+      setBaseCoverImage(data.coverPhoto);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -52,6 +55,13 @@ const Edit = () => {
     const base64 = await convertBase64(file);
     setBaseImage(base64);
   };
+
+  const uploadCoverImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setBaseCoverImage(base64);
+  };
+
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -77,7 +87,12 @@ const Edit = () => {
       };
       await API.put(
         '/api/artist/private/updateprofile',
-        { username: Name, profilePhoto: baseImage, bio: Bio },
+        {
+          username: Name,
+          profilePhoto: baseImage,
+          bio: Bio,
+          coverPhoto: baseCoverImage,
+        },
         config
       );
       setLoading(false);
@@ -118,40 +133,71 @@ const Edit = () => {
         </h3>
       ) : (
         <div className='edit-container'>
-          <Cross
-            id='cross-icon'
-            onClick={() => {
-              navigate('/artist/landing');
-            }}
-          />
-          <span id='edit-txt'>Edit profile</span>
-          <img id='img-edit' src={baseImage} />
-          <label htmlFor='chng-pp' id='chng-pp-1'>
-            Change profile picture
-          </label>
-          <input
-            id='chng-pp'
-            type='file'
-            onChange={(e) => {
-              uploadImage(e);
-            }}
-            style={{ display: 'none' }}
-          />
+          <div className='editProfile-header'>
+            <div className='editProfile-headerLeft'>
+              <Cross
+                id='cross-icon'
+                onClick={() => {
+                  navigate('/artist/landing');
+                }}
+              />
+              <span id='edit-txt'>Edit profile</span>
+            </div>
+            <div className='editProfile-headerRight'>
+              <span
+                className='editProfile-switchBtn'
+                onClick={() => setSwitchToCover(!switchToCover)}
+              >
+                {switchToCover ? 'switch to profile' : 'switch to cover'}
+              </span>
+            </div>
+          </div>
+          {switchToCover ? (
+            <Fragment>
+              <img id='img-edit' src={baseCoverImage} />
+              <label htmlFor='chng-pp' id='chng-pp-1'>
+                Change cover picture
+              </label>
+              <input
+                id='chng-pp'
+                type='file'
+                onChange={(e) => {
+                  uploadCoverImage(e);
+                }}
+                style={{ display: 'none' }}
+              />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <img id='img-edit' src={baseImage} />
+              <label htmlFor='chng-pp' id='chng-pp-1'>
+                Change profile picture
+              </label>
+              <input
+                id='chng-pp'
+                type='file'
+                onChange={(e) => {
+                  uploadImage(e);
+                }}
+                style={{ display: 'none' }}
+              />
 
-          <input
-            type='text'
-            className='inp-edit'
-            placeholder='Name'
-            value={Name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type='text'
-            className='inp-edit'
-            placeholder='Bio'
-            value={Bio}
-            onChange={(e) => setBio(e.target.value)}
-          />
+              <input
+                type='text'
+                className='inp-edit'
+                placeholder='Name'
+                value={Name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type='text'
+                className='inp-edit'
+                placeholder='Bio'
+                value={Bio}
+                onChange={(e) => setBio(e.target.value)}
+              />
+            </Fragment>
+          )}
           <h4 id='select-theme'>Select theme for app</h4>
           <h6 id='select-theme-subhead'>Select any one</h6>
           <div className='theme-iconsDiv'>

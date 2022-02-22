@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import LoadingPage from '../../Loader/LoadingPage';
 import API from '../../api';
 const ArtistOtp = () => {
   const navigate = useNavigate();
@@ -10,9 +11,11 @@ const ArtistOtp = () => {
   const [code2, setCode2] = useState('');
   const [code3, setCode3] = useState('');
   const [code4, setCode4] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const resendOtp = async () => {
     try {
+      setLoading(true);
       await API.post(
         '/api/artist/public/generateotp',
         { phone },
@@ -22,10 +25,21 @@ const ArtistOtp = () => {
           },
         }
       );
+      setLoading(false);
       alert('OTP sent');
       // navigate(`/artist/otp/${phone}`);
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      alert(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
+      console.log(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
     }
   };
 
@@ -42,6 +56,7 @@ const ArtistOtp = () => {
         code4.trim() &&
         code4.trim().length == 1
       ) {
+        setLoading(true);
         const code = code1 + code2 + code3 + code4;
         const config = {
           headers: {
@@ -57,11 +72,14 @@ const ArtistOtp = () => {
         localStorage.setItem('fanstarToken', data);
         // alert('Login Successfull');
         // navigate(`/artist/landing`);
+        setLoading(false);
         window.location.href = `/artist/landing`;
       } else {
+        setLoading(false);
         alert('Something went wrong Please try again later!');
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -129,6 +147,7 @@ const ArtistOtp = () => {
           Log In
         </button>
       </form>
+      {loading && <LoadingPage />}
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import LoadingPage from '../../Loader/LoadingPage';
 import API from '../../api';
+
 const EmployeeOtp = () => {
   const navigate = useNavigate();
   const [counter, setCounter] = useState(60);
@@ -9,6 +11,29 @@ const EmployeeOtp = () => {
   const [code2, setCode2] = useState('');
   const [code3, setCode3] = useState('');
   const [code4, setCode4] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const resendOtp = async () => {
+    try {
+      setLoading(true);
+      await API.post(
+        '/api/employee/public/generateotp',
+        { phone },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setLoading(false);
+      alert('OTP sent');
+      // navigate(`/artist/otp/${phone}`);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
   const postData = async (e) => {
     e.preventDefault();
     try {
@@ -22,6 +47,7 @@ const EmployeeOtp = () => {
         code4.trim() &&
         code4.trim().length == 1
       ) {
+        setLoading(true);
         const code = code1 + code2 + code3 + code4;
         const config = {
           headers: {
@@ -33,14 +59,26 @@ const EmployeeOtp = () => {
           { phone, code },
           config
         );
+        setLoading(false);
         localStorage.setItem('fanstarEmployeeToken', data);
         alert('Login Successfull');
         navigate('/employee/income');
       } else {
+        setLoading(false);
         alert('Something went wrong Please try again later!');
       }
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      alert(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
+      console.log(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
     }
   };
   useEffect(() => {
@@ -100,16 +138,15 @@ const EmployeeOtp = () => {
             onChange={(e) => setCode4(e.target.value)}
           ></input>
         </div>
-        <Link to='/resend' style={{ textDecoration: 'none' }}>
-          <h6 className='resend-txt'>
-            Resend OTP <span className='timer'>{counter}</span>
-          </h6>
-        </Link>
+        <h6 className='resend-txt' onClick={resendOtp}>
+          Resend OTP <span className='timer'>{counter}</span>
+        </h6>
 
         <button className='btn' type='submit' onClick={postData}>
           Log In
         </button>
       </form>
+      {loading && <LoadingPage />}
     </div>
   );
 };

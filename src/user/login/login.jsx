@@ -3,11 +3,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import API from '../../api';
 import fanstar_logo from '../.././assets/fanstar_logo.svg';
 import './login.css';
+import LoadingPage from '../../Loader/LoadingPage';
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [phone, setPhone] = useState('');
+  const [loading, setLoading] = useState(false);
 
   if (!location.state) {
     navigate('/');
@@ -16,19 +18,32 @@ const Login = () => {
   const postData = async () => {
     try {
       if (phone.trim() && phone.trim().length == 10) {
+        setLoading(true);
         const config = {
           headers: {
             'Content-Type': 'application/json',
           },
         };
         await API.post('/api/user/public/generateotp', { phone }, config);
+        setLoading(false);
         alert('OTP sent');
         navigate(`/otp/${phone}`, { state: location.state });
       } else {
+        setLoading(false);
         alert('Mobile no is not correct!');
       }
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      alert(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
+      console.log(
+        error?.response?.data?.error
+          ? error?.response?.data?.error
+          : 'Something went wrong'
+      );
     }
   };
   return (
@@ -55,6 +70,7 @@ const Login = () => {
           Next
         </button>
       </div>
+      {loading && <LoadingPage />}
     </div>
   );
 };

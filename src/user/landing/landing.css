@@ -51,6 +51,7 @@
   width: 100%;
   object-fit: cover;
   position: relative;
+  height: 30vh;
 }
 #addToScreen {
   z-index: 15;
@@ -205,10 +206,10 @@
   font-family: Kaushan Script;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
   text-align: center;
-  padding: 3rem;
+  padding: 2rem;
   margin-left: 3%;
   margin-right: 3%;
   cursor: pointer;
@@ -315,10 +316,9 @@
   font-family: Kaushan Script;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
-  margin-left: 1rem;
-
+  /* margin-left: 1rem; */
   text-align: center;
 
   color: var(--background-color);
@@ -463,4 +463,19 @@
   right: 3%;
   z-index: 5;
   width: auto;
+}
+
+.serviceText-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-amount {
+  font-size: 12px !important;
+  font-family: Kaushan Script;
+  font-style: normal;
+  font-weight: normal;
+  color: var(--background-color);
 }
