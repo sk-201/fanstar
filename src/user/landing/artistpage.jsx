@@ -243,9 +243,13 @@ const ArtistPage = () => {
                         <div
                           className='card-2'
                           onClick={() => {
-                            navigate(
-                              `/artist/${artistName}/${id}/user/service/${data._id}`
-                            );
+                            if (localStorage.getItem('fanstarUserToken')) {
+                              navigate(
+                                `/artist/${artistName}/${id}/user/service/${data._id}`
+                              );
+                            } else {
+                              alert('Please login first.');
+                            }
                           }}
                         >
                           {' '}
@@ -277,9 +281,13 @@ const ArtistPage = () => {
               id='see-all'
               style={{ cursor: 'pointer' }}
               onClick={() => {
-                navigate(`/artist/${artistName}/${id}/user/imagelist`, {
-                  state: albumId,
-                });
+                if (localStorage.getItem('fanstarUserToken')) {
+                  navigate(`/artist/${artistName}/${id}/user/imagelist`, {
+                    state: albumId,
+                  });
+                } else {
+                  alert('Please login first.');
+                }
               }}
             >
               See All
@@ -370,9 +378,15 @@ const ArtistPage = () => {
                                 <button
                                   id='unlock-btn'
                                   onClick={() => {
-                                    navigate(
-                                      `/artist/${artistName}/${id}/user/image/${data._id}`
-                                    );
+                                    if (
+                                      localStorage.getItem('fanstarUserToken')
+                                    ) {
+                                      navigate(
+                                        `/artist/${artistName}/${id}/user/image/${data._id}`
+                                      );
+                                    } else {
+                                      alert('Please login first.');
+                                    }
                                   }}
                                 >
                                   {' '}
