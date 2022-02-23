@@ -14,51 +14,70 @@ const AlbumList = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchAlbumList = async () => {
-    try {
-      const { data } = await API.get(`/api/user/private/getallalbums/${id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
-        },
-      });
-      if (data.length === 0) {
-        setLoading(false);
-        return;
-      }
-      // console.log(data);
-      let dataArray = [];
-      data.forEach(async (d) => {
-        try {
-          const response = await API.put(
-            `/api/user/private/checkifsubscribed`,
-            {
-              albumId: d._id,
-            },
-            {
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(
-                  'fanstarUserToken'
-                )}`,
+    if (localStorage.getItem('fanstarUserToken')) {
+      try {
+        const { data } = await API.get(`/api/user/private/getallalbums/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+          },
+        });
+        if (data.length === 0) {
+          setLoading(false);
+          return;
+        }
+        // console.log(data);
+        let dataArray = [];
+        data.forEach(async (d) => {
+          try {
+            const response = await API.put(
+              `/api/user/private/checkifsubscribed`,
+              {
+                albumId: d._id,
               },
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${localStorage.getItem(
+                    'fanstarUserToken'
+                  )}`,
+                },
+              }
+            );
+            dataArray.push({ ...d, subscribed: response.data.isSubscriber });
+            // console.log(dataArray.length, 'len', data.length);
+            if (dataArray.length === data.length) {
+              // console.log(dataArray);
+              setAlbumList(dataArray);
+              setLoading(false);
             }
-          );
-          dataArray.push({ ...d, subscribed: response.data.isSubscriber });
-          // console.log(dataArray.length, 'len', data.length);
-          if (dataArray.length === data.length) {
-            // console.log(dataArray);
-            setAlbumList(dataArray);
+          } catch (error) {
+            alert('Something went wrong, please try later!');
+            console.log(error);
             setLoading(false);
           }
-        } catch (error) {
-          console.log(error);
-          setLoading(false);
-        }
-      });
-      // console.log(dataArray);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
+        });
+        // console.log(dataArray);
+      } catch (error) {
+        alert('Something went wrong, please try later!');
+        console.log(error);
+        setLoading(false);
+      }
+    } else {
+      try {
+        setLoading(true);
+        const { data } = await API.get(`/api/user/private/getallalbums/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setAlbumList(data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        alert('Something went wrong, please try later!');
+        console.log(error);
+      }
     }
   };
 

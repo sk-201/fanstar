@@ -18,19 +18,32 @@ const Subscribe = () => {
   const navigate = useNavigate();
 
   const fetchDetails = async (albumId) => {
-    try {
-      const { data } = await API.get(`/api/user/private/getalbum/${albumId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
-        },
-      });
-      setAlbumDetails(data);
-      setLoading(false);
-      console.log(data);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
+    if (localStorage.getItem('fanstarUserToken')) {
+      try {
+        const { data } = await API.get(
+          `/api/user/private/getalbum/${albumId}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem(
+                'fanstarUserToken'
+              )}`,
+            },
+          }
+        );
+        setAlbumDetails(data);
+        setLoading(false);
+        console.log(data);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+      }
+    } else {
+      alert('Please login to subscribe!');
+      // navigate('/login', {
+      //   state: { artistid: id, artistName: artistName },
+      // });
+      navigate(`/artist/${artistName}/${id}`);
     }
   };
 
@@ -56,12 +69,12 @@ const Subscribe = () => {
                   {' '}
                   <img
                     id='ban-img'
-                    src={`${imageUrl}/${albumDetails.images[0]}`}
+                    src={`${imageUrl}/${albumDetails?.images?.[0]}`}
                     alt='banner-img'
                   />{' '}
                 </div>
 
-                <h1 id='sub-main-con'>{albumDetails.description}</h1>
+                <h1 id='sub-main-con'>{albumDetails?.description}</h1>
                 {/**<select name='plans' className='choose-plan'>
                   <option value='1month'>1 month membership @ 599/-</option>
                   <option value='plan2'>Plan 2</option>
@@ -72,7 +85,7 @@ const Subscribe = () => {
                   type='text'
                   // placeholder='Name'
                   disabled
-                  value={`5 minutes membership @ ${albumDetails.price}/-`}
+                  value={`5 minutes membership @ ${albumDetails?.price}/-`}
                   // onChange={(e) => setName(e.target.value)}
                 />
                 <input
