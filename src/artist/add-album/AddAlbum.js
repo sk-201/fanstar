@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Resizer from 'react-image-file-resizer';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
 import backIcon from '../../assets/backArrow.svg';
@@ -19,6 +20,11 @@ const AddAlbum = () => {
   const [inputData, setInputData] = useState(initialData);
   const imageInput = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(0);
+  const [totalFiles, setTotalFiles] = useState(0);
+  // var count = 0,
+  //   totalFiles = 0;
+  // const [counter, setCounter] = useState(0);
 
   const navigate = useNavigate();
 
@@ -26,9 +32,47 @@ const AddAlbum = () => {
     imageInput.current.click();
   };
 
+  const resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        'JPEG',
+        60,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        'blob',
+        200,
+        200
+      );
+    });
+
   const handleImageChange = (event) => {
     const fileUploaded = event.target.files;
-    setImageFiles([...imageFiles, ...fileUploaded]);
+    const keys = Object.keys(fileUploaded);
+    let imageArray = [];
+    let index = 0;
+    setLoading(true);
+    keys.forEach(async (i) => {
+      const fileName = fileUploaded[i].name;
+      const fileType = fileUploaded[i].type;
+      const image = await resizeFile(fileUploaded[i]);
+      index += 1;
+      const newfile = new File([image], fileName, {
+        type: fileType,
+        lastModified: Date.now(),
+      }); //output image as a file }, mime, quality);
+      imageArray.push(newfile);
+      if (index === Object.keys(fileUploaded).length) {
+        // console.log(imageArray);
+        setImageFiles([...imageFiles, ...imageArray]);
+        setLoading(false);
+      }
+    });
+
     // console.log(URL.createObjectURL(fileUploaded[0]));
   };
 
@@ -44,29 +88,67 @@ const AddAlbum = () => {
   };
 
   const handleAddAlbum = async () => {
-    console.log(imageFiles);
+    // console.log(imageFiles);
     if (setImageFiles.length === 0) {
       alert('Add images');
     } else {
       let formData = new FormData();
-      imageFiles.forEach((image) => {
-        formData.append('artistFile', image);
-      });
+      // imageFiles.forEach((image) => {
+      //   // console.log(image);
+      //   // const compressImage = await resizeFile(image);
+      //   // console.log(compressImage);
+      //   formData.append('artistFile', image);
+      // });
       formData.append('price', inputData.price);
       formData.append('description', inputData.description);
       formData.append('albumName', inputData.albumName);
 
       try {
         setLoading(true);
-        await API.post('/api/artist/private/createalbum', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
-          },
+        const { data } = await API.post(
+          '/api/artist/private/createalbum',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+            },
+          }
+        );
+        console.log(data);
+        setTotalFiles(imageFiles.length);
+        let tempTotalFiles = imageFiles.length;
+        let tempCount = 0;
+
+        imageFiles.forEach(async (image) => {
+          const fileData = new FormData();
+          fileData.append('artistFile', image);
+
+          try {
+            await API.put(
+              `/api/artist/private/updatealbum/${data.albumId}`,
+              fileData,
+              {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  Authorization: `Bearer ${localStorage.getItem(
+                    'fanstarToken'
+                  )}`,
+                },
+              }
+            );
+            setCount(count + 1);
+            tempCount += 1;
+            // console.log(count);
+            if (tempCount === tempTotalFiles) {
+              setLoading(false);
+              alert('Album added!');
+              navigate('/artist/landing');
+            }
+          } catch (error) {
+            console.log(error);
+          }
         });
-        setLoading(false);
-        alert('Album added!');
-        navigate('/artist/landing');
       } catch (error) {
         console.log(error);
         setLoading(false);
@@ -176,6 +258,20 @@ const AddAlbum = () => {
         </button>
       </div>
       {loading && <LoadingPage />}
+      {/* {loading && (
+        <p
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '36%',
+            zIndex: '30',
+            fontFamily: 'Montserrat',
+            fontWeight: 600,
+            fontSize: '18px',
+            color: '#000000',
+          }}
+        >{`${count} of ${totalFiles} uploaded`}</p>
+      )} */}
     </div>
   );
 };

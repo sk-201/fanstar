@@ -15,6 +15,7 @@ const LoadingPage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: '20',
       }}
     >
       <div
@@ -30,6 +31,7 @@ const LoadingPage = () => {
           width: '100px',
           height: '100px',
           marginTop: '1rem',
+          zIndex: '25',
           // textAlign: 'center',
         }}
       >

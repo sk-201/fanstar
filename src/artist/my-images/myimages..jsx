@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ConfirmationScreen from './ConfirmationScreen';
-import { ReactComponent as BackArrow } from '../../assets/backArrow.svg';
+import backArrow from '../../assets/backArrow.svg';
 import Image from '../../assets/myimg.png';
 import closeWhite from '../../assets/closeWhite.svg';
 import { imageUrl } from '../../utils';
@@ -43,8 +43,29 @@ const MyImage = () => {
 
   return (
     <div className='my-image'>
-      <BackArrow id='bck-arrw' onClick={() => navigate('/artist/landing')} />
-      <span id='my-service-text'>My Images</span>
+      {/* { <BackArrow id='bck-arrw' onClick={() => navigate('/artist/landing')} />
+      <span id='my-service-text'>My Images</span>} */}
+      <div className='albumList-headerDiv decreaseWidth'>
+        <div className='albumList-headerLeft'>
+          <button
+            className='albumList-backBtn'
+            onClick={() => navigate(`/artist/landing`)}
+          >
+            <img src={backArrow} alt='back' className='albumList-backIcon' />
+          </button>
+          <h3 className='albumList-title'>My Images</h3>
+        </div>
+        <div className='albumList-headerRight'>
+          <button
+            className='add-myImage'
+            onClick={() => {
+              navigate(`/add`);
+            }}
+          >
+            Add <span className='addImage-icon'>+</span>
+          </button>
+        </div>
+      </div>
       <div className='my-img-cont'>
         {loading ? (
           <h3 className='myImage-loading'>Loading...</h3>

@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import Resizer from 'react-image-file-resizer';
 import API from '../../api';
 import { imageUrl } from '../../utils';
 import ConfirmationScreen from './ConfirmationScreen';
@@ -55,12 +56,46 @@ const ViewAlbum = () => {
     imageInput.current.click();
   };
 
+  const resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        'JPEG',
+        60,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        'blob',
+        200,
+        200
+      );
+    });
+
   const handleImageChange = (event) => {
     const fileUploaded = event.target.files;
-    const fileArray = [...fileUploaded];
-    // setImageFiles([...imageFiles, ...fileUploaded]);
-    handleAddImage(fileArray);
-    // console.log(URL.createObjectURL(fileUploaded[0]));
+    // const fileArray = [...fileUploaded];
+    const keys = Object.keys(fileUploaded);
+    let imageArray = [];
+    let index = 0;
+    keys.forEach(async (i) => {
+      const fileName = fileUploaded[i].name;
+      const fileType = fileUploaded[i].type;
+      const image = await resizeFile(fileUploaded[i]);
+      index += 1;
+      const newfile = new File([image], fileName, {
+        type: fileType,
+        lastModified: Date.now(),
+      }); //output image as a file }, mime, quality);
+      imageArray.push(newfile);
+      if (index === Object.keys(fileUploaded).length) {
+        // console.log(imageArray);
+        handleAddImage(imageArray);
+        // setImageFiles([...imageFiles, ...imageArray]);
+      }
+    });
   };
 
   const handleAddImage = async (files) => {
@@ -187,7 +222,7 @@ const ViewAlbum = () => {
           id={id}
           type={type}
           fileUrl={fileUrl}
-          back={() => navigate('/artist/landing')}
+          back={() => navigate('/artist/myalbums')}
           refresh={() => setBoolVal(false)}
         />
       )}

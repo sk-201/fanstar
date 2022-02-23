@@ -61,14 +61,26 @@ const MyAlbums = () => {
 
   return (
     <div className='albumList-container'>
-      <div className='albumList-headerDiv'>
-        <button
-          className='albumList-backBtn'
-          onClick={() => navigate(`/artist/landing`)}
-        >
-          <img src={backIcon} alt='back' className='albumList-backIcon' />
-        </button>
-        <h3 className='albumList-title'>My Albums</h3>
+      <div className='albumList-headerDiv '>
+        <div className='albumList-headerLeft'>
+          <button
+            className='albumList-backBtn'
+            onClick={() => navigate(`/artist/landing`)}
+          >
+            <img src={backIcon} alt='back' className='albumList-backIcon' />
+          </button>
+          <h3 className='albumList-title'>My Albums</h3>
+        </div>
+        <div className='albumList-headerRight'>
+          <button
+            className='add-myImage'
+            onClick={() => {
+              navigate(`/artist/addalbum`);
+            }}
+          >
+            Add <span className='addImage-icon'>+</span>
+          </button>
+        </div>
       </div>
       <div className='ablumList-listDiv'>
         {loading ? (

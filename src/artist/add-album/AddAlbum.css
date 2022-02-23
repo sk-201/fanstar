@@ -49,12 +49,13 @@
   margin: auto;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .addAlubm-initialImgDiv {
   width: 25%;
-  height: 25%;
+  height: 60px;
   margin: 5px;
   position: relative;
   z-index: 5;

@@ -84,3 +84,8 @@
   height: 12px;
   object-fit: cover;
 }
+
+.decreaseWidth {
+  width: 90%;
+  margin: auto;
+}
