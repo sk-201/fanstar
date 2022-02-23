@@ -92,7 +92,7 @@ const AlbumList = () => {
 
   return (
     <div className='albumList-container'>
-      <div className='albumList-headerDiv'>
+      <div className='albumList-headerDiv additionStyle'>
         <button
           className='albumList-backBtn'
           onClick={() => navigate(`/artist/${artistName}/${id}`)}

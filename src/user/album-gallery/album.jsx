@@ -94,90 +94,21 @@ const Album = () => {
             Back
           </span>
         </h1>
-        <div className='time-cont'>
-          {(new Date().getTime() - timestamp) / 1000 <= 120 ? ( //condition
-            <div>
-              {' '}
-              <Clock id='clock-svg' />{' '}
-              <span id='timer-clock'> {seconds} sec</span>
-              <div className='album-card'>
-                {album.length > 0 &&
-                  album.map((data, ind) => {
-                    return (
-                      <div>
-                        <div className='album-card-1' key={ind}>
-                          {data.url.split('.').pop() === 'jpg' ||
-                          data.url.split('.').pop() === 'jpeg' ||
-                          data.url.split('.').pop() === 'png' ? (
-                            <img
-                              className='album-card-img'
-                              src={`${imageUrl}/${data.url}`}
-                              style={{
-                                webkitFilter: `${
-                                  data.accessedBy.length > 0
-                                    ? 'blur(0px)'
-                                    : 'blur(20px)'
-                                }`,
-                                filter: `${
-                                  data.accessedBy.length > 0
-                                    ? 'blur(0px)'
-                                    : 'blur(20px)'
-                                }`,
-                              }}
-                            />
-                          ) : (
-                            <video
-                              className='album-card-img'
-                              controls
-                              style={{
-                                webkitFilter: `${
-                                  data.accessedBy.length > 0
-                                    ? 'blur(0px)'
-                                    : 'blur(20px)'
-                                }`,
-                                filter: `${
-                                  data.accessedBy.length > 0
-                                    ? 'blur(0px)'
-                                    : 'blur(20px)'
-                                }`,
-                              }}
-                            >
-                              <source
-                                src={`${imageUrl}/${data.url}`}
-                                type='video/mp4'
-                              />
-                            </video>
-                          )}
-                        </div>
-                        <p className='imageCaption-paraBottom'>
-                          {data.caption}
-                        </p>
-                      </div>
-                    );
-                  })}
-                {/* <button onClick={removeAccess}>Remove</button> */}
-              </div>
-            </div>
-          ) : (
-            <div>
-              <div className='album-card'>
-                {album.length > 0 &&
-                  album.map((data, ind) => {
-                    return (
-                      <div>
-                        <div className='album-card-1' key={ind}>
-                          <div id='album-img-btn'>
-                            <button
-                              id='unlock-btn'
-                              onClick={() => {
-                                navigate(
-                                  `/artist/${artistName}/${id}/user/image/${data._id}`
-                                );
-                              }}
-                            >
-                              {' '}
-                              Unlock now
-                            </button>
+        {album.length === 0 ? (
+          <h3 className='artistChatlist-loading'>No image</h3>
+        ) : (
+          <div className='time-cont'>
+            {(new Date().getTime() - timestamp) / 1000 <= 120 ? ( //condition
+              <div>
+                {' '}
+                <Clock id='clock-svg' />{' '}
+                <span id='timer-clock'> {seconds} sec</span>
+                <div className='album-card'>
+                  {album.length > 0 &&
+                    album.map((data, ind) => {
+                      return (
+                        <div>
+                          <div className='album-card-1' key={ind}>
                             {data.url.split('.').pop() === 'jpg' ||
                             data.url.split('.').pop() === 'jpeg' ||
                             data.url.split('.').pop() === 'png' ? (
@@ -185,17 +116,33 @@ const Album = () => {
                                 className='album-card-img'
                                 src={`${imageUrl}/${data.url}`}
                                 style={{
-                                  webkitFilter: 'blur(20px)',
-                                  filter: 'blur(20px)',
+                                  webkitFilter: `${
+                                    data.accessedBy.length > 0
+                                      ? 'blur(0px)'
+                                      : 'blur(20px)'
+                                  }`,
+                                  filter: `${
+                                    data.accessedBy.length > 0
+                                      ? 'blur(0px)'
+                                      : 'blur(20px)'
+                                  }`,
                                 }}
                               />
                             ) : (
                               <video
                                 className='album-card-img'
-                                controls='false'
+                                controls
                                 style={{
-                                  webkitFilter: 'blur(20px)',
-                                  filter: 'blur(20px)',
+                                  webkitFilter: `${
+                                    data.accessedBy.length > 0
+                                      ? 'blur(0px)'
+                                      : 'blur(20px)'
+                                  }`,
+                                  filter: `${
+                                    data.accessedBy.length > 0
+                                      ? 'blur(0px)'
+                                      : 'blur(20px)'
+                                  }`,
                                 }}
                               >
                                 <source
@@ -209,13 +156,70 @@ const Album = () => {
                             {data.caption}
                           </p>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  {/* <button onClick={removeAccess}>Remove</button> */}
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            ) : (
+              <div>
+                <div className='album-card'>
+                  {album.length > 0 &&
+                    album.map((data, ind) => {
+                      return (
+                        <div>
+                          <div className='album-card-1' key={ind}>
+                            <div id='album-img-btn'>
+                              <button
+                                id='unlock-btn'
+                                onClick={() => {
+                                  navigate(
+                                    `/artist/${artistName}/${id}/user/image/${data._id}`
+                                  );
+                                }}
+                              >
+                                {' '}
+                                Unlock now
+                              </button>
+                              {data.url.split('.').pop() === 'jpg' ||
+                              data.url.split('.').pop() === 'jpeg' ||
+                              data.url.split('.').pop() === 'png' ? (
+                                <img
+                                  className='album-card-img'
+                                  src={`${imageUrl}/${data.url}`}
+                                  style={{
+                                    webkitFilter: 'blur(20px)',
+                                    filter: 'blur(20px)',
+                                  }}
+                                />
+                              ) : (
+                                <video
+                                  className='album-card-img'
+                                  controls='false'
+                                  style={{
+                                    webkitFilter: 'blur(20px)',
+                                    filter: 'blur(20px)',
+                                  }}
+                                >
+                                  <source
+                                    src={`${imageUrl}/${data.url}`}
+                                    type='video/mp4'
+                                  />
+                                </video>
+                              )}
+                            </div>
+                            <p className='imageCaption-paraBottom'>
+                              {data.caption}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <BottomNav active='home' />
     </Fragment>

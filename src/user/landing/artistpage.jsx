@@ -22,6 +22,7 @@ const ArtistPage = () => {
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
   const [profilePhoto, setProfilePhoto] = useState('');
+  const [coverPhoto, setCoverPhoto] = useState('');
   const [services, setServices] = useState([]);
   const [allImages, setAllImages] = useState([]);
   const [timestamp, setTimestamp] = useState('');
@@ -40,10 +41,12 @@ const ArtistPage = () => {
     };
     API.get(`/api/user/private/getartist/${id}`, config).then(({ data }) => {
       // console.log(.split(' ').join('-'));
+      console.log(data);
       window.localStorage.setItem('color', data.theme);
       setTheme(data.theme);
       setName(data.username);
       setProfilePhoto(data.profilePhoto);
+      setCoverPhoto(data.coverPhoto);
       setBio(data.bio);
     });
     API.get(`/api/user/public/getservices/${id}`, config).then(({ data }) => {
@@ -164,7 +167,11 @@ const ArtistPage = () => {
     <Fragment>
       <div className='user-landing'>
         <div className='img-header'>
-          <img className='img-1' src={Img1} alt='banner-pic' />
+          <img
+            className='img-1'
+            src={coverPhoto ? coverPhoto : Img1}
+            alt='banner-pic'
+          />
 
           {localStorage.getItem('fanstarUserToken') ? (
             <Link to={`/artist/${artistName}/${id}/wallet`}>
@@ -262,96 +269,25 @@ const ArtistPage = () => {
               See All
             </span>
           </h1>
-          <div className='time-cont'>
-            {(new Date().getTime() - timestamp) / 1000 <= 120 ? ( //condition
-              <div>
-                {' '}
-                <div className='album-card'>
-                  {allImages.length > 0 &&
-                    allImages.map((data, ind) => {
-                      return (
-                        <div>
-                          {data.accessedBy.length > 0 && (
-                            <Fragment>
-                              <Clock id='clock-svg' />{' '}
-                              <span id='timer-clock'> {seconds} sec</span>
-                            </Fragment>
-                          )}
-                          <div className='album-card-1' key={ind}>
-                            {data.url.split('.').pop() === 'jpg' ||
-                            data.url.split('.').pop() === 'jpeg' ||
-                            data.url.split('.').pop() === 'png' ? (
-                              <img
-                                className='album-card-img'
-                                src={`${imageUrl}/${data.url}`}
-                                style={{
-                                  webkitFilter: `${
-                                    data.accessedBy.length > 0
-                                      ? 'blur(0px)'
-                                      : 'blur(20px)'
-                                  }`,
-                                  filter: `${
-                                    data.accessedBy.length > 0
-                                      ? 'blur(0px)'
-                                      : 'blur(20px)'
-                                  }`,
-                                }}
-                              />
-                            ) : (
-                              <video
-                                className='album-card-img'
-                                controls
-                                style={{
-                                  webkitFilter: `${
-                                    data.accessedBy.length > 0
-                                      ? 'blur(0px)'
-                                      : 'blur(20px)'
-                                  }`,
-                                  filter: `${
-                                    data.accessedBy.length > 0
-                                      ? 'blur(0px)'
-                                      : 'blur(20px)'
-                                  }`,
-                                }}
-                              >
-                                <source
-                                  src={`${imageUrl}/${data.url}`}
-                                  type='video/mp4'
-                                />
-                              </video>
+          {allImages.length === 0 ? (
+            <h3 className='artistChatlist-loading'>No image</h3>
+          ) : (
+            <div className='time-cont'>
+              {(new Date().getTime() - timestamp) / 1000 <= 120 ? ( //condition
+                <div>
+                  {' '}
+                  <div className='album-card'>
+                    {allImages.length > 0 &&
+                      allImages.map((data, ind) => {
+                        return (
+                          <div>
+                            {data.accessedBy.length > 0 && (
+                              <Fragment>
+                                <Clock id='clock-svg' />{' '}
+                                <span id='timer-clock'> {seconds} sec</span>
+                              </Fragment>
                             )}
-                          </div>
-                          {
-                            <p className='imageCaption-paraBottom'>
-                              {data.caption}
-                            </p>
-                          }
-                        </div>
-                      );
-                    })}
-                  {/* <button onClick={removeAccess}>Remove</button> */}
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div className='album-card'>
-                  {allImages.length > 0 &&
-                    allImages.slice(0, 3).map((data, ind) => {
-                      return (
-                        <div>
-                          <div className='album-card-1' key={ind}>
-                            <div id='album-img-btn'>
-                              <button
-                                id='unlock-btn'
-                                onClick={() => {
-                                  navigate(
-                                    `/artist/${artistName}/${id}/user/image/${data._id}`
-                                  );
-                                }}
-                              >
-                                {' '}
-                                Unlock now
-                              </button>
+                            <div className='album-card-1' key={ind}>
                               {data.url.split('.').pop() === 'jpg' ||
                               data.url.split('.').pop() === 'jpeg' ||
                               data.url.split('.').pop() === 'png' ? (
@@ -359,17 +295,33 @@ const ArtistPage = () => {
                                   className='album-card-img'
                                   src={`${imageUrl}/${data.url}`}
                                   style={{
-                                    webkitFilter: 'blur(20px)',
-                                    filter: 'blur(20px)',
+                                    webkitFilter: `${
+                                      data.accessedBy.length > 0
+                                        ? 'blur(0px)'
+                                        : 'blur(20px)'
+                                    }`,
+                                    filter: `${
+                                      data.accessedBy.length > 0
+                                        ? 'blur(0px)'
+                                        : 'blur(20px)'
+                                    }`,
                                   }}
                                 />
                               ) : (
                                 <video
                                   className='album-card-img'
-                                  controls='false'
+                                  controls
                                   style={{
-                                    webkitFilter: 'blur(20px)',
-                                    filter: 'blur(20px)',
+                                    webkitFilter: `${
+                                      data.accessedBy.length > 0
+                                        ? 'blur(0px)'
+                                        : 'blur(20px)'
+                                    }`,
+                                    filter: `${
+                                      data.accessedBy.length > 0
+                                        ? 'blur(0px)'
+                                        : 'blur(20px)'
+                                    }`,
                                   }}
                                 >
                                   <source
@@ -378,11 +330,6 @@ const ArtistPage = () => {
                                   />
                                 </video>
                               )}
-                              {/**data.accessedBy.length > 0 && (
-                                <p className='imageCaption-para'>
-                                  {data.caption}
-                                </p>
-                              ) */}
                             </div>
                             {
                               <p className='imageCaption-paraBottom'>
@@ -390,15 +337,79 @@ const ArtistPage = () => {
                               </p>
                             }
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    {/* <button onClick={removeAccess}>Remove</button> */}
+                  </div>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div>
+                  <div className='album-card'>
+                    {allImages.length > 0 &&
+                      allImages.slice(0, 3).map((data, ind) => {
+                        return (
+                          <div>
+                            <div className='album-card-1' key={ind}>
+                              <div id='album-img-btn'>
+                                <button
+                                  id='unlock-btn'
+                                  onClick={() => {
+                                    navigate(
+                                      `/artist/${artistName}/${id}/user/image/${data._id}`
+                                    );
+                                  }}
+                                >
+                                  {' '}
+                                  Unlock now
+                                </button>
+                                {data.url.split('.').pop() === 'jpg' ||
+                                data.url.split('.').pop() === 'jpeg' ||
+                                data.url.split('.').pop() === 'png' ? (
+                                  <img
+                                    className='album-card-img'
+                                    src={`${imageUrl}/${data.url}`}
+                                    style={{
+                                      webkitFilter: 'blur(20px)',
+                                      filter: 'blur(20px)',
+                                    }}
+                                  />
+                                ) : (
+                                  <video
+                                    className='album-card-img'
+                                    controls='false'
+                                    style={{
+                                      webkitFilter: 'blur(20px)',
+                                      filter: 'blur(20px)',
+                                    }}
+                                  >
+                                    <source
+                                      src={`${imageUrl}/${data.url}`}
+                                      type='video/mp4'
+                                    />
+                                  </video>
+                                )}
+                                {/**data.accessedBy.length > 0 && (
+                                <p className='imageCaption-para'>
+                                  {data.caption}
+                                </p>
+                              ) */}
+                              </div>
+                              {
+                                <p className='imageCaption-paraBottom'>
+                                  {data.caption}
+                                </p>
+                              }
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
 
-            {/* <button onClick={removeAccess}>Remove</button> */}
-          </div>
+              {/* <button onClick={removeAccess}>Remove</button> */}
+            </div>
+          )}
 
           {/* <div className='album-card-2'><img className="album-card-img" src={AlbumImg2}/></div>
             <div className='album-card-3'><img className="album-card-img" src={AlbumImg3}/></div> */}

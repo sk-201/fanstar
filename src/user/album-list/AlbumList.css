@@ -13,6 +13,10 @@
   margin-bottom: 10px;
 }
 
+.additionStyle {
+  justify-content: flex-start !important;
+}
+
 .albumList-backBtn {
   margin: 0;
   padding: 0;
