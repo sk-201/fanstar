@@ -1,58 +1,62 @@
-.album-confirmation-container {
+.puralbum-confirmation-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 15;
 }
 
-.album-confirmation-cardDiv {
+.puralbum-confirmation-cardDiv {
   position: relative;
   top: 0%;
   left: 0%;
-  background-color: #fff;
-  border-radius: 5px;
-  width: 80%;
-  padding: 10px 15px;
+  background-color: transparent;
+  /* border-radius: 5px; */
+  width: 90%;
+  padding: 0;
   text-align: center;
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
     0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
   z-index: 20;
 }
 
-.album-confirmation-close {
+.puralbum-confirmation-close {
   /* margin-bottom: 1rem; */
   /* padding: 5px; */
-  height: 32px;
+  /* height: 32px; */
 }
 
-.album-close-confirmation {
+.puralbum-close-confirmation {
   transform: rotate(45deg);
   background-color: transparent;
   outline: none;
   padding: 0;
   margin: 0;
   border: none;
-  color: #424e4f;
+  color: #fff;
   width: 32px;
   height: 32px;
-  float: right;
-  font-size: 30px;
+  /* float: right; */
+  font-size: 40px;
+  font-weight: 400;
+  position: absolute;
+  right: 2%;
+  top: 2%;
 }
 
-.album-confirmation-contentDiv {
+.puralbum-confirmation-contentDiv {
   margin-top: 10px;
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e7e7e7;
 }
 
-.album-confirmation-content {
+.puralbum-confirmation-content {
   font-family: Montserrat;
   font-weight: normal;
   font-size: 14px;
@@ -60,7 +64,7 @@
   color: #000000;
 }
 
-.album-remove-artistBtn {
+.puralbum-remove-artistBtn {
   margin: 0;
   background-color: transparent;
   padding: 0;
@@ -71,4 +75,13 @@
   color: #fc3c00;
   border: none;
   margin-bottom: 10px;
+}
+
+.puralbum-image {
+  max-height: 90vh;
+  min-height: 70vh;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #fff;
 }

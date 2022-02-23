@@ -5,6 +5,7 @@ import { imageUrl } from '../../utils';
 import backIcon from '../../assets/backArrow.svg';
 
 import './PurchasedAlbum.css';
+import ConfirmationScreen from './ConfirmationScreen';
 
 const PurchasedAlbum = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const PurchasedAlbum = () => {
   const [albumName, setAlbumName] = useState('');
   const [boolVal, setBoolVal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [selectedImg, setSelectedImg] = useState(null);
 
   const fetchAlbumImages = async () => {
     try {
@@ -62,7 +64,11 @@ const PurchasedAlbum = () => {
             ) : (
               <Fragment>
                 {albumImages.images.map((image) => (
-                  <div className='purchased-singleDiv' key={image}>
+                  <div
+                    className='purchased-singleDiv'
+                    key={image}
+                    onClick={() => setSelectedImg(`${imageUrl}/${image}`)}
+                  >
                     <img
                       src={`${imageUrl}/${image}`}
                       alt='artist'
@@ -75,6 +81,12 @@ const PurchasedAlbum = () => {
           </Fragment>
         )}
       </div>
+      {selectedImg && (
+        <ConfirmationScreen
+          close={() => setSelectedImg(null)}
+          selectedImg={selectedImg}
+        />
+      )}
     </div>
   );
 };

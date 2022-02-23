@@ -3,6 +3,7 @@ import Img1 from '../.././assets/Banner.png';
 import 'swiper/swiper.min.css';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import SwiperCore, { Pagination } from 'swiper';
+import LoadingPage from '../../Loader/LoadingPage';
 
 import API from '../../api';
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
@@ -29,6 +30,7 @@ const ArtistPage = () => {
   const [startClock, setStartClock] = useState(false);
   const location = useLocation();
   const [albumId, setAlbumId] = useState(location.state);
+  const [loading, setLoading] = useState(true);
   // var addBtn = document.getElementById('addToScreen-user');
   // var deferredPrompt;
 
@@ -39,23 +41,37 @@ const ArtistPage = () => {
         Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
     };
-    API.get(`/api/user/private/getartist/${id}`, config).then(({ data }) => {
-      // console.log(.split(' ').join('-'));
-      console.log(data);
-      window.localStorage.setItem('color', data.theme);
-      setTheme(data.theme);
-      setName(data.username);
-      setProfilePhoto(data.profilePhoto);
-      setCoverPhoto(data.coverPhoto);
-      setBio(data.bio);
-    });
-    API.get(`/api/user/public/getservices/${id}`, config).then(({ data }) => {
-      setServices(data);
-    });
-    API.get(`/api/user/private/getallimages/${id}`, config).then(({ data }) => {
-      setAllImages(data);
-      // console.log(data);
-    });
+    API.get(`/api/user/private/getartist/${id}`, config)
+      .then(({ data }) => {
+        // console.log(.split(' ').join('-'));
+        // console.log(data);
+        window.localStorage.setItem('color', data.theme);
+        setTheme(data.theme);
+        setName(data.username);
+        setProfilePhoto(data.profilePhoto);
+        setCoverPhoto(data.coverPhoto);
+        setBio(data.bio);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+    API.get(`/api/user/public/getservices/${id}`, config)
+      .then(({ data }) => {
+        setServices(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    API.get(`/api/user/private/getallimages/${id}`, config)
+      .then(({ data }) => {
+        setAllImages(data);
+        // console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     if (albumId) {
       // console.log(albumId, 'state');
       API.get(`/api/user/private/getimagetimestamp/${albumId}`, config).then(
@@ -416,6 +432,7 @@ const ArtistPage = () => {
         </div>
       </div>
       <BottomNav active='home' />
+      {loading && <LoadingPage />}
     </Fragment>
   );
 };

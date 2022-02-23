@@ -72,7 +72,7 @@ const Subscribe = () => {
                   type='text'
                   // placeholder='Name'
                   disabled
-                  value={`1 month membership @ ${albumDetails.price}/-`}
+                  value={`5 minutes membership @ ${albumDetails.price}/-`}
                   // onChange={(e) => setName(e.target.value)}
                 />
                 <input

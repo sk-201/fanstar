@@ -7,10 +7,9 @@ import '../../user/landing/landing.css';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import SwiperCore, { Pagination } from 'swiper';
 import editIcon from '../../assets/edit-icon.svg';
-// import fanstarAppLogo from '../../assets/fanstarAppLogo.jpeg'
-// import demoCover from '../../assets/demoCover.png';
 import { setTheme, imageUrl } from '../../utils';
 import BottomNav from '../BottomNav/BottomNav';
+import LoadingPage from '../../Loader/LoadingPage';
 
 const ArtistLanding = () => {
   const { token = null } = useParams();
@@ -18,6 +17,7 @@ const ArtistLanding = () => {
   const [imageList, setImageList] = useState([]);
   const [albumList, setAlbumList] = useState([]);
   const [artistDetails, setArtistDetails] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   // var addBtn = document.getElementById('addToScreen');
 
@@ -41,6 +41,8 @@ const ArtistLanding = () => {
         Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
       },
     };
+
+    setLoading(true);
 
     API.get('/api/artist/private/ownservices', config)
       .then(({ data }) => {
@@ -67,9 +69,13 @@ const ArtistLanding = () => {
         window.localStorage.setItem('color', data.theme);
         setTheme(data.theme);
         // console.log(data);
+        setLoading(false);
         setArtistDetails(data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   }, []);
 
   SwiperCore.use([Pagination]);
@@ -367,6 +373,7 @@ const ArtistLanding = () => {
         </div>
       </div>
       <BottomNav active='profile' />
+      {loading && <LoadingPage />}
     </Fragment>
   );
 };

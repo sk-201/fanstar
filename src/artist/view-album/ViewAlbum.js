@@ -11,6 +11,7 @@ import closeWhite from '../../assets/closeWhite.svg';
 import dustbin from '../../assets/dustbin.svg';
 
 import './ViewAlbum.css';
+import ViewSingleImage from './ViewSingleImage';
 
 const ViewAlbum = () => {
   const imageInput = useRef(null);
@@ -23,6 +24,7 @@ const ViewAlbum = () => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [fileUrl, setFileUrl] = useState('');
   const [type, setType] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const fetchAlbumImages = async (id) => {
     try {
@@ -174,7 +176,11 @@ const ViewAlbum = () => {
             ) : (
               <Fragment>
                 {albumImages.map((image) => (
-                  <div className='viewAlbum-singleDiv' key={image}>
+                  <div
+                    className='viewAlbum-singleDiv'
+                    key={image}
+                    onClick={() => setSelectedImage(`${imageUrl}/${image}`)}
+                  >
                     <img
                       src={`${imageUrl}/${image}`}
                       alt='artist'
@@ -224,6 +230,12 @@ const ViewAlbum = () => {
           fileUrl={fileUrl}
           back={() => navigate('/artist/myalbums')}
           refresh={() => setBoolVal(false)}
+        />
+      )}
+      {selectedImage && (
+        <ViewSingleImage
+          close={() => setSelectedImage(null)}
+          selectedImg={selectedImage}
         />
       )}
     </div>
