@@ -29,6 +29,11 @@ const ArtistLanding = () => {
       } else {
         return navigate('/artist/login');
       }
+    } else if (localStorage.getItem('fanstarToken')) {
+      if (token) {
+        window.localStorage.setItem('fanstarToken', token);
+        navigate('/artist/landing');
+      }
     }
     const config = {
       headers: {
