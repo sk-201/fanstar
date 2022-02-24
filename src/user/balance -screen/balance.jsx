@@ -10,7 +10,7 @@ import LoadingPage from '../../Loader/LoadingPage';
 const Balance = () => {
   const { state } = useLocation();
   const { artistId, serviceId, artistName } = useParams();
-  const { username, email, phone, insta } = state;
+  const { username, email, phone, insta, location } = state;
   const [servicename, setServiceName] = useState('');
   const [serviceprice, setServicePrice] = useState('');
   const [balance, setBalance] = useState('');
@@ -102,7 +102,7 @@ const Balance = () => {
 
       await API.put(
         '/api/user/private/buyservice',
-        { serviceId, username, email, phone, insta },
+        { serviceId, username, email, phone, insta, location },
         config
       );
       alert('Thank you for buying my service!!');

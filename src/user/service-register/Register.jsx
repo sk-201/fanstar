@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import API from '../../api';
 import Ban from '../.././assets/register-banner.png';
@@ -13,6 +14,7 @@ const Register = () => {
   const [serviceprice, setServicePrice] = useState('');
   const [serviceDesc, setServiceDesc] = useState('');
   const { serviceId, artistId, artistName } = useParams();
+  const [location, setLocation] = useState('');
   const navigate = useNavigate();
   // this.razorPayHandler = this.razorPayHandler(this);
 
@@ -32,6 +34,38 @@ const Register = () => {
         console.log(data);
       })
       .catch((error) => console.log(error));
+  }, []);
+
+  const findLoction = async (long, lat) => {
+    try {
+      const { data } = await axios.get(
+        `https://us1.locationiq.com/v1/reverse.php?key=pk.449ce430f077a7d656d39b1d66709709&lat=${lat}&lon=${long}&format=json`
+      );
+      setLocation(
+        `${data?.address?.state ? `${data?.address?.state},` : ''} ${
+          data?.address?.country ? data?.address?.country : ''
+        }`
+      );
+      console.log(
+        `${data?.address?.state ? `${data?.address?.state},` : ''} ${
+          data?.address?.country ? data?.address?.country : ''
+        }`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        findLoction(position.coords.longitude, position.coords.latitude);
+        // setLatitude(position.coords.latitude);
+        // setLongitude(position.coords.longitude);
+      });
+    } else {
+      console.log('Not Availaible');
+    }
   }, []);
 
   // async razorPayPaymentHandler() {
@@ -124,7 +158,7 @@ const Register = () => {
             navigate(
               `/artist/${artistName}/${artistId}/user/service/${serviceId}/payment`,
               {
-                state: { username, email, phone, insta },
+                state: { username, email, phone, insta, location },
               }
             );
           }

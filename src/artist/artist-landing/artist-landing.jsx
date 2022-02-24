@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import API from '../../api';
-import Img1 from '../../assets/demoCoverPhoto.jpg';
+import Img1 from '../../assets/fanstarAppLogo.jpeg';
 import Img2 from '../.././assets/2-div-img.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../user/landing/landing.css';

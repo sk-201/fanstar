@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Img1 from '../.././assets/Banner.png';
+import jwt_decode from 'jwt-decode';
+import Img1 from '../../assets/fanstarAppLogo.jpeg';
 import 'swiper/swiper.min.css';
 import { Swiper, SwiperSlide } from 'swiper/react/swiper-react';
 import SwiperCore, { Pagination } from 'swiper';
@@ -35,55 +36,118 @@ const ArtistPage = () => {
   // var deferredPrompt;
 
   useEffect(() => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
-      },
-    };
-    API.get(`/api/user/private/getartist/${id}`, config)
-      .then(({ data }) => {
-        // console.log(.split(' ').join('-'));
-        // console.log(data);
-        window.localStorage.setItem('color', data.theme);
-        setTheme(data.theme);
-        setName(data.username);
-        setProfilePhoto(data.profilePhoto);
-        setCoverPhoto(data.coverPhoto);
-        setBio(data.bio);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-    API.get(`/api/user/public/getservices/${id}`, config)
-      .then(({ data }) => {
-        setServices(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    API.get(`/api/user/private/getallimages/${id}`, config)
-      .then(({ data }) => {
-        setAllImages(data);
-        // console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    if (albumId) {
-      // console.log(albumId, 'state');
-      API.get(`/api/user/private/getimagetimestamp/${albumId}`, config).then(
-        (res) => {
-          setTimestamp(new Date().getTime());
-          setStartClock(true);
-          // console.log((new Date().getTime()-new Date(res.data).getTime())/1000);
-          // API.put('/api/user/private/removealbumaccess',{albumId:state},config);
-          //   console.log(new Date());
-          //  console.log(new Date(res.data))
+    if (localStorage.getItem('fanstarUserToken')) {
+      if (
+        jwt_decode(localStorage.getItem('fanstarUserToken')).exp >
+        Date.now() / 1000
+      ) {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+          },
+        };
+        API.get(`/api/user/private/getartist/${id}`, config)
+          .then(({ data }) => {
+            // console.log(.split(' ').join('-'));
+            // console.log(data);
+            window.localStorage.setItem('color', data.theme);
+            setTheme(data.theme);
+            setName(data.username);
+            setProfilePhoto(data.profilePhoto);
+            setCoverPhoto(data.coverPhoto);
+            setBio(data.bio);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+            setLoading(false);
+          });
+        API.get(`/api/user/public/getservices/${id}`, config)
+          .then(({ data }) => {
+            setServices(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        API.get(`/api/user/private/getallimages/${id}`, config)
+          .then(({ data }) => {
+            setAllImages(data);
+            // console.log(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        if (albumId) {
+          // console.log(albumId, 'state');
+          API.get(
+            `/api/user/private/getimagetimestamp/${albumId}`,
+            config
+          ).then((res) => {
+            setTimestamp(new Date().getTime());
+            setStartClock(true);
+            // console.log((new Date().getTime()-new Date(res.data).getTime())/1000);
+            // API.put('/api/user/private/removealbumaccess',{albumId:state},config);
+            //   console.log(new Date());
+            //  console.log(new Date(res.data))
+          });
         }
-      );
+      } else {
+        // alert('Session Expired! Please login again');
+        localStorage.removeItem('fanstarUserToken');
+        window.location.reload();
+      }
+    } else {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+        },
+      };
+      API.get(`/api/user/private/getartist/${id}`, config)
+        .then(({ data }) => {
+          // console.log(.split(' ').join('-'));
+          // console.log(data);
+          window.localStorage.setItem('color', data.theme);
+          setTheme(data.theme);
+          setName(data.username);
+          setProfilePhoto(data.profilePhoto);
+          setCoverPhoto(data.coverPhoto);
+          setBio(data.bio);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+      API.get(`/api/user/public/getservices/${id}`, config)
+        .then(({ data }) => {
+          setServices(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      API.get(`/api/user/private/getallimages/${id}`, config)
+        .then(({ data }) => {
+          setAllImages(data);
+          // console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      if (albumId) {
+        // console.log(albumId, 'state');
+        API.get(`/api/user/private/getimagetimestamp/${albumId}`, config).then(
+          (res) => {
+            setTimestamp(new Date().getTime());
+            setStartClock(true);
+            // console.log((new Date().getTime()-new Date(res.data).getTime())/1000);
+            // API.put('/api/user/private/removealbumaccess',{albumId:state},config);
+            //   console.log(new Date());
+            //  console.log(new Date(res.data))
+          }
+        );
+      }
     }
   }, []);
 
