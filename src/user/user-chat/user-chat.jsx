@@ -47,29 +47,26 @@ const ChatScreen = () => {
   }, [artistId]);
 
   useEffect(() => {
-    if (!boolVal) {
-      API.get(`/api/chat/getachat/${roomId}`)
-        .then(({ data }) => {
-          // console.log(data);
-          setServiceName(data.paymentId.serviceName);
-          setMessages(data.allMessages);
-        })
-        .catch((error) => console.log(error));
-      API.get('/api/user/private/getemojies', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
-        },
+    API.get(`/api/chat/getachat/${roomId}`)
+      .then(({ data }) => {
+        // console.log(data);
+        setServiceName(data.paymentId.serviceName);
+        setMessages(data.allMessages);
       })
-        .then(({ data }) => {
-          // console.log(data);
-          // console.log(`${imageUrl}/${data[0].emoji}`);
-          setEmojis(data);
-        })
-        .catch((error) => console.log(error));
-      setBoolVal(true);
-    }
-  }, [boolVal, roomId]); ///api/chat/getallchats/:artistId
+      .catch((error) => console.log(error));
+    API.get('/api/user/private/getemojies', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+      },
+    })
+      .then(({ data }) => {
+        // console.log(data);
+        // console.log(`${imageUrl}/${data[0].emoji}`);
+        setEmojis(data);
+      })
+      .catch((error) => console.log(error));
+  }, [roomId]); ///api/chat/getallchats/:artistId
 
   useEffect(() => {
     socket.emit('joined', { userId, roomId });
@@ -85,6 +82,8 @@ const ChatScreen = () => {
     e.preventDefault();
     if (message.length > 0) {
       try {
+        socket.emit('sendmessage', { userId, roomId, message, isImage: false });
+        setMessage('');
         const { data } = await API.put(
           '/api/user/private/deductbalance',
           {
@@ -100,8 +99,6 @@ const ChatScreen = () => {
           }
         );
         // console.log(data);
-        socket.emit('sendmessage', { userId, roomId, message, isImage: false });
-        setMessage('');
       } catch (error) {
         alert('Check your wallet balance!');
         navigate(`/artist/${artistName}/${id}/wallet`);
@@ -112,6 +109,14 @@ const ChatScreen = () => {
 
   const sendEmoji = async (emId, url) => {
     try {
+      socket.emit('sendmessage', {
+        userId,
+        roomId,
+        message: url,
+        isImage: true,
+      });
+      setMessage('');
+      setEmojiDisplay(false);
       const { data } = await API.post(
         '/api/user/private/giveemoji',
         {
@@ -126,14 +131,6 @@ const ChatScreen = () => {
         }
       );
       console.log(url);
-      socket.emit('sendmessage', {
-        userId,
-        roomId,
-        message: url,
-        isImage: true,
-      });
-      setMessage('');
-      setEmojiDisplay(false);
     } catch (error) {
       alert('Check your wallet balance!');
       navigate(`/artist/${artistName}/${id}/wallet`);

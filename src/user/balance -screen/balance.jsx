@@ -5,6 +5,7 @@ import API from '../../api';
 import backIcon from '../../assets/backArrow.svg';
 
 import './balance.css';
+import LoadingPage from '../../Loader/LoadingPage';
 
 const Balance = () => {
   const { state } = useLocation();
@@ -14,6 +15,7 @@ const Balance = () => {
   const [serviceprice, setServicePrice] = useState('');
   const [balance, setBalance] = useState('');
   const [openRecharge, setOpenRecharge] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [rechargeAmount, setRechargeAmount] = useState('');
   const navigate = useNavigate();
 
@@ -45,12 +47,13 @@ const Balance = () => {
         Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
     };
+    setLoading(true);
     const API_URL = `/api/user/private/`;
     const orderUrl = `${API_URL}order/${rechargeAmount}`;
     const response = await API.get(orderUrl, config);
     const { data } = response;
-    console.log('App -> razorPayPaymentHandler -> data', data);
-    console.log('response', response);
+    // console.log('App -> razorPayPaymentHandler -> data', data);
+    // console.log('response', response);
 
     const options = {
       key: Razorpay_Key,
@@ -69,10 +72,12 @@ const Balance = () => {
           const successObj = JSON.parse(captureResponse.data);
           const captured = successObj.captured;
           console.log('App -> razorPayPaymentHandler -> captured', successObj);
+          setLoading(false);
           if (captured) {
             console.log('success');
           }
         } catch (err) {
+          setLoading(false);
           console.log(err);
         }
       },
@@ -86,6 +91,7 @@ const Balance = () => {
   };
 
   const buyService = async () => {
+    setLoading(true);
     try {
       const config = {
         headers: {
@@ -101,7 +107,9 @@ const Balance = () => {
       );
       alert('Thank you for buying my service!!');
       navigate(`/artist/${artistName}/${artistId}`);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       alert('Not Enough Balance');
       console.log(error);
     }
@@ -171,10 +179,11 @@ const Balance = () => {
         <h1 id='tot-amt'>Total Amount</h1>
         <span id='incl'>(inclusive of all charges)</span>
         <span id='price'>Rs {serviceprice}/-</span>
-        <button className='btn-pay' onClick={buyService}>
+        <button className='btn-pay' onClick={buyService} disabled={loading}>
           Pay with Wallet
         </button>
       </div>
+      {loading && <LoadingPage />}
     </div>
   );
 };

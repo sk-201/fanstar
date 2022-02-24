@@ -11,6 +11,7 @@ const Register = () => {
   const [insta, setInsta] = useState('');
   const [servicename, setServiceName] = useState('');
   const [serviceprice, setServicePrice] = useState('');
+  const [serviceDesc, setServiceDesc] = useState('');
   const { serviceId, artistId, artistName } = useParams();
   const navigate = useNavigate();
   // this.razorPayHandler = this.razorPayHandler(this);
@@ -27,6 +28,7 @@ const Register = () => {
       .then(({ data }) => {
         setServiceName(data.serviceName);
         setServicePrice(data.amount);
+        setServiceDesc(data.description);
         console.log(data);
       })
       .catch((error) => console.log(error));
@@ -132,8 +134,8 @@ const Register = () => {
       </button>
 
       <text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Hendrerit ut
-        massa metus.Lorem ipLorem ipsum <span>Read more </span>
+        <span>Description : </span> {serviceDesc}{' '}
+        {/**<span>Read more </span> */}
       </text>
     </div>
   );
