@@ -7,6 +7,7 @@ import avatar from '../../assets/avatar.png';
 import editIcon from '../../assets/editIcon.png';
 import './employee-profile.css';
 import BottomNav from '../BottomNav/BottomNav';
+import LoadingPage from '../../Loader/LoadingPage';
 
 const initialData = {
   username: '',
@@ -20,9 +21,11 @@ const EmployeeProfile = () => {
   const [profileInfo, setProfileInfo] = useState(initialData);
   const [isEdit, setIsEdit] = useState(false);
   const [boolVal, setBoolVal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const fetchProfileInfo = async () => {
+    setLoading(true);
     try {
       const { data } = await API.get('/api/employee/private/getownprofile', {
         headers: {
@@ -31,9 +34,11 @@ const EmployeeProfile = () => {
           )}`,
         },
       });
+      setLoading(false);
       // console.log(data);
       setProfileInfo(data);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -117,6 +122,7 @@ const EmployeeProfile = () => {
         />
       )}
       <BottomNav active='profile' />
+      {loading && <LoadingPage />}
     </div>
   );
 };

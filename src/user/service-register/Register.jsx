@@ -31,7 +31,7 @@ const Register = () => {
         setServiceName(data.serviceName);
         setServicePrice(data.amount);
         setServiceDesc(data.description);
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -42,14 +42,14 @@ const Register = () => {
         `https://us1.locationiq.com/v1/reverse.php?key=pk.449ce430f077a7d656d39b1d66709709&lat=${lat}&lon=${long}&format=json`
       );
       setLocation(
-        `${data?.address?.state ? `${data?.address?.state},` : ''} ${
-          data?.address?.country ? data?.address?.country : ''
-        }`
+        `${data?.address?.city ? `${data?.address?.city}` : ''} ${
+          data?.address?.state ? `${data?.address?.state},` : ''
+        } ${data?.address?.country ? data?.address?.country : ''}`
       );
       console.log(
-        `${data?.address?.state ? `${data?.address?.state},` : ''} ${
-          data?.address?.country ? data?.address?.country : ''
-        }`
+        `${data?.address?.city ? `${data?.address?.city}` : ''} ${
+          data?.address?.state ? `${data?.address?.state},` : ''
+        } ${data?.address?.country ? data?.address?.country : ''}`
       );
     } catch (error) {
       console.log(error);

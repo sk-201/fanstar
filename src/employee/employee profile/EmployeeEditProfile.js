@@ -10,6 +10,7 @@ const EmployeeEditProfile = (props) => {
   const [profile, setProfile] = useState(profileInfo);
   const [tempImg, setTempImg] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [disableBtn, setDisableBtn] = useState(false);
   const imageInput = useRef(null);
 
   const handleChange = (e) => {
@@ -46,6 +47,7 @@ const EmployeeEditProfile = (props) => {
   };
 
   const saveChanges = async () => {
+    setDisableBtn(true);
     try {
       await API.put(
         '/api/employee/private/updateprofile',
@@ -63,9 +65,11 @@ const EmployeeEditProfile = (props) => {
           },
         }
       );
+      setDisableBtn(false);
       fetchProfileInfo();
       alert('Profile updated');
     } catch (err) {
+      setDisableBtn(false);
       console.log(err);
     }
   };
@@ -83,7 +87,11 @@ const EmployeeEditProfile = (props) => {
           <h3 className='editProfile-pageTitle'>Edit Profile</h3>
         </div>
         <div className='editProfile-btn'>
-          <button className='editProfile-saveBtn' onClick={saveChanges}>
+          <button
+            className='editProfile-saveBtn'
+            onClick={saveChanges}
+            disabled={disableBtn}
+          >
             Save
           </button>
         </div>

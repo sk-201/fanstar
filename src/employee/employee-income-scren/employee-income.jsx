@@ -1,8 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import jwt_decode from 'jwt-decode';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
 import fanstar_logo from '../../assets/fanstar_logo.svg';
 import BottomNav from '../BottomNav/BottomNav';
+import LoadingPage from '../../Loader/LoadingPage';
 
 const EmployeeIncome = () => {
   const [totalIncome, setTotalIncome] = useState(0);
@@ -10,6 +12,7 @@ const EmployeeIncome = () => {
   const [totalOrders, setTotalOrders] = useState(0);
   const [pendingOrders, setPendingOrders] = useState(0);
   const [boolVal, setBoolVal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const config = {
@@ -20,11 +23,13 @@ const EmployeeIncome = () => {
   };
 
   const fetchTotalAndWeeklyIncome = async () => {
+    setLoading(true);
     try {
       const { data } = await API.get(
         '/api/employee/private/getpaymentsofownartists',
         config
       );
+      // console.log(data);
       setTotalOrders(data.length);
       let today = new Date();
       let before = new Date(today);
@@ -44,26 +49,37 @@ const EmployeeIncome = () => {
       setTotalIncome(total);
       setWeeklyIncome(weekly);
       setPendingOrders(pending);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
 
-  const fetchEmployeeProfile = async () => {
-    try {
-      const { data } = await API.get(
-        '/api/employee/private/getownprofile',
-        config
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchEmployeeProfile = async () => {
+  //   try {
+  //     const { data } = await API.get(
+  //       '/api/employee/private/getownprofile',
+  //       config
+  //     );
+  //   } catch (error) {
+  //     // setLoading(false);
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     if (!boolVal) {
-      fetchTotalAndWeeklyIncome();
-      fetchEmployeeProfile();
+      if (
+        localStorage.getItem('fanstarEmployeeToken') &&
+        jwt_decode(localStorage.getItem('fanstarEmployeeToken')).exp >
+          Date.now() / 1000
+      ) {
+        fetchTotalAndWeeklyIncome();
+        // fetchEmployeeProfile();
+      } else {
+        return navigate('/employee/login');
+      }
       setBoolVal(true);
     }
   }, [boolVal]);
@@ -95,6 +111,7 @@ const EmployeeIncome = () => {
         </div>
       </div>
       <BottomNav active='home' />
+      {loading && <LoadingPage />}
     </Fragment>
   );
 };

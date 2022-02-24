@@ -223,6 +223,7 @@
 
 .pending-userDetails {
   margin-left: 10px;
+  width: 75%;
 }
 
 .pending-userName {
@@ -241,4 +242,21 @@
   font-size: 12px;
   color: #8f8f8f;
   margin: 5px 0;
+}
+
+.pending-user {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pending-userLocation {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  color: #223263;
+  margin: 5px 0;
+  /* margin-left: 15px; */
 }

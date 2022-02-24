@@ -1,26 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
-import artistDemo from '../../assets/artistDemo.png';
-import { ReactComponent as Home } from '../.././assets/home-white.svg';
-import { ReactComponent as ChatB } from '../.././assets/chat-black.svg';
-import { ReactComponent as LockB } from '../.././assets/Ellipse 66.svg';
-import { ReactComponent as HomeB } from '../.././assets/home.svg';
-import { ReactComponent as Chat } from '../.././assets/chat.svg';
-import { ReactComponent as Lock } from '../.././assets/opep.svg';
-
 import './EmployeeLinkedArtist.css';
 import BottomNav from '../BottomNav/BottomNav';
+import LoadingPage from '../../Loader/LoadingPage';
 
 const EmployeeLinkedArtist = () => {
   const navigate = useNavigate();
   const [artistList, setArtistList] = useState([]);
   const [boolVal, setBoolVal] = useState(false);
-  const [home, setHome] = useState(0);
-  const [chat, setChat] = useState(1);
-  const [lock, setLock] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const fetchArtistList = async () => {
+    setLoading(true);
     try {
       const { data } = await API.get('/api/employee/private/getownartists', {
         headers: {
@@ -29,8 +21,10 @@ const EmployeeLinkedArtist = () => {
           )}`,
         },
       });
+      setLoading(false);
       setArtistList(data);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -73,6 +67,7 @@ const EmployeeLinkedArtist = () => {
         </div>
       ))}
       <BottomNav active='artists' />
+      {loading && <LoadingPage />}
     </div>
   );
 };

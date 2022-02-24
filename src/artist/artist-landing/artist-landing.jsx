@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import API from '../../api';
+import jwt_decode from 'jwt-decode';
 import Img1 from '../../assets/fanstarAppLogo.jpeg';
 import Img2 from '../.././assets/2-div-img.png';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -30,9 +31,17 @@ const ArtistLanding = () => {
         return navigate('/artist/login');
       }
     } else if (localStorage.getItem('fanstarToken')) {
+      // console.log('hello', jwt_decode(localStorage.getItem('fanstarToken')));
       if (token) {
         window.localStorage.setItem('fanstarToken', token);
         navigate('/artist/landing');
+      } else if (
+        jwt_decode(localStorage.getItem('fanstarToken')).exp <=
+        Date.now() / 1000
+      ) {
+        console.log('hi');
+        localStorage.removeItem('fanstarToken');
+        return navigate('/artist/login');
       }
     }
     const config = {

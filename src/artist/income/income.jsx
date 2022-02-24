@@ -196,9 +196,14 @@ const Income = () => {
                     />
                   </div>
                   <div className='pending-userDetails'>
-                    <h3 className='pending-userName'>
-                      {data?.userId?.username}
-                    </h3>
+                    <div className='pending-user'>
+                      <h3 className='pending-userName'>
+                        {data?.userId?.username}
+                      </h3>
+                      <span className='pending-userLocation'>
+                        {data?.userId?.location ? data?.userId?.location : ''}
+                      </span>
+                    </div>
                     <p className='pending-orderName'>
                       {data?.serviceId?.serviceName}
                     </p>
