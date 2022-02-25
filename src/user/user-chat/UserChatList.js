@@ -17,7 +17,7 @@ const UserChatList = () => {
   const [loading, setLoading] = useState(true);
 
   const chatHandler = async (paymentId) => {
-    console.log(paymentId);
+    // console.log(paymentId);
     try {
       const res = await API.post(
         '/api/chat/createchat',
@@ -50,6 +50,7 @@ const UserChatList = () => {
     };
     API.get(`/api/user/private/getartist/${id}`, config)
       .then(({ data }) => {
+        // console.log(data);
         setArtistDetails(data);
         API.get(`/api/chat/getallchatsofuser`, config)
           .then((res) => {
@@ -76,6 +77,18 @@ const UserChatList = () => {
           <img className='chat-headerLogo' src={fanstar_logo} alt='logo' />
           <h3 className='chat-headTitle'>Fanstar</h3>
         </div>
+        {!loading && (
+          <p
+            style={{
+              margin: '5px 0',
+              width: '100%',
+              textAlign: 'center',
+              fontSize: '14px',
+            }}
+          >
+            Per msg price : Rs. {artistDetials.chatPrice}/-
+          </p>
+        )}
         <div className='chat-container'>
           {loading ? (
             <h3 className='artistChatlist-loading'>Loading...</h3>

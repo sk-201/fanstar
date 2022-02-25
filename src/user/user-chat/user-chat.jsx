@@ -45,6 +45,7 @@ const ChatScreen = () => {
     })
       .then(({ data }) => {
         setArtistDetails(data);
+        console.log(data);
       })
       .catch((error) => console.log(error));
   }, [artistId]);
@@ -137,7 +138,9 @@ const ChatScreen = () => {
       setEmojiDisplay(false);
       console.log(url);
     } catch (error) {
-      alert('Check your wallet balance!');
+      alert(
+        `Check your wallet balance, per msg price is Rs. ${artistDetails.chatPrice}/-`
+      );
       navigate(`/artist/${artistName}/${id}/wallet`);
       setMessage('');
     }
@@ -194,7 +197,12 @@ const ChatScreen = () => {
                 <p className='artistChat-username'>
                   {artistDetails.username ? artistDetails.username : ''}
                 </p>
-                <span className='artistChat-serviceName'>{serviceName}</span>
+                <div className='artistChat-serviceNameAndPrice'>
+                  <span className='artistChat-serviceName'>{serviceName}</span>
+                  {artistDetails?.chatPrice && (
+                    <span className='artistChat-price'>{`Per msg price: ${artistDetails?.chatPrice}`}</span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
