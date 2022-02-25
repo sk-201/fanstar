@@ -87,8 +87,6 @@ const ChatScreen = () => {
     e.preventDefault();
     if (message.length > 0) {
       try {
-        socket.emit('sendmessage', { userId, roomId, message, isImage: false });
-        setMessage('');
         const { data } = await API.put(
           '/api/user/private/deductbalance',
           {
@@ -104,6 +102,8 @@ const ChatScreen = () => {
           }
         );
         // console.log(data);
+        socket.emit('sendmessage', { userId, roomId, message, isImage: false });
+        setMessage('');
       } catch (error) {
         alert('Check your wallet balance!');
         navigate(`/artist/${artistName}/${id}/wallet`);
@@ -114,14 +114,6 @@ const ChatScreen = () => {
 
   const sendEmoji = async (emId, url) => {
     try {
-      socket.emit('sendmessage', {
-        userId,
-        roomId,
-        message: url,
-        isImage: true,
-      });
-      setMessage('');
-      setEmojiDisplay(false);
       const { data } = await API.post(
         '/api/user/private/giveemoji',
         {
@@ -135,6 +127,14 @@ const ChatScreen = () => {
           },
         }
       );
+      socket.emit('sendmessage', {
+        userId,
+        roomId,
+        message: url,
+        isImage: true,
+      });
+      setMessage('');
+      setEmojiDisplay(false);
       console.log(url);
     } catch (error) {
       alert('Check your wallet balance!');
