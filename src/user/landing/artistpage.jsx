@@ -269,13 +269,13 @@ const ArtistPage = () => {
               <text id='login-text-land'>Login</text>
             </div>
           )}
-          <button
+          {/**<button
             className='addToHome-btn'
             id='addToScreen-user'
             onClick={addToHome}
           >
             Install
-          </button>
+          </button> */}
           <Link to={`/artist/${artistName}/${id}/albumlist`}>
             <Bell className='bell-icon'> </Bell>
           </Link>

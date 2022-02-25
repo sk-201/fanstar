@@ -167,13 +167,13 @@ const ArtistLanding = () => {
             src={artistDetails.coverPhoto ? artistDetails.coverPhoto : Img1}
             alt='banner-pic'
           />
-          <button
+          {/** <button
             className='addToHome-btn'
             id='addToScreen'
             onClick={addToHome}
           >
             Install
-          </button>
+          </button> */}
           <h1 className='img-1-heading'>
             {Object.keys(artistDetails).length > 0
               ? `Hi I'm ${artistDetails.username}`
