@@ -17,7 +17,7 @@ const UserChatList = () => {
   const [loading, setLoading] = useState(true);
 
   const chatHandler = async (paymentId) => {
-    // console.log(paymentId);
+    console.log(paymentId);
     try {
       const res = await API.post(
         '/api/chat/createchat',
@@ -91,7 +91,11 @@ const UserChatList = () => {
                     <div
                       className='artistChat-chatBox'
                       key={data._id}
-                      onClick={() => chatHandler(data.paymentId._id)}
+                      onClick={() =>
+                        chatHandler(
+                          data?.paymentId?._id ? data?.paymentId?._id : null
+                        )
+                      }
                     >
                       <div className='artistChatlist-imgDiv'>
                         <img

@@ -20,6 +20,7 @@ const ArtistChat = () => {
   const [confirmType, setConfirmType] = useState(false);
   const { state } = useLocation();
   const { userId, roomId, paymentId } = state;
+  // const [isPaymentId, setIsPaymentId] = useState(paymentId ? true : false);
   const [messages, setMessages] = useState([]);
   const [serviceName, setServiceName] = useState('');
   const navigate = useNavigate();
@@ -31,7 +32,9 @@ const ArtistChat = () => {
       API.get(`/api/chat/getachat/${roomId}`)
         .then(({ data }) => {
           console.log(data);
-          setServiceName(data.paymentId.serviceName);
+          setServiceName(
+            data?.paymentId?.serviceName ? data?.paymentId?.serviceName : ''
+          );
           setMessages(data.allMessages);
           setBoolVal(true);
         })
@@ -151,16 +154,18 @@ const ArtistChat = () => {
                 className='artistChat-icon'
               />
             </button>
-            <button
-              className='artistChat-complete'
-              onClick={() => handleConfirm('status')}
-            >
-              <img
-                src={completeStatus}
-                alt='status'
-                className='artistChat-icon'
-              />
-            </button>
+            {paymentId && (
+              <button
+                className='artistChat-complete'
+                onClick={() => handleConfirm('status')}
+              >
+                <img
+                  src={completeStatus}
+                  alt='status'
+                  className='artistChat-icon'
+                />
+              </button>
+            )}
           </div>
         </div>
         <div className='artistChat-div'>

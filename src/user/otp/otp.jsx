@@ -37,17 +37,18 @@ const Otp = () => {
         };
         const { data } = await API.post(
           '/api/user/public/verify',
-          { phone, code },
+          { phone, code, artistId: location?.state?.artistid },
           config
         );
         setLoading(false);
         localStorage.setItem('fanstarUserToken', data);
-        window.location.href = `/artist/${location.state.artistName}/${location.state.artistid}`;
+        window.location.href = `/artist/${location?.state?.artistName}/${location?.state?.artistid}`;
       } else {
         setLoading(false);
         alert('Something went wrong Please try again later!');
       }
     } catch (error) {
+      setLoading(false);
       alert(
         error?.response?.data?.error
           ? error?.response?.data?.error

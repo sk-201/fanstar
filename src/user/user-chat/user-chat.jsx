@@ -18,6 +18,9 @@ const ChatScreen = () => {
   const [message, setMessage] = useState('');
   const { state } = useLocation();
   const { userId, roomId, artistId } = state;
+  const [isPaymentId, setIsPaymentId] = useState(
+    state.paymentId ? true : false
+  );
   const [messages, setMessages] = useState([]);
   const [serviceName, setServiceName] = useState('');
   const [emojis, setEmojis] = useState([]);
@@ -50,7 +53,9 @@ const ChatScreen = () => {
     API.get(`/api/chat/getachat/${roomId}`)
       .then(({ data }) => {
         // console.log(data);
-        setServiceName(data.paymentId.serviceName);
+        setServiceName(
+          data?.paymentId?.serviceName ? data?.paymentId?.serviceName : ''
+        );
         setMessages(data.allMessages);
       })
       .catch((error) => console.log(error));
@@ -193,18 +198,20 @@ const ChatScreen = () => {
               </div>
             </div>
           </div>
-          <div className='artistChat-headerRight'>
-            <button
-              className='artistChat-complete'
-              onClick={() => setOpenConfirm(true)}
-            >
-              <img
-                src={completeStatus}
-                alt='status'
-                className='artistChat-icon'
-              />
-            </button>
-          </div>
+          {isPaymentId && (
+            <div className='artistChat-headerRight'>
+              <button
+                className='artistChat-complete'
+                onClick={() => setOpenConfirm(true)}
+              >
+                <img
+                  src={completeStatus}
+                  alt='status'
+                  className='artistChat-icon'
+                />
+              </button>
+            </div>
+          )}
         </div>
         <div className={`artistChat-div ${emojiDisplay ? 'changeHeight' : ''}`}>
           {messages.map((mes, ind) => {
