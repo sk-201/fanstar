@@ -13,6 +13,23 @@
   margin-bottom: 10px;
 }
 
+.singleAlbum-headerDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.albumList-displayPrice {
+  font-size: 14px;
+  color: #fff;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  width: 25%;
+}
+
 .additionStyle {
   justify-content: flex-start !important;
 }
@@ -53,12 +70,13 @@
   margin: 1.5rem 0;
 }
 
-.albumList-ablumName {
+.albumList-ablumNameSubs {
   margin-top: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 0;
   font-family: Kaushan Script;
   font-weight: normal;
   font-size: 20px;
+  width: 70%;
   color: #ffffff;
 }
 

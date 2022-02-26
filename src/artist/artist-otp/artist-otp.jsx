@@ -80,6 +80,7 @@ const ArtistOtp = () => {
       }
     } catch (error) {
       setLoading(false);
+      alert('Incorrect OTP');
       console.log(error);
     }
   };

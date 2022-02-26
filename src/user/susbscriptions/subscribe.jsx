@@ -112,12 +112,8 @@ const Subscribe = () => {
                 <button
                   className='btn-sub'
                   onClick={() => {
-                    if (
-                      name.trim() == '' ||
-                      email.trim() == '' ||
-                      insta.trim() == ''
-                    ) {
-                      alert('One or more Field is empty!!');
+                    if (name.trim() == '') {
+                      alert('Name is required!');
                     } else {
                       navigate(
                         `/artist/${artistName}/${id}/subscribe/payment`,

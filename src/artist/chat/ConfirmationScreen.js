@@ -7,23 +7,27 @@ const ConfirmationScreen = (props) => {
   const [price, setPrice] = useState('');
 
   const handleChangePrice = async () => {
-    try {
-      await API.put(
-        '/api/artist/private/updatechatprice',
-        {
-          chatPrice: price,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+    if (price >= 10) {
+      try {
+        await API.put(
+          '/api/artist/private/updatechatprice',
+          {
+            chatPrice: price,
           },
-        }
-      );
-      // console.log(data);
-      close();
-    } catch (error) {
-      console.log(error);
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+            },
+          }
+        );
+        // console.log(data);
+        close();
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert('Price should be equal to or greater than Rs 10/-');
     }
   };
 
@@ -39,9 +43,9 @@ const ConfirmationScreen = (props) => {
           <p className='price-confirmation-content'>Per message price</p>
           <input
             type='number'
-            min='1'
+            min='10'
             value={price}
-            placeholder='Message price'
+            placeholder='Message price (min Rs. 10/-)'
             className='price-inputField'
             onChange={(e) => setPrice(e.target.value)}
           />

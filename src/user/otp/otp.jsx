@@ -49,11 +49,7 @@ const Otp = () => {
       }
     } catch (error) {
       setLoading(false);
-      alert(
-        error?.response?.data?.error
-          ? error?.response?.data?.error
-          : 'Something went wrong'
-      );
+      alert('Incorrect OTP');
       console.log(
         error?.response?.data?.error
           ? error?.response?.data?.error

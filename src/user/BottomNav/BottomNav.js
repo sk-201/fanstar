@@ -59,7 +59,15 @@ const BottomNav = (props) => {
       </div>
       <div
         className='bottomNav-home'
-        onClick={() => navigate(`/artist/${artistName}/${id}/user/chatlist`)}
+        onClick={() => {
+          if (localStorage.getItem('fanstarUserToken')) {
+            navigate(`/artist/${artistName}/${id}/user/chatlist`);
+          } else {
+            navigate('/login', {
+              state: { artistid: id, artistName: artistName },
+            });
+          }
+        }}
       >
         <img src={chat} alt='chat' className='bottomNav-icon' />
         {active === 'chat' && (

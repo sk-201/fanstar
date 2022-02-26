@@ -71,6 +71,7 @@ const AlbumList = () => {
             'Content-Type': 'application/json',
           },
         });
+
         setAlbumList(data);
         setLoading(false);
       } catch (error) {
@@ -131,7 +132,12 @@ const AlbumList = () => {
               <Fragment>
                 {albumList.map((album) => (
                   <div className='albumList-albumDiv' key={album._id}>
-                    <h3 className='albumList-ablumName'>{album.albumName}</h3>
+                    <div className='singleAlbum-headerDiv'>
+                      <h3 className='albumList-ablumNameSubs'>
+                        {album.albumName}
+                      </h3>
+                      <p className='albumList-displayPrice'>{`Rs. ${album.price}/-`}</p>
+                    </div>
                     <div className='albumList-coverDiv'>
                       <img
                         src={

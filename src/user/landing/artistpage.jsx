@@ -312,7 +312,9 @@ const ArtistPage = () => {
                                 `/artist/${artistName}/${id}/user/service/${data._id}`
                               );
                             } else {
-                              alert('Please login first.');
+                              navigate('/login', {
+                                state: { artistid: id, artistName: artistName },
+                              });
                             }
                           }}
                         >
@@ -350,7 +352,9 @@ const ArtistPage = () => {
                     state: albumId,
                   });
                 } else {
-                  alert('Please login first.');
+                  navigate('/login', {
+                    state: { artistid: id, artistName: artistName },
+                  });
                 }
               }}
             >
@@ -449,13 +453,19 @@ const ArtistPage = () => {
                                         `/artist/${artistName}/${id}/user/image/${data._id}`
                                       );
                                     } else {
-                                      alert('Please login first.');
+                                      navigate('/login', {
+                                        state: {
+                                          artistid: id,
+                                          artistName: artistName,
+                                        },
+                                      });
                                     }
                                   }}
                                 >
                                   {' '}
                                   Unlock now
                                 </button>
+                                <p className='displayPrice'>{`Rs. ${data.price}/-`}</p>
                                 {data.url.split('.').pop() === 'jpg' ||
                                 data.url.split('.').pop() === 'jpeg' ||
                                 data.url.split('.').pop() === 'png' ? (

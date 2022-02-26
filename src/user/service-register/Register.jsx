@@ -147,13 +147,8 @@ const Register = () => {
       <button
         className='btn-pay'
         onClick={() => {
-          if (
-            username.trim() == '' ||
-            email.trim() == '' ||
-            phone.trim() == '' ||
-            insta.trim() == ''
-          ) {
-            alert('One or more Field is empty!!');
+          if (username.trim() == '' || phone.trim() == '') {
+            alert('Name and Phone number are required!');
           } else {
             navigate(
               `/artist/${artistName}/${artistId}/user/service/${serviceId}/payment`,
