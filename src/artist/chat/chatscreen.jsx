@@ -107,7 +107,7 @@ const ChatList = () => {
                         <div className='artistChatlist-userInfo'>
                           <div className='artistChatlist-usernameAndService'>
                             <h4 className='artistChatlist-username'>
-                              {data.username ? `${data.username} ` : ''}
+                              {data.username ? `${data.username} ` : 'Anonymous'}
                             </h4>
                             <span className='artistChatlist-serviceName'>
                               {data?.serviceName ? data?.serviceName : ''}

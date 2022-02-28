@@ -39,7 +39,7 @@ const ArtistPage = () => {
     if (localStorage.getItem('fanstarUserToken')) {
       if (
         jwt_decode(localStorage.getItem('fanstarUserToken')).exp >
-        Date.now() / 1000
+        Date.now() / 1000 && (localStorage.getItem('artistId')===id)
       ) {
         const config = {
           headers: {
@@ -95,6 +95,7 @@ const ArtistPage = () => {
       } else {
         // alert('Session Expired! Please login again');
         localStorage.removeItem('fanstarUserToken');
+        localStorage.removeItem('artistId')
         window.location.reload();
       }
     } else {

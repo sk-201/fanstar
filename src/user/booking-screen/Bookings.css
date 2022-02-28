@@ -82,3 +82,13 @@
   font-size: 14px;
   margin: 0;
 }
+
+.booking-feedbackDiv{
+  width: 100%;
+  text-align: right;
+}
+
+.booking-feedback{
+  margin: 0 10px;
+  color: #00be5e;
+}

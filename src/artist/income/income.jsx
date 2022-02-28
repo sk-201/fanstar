@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import avatar from '../../assets/avatar.png';
 import Logo from '../../assets/Ellipse 58.png';
 import fanstar_logo from '../../assets/fanstar_logo.svg';
+import completeMark from '../../assets/completeMark.svg';
 import './income.css';
 import BottomNav from '../BottomNav/BottomNav';
+import ConfirmationScreen from './ConfirmationScreen';
 
 const Income = () => {
   const navigate = useNavigate();
@@ -16,10 +18,12 @@ const Income = () => {
   const [pendingOrders, setPendingOrders] = useState(0);
   const [artistCommission, setArtistCommission] = useState(0);
   // const [amountPending, setAmountPending] = useState(0);
+  const [confirmScreen, setConfirmScreen] = useState(false);
   const [amountPaid, setAmountPaid] = useState(0);
   const [pendingData, setPendingData] = useState([]);
   const [artistData, setArtistData] = useState({});
   const [boolVal, setBoolVal] = useState(false);
+  const [confirmId, setConfirmId] = useState('');
 
   const config = {
     headers: {
@@ -106,7 +110,6 @@ const Income = () => {
         {
           user1: data._id,
           user2: orderData?.userId?._id,
-          paymentId: orderData._id,
         },
         {
           headers: {
@@ -132,6 +135,31 @@ const Income = () => {
     }
   };
 
+  const completeStatusClick = async () => {
+    try {
+      const { data } = await API.put(
+        '/api/artist/private/completepayment',
+        {
+          paymentId: confirmId,
+          // roomId: roomId,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          },
+        }
+      );
+      alert('Service Completed!');
+      setConfirmScreen(false);
+      setConfirmId('');
+      navigate('/chat');
+      // console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Fragment>
       <div className='income'>
@@ -150,17 +178,17 @@ const Income = () => {
             }
           >
             <h2 id='tot-inc-text-1'>Total Income</h2>
-            <h1 id='tot-inc-rs'> Rs {parseInt(balance)}/-</h1>
+            <h1 id='tot-inc-rs'> Rs {parseInt(balance).toFixed(2)}/-</h1>
           </div>
           <span id='week-inc-text'>Weekly Income</span>
           <div className='weekly-income'>
             <h2 id='week-inc-text-1'>Weekly Income</h2>
-            <h1 id='week-inc-rs'>Rs {weeklyIncome}/-</h1>
+            <h1 id='week-inc-rs'>Rs {parseInt(weeklyIncome).toFixed(2)}/-</h1>
           </div>
           <span id='tot-inc-text'>Balance Withdrawn</span>
           <div className='total-income gradient'>
             <h2 id='tot-inc-text-1-changeColor'>Balance Withdrawn</h2>
-            <h1 id='tot-inc-rs-changeColor'> Rs {parseInt(amountPaid)}/-</h1>
+            <h1 id='tot-inc-rs-changeColor'> Rs {parseInt(amountPaid).toFixed(2)}/-</h1>
             {/**<button
               className='request-btn'
               onClick={() =>
@@ -186,9 +214,9 @@ const Income = () => {
                 <div
                   className='pending-container'
                   key={data._id}
-                  onClick={() => chatHandler(data)}
+                  
                 >
-                  <div className='pending-userImgDiv'>
+                  <div className='pending-userImgDiv' onClick={() => chatHandler(data)}>
                     <img
                       src={avatar}
                       alt='user-pic'
@@ -196,7 +224,7 @@ const Income = () => {
                     />
                   </div>
                   <div className='pending-userDetails'>
-                    <div className='pending-user'>
+                    <div className='pending-user' onClick={() => chatHandler(data)}>
                       <h3 className='pending-userName'>
                         {data?.userId?.username}
                       </h3>
@@ -204,9 +232,18 @@ const Income = () => {
                         {data?.userId?.location ? data?.userId?.location : ''}
                       </span>
                     </div>
-                    <p className='pending-orderName'>
+                    <div className='pending-user'>
+                    <p className='pending-orderName' onClick={() => chatHandler(data)}>
                       {data?.serviceId?.serviceName}
                     </p>
+                      <div className='pending-markCompleteDiv' onClick={() => {
+                        setConfirmId(data._id);
+                        setConfirmScreen(true);
+                      }}>
+                       <img src={completeMark} className='markImg' alt='mark'/> 
+                      <span className='pending-markComplete'>Complete</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -214,6 +251,12 @@ const Income = () => {
           )}
         </div>
       </div>
+      {
+        confirmScreen && <ConfirmationScreen type={"status"} handleStatusFunc={completeStatusClick} close={() => {
+          setConfirmId('');
+          setConfirmScreen(false)
+        }}/>
+      }
       <BottomNav active='home' />
     </Fragment>
   );
