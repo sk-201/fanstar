@@ -32,6 +32,7 @@ const ArtistPage = () => {
   const location = useLocation();
   const [albumId, setAlbumId] = useState(location.state);
   const [loading, setLoading] = useState(true);
+  const [premAlbum, setPremAlbum] = useState([]);
   // var addBtn = document.getElementById('addToScreen-user');
   // var deferredPrompt;
 
@@ -151,6 +152,21 @@ const ArtistPage = () => {
       }
     }
   }, []);
+
+
+  useEffect(() => {
+    API.get(`/api/user/private/getallalbums/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+      },
+    }).then(({data}) => {
+      setPremAlbum(data)
+      console.log(data);
+    }).catch((error) => {
+      console.log(error);
+    })
+  }, [])
 
   useEffect(() => {
     if (seconds > 0 && startClock) {
@@ -518,6 +534,57 @@ const ArtistPage = () => {
 
           {/* <div className='album-card-2'><img className="album-card-img" src={AlbumImg2}/></div>
             <div className='album-card-3'><img className="album-card-img" src={AlbumImg3}/></div> */}
+        </div>
+        <div className='container-2'>
+          
+          <div className='albumDisplay-header'>
+          <h1 className='premium-header'>Premium Albums</h1>  
+          <p className='premium-contentAll' onClick={() => navigate(`/artist/${artistName}/${id}/albumlist`)}>See All</p>
+            </div>
+          <div>
+            <div className='card'>
+              {/* <div className='card-1'></div> */}
+              <Swiper
+                pagination={{
+                  dynamicBullets: true,
+                }}
+                className='mySwiper'
+              >
+                {premAlbum.length > 0 &&
+                  premAlbum.map((data) => {
+                    
+                    return (
+                      <SwiperSlide>
+                        <div
+                          className='albumSlideCard'
+                          onClick={() => {
+                            if (localStorage.getItem('fanstarUserToken')) {
+                              // navigate(
+                              //   `/artist/${artistName}/${id}/subscribe/${data._id}`
+                              // );
+                              navigate(
+                                `/artist/${artistName}/${id}/albumlist`
+                              );
+                            } else {
+                              navigate('/login', {
+                                state: { artistid: id, artistName: artistName },
+                              });
+                            }
+                          }}
+                        >
+                          {' '}
+                          <div className='landing-albumSlide'>
+                              <img src={`${imageUrl}/${data?.images?.[0]}`} alt='alubm' className='albumSlideImg'/>
+                            </div>
+                        </div>
+                      </SwiperSlide>
+                    );
+                  })}
+              </Swiper>
+
+              {/* <div className='card-3'></div> */}
+            </div>
+          </div>
         </div>
       </div>
       <BottomNav active='home' />
