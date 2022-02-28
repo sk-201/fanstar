@@ -5,11 +5,13 @@ import avatar from '../../assets/avatar.png';
 import completeStatus from '../../assets/completeStatus.svg';
 import sendIcon from '../../assets/sendIcon.svg';
 import emoji from '../../assets/emoji.svg';
+import emojiOpen from '../../assets/emojiOpen.svg';
 import socket from '../../socket';
 import API from '../../api';
 import { imageUrl } from '../../utils';
 import BottomNav from '../BottomNav/BottomNav';
 import ConfirmationScreen from './ConfirmationScreen';
+import LoadingPage from '../../Loader/LoadingPage';
 
 import './user-chat.css';
 
@@ -18,14 +20,14 @@ const ChatScreen = () => {
   const [message, setMessage] = useState('');
   const { state } = useLocation();
   const { userId, roomId, artistId } = state;
-  const [isPaymentId, setIsPaymentId] = useState(
-    state.paymentId ? true : false
+  const [buyService, setBuyService] = useState(
+    false
   );
   const [messages, setMessages] = useState([]);
   const [serviceName, setServiceName] = useState('');
   const [emojis, setEmojis] = useState([]);
   const [emojiDisplay, setEmojiDisplay] = useState(false);
-  const [boolVal, setBoolVal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [openConfirm, setOpenConfirm] = useState(false);
   const navigate = useNavigate();
   const { id, artistName } = useParams();
@@ -37,6 +39,7 @@ const ChatScreen = () => {
   }
 
   useEffect(() => {
+    setLoading(true);
     API.get(`/api/user/private/getartist/${artistId}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -44,11 +47,32 @@ const ChatScreen = () => {
       },
     })
       .then(({ data }) => {
+        setLoading(false);
         setArtistDetails(data);
         console.log(data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setLoading(false);
+        console.log(error)});
   }, [artistId]);
+
+  useEffect(() => {
+    
+    API.get(`/api/user/private/ispendingavailable`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+      },
+    })
+      .then(({ data }) => {
+        // setArtistDetails(data);
+        setBuyService(data.available)
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }, [])
 
   useEffect(() => {
     API.get(`/api/chat/getachat/${roomId}`)
@@ -88,20 +112,22 @@ const ChatScreen = () => {
     e.preventDefault();
     if (message.length > 0) {
       try {
-        const { data } = await API.put(
-          '/api/user/private/deductbalance',
-          {
-            roomId: roomId,
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem(
-                'fanstarUserToken'
-              )}`,
+        if(!buyService){
+          const { data } = await API.put(
+            '/api/user/private/deductbalance',
+            {
+              roomId: roomId,
             },
-          }
-        );
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem(
+                  'fanstarUserToken'
+                )}`,
+              },
+            }
+          );
+        }
         // console.log(data);
         socket.emit('sendmessage', { userId, roomId, message, isImage: false });
         setMessage('');
@@ -115,19 +141,21 @@ const ChatScreen = () => {
 
   const sendEmoji = async (emId, url) => {
     try {
-      const { data } = await API.post(
-        '/api/user/private/giveemoji',
-        {
-          artistId: id,
-          emojiId: emId,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+      if(!buyService){
+        const { data } = await API.post(
+          '/api/user/private/giveemoji',
+          {
+            artistId: id,
+            emojiId: emId,
           },
-        }
-      );
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
+            },
+          }
+        );
+      }
       socket.emit('sendmessage', {
         userId,
         roomId,
@@ -178,7 +206,7 @@ const ChatScreen = () => {
             <div
               className='artistChat-back'
               onClick={() =>
-                navigate(`/artist/${artistName}/${artistId}/user/chatlist`)
+                navigate(`/artist/${artistName}/${artistId}`)
               }
             >
               <img src={BackArrow} alt='back' className='artistChat-backIcon' />
@@ -206,7 +234,7 @@ const ChatScreen = () => {
               </div>
             </div>
           </div>
-          {isPaymentId && (
+          {/* {isPaymentId && (
             <div className='artistChat-headerRight'>
               <button
                 className='artistChat-complete'
@@ -219,7 +247,7 @@ const ChatScreen = () => {
                 />
               </button>
             </div>
-          )}
+          )} */}
         </div>
         <div className={`artistChat-div ${emojiDisplay ? 'changeHeight' : ''}`}>
           {messages.map((mes, ind) => {
@@ -270,8 +298,8 @@ const ChatScreen = () => {
               >
                 <img
                   className='artistChat-emojiBtnIcon'
-                  src={emoji}
-                  alt='emoji'
+                  src={emojiOpen}
+                  alt='emojis'
                 />
               </button>
             </div>
@@ -309,6 +337,9 @@ const ChatScreen = () => {
             handleStatusFunc={completeStatusClick}
           />
         )}
+        {
+          loading && <LoadingPage />
+        }
         <BottomNav active='chat' />
       </div>
     </Fragment>

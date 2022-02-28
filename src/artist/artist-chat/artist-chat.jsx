@@ -144,7 +144,7 @@ const ArtistChat = () => {
             </div>
           </div>
           <div className='artistChat-headerRight'>
-            <button
+            {/* <button
               className='artistChat-generate'
               onClick={() => handleConfirm('meet')}
             >
@@ -153,8 +153,8 @@ const ArtistChat = () => {
                 alt='generate'
                 className='artistChat-icon'
               />
-            </button>
-            {paymentId && (
+            </button> */}
+            {/* {paymentId && (
               <button
                 className='artistChat-complete'
                 onClick={() => handleConfirm('status')}
@@ -165,7 +165,7 @@ const ArtistChat = () => {
                   className='artistChat-icon'
                 />
               </button>
-            )}
+            )} */}
           </div>
         </div>
         <div className='artistChat-div'>

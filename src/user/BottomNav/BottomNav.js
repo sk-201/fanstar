@@ -38,6 +38,7 @@ const BottomNav = (props) => {
         state: { userId: data._id, roomId: res.data, artistId: id },
       });
     } catch (error) {
+      alert("Something went wrong, please try later!");
       console.log(error);
     }
   };
@@ -61,7 +62,8 @@ const BottomNav = (props) => {
         className='bottomNav-home'
         onClick={() => {
           if (localStorage.getItem('fanstarUserToken')) {
-            navigate(`/artist/${artistName}/${id}/user/chatlist`);
+            // navigate(`/artist/${artistName}/${id}/user/chatlist`);
+            chatHandler();
           } else {
             navigate('/login', {
               state: { artistid: id, artistName: artistName },

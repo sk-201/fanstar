@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import API from '../../api.js';
 import BottomNav from '../BottomNav/BottomNav.js';
 import './Bookings.css';
@@ -7,6 +8,8 @@ const Bookings = () => {
   const [bookingData, setBookingData] = useState([]);
   const [boolVal, setBoolVal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const {artistName, id} = useParams();
 
   const fetchUserBooking = async () => {
     setLoading(true);
@@ -67,7 +70,7 @@ const Bookings = () => {
                       <p className='booking-handle'>
                         Social handle:{' '}
                         <span className='booking-handleDetail'>
-                          {order?.userId?.insta}
+                          {order?.userId?.insta? order?.userId?.insta : 'NA'}
                         </span>
                       </p>
                       <p className='booking-status'>
@@ -76,6 +79,15 @@ const Bookings = () => {
                           {order.status}
                         </span>
                       </p>
+                      <div className='booking-feedbackDiv'>
+                      {
+                        order.doneForArtist && <p className='booking-feedback' onClick={()=>navigate(`/artist/${artistName}/${id}/user/feedback`, {
+                          state: {
+                            paymentId: order._id
+                          }
+                        })}>Feedback</p>  
+                      }
+                      </div>
                     </div>
                   ))}
                 </Fragment>

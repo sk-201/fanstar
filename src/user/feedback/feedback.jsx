@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { ReactComponent as Star } from '../.././assets/Star.svg';
 import { ReactComponent as StarE } from '../.././assets/Star 6.svg';
 import { ReactComponent as BackArrow } from '../../assets/backArrow.svg';
 import API from '../../api';
 import './feedback.css';
 const Feedback = () => {
+  const {state} = useLocation();
   const { artistId, artistName } = useParams();
   const [stars, setStars] = useState(1);
   const [star1, setStar1] = useState('');
@@ -15,6 +16,11 @@ const Feedback = () => {
   const [star5, setStar5] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+
+  if(!state){
+    navigate(`/artist/${artistName}/${artistId}`);
+  }
+
   const AddFeedback = async () => {
     try {
       const config = {
@@ -26,7 +32,7 @@ const Feedback = () => {
 
       await API.post(
         '/api/user/private/givefeedback',
-        { artistId, stars, message },
+        { artistId, stars, message, paymentId: state.paymentId },
         config
       );
       alert('Thanks for the feedback');

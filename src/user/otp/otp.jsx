@@ -42,6 +42,7 @@ const Otp = () => {
         );
         setLoading(false);
         localStorage.setItem('fanstarUserToken', data);
+        localStorage.setItem('artistId', location?.state?.artistid);
         window.location.href = `/artist/${location?.state?.artistName}/${location?.state?.artistid}`;
       } else {
         setLoading(false);

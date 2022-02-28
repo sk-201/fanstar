@@ -260,3 +260,23 @@
   margin: 5px 0;
   /* margin-left: 15px; */
 }
+
+.pending-markComplete{
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: #60c879;
+  margin: 5px 0;
+  margin-left: 5px;
+}
+
+.pending-markCompleteDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1.5px solid #60c879;
+  border-radius: 22px;
+  padding: 0px 8px;
+}

@@ -258,6 +258,11 @@
   border: 1px solid #f0f0f0;
 }
 
+.artistChat-emojiBtnIcon{
+  width: 22px;
+  height: 22px;
+}
+
 .artistChat-emojiBtn {
   width: 15%;
   padding: 0;
@@ -360,7 +365,7 @@
   font-size: 12px;
   color: #3d3c3c;
   margin: 0;
-  margin-left: 10px;
+  margin-left: 0;
 }
 
 .artistChat-usernameAndService {
