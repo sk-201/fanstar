@@ -12,6 +12,8 @@ import { ReactComponent as Wallet } from '../.././assets/wallet.svg';
 import { ReactComponent as Bell } from '../.././assets/bell.svg';
 import { ReactComponent as User } from '../.././assets/userlogin.svg';
 import { ReactComponent as Clock } from '../.././assets/clock.svg';
+import leftArrow from '../../assets/leftArrow.svg';
+import rightArrow from '../../assets/rightArrow.svg';
 import { setTheme, imageUrl, addToHome } from '../../utils';
 import './landing.css';
 import BottomNav from '../BottomNav/BottomNav';
@@ -337,17 +339,32 @@ const ArtistPage = () => {
                             }
                           }}
                         >
-                          {' '}
-                          <div className='serviceText-div'>
-                            <text id='service-txt-landing'>
-                              {data.serviceName}
-                            </text>
-                            <text
-                              id='service-txt-landing'
-                              className='service-amount'
-                            >
-                              {`Rs ${data.amount}/-`}
-                            </text>
+                          <div className='service-contentContainer'>
+                            <div className='arrow-div'>
+                              <img
+                                alt='left'
+                                className='arrowIcon'
+                                src={leftArrow}
+                              />
+                            </div>
+                            <div className='serviceText-div'>
+                              <text id='service-txt-landing'>
+                                {data.serviceName}
+                              </text>
+                              <text
+                                id='service-txt-landing'
+                                className='service-amount'
+                              >
+                                {`Rs ${data.amount}/-`}
+                              </text>
+                            </div>
+                            <div className='arrow-div'>
+                              <img
+                                alt='right'
+                                className='arrowIcon'
+                                src={rightArrow}
+                              />
+                            </div>
                           </div>
                         </div>
                       </SwiperSlide>
@@ -579,11 +596,33 @@ const ArtistPage = () => {
                         >
                           {' '}
                           <div className='landing-albumSlide'>
+                            <div className='ablumArrowDiv-left'>
+                              <img
+                                className='arrowIcon'
+                                alt='left'
+                                src={leftArrow}
+                              />
+                            </div>
                             <img
                               src={`${imageUrl}/${data?.images?.[0]}`}
                               alt='alubm'
                               className='albumSlideImg'
                             />
+                            <div className='ablumDetail-div'>
+                              <p className='ablumDetail-name'>
+                                {data.albumName}
+                              </p>
+                              <p className='ablumDetail-price'>
+                                {data.price ? `Rs. ${data.price}/-` : ''}
+                              </p>
+                            </div>
+                            <div className='ablumArrowDiv-right'>
+                              <img
+                                className='arrowIcon'
+                                alt='right'
+                                src={rightArrow}
+                              />
+                            </div>
                           </div>
                         </div>
                       </SwiperSlide>

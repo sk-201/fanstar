@@ -264,6 +264,61 @@
   border-radius: 8px;
   pointer-events: none;
   object-fit: cover;
+  position: relative;
+}
+
+.ablumArrowDiv-left {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 7%;
+  top: 40%;
+  z-index: 5;
+  background-color: var(--menu-container-color);
+  border-radius: 50%;
+}
+
+.ablumArrowDiv-right {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 7%;
+  top: 40%;
+  z-index: 5;
+  border-radius: 50%;
+  background-color: var(--menu-container-color);
+}
+
+.ablumDetail-div {
+  width: 60%;
+  box-sizing: border-box;
+  padding: 8px;
+  position: absolute;
+  left: 20%;
+  top: 28%;
+  background-color: rgba(15, 16, 17, 0.4);
+  text-align: center;
+  color: #fff;
+  font-family: Montserrat;
+  border-radius: 8px;
+}
+
+.ablumDetail-name {
+  font-weight: 500;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.ablumDetail-price {
+  font-weight: 500;
+  font-size: 13px;
+  margin: 5px 0;
 }
 
 .card-3 {
@@ -537,6 +592,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 70%;
 }
 
 .service-amount {
@@ -545,4 +601,25 @@
   font-style: normal;
   font-weight: normal;
   color: var(--background-color);
+}
+
+.service-contentContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow-div {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: var(--menu-container-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.arrowIcon {
+  height: 22px;
+  width: 22px;
 }
