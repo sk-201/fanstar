@@ -1,4 +1,4 @@
-.album-confirmation-container {
+.myImage-confirmation-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   z-index: 20;
 }
 
-.album-confirmation-cardDiv {
+.myImage-confirmation-cardDiv {
   position: relative;
   top: 0%;
   left: 0%;
@@ -25,13 +25,13 @@
   z-index: 20;
 }
 
-.album-confirmation-close {
+.myImage-confirmation-close {
   /* margin-bottom: 1rem; */
   /* padding: 5px; */
   height: 32px;
 }
 
-.album-close-confirmation {
+.myImage-close-confirmation {
   transform: rotate(45deg);
   background-color: transparent;
   outline: none;
@@ -45,14 +45,14 @@
   font-size: 30px;
 }
 
-.album-confirmation-contentDiv {
+.myImage-confirmation-contentDiv {
   margin-top: 10px;
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e7e7e7;
 }
 
-.album-confirmation-content {
+.myImage-confirmation-content {
   font-family: Montserrat;
   font-weight: normal;
   font-size: 14px;
@@ -60,7 +60,7 @@
   color: #000000;
 }
 
-.album-remove-artistBtn {
+.myImage-remove-artistBtn {
   margin: 0;
   background-color: transparent;
   padding: 0;
