@@ -153,7 +153,8 @@ const Income = () => {
       alert('Service Completed!');
       setConfirmScreen(false);
       setConfirmId('');
-      navigate('/chat');
+      fetchPendingOrders();
+      // navigate('/chat');
       // console.log(data);
     } catch (error) {
       console.log(error);
@@ -188,7 +189,10 @@ const Income = () => {
           <span id='tot-inc-text'>Balance Withdrawn</span>
           <div className='total-income gradient'>
             <h2 id='tot-inc-text-1-changeColor'>Balance Withdrawn</h2>
-            <h1 id='tot-inc-rs-changeColor'> Rs {parseInt(amountPaid).toFixed(2)}/-</h1>
+            <h1 id='tot-inc-rs-changeColor'>
+              {' '}
+              Rs {parseInt(amountPaid).toFixed(2)}/-
+            </h1>
             {/**<button
               className='request-btn'
               onClick={() =>
@@ -211,12 +215,11 @@ const Income = () => {
             <div className='pending-orderList'>
               <h2 className='pending-orderTitle'>My Pending Orders</h2>
               {pendingData.map((data) => (
-                <div
-                  className='pending-container'
-                  key={data._id}
-                  
-                >
-                  <div className='pending-userImgDiv' onClick={() => chatHandler(data)}>
+                <div className='pending-container' key={data._id}>
+                  <div
+                    className='pending-userImgDiv'
+                    onClick={() => chatHandler(data)}
+                  >
                     <img
                       src={avatar}
                       alt='user-pic'
@@ -224,7 +227,10 @@ const Income = () => {
                     />
                   </div>
                   <div className='pending-userDetails'>
-                    <div className='pending-user' onClick={() => chatHandler(data)}>
+                    <div
+                      className='pending-user'
+                      onClick={() => chatHandler(data)}
+                    >
                       <h3 className='pending-userName'>
                         {data?.userId?.username}
                       </h3>
@@ -233,15 +239,25 @@ const Income = () => {
                       </span>
                     </div>
                     <div className='pending-user'>
-                    <p className='pending-orderName' onClick={() => chatHandler(data)}>
-                      {data?.serviceId?.serviceName}
-                    </p>
-                      <div className='pending-markCompleteDiv' onClick={() => {
-                        setConfirmId(data._id);
-                        setConfirmScreen(true);
-                      }}>
-                       <img src={completeMark} className='markImg' alt='mark'/> 
-                      <span className='pending-markComplete'>Complete</span>
+                      <p
+                        className='pending-orderName'
+                        onClick={() => chatHandler(data)}
+                      >
+                        {data?.serviceId?.serviceName}
+                      </p>
+                      <div
+                        className='pending-markCompleteDiv'
+                        onClick={() => {
+                          setConfirmId(data._id);
+                          setConfirmScreen(true);
+                        }}
+                      >
+                        <img
+                          src={completeMark}
+                          className='markImg'
+                          alt='mark'
+                        />
+                        <span className='pending-markComplete'>Complete</span>
                       </div>
                     </div>
                   </div>
@@ -251,12 +267,16 @@ const Income = () => {
           )}
         </div>
       </div>
-      {
-        confirmScreen && <ConfirmationScreen type={"status"} handleStatusFunc={completeStatusClick} close={() => {
-          setConfirmId('');
-          setConfirmScreen(false)
-        }}/>
-      }
+      {confirmScreen && (
+        <ConfirmationScreen
+          type={'status'}
+          handleStatusFunc={completeStatusClick}
+          close={() => {
+            setConfirmId('');
+            setConfirmScreen(false);
+          }}
+        />
+      )}
       <BottomNav active='home' />
     </Fragment>
   );

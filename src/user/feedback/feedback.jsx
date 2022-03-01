@@ -6,7 +6,7 @@ import { ReactComponent as BackArrow } from '../../assets/backArrow.svg';
 import API from '../../api';
 import './feedback.css';
 const Feedback = () => {
-  const {state} = useLocation();
+  const { state } = useLocation();
   const { artistId, artistName } = useParams();
   const [stars, setStars] = useState(1);
   const [star1, setStar1] = useState('');
@@ -17,7 +17,9 @@ const Feedback = () => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  if(!state){
+  console.log(state);
+
+  if (!state) {
     navigate(`/artist/${artistName}/${artistId}`);
   }
 

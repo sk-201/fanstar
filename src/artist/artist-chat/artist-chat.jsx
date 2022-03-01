@@ -137,7 +137,7 @@ const ArtistChat = () => {
               <img src={avatar} alt='user' className='artistChat-userImage' />
               <div className='artistChat-usernameAndService'>
                 <p className='artistChat-username'>
-                  {state.username ? state.username : ''}
+                  {state.username ? state.username : 'Unknown'}
                 </p>
                 <span className='artistChat-serviceName'>{serviceName}</span>
               </div>

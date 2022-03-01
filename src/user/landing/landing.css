@@ -215,7 +215,7 @@
   cursor: pointer;
 }
 
-.albumDisplay-header{
+.albumDisplay-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -224,16 +224,16 @@
   margin: auto;
 }
 
-.premium-header{
+.premium-header {
   font-family: Kaushan Script;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
-  line-height: 24px; 
+  line-height: 24px;
   margin: 12px 0;
 }
 
-.premium-contentAll{
+.premium-contentAll {
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
@@ -243,7 +243,7 @@
   margin: 12px 0;
 }
 
-.albumSlideCard{
+.albumSlideCard {
   /* border: 1px solid var(--background-color); */
   border-radius: 8px;
   box-sizing: border-box;
@@ -252,17 +252,17 @@
   margin: auto;
 }
 
-
-.landing-albumSlide{
+.landing-albumSlide {
   width: 100%;
   height: 100%;
   border-radius: 8px;
 }
 
-.albumSlideImg{
+.albumSlideImg {
   width: 100%;
   height: 100%;
   border-radius: 8px;
+  pointer-events: none;
   object-fit: cover;
 }
 
@@ -502,6 +502,7 @@
   width: 100%;
   height: 100%;
   border-radius: 8px;
+  pointer-events: none;
   object-fit: cover;
 }
 

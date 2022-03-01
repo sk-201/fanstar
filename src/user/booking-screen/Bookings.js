@@ -9,7 +9,7 @@ const Bookings = () => {
   const [boolVal, setBoolVal] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const {artistName, id} = useParams();
+  const { artistName, id } = useParams();
 
   const fetchUserBooking = async () => {
     setLoading(true);
@@ -70,7 +70,7 @@ const Bookings = () => {
                       <p className='booking-handle'>
                         Social handle:{' '}
                         <span className='booking-handleDetail'>
-                          {order?.userId?.insta? order?.userId?.insta : 'NA'}
+                          {order?.userId?.insta ? order?.userId?.insta : 'NA'}
                         </span>
                       </p>
                       <p className='booking-status'>
@@ -80,13 +80,23 @@ const Bookings = () => {
                         </span>
                       </p>
                       <div className='booking-feedbackDiv'>
-                      {
-                        order.doneForArtist && <p className='booking-feedback' onClick={()=>navigate(`/artist/${artistName}/${id}/user/feedback`, {
-                          state: {
-                            paymentId: order._id
-                          }
-                        })}>Feedback</p>  
-                      }
+                        {order.doneForArtist && !order.feedback && (
+                          <p
+                            className='booking-feedback'
+                            onClick={() =>
+                              navigate(
+                                `/artist/${artistName}/${id}/user/feedback`,
+                                {
+                                  state: {
+                                    paymentId: order._id,
+                                  },
+                                }
+                              )
+                            }
+                          >
+                            Feedback
+                          </p>
+                        )}
                       </div>
                     </div>
                   ))}

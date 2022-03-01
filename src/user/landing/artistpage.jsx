@@ -40,7 +40,8 @@ const ArtistPage = () => {
     if (localStorage.getItem('fanstarUserToken')) {
       if (
         jwt_decode(localStorage.getItem('fanstarUserToken')).exp >
-        Date.now() / 1000 && (localStorage.getItem('artistId')===id)
+          Date.now() / 1000 &&
+        localStorage.getItem('artistId') === id
       ) {
         const config = {
           headers: {
@@ -96,7 +97,7 @@ const ArtistPage = () => {
       } else {
         // alert('Session Expired! Please login again');
         localStorage.removeItem('fanstarUserToken');
-        localStorage.removeItem('artistId')
+        localStorage.removeItem('artistId');
         window.location.reload();
       }
     } else {
@@ -153,20 +154,21 @@ const ArtistPage = () => {
     }
   }, []);
 
-
   useEffect(() => {
     API.get(`/api/user/private/getallalbums/${id}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('fanstarUserToken')}`,
       },
-    }).then(({data}) => {
-      setPremAlbum(data)
-      console.log(data);
-    }).catch((error) => {
-      console.log(error);
     })
-  }, [])
+      .then(({ data }) => {
+        setPremAlbum(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     if (seconds > 0 && startClock) {
@@ -536,11 +538,15 @@ const ArtistPage = () => {
             <div className='album-card-3'><img className="album-card-img" src={AlbumImg3}/></div> */}
         </div>
         <div className='container-2'>
-          
           <div className='albumDisplay-header'>
-          <h1 className='premium-header'>Premium Albums</h1>  
-          <p className='premium-contentAll' onClick={() => navigate(`/artist/${artistName}/${id}/albumlist`)}>See All</p>
-            </div>
+            <h1 className='premium-header'>Premium Albums</h1>
+            <p
+              className='premium-contentAll'
+              onClick={() => navigate(`/artist/${artistName}/${id}/albumlist`)}
+            >
+              See All
+            </p>
+          </div>
           <div>
             <div className='card'>
               {/* <div className='card-1'></div> */}
@@ -550,9 +556,10 @@ const ArtistPage = () => {
                 }}
                 className='mySwiper'
               >
-                {premAlbum.length > 0 &&
+                {premAlbum.length === 0 ? (
+                  <h3 className='artistChatlist-loading'>No album</h3>
+                ) : (
                   premAlbum.map((data) => {
-                    
                     return (
                       <SwiperSlide>
                         <div
@@ -562,9 +569,7 @@ const ArtistPage = () => {
                               // navigate(
                               //   `/artist/${artistName}/${id}/subscribe/${data._id}`
                               // );
-                              navigate(
-                                `/artist/${artistName}/${id}/albumlist`
-                              );
+                              navigate(`/artist/${artistName}/${id}/albumlist`);
                             } else {
                               navigate('/login', {
                                 state: { artistid: id, artistName: artistName },
@@ -574,12 +579,17 @@ const ArtistPage = () => {
                         >
                           {' '}
                           <div className='landing-albumSlide'>
-                              <img src={`${imageUrl}/${data?.images?.[0]}`} alt='alubm' className='albumSlideImg'/>
-                            </div>
+                            <img
+                              src={`${imageUrl}/${data?.images?.[0]}`}
+                              alt='alubm'
+                              className='albumSlideImg'
+                            />
+                          </div>
                         </div>
                       </SwiperSlide>
                     );
-                  })}
+                  })
+                )}
               </Swiper>
 
               {/* <div className='card-3'></div> */}
