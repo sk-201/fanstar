@@ -77,7 +77,25 @@ const MyImage = () => {
               <Fragment>
                 {imageList.map((image) => (
                   <div className='myImage-box'>
-                    <img src={`${imageUrl}/${image.url}`} id='myimg' />
+                    <div className='myImageDiv'>
+                      {image?.url?.split('.')?.pop() === 'jpg' ||
+                      image?.url?.split('.')?.pop() === 'jpeg' ||
+                      image?.url?.split('.')?.pop() === 'png' ? (
+                        <img
+                          src={`${imageUrl}/${image.url}`}
+                          alt='myImage'
+                          className='myImage'
+                        />
+                      ) : (
+                        <video className='myImage' controls>
+                          <source
+                            src={`${imageUrl}/${image.url}`}
+                            type='video/mp4'
+                          />
+                        </video>
+                      )}
+                    </div>
+                    {/* <img src={`${imageUrl}/${image.url}`} id='myimg' /> */}
                     <h2 id='unlock-price-txt'>Unlocking price</h2>
                     <h3 id='unlock-price'>{`Rs ${image.price}/-`}</h3>
                     <p id='unlock-price-subtext'>{image.caption}</p>

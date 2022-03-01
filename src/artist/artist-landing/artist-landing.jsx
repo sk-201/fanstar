@@ -238,7 +238,7 @@ const ArtistLanding = () => {
                             }}
                           >
                             {' '}
-                            <div className='serviceText-div'>
+                            <div className='serviceText-div alignCenter'>
                               <text id='service-txt-landing'>
                                 {data.serviceName}
                               </text>

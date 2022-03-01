@@ -11,8 +11,8 @@ import './AddAlbum.css';
 
 const initialData = {
   price: '',
-  description: '',
-  albumName: '',
+  description: 'Album',
+  albumName: 'Album',
 };
 
 const AddAlbum = () => {
@@ -89,8 +89,8 @@ const AddAlbum = () => {
 
   const handleAddAlbum = async () => {
     // console.log(imageFiles);
-    if (setImageFiles.length === 0) {
-      alert('Add images');
+    if (imageFiles.length === 0) {
+      alert('Please add some photos');
     } else {
       let formData = new FormData();
       // imageFiles.forEach((image) => {
@@ -103,55 +103,59 @@ const AddAlbum = () => {
       formData.append('description', inputData.description);
       formData.append('albumName', inputData.albumName);
 
-      try {
-        setLoading(true);
-        const { data } = await API.post(
-          '/api/artist/private/createalbum',
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
-            },
-          }
-        );
-        console.log(data);
-        setTotalFiles(imageFiles.length);
-        let tempTotalFiles = imageFiles.length;
-        let tempCount = 0;
-
-        imageFiles.forEach(async (image) => {
-          const fileData = new FormData();
-          fileData.append('artistFile', image);
-
-          try {
-            await API.put(
-              `/api/artist/private/updatealbum/${data.albumId}`,
-              fileData,
-              {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                  Authorization: `Bearer ${localStorage.getItem(
-                    'fanstarToken'
-                  )}`,
-                },
-              }
-            );
-            setCount(count + 1);
-            tempCount += 1;
-            // console.log(count);
-            if (tempCount === tempTotalFiles) {
-              setLoading(false);
-              alert('Album added!');
-              navigate('/artist/landing');
+      if (inputData.price !== '') {
+        try {
+          setLoading(true);
+          const { data } = await API.post(
+            '/api/artist/private/createalbum',
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+              },
             }
-          } catch (error) {
-            console.log(error);
-          }
-        });
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
+          );
+          console.log(data);
+          setTotalFiles(imageFiles.length);
+          let tempTotalFiles = imageFiles.length;
+          let tempCount = 0;
+
+          imageFiles.forEach(async (image) => {
+            const fileData = new FormData();
+            fileData.append('artistFile', image);
+
+            try {
+              await API.put(
+                `/api/artist/private/updatealbum/${data.albumId}`,
+                fileData,
+                {
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${localStorage.getItem(
+                      'fanstarToken'
+                    )}`,
+                  },
+                }
+              );
+              setCount(count + 1);
+              tempCount += 1;
+              // console.log(count);
+              if (tempCount === tempTotalFiles) {
+                setLoading(false);
+                alert('Album added!');
+                navigate('/artist/landing');
+              }
+            } catch (error) {
+              console.log(error);
+            }
+          });
+        } catch (error) {
+          console.log(error);
+          setLoading(false);
+        }
+      } else {
+        alert('Please add album price');
       }
     }
   };
