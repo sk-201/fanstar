@@ -9,7 +9,7 @@ const AddImage = () => {
   const [isImage, setIsImage] = useState(false);
   const [caption, setCaption] = useState('');
   const [price, setPrice] = useState('');
-  const [fileStore, setFileStore] = useState('');
+  const [fileStore, setFileStore] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const uploadImage = async (e) => {
@@ -42,29 +42,34 @@ const AddImage = () => {
   const sendImage = async (e) => {
     e.preventDefault();
 
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
-        },
-      };
-      if (caption.trim().length == 0 && price.trim().length() == 0) {
-        alert('Caption or Price is empty');
+    if (fileStore) {
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+          },
+        };
+        if (caption === '' && price === '') {
+          alert('Caption or Price is empty');
+        } else {
+          const data = new FormData();
+          data.append('caption', caption);
+          data.append('price', price);
+          data.append('artistFile', fileStore);
+          setLoading(true);
+          await API.post('/api/artist/private/uploadimage', data, config);
+          setLoading(false);
+          alert('Image Uploaded!');
+          navigate('/artist/landing');
+        }
+        // console.log(fileStore);
+      } catch (error) {
+        alert('Something went wrong!');
+        console.log(error);
       }
-      // console.log(fileStore);
-      const data = new FormData();
-      data.append('caption', caption);
-      data.append('price', price);
-      data.append('artistFile', fileStore);
-      setLoading(true);
-      await API.post('/api/artist/private/uploadimage', data, config);
-      setLoading(false);
-      alert('Image Uploaded!');
-      navigate('/artist/landing');
-    } catch (error) {
-      alert('Something went wrong!');
-      console.log(error);
+    } else {
+      alert('Please add image or video.');
     }
   };
   return (

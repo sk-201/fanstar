@@ -273,29 +273,33 @@ const ArtistLanding = () => {
             </button>
           </div>
           <div className='image-containerDiv'>
-            {imageList.slice(0, 3).map((image) => (
-              <Fragment>
-                <div className='myImageDiv'>
-                  {image.url.split('.').pop() === 'jpg' ||
-                  image.url.split('.').pop() === 'jpeg' ||
-                  image.url.split('.').pop() === 'png' ? (
-                    <img
-                      src={`${imageUrl}/${image.url}`}
-                      alt='myImage'
-                      className='myImage'
-                    />
-                  ) : (
-                    <video className='myImage' controls>
-                      <source
-                        src={`${imageUrl}/${image.url}`}
-                        type='video/mp4'
-                      />
-                    </video>
-                  )}
-                </div>
-                <p className='imageCaption-paraBottom'>{image.caption}</p>
-              </Fragment>
-            ))}
+            {imageList.slice(0, 3).map((image) => {
+              if (image.url) {
+                return (
+                  <Fragment>
+                    <div className='myImageDiv'>
+                      {image?.url?.split('.')?.pop() === 'jpg' ||
+                      image?.url?.split('.')?.pop() === 'jpeg' ||
+                      image?.url?.split('.')?.pop() === 'png' ? (
+                        <img
+                          src={`${imageUrl}/${image.url}`}
+                          alt='myImage'
+                          className='myImage'
+                        />
+                      ) : (
+                        <video className='myImage' controls>
+                          <source
+                            src={`${imageUrl}/${image.url}`}
+                            type='video/mp4'
+                          />
+                        </video>
+                      )}
+                    </div>
+                    <p className='imageCaption-paraBottom'>{image.caption}</p>
+                  </Fragment>
+                );
+              }
+            })}
             {imageList.length > 0 ? (
               <div className='seeMore-btnDiv'>
                 <button
