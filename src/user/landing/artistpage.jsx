@@ -416,9 +416,9 @@ const ArtistPage = () => {
                               </Fragment>
                             )}
                             <div className='album-card-1' key={ind}>
-                              {data.url.split('.').pop() === 'jpg' ||
-                              data.url.split('.').pop() === 'jpeg' ||
-                              data.url.split('.').pop() === 'png' ? (
+                              {data?.url?.split('.')?.pop() === 'jpg' ||
+                              data?.url?.split('.')?.pop() === 'jpeg' ||
+                              data?.url?.split('.')?.pop() === 'png' ? (
                                 <img
                                   className='album-card-img'
                                   src={`${imageUrl}/${data.url}`}
