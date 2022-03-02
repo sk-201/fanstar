@@ -273,7 +273,7 @@ const ArtistLanding = () => {
             </button>
           </div>
           <div className='image-containerDiv'>
-            {imageList.map((image) => {
+            {imageList.slice(0, 3).map((image) => {
               if (image.url) {
                 return (
                   <Fragment>
