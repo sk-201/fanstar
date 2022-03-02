@@ -43,30 +43,35 @@ const AddImage = () => {
     e.preventDefault();
 
     if (fileStore) {
-      try {
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
-          },
-        };
-        if (caption === '' && price === '') {
-          alert('Caption or Price is empty');
-        } else {
-          const data = new FormData();
-          data.append('caption', caption);
-          data.append('price', price);
-          data.append('artistFile', fileStore);
-          setLoading(true);
-          await API.post('/api/artist/private/uploadimage', data, config);
-          setLoading(false);
-          alert('Image Uploaded!');
-          navigate('/artist/landing');
+      console.log(fileStore.size / 1000000);
+      if (fileStore.size / 1000000 <= 50) {
+        try {
+          const config = {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
+            },
+          };
+          if (caption === '' && price === '') {
+            alert('Caption or Price is empty');
+          } else {
+            const data = new FormData();
+            data.append('caption', caption);
+            data.append('price', price);
+            data.append('artistFile', fileStore);
+            setLoading(true);
+            await API.post('/api/artist/private/uploadimage', data, config);
+            setLoading(false);
+            alert('Image Uploaded!');
+            navigate('/artist/landing');
+          }
+          // console.log(fileStore);
+        } catch (error) {
+          alert('Something went wrong!');
+          console.log(error);
         }
-        // console.log(fileStore);
-      } catch (error) {
-        alert('Something went wrong!');
-        console.log(error);
+      } else {
+        alert('Image or video size is exceeding the image (max size 50mb)');
       }
     } else {
       alert('Please add image or video.');
