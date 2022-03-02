@@ -502,9 +502,12 @@ const ArtistPage = () => {
                                   Unlock now
                                 </button>
                                 <p className='displayPrice'>{`Rs. ${data.price}/-`}</p>
-                                {data?.url?.split('.')?.pop() === 'jpg' ||
-                                data?.url?.split('.')?.pop() === 'jpeg' ||
-                                data?.url?.split('.')?.pop() === 'png' ? (
+                                {data?.url?.split('.')?.pop()?.toLowerCase() ===
+                                  'jpg' ||
+                                data?.url?.split('.')?.pop()?.toLowerCase() ===
+                                  'jpeg' ||
+                                data?.url?.split('.')?.pop()?.toLowerCase() ===
+                                  'png' ? (
                                   <img
                                     className='album-card-img'
                                     src={`${imageUrl}/${data.url}`}

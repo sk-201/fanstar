@@ -78,9 +78,9 @@ const MyImage = () => {
                 {imageList.map((image) => (
                   <div className='myImage-box'>
                     <div className='myImageDiv'>
-                      {image?.url?.split('.')?.pop() === 'jpg' ||
-                      image?.url?.split('.')?.pop() === 'jpeg' ||
-                      image?.url?.split('.')?.pop() === 'png' ? (
+                      {image?.url?.split('.')?.pop()?.toLowerCase() === 'jpg' ||
+                      image?.url?.split('.')?.pop()?.toLowerCase() === 'jpeg' ||
+                      image?.url?.split('.')?.pop()?.toLowerCase() === 'png' ? (
                         <img
                           src={`${imageUrl}/${image.url}`}
                           alt='myImage'
