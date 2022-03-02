@@ -44,7 +44,7 @@ const AddImage = () => {
 
     if (fileStore) {
       console.log(fileStore.size / 1000000);
-      if (fileStore.size / 1000000 <= 50) {
+      if (fileStore.size / 1000000 <= 40) {
         try {
           const config = {
             headers: {
@@ -67,11 +67,12 @@ const AddImage = () => {
           }
           // console.log(fileStore);
         } catch (error) {
+          setLoading(false);
           alert('Something went wrong!');
           console.log(error);
         }
       } else {
-        alert('Image or video size is exceeding the image (max size 50mb)');
+        alert('Image or video size is exceeding the image (max size 40mb)');
       }
     } else {
       alert('Please add image or video.');
