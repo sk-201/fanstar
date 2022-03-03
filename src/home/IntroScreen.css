@@ -159,12 +159,14 @@
   box-sizing: border-box;
   background: #565656;
   padding: 1rem 1.5rem 2rem 1.5rem;
+}
+
+.home-footerSec1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-
 .home-footer {
   width: 60%;
   display: flex;
@@ -207,6 +209,19 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.home-footerSec2 {
+  text-align: right;
+  width: 100%;
+}
+
+.footer-privacy {
+  margin: 0;
+  font-weight: 400;
+  font-size: 15px;
+  margin-top: 12px;
+  color: #ffffff;
 }
 
 /***************** Login option page *********************/
@@ -302,4 +317,39 @@
   font-size: 12px;
   line-height: 24px;
   color: #333333;
+}
+
+/*********** Policy ******************/
+
+.policy-container {
+  width: 90%;
+  margin: auto;
+  font-family: Montserrat;
+  padding-bottom: 1.5rem;
+}
+
+.policy-headerDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.policy-header {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 8px 0;
+}
+
+.policy-goToHome {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.contactDetails {
+  font-weight: 500;
 }

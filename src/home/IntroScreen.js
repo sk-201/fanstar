@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import fanstar_logo from '../assets/fanstar_logo.svg';
 import fansImage from '../assets/fansImage.png';
 import appIcon from '../assets/appIcon.png';
@@ -14,6 +15,7 @@ import LoginOptionScreen from './LoginOptionScreen';
 
 const IntroScreen = () => {
   const [showLogin, setShowLogin] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className='intro-mainContainer'>
       {showLogin ? (
@@ -80,25 +82,39 @@ const IntroScreen = () => {
             </div>
           </div>
           <div className='home-footerDiv'>
-            <div className='home-footer'>
-              <img src={fanstar_logo} alt='logo' className='footer-logo' />
-              <h3 className='home-footerHead'>Fanstar</h3>
-            </div>
-            <div className='home-socialLink'>
-              <p className='home-socialPara'>Join us</p>
-              <div className='home-socialIconDiv'>
-                <img
-                  src={facebook}
-                  alt='facebook'
-                  className='home-socialIcon'
-                />
-                <img
-                  src={instagram}
-                  alt='facebook'
-                  className='home-socialIcon'
-                />
-                <img src={twitter} alt='facebook' className='home-socialIcon' />
+            <div className='home-footerSec1'>
+              <div className='home-footer'>
+                <img src={fanstar_logo} alt='logo' className='footer-logo' />
+                <h3 className='home-footerHead'>Fanstar</h3>
               </div>
+              <div className='home-socialLink'>
+                <p className='home-socialPara'>Join us</p>
+                <div className='home-socialIconDiv'>
+                  <img
+                    src={facebook}
+                    alt='facebook'
+                    className='home-socialIcon'
+                  />
+                  <img
+                    src={instagram}
+                    alt='facebook'
+                    className='home-socialIcon'
+                  />
+                  <img
+                    src={twitter}
+                    alt='facebook'
+                    className='home-socialIcon'
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='home-footerSec2'>
+              <p
+                className='footer-privacy'
+                onClick={() => navigate('/privacy-policy')}
+              >
+                Privacy Policy
+              </p>
             </div>
           </div>
         </Fragment>

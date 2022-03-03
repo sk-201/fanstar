@@ -50,6 +50,7 @@ import AlbumList from './user/album-list/AlbumList';
 import PurchasedAlbum from './user/purchased-album/PurchasedAlbum';
 import MyAlbums from './artist/my-albums/MyAlbums';
 import ErrorPage from './ErrorPage/ErrorPage';
+import PrivacyPolicyPage from './home/PrivacyPolicyPage';
 
 function App() {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -67,6 +68,7 @@ function App() {
           <Route path='/login' exact element={<Login />} />
           <Route path='/otp/:phone' exact element={<Otp />} />
           <Route path='/resend' exact element={<Resend />} />
+          <Route path='/privacy-policy' exact element={<PrivacyPolicyPage />} />
           <Route
             path='/artist/:artistName/:artistId/user/service/:serviceId'
             exact

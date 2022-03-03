@@ -65,7 +65,7 @@ const ViewAlbum = () => {
         300,
         300,
         'JPEG',
-        60,
+        70,
         0,
         (uri) => {
           resolve(uri);
