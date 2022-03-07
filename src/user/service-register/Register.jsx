@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 import { useParams, useNavigate } from 'react-router-dom';
 import API from '../../api';
 import Ban from '../.././assets/register-banner.png';
@@ -131,12 +133,21 @@ const Register = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
+        <PhoneInput
+          id={'register-phoneno'}
+          className='inputRegister-phoneno'
+          // type='tel'
+          defaultCountry='IN'
+          value={phone}
+          onChange={setPhone}
+          placeholder='Enter your phone no'
+        />
+        {/* <input
           type='text'
           placeholder='Enter phone number'
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-        />
+        /> */}
         <input
           type='text'
           placeholder='@Instagram Handle'

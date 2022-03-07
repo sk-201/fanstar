@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import API from '../../api';
 import { useNavigate } from 'react-router-dom';
+import { uploadImageOnAWS } from '../../aws/aws';
 import backArrow from '../../assets/backArrow.svg';
 import './add-image.css';
+
 const AddImage = () => {
   const navigate = useNavigate();
   const [baseImage, setBaseImage] = useState('');
@@ -27,7 +29,9 @@ const AddImage = () => {
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
+      // fileReader.readAsDataURL(file);
+
+      fileReader.readAsArrayBuffer(file);
 
       fileReader.onload = () => {
         resolve(fileReader.result);
@@ -64,6 +68,10 @@ const AddImage = () => {
             setLoading(false);
             alert('Image Uploaded!');
             navigate('/artist/landing');
+            // console.log(fileStore);
+            // const response = await convertBase64(fileStore);
+            // const data = await uploadImageOnAWS(fileStore, response);
+            // console.log(data);
           }
           // console.log(fileStore);
         } catch (error) {

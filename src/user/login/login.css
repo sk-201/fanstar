@@ -24,6 +24,26 @@
   opacity: 1;
 }
 
+#inputStyle {
+  margin-top: 0 !important;
+  outline: none;
+}
+.input-phoneno {
+  /* margin-top: 0 !important; */
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 8px 10px;
+  width: 80%;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  background: #f3f3f3;
+  border-radius: 8px;
+}
+::placeholder {
+  color: #b6b6b6 !important;
+  opacity: 1;
+}
+
 .msg-no {
   margin-left: 2.2rem;
   margin-top: 0.2rem;

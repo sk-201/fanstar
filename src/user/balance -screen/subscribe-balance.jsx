@@ -126,7 +126,9 @@ const SubBalance = () => {
           My Balance <span id='curr'>INR</span>
         </h1>
 
-        <text id='bal-sc-bal'>Rs {balance}.00</text>
+        <text id='bal-sc-bal'>
+          {balance ? `Rs ${parseInt(balance).toFixed(2)}` : ''}
+        </text>
       </div>
       <div className='bal-recharge'>
         {openRecharge ? (

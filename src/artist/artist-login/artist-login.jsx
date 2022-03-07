@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api';
-import Logo from '../.././assets/Ellipse 58.png';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 import LoadingPage from '../../Loader/LoadingPage';
 import fanstar_logo from '../../assets/fanstar_logo.svg';
 import '../../user/login/login.css';
@@ -13,7 +14,7 @@ const ArtistLogin = () => {
 
   const postData = async () => {
     try {
-      if (phone.trim() && phone.trim().length == 10) {
+      if (phone.trim()) {
         const config = {
           headers: {
             'Content-Type': 'application/json',
@@ -26,6 +27,7 @@ const ArtistLogin = () => {
         navigate(`/artist/otp/${phone}`);
       } else {
         alert('Mobile no is not correct!');
+        // console.log(phone);
       }
     } catch (error) {
       setLoading(false);
@@ -54,11 +56,13 @@ const ArtistLogin = () => {
         </div>
         <h2 className='login-heading'>Login </h2>
         <div className='inputs'>
-          <input
-            className='input-no'
-            type='tel'
+          <PhoneInput
+            id={'inputStyle'}
+            className='input-phoneno'
+            // type='tel'
+            defaultCountry='IN'
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={setPhone}
             placeholder='Enter your phone no'
           />
           <h6 className='msg-no'>Please Enter your phone number</h6>

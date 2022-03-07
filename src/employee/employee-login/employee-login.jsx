@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 import API from '../../api';
 import fanstar_logo from '../../assets/fanstar_logo.svg';
 import LoadingPage from '../../Loader/LoadingPage';
@@ -12,7 +14,7 @@ const EmployeeLogin = () => {
 
   const postData = async () => {
     try {
-      if (phone.trim() && phone.trim().length == 10) {
+      if (phone.trim()) {
         const config = {
           headers: {
             'Content-Type': 'application/json',
@@ -50,11 +52,13 @@ const EmployeeLogin = () => {
       </div>
       <h2 className='login-heading'>Login </h2>
       <div className='inputs'>
-        <input
-          className='input-no'
-          type='tel'
+        <PhoneInput
+          id={'inputStyle'}
+          className='input-phoneno'
+          // type='tel'
+          defaultCountry='IN'
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={setPhone}
           placeholder='Enter your phone no'
         />
         <h6 className='msg-no'>Please Enter your phone number</h6>

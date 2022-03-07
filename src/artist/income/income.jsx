@@ -14,6 +14,7 @@ const Income = () => {
   const navigate = useNavigate();
   const [balance, setBalance] = useState(0);
   const [weeklyIncome, setWeeklyIncome] = useState(0);
+  const [totalIncome, setTotalIncome] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [pendingOrders, setPendingOrders] = useState(0);
   const [artistCommission, setArtistCommission] = useState(0);
@@ -52,20 +53,30 @@ const Income = () => {
       );
       setTotalOrders(data.length);
       let pending = 0,
-        weekly = 0;
+        weekly = 0,
+        totalPay = 0,
+        count = 0;
       let today = new Date();
       let before = new Date(today);
       before.setDate(today.getDate() - 6);
       data.forEach((d) => {
+        count += 1;
         if (d.status === 'pending') {
           pending += 1;
         }
         if (new Date(d.createdAt).getTime() >= before) {
           weekly += parseInt(d.amount);
         }
+        totalPay += parseInt(d.amount);
+        // console.log(count);
+        if (count === data.length) {
+          // console.log(totalPay);
+          // console.log(weekly);
+          setTotalIncome(totalPay * comm);
+          setWeeklyIncome(weekly * comm);
+          setPendingOrders(pending);
+        }
       });
-      setWeeklyIncome(weekly * comm);
-      setPendingOrders(pending);
     } catch (error) {
       console.log(error);
     }
@@ -161,6 +172,8 @@ const Income = () => {
     }
   };
 
+  // console.log(totalIncome);
+
   return (
     <Fragment>
       <div className='income'>
@@ -179,7 +192,7 @@ const Income = () => {
             }
           >
             <h2 id='tot-inc-text-1'>Total Income</h2>
-            <h1 id='tot-inc-rs'> Rs {parseInt(balance).toFixed(2)}/-</h1>
+            <h1 id='tot-inc-rs'> Rs {parseInt(totalIncome).toFixed(2)}/-</h1>
           </div>
           <span id='week-inc-text'>Weekly Income</span>
           <div className='weekly-income'>
