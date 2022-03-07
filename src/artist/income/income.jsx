@@ -164,7 +164,8 @@ const Income = () => {
       alert('Service Completed!');
       setConfirmScreen(false);
       setConfirmId('');
-      fetchPendingOrders();
+      // fetchPendingOrders();
+      window.location.reload();
       // navigate('/chat');
       // console.log(data);
     } catch (error) {
