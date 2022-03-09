@@ -20,7 +20,40 @@ const ArtistLanding = () => {
   const [artistDetails, setArtistDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  // var addBtn = document.getElementById('addToScreen');
+  let deferredPrompt;
+  var btnAdd = document.getElementById('addToScreen');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    console.log('loading..');
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+    // Update UI notify the user they can add to home screen
+    btnAdd.style.display = 'block';
+    console.log('loaded');
+  });
+
+  const handleInstall = (e) => {
+    // hide our user interface that shows our A2HS button
+    btnAdd.style.display = 'none';
+    // Show the prompt
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      deferredPrompt = null;
+    });
+  };
+
+  // Check if the app is succesfully installed
+  window.addEventListener('appinstalled', (evt) => {
+    console.log('a2hs', 'installed');
+  });
 
   useEffect(() => {
     if (!localStorage.getItem('fanstarToken')) {
@@ -114,49 +147,49 @@ const ArtistLanding = () => {
   //   }
   // };
 
-  let deferredPrompt;
-  // addBtn.style.display = 'none';
+  // let deferredPrompt;
+  // // addBtn.style.display = 'none';
 
-  // useEffect(() => {
+  // // useEffect(() => {
 
-  // }, []);
+  // // }, []);
 
-  var accepted = 0;
+  // var accepted = 0;
 
-  const shortcut = () => {
-    console.log('clicked');
-    if (accepted) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          // AppInstalled("shilindhraaa");
-          console.log('added');
-        } else {
-        }
-      });
-    }
-  };
+  // const shortcut = () => {
+  //   console.log('clicked');
+  //   if (accepted) {
+  //     deferredPrompt.prompt();
+  //     deferredPrompt.userChoice.then((choiceResult) => {
+  //       if (choiceResult.outcome === 'accepted') {
+  //         // AppInstalled("shilindhraaa");
+  //         console.log('added');
+  //       } else {
+  //       }
+  //     });
+  //   }
+  // };
 
-  function addToHome() {
-    // AppInstallClick("shilindhraaa");
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      var addBtn = document.getElementById('addToScreen');
+  // function addToHome() {
+  //   // AppInstallClick("shilindhraaa");
+  //   window.addEventListener('beforeinstallprompt', (e) => {
+  //     e.preventDefault();
+  //     var addBtn = document.getElementById('addToScreen');
 
-      // console.log(addBtn);
-      deferredPrompt = e;
-      console.log(e);
-      if (accepted == 0) {
-        addBtn.style.display = 'block';
-        accepted = 1;
-        shortcut();
-      }
-    });
-  }
+  //     // console.log(addBtn);
+  //     deferredPrompt = e;
+  //     console.log(e);
+  //     if (accepted == 0) {
+  //       addBtn.style.display = 'block';
+  //       accepted = 1;
+  //       shortcut();
+  //     }
+  //   });
+  // }
 
-  window.addEventListener('appinstalled', (evt) => {
-    console.log('a2hs installed');
-  });
+  // window.addEventListener('appinstalled', (evt) => {
+  //   console.log('a2hs installed');
+  // });
 
   return (
     <Fragment>
@@ -167,13 +200,13 @@ const ArtistLanding = () => {
             src={artistDetails.coverPhoto ? artistDetails.coverPhoto : Img1}
             alt='banner-pic'
           />
-          {/** <button
+          <button
             className='addToHome-btn'
             id='addToScreen'
-            onClick={addToHome}
+            onClick={handleInstall}
           >
             Install
-          </button> */}
+          </button>
           <h1 className='img-1-heading'>
             {Object.keys(artistDetails).length > 0
               ? `Hi I'm ${artistDetails.username}`

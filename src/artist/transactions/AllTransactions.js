@@ -25,7 +25,7 @@ const AllTransactions = () => {
           Authorization: `Bearer ${localStorage.getItem('fanstarToken')}`,
         },
       });
-      // console.log(data);
+      console.log(data);
       setPaymentDetails(data);
       setLoading(false);
     } catch (error) {
@@ -61,19 +61,15 @@ const AllTransactions = () => {
               <div className='artistTrans-singleTrans' key={payment._id}>
                 <div className='artistTrans-contentDiv'>
                   <h3 className='artistTrans-orderId'>{`#${payment._id}`}</h3>
-                  <p className='artistTrans-status'>{`Status: ${
-                    payment.doneForArtist && payment.doneForUser
-                      ? 'Completed'
-                      : 'Pending'
-                  }`}</p>
+                  <p className='artistTrans-status'>{`Status: ${payment.status}`}</p>
                   <p className='artistTrans-date'>
                     {moment(payment.createdAt).format('DD MMM YYYY')}
                   </p>
                 </div>
                 <div className='artistTrans-amountDiv'>
-                  <p className='artistTrans-amount'>{`Rs ${
+                  <p className='artistTrans-amount'>{`Rs ${(
                     parseInt(payment.amount) * state
-                  }/-`}</p>
+                  ).toFixed(2)}/-`}</p>
                 </div>
               </div>
             ))}
