@@ -20,52 +20,52 @@ const ArtistLanding = () => {
   const [artistDetails, setArtistDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  let deferredPrompt;
-  var btnAdd = document.getElementById('addToScreen');
+  // let deferredPrompt;
+  // var btnAdd = document.getElementById('addToScreen');
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    console.log('loading..');
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
-    // Update UI notify the user they can add to home screen
-    btnAdd.style.display = 'block';
-    deferredPrompt.prompt();
-    console.log(deferredPrompt);
-    // Wait for the user to respond to the prompt
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the A2HS prompt');
-      } else {
-        console.log('User dismissed the A2HS prompt');
-      }
-      deferredPrompt = null;
-    });
-    console.log('loaded');
-  });
+  // window.addEventListener('beforeinstallprompt', (e) => {
+  //   // Prevent Chrome 67 and earlier from automatically showing the prompt
+  //   console.log('loading..');
+  //   e.preventDefault();
+  //   // Stash the event so it can be triggered later.
+  //   deferredPrompt = e;
+  //   // Update UI notify the user they can add to home screen
+  //   btnAdd.style.display = 'block';
+  //   deferredPrompt.prompt();
+  //   console.log(deferredPrompt);
+  //   // Wait for the user to respond to the prompt
+  //   deferredPrompt.userChoice.then((choiceResult) => {
+  //     if (choiceResult.outcome === 'accepted') {
+  //       console.log('User accepted the A2HS prompt');
+  //     } else {
+  //       console.log('User dismissed the A2HS prompt');
+  //     }
+  //     deferredPrompt = null;
+  //   });
+  //   console.log('loaded');
+  // });
 
-  const handleInstall = (e) => {
-    // hide our user interface that shows our A2HS button
-    // btnAdd.style.display = 'none';
-    // Show the prompt
+  // const handleInstall = (e) => {
+  //   // hide our user interface that shows our A2HS button
+  //   // btnAdd.style.display = 'none';
+  //   // Show the prompt
 
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      console.log(deferredPrompt);
-      // Wait for the user to respond to the prompt
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the A2HS prompt');
-        } else {
-          console.log('User dismissed the A2HS prompt');
-        }
-        deferredPrompt = null;
-      });
-    } else {
-      console.log('Not available');
-    }
-  };
+  //   if (deferredPrompt) {
+  //     deferredPrompt.prompt();
+  //     console.log(deferredPrompt);
+  //     // Wait for the user to respond to the prompt
+  //     deferredPrompt.userChoice.then((choiceResult) => {
+  //       if (choiceResult.outcome === 'accepted') {
+  //         console.log('User accepted the A2HS prompt');
+  //       } else {
+  //         console.log('User dismissed the A2HS prompt');
+  //       }
+  //       deferredPrompt = null;
+  //     });
+  //   } else {
+  //     console.log('Not available');
+  //   }
+  // };
 
   // Check if the app is succesfully installed
   window.addEventListener('appinstalled', (evt) => {
@@ -220,7 +220,7 @@ const ArtistLanding = () => {
           <button
             className='addToHome-btn'
             id='addToScreen'
-            onClick={handleInstall}
+            // onClick={handleInstall}
           >
             Install
           </button>
