@@ -31,6 +31,17 @@ const ArtistLanding = () => {
     deferredPrompt = e;
     // Update UI notify the user they can add to home screen
     btnAdd.style.display = 'block';
+    deferredPrompt.prompt();
+    console.log(deferredPrompt);
+    // Wait for the user to respond to the prompt
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt');
+      } else {
+        console.log('User dismissed the A2HS prompt');
+      }
+      deferredPrompt = null;
+    });
     console.log('loaded');
   });
 
